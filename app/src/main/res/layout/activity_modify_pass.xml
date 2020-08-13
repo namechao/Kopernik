@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/head_layout"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/oldPwdLL"
+                layout="@layout/layout_common_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+            <include
+                android:id="@+id/newPwdLL1"
+                layout="@layout/layout_common_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+            <include
+                android:id="@+id/newPwdLL2"
+                layout="@layout/layout_common_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:id="@+id/pwdLettersTv"
+                android:layout_width="match_parent"
+                android:layout_marginStart="10dp"
+                android:text="@string/pwd_abc"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/red"
+                android:textSize="@dimen/sp_12"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/pwdNumberTv"
+                android:layout_width="match_parent"
+                android:layout_marginStart="10dp"
+                android:text="@string/pwd_number"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/red"
+                android:textSize="@dimen/sp_12"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/pwdLettersBothTv"
+                android:layout_width="match_parent"
+                android:layout_marginStart="10dp"
+                android:text="@string/pwd_abc_both"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/red"
+                android:textSize="@dimen/sp_12"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/pwdLengthTv"
+                android:layout_width="match_parent"
+                android:layout_marginStart="10dp"
+                android:text="@string/pwd_length"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/red"
+                android:textSize="@dimen/sp_12"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:text="@string/confirm_change"
+                android:layout_width="match_parent"
+                android:background="@drawable/btn_enable_bg"
+                android:layout_height="44dp"
+                android:layout_marginTop="50dp"
+                android:textColor="@color/btn_enable_text_bg"
+                android:enabled="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/okBtn"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

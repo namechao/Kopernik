@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/one_btn_spb"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/head_layout"/>
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/smartRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srlEnableAutoLoadMore="false"
+            app:srlEnableLoadMore="true"
+            app:srlEnableOverScrollDrag="false"
+            app:srlDisableContentWhenLoading="true"
+            app:srlDisableContentWhenRefresh="true">
+
+            <com.kopernik.app.widget.MyClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+            </com.kopernik.app.widget.MyClassicsHeader>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <com.kopernik.app.widget.MyClassicsFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+            </com.kopernik.app.widget.MyClassicsFooter>
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    </LinearLayout>
+
+    <com.allen.library.SuperButton
+        android:layout_alignParentBottom="true"
+        android:id="@+id/oneBtnSpb"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/one_click_raise_interest"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        app:sSelectorNormalColor="@color/node_choose_normal"
+        app:sSelectorPressedColor="@color/node_choose_disable"
+        app:sSelectorDisableColor="@color/node_choose_disable"
+        android:enabled="true"
+        app:sUseSelector="true"/>
+
+</RelativeLayout>

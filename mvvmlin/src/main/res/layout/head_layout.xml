@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/headRootView"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="vertical"
+    android:background="@color/bg_white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="20dp">
+
+        <LinearLayout
+            android:id="@+id/headBackLL"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingEnd="10dp"
+            android:paddingStart="15dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/headBackIv"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/icon_back"
+                android:layout_centerInParent="true"
+                android:layout_alignParentLeft="true" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/headTitleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/title_black"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:visibility="visible"
+            android:id="@+id/headTvFunction"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:textColor="@color/text_gray"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true" />
+        <TextView
+            android:visibility="visible"
+            android:id="@+id/rightTv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="14dp"
+            android:textColor="@color/color_ffcf32"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/rightIv"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/rightTv" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/headIvFunction"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/headDiv"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/head_line"/>
+
+</LinearLayout>

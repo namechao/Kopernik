@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                app:tl_indicator_color="@color/node_tab_indicator"
+                app:tl_indicator_width="35dp"
+                app:tl_textsize="17sp"
+                app:tl_textSelectColor="@color/node_tab_select_text"
+                app:tl_textUnselectColor="@color/node_tab_unselect_text" />
+
+            <TextView
+                android:id="@+id/nodeRegisterTv"
+                android:layout_width="wrap_content"
+                android:textColor="@color/node_tab_indicator"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:drawablePadding="@dimen/dp_5"
+                android:layout_marginStart="15dp"
+                android:drawableEnd="@mipmap/icon_node_register"
+                android:text="@string/node_register_title2"
+                android:visibility="gone"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </androidx.viewpager.widget.ViewPager>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/myVoteLL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/vote_blue_half_bg"
+        android:layout_marginBottom="80dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_gravity="bottom|end"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@mipmap/icon_vote"/>
+
+        <TextView
+            android:text="@string/title_vote_mine"
+            android:gravity="center"
+            android:textColor="@color/node_vote_text"
+            android:visibility="visible"
+            android:textSize="13dp"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="bottom|end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</FrameLayout>

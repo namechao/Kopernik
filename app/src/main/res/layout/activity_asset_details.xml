@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_white">
+
+    <include
+        android:id="@+id/assetDetailsTite"
+        layout="@layout/head_layout"/>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        app:layout_constraintTop_toBottomOf="@id/assetDetailsTite"
+        app:layout_constraintBottom_toTopOf="@id/bottomLL"
+        android:id="@+id/smartRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <com.kopernik.app.widget.MyClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+        </com.kopernik.app.widget.MyClassicsHeader>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <com.kopernik.app.widget.MyClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+        </com.kopernik.app.widget.MyClassicsFooter>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/bottomLL"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp_6"
+        android:paddingBottom="@dimen/dp_6"
+        android:background="@color/asset_details_bottom"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/collectMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/make_collections"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:drawablePadding="@dimen/dp_4"
+            android:textColor="@color/mnemonic_type"
+            android:text="@string/collect_money"
+            android:textSize="@dimen/sp_12"
+            />
+        <TextView
+            android:id="@+id/transferAccounts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/transfer_accounts"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/sp_12"
+            android:drawablePadding="@dimen/dp_4"
+            android:textColor="@color/mnemonic_type"
+            android:text="@string/title_asset_transfer"
+            />
+        <TextView
+            android:id="@+id/vote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/vote"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/sp_12"
+            android:drawablePadding="@dimen/dp_4"
+            android:textColor="@color/mnemonic_type"
+            android:text="@string/node_vote"
+            />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

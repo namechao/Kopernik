@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_white">
+
+    <include
+        layout="@layout/head_layout"/>
+
+    <com.flyco.tablayout.SegmentTabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:tl_textSelectColor="@color/white"
+        app:tl_textUnselectColor="@color/tab_un_select"
+        app:tl_bar_color="@color/tab_bar"
+        app:tl_bar_stroke_color="@color/tab_bar_stroke"
+        app:tl_indicator_color="@color/tab_indicator_color"
+        app:tl_divider_color="@color/tab_divider"
+        app:tl_textBold="BOTH"/>
+
+    <LinearLayout
+        android:id="@+id/inviteIntegralLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/dialog_line"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/invitePointsSpt"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:sCenterViewGravity="left_center"
+                app:sCenterTopTextString="@string/invite_points"
+                app:sCenterTopTextSize="@dimen/sp_12"
+                app:sCenterTopTextColor="@color/text_gray"
+                app:sCenterTextString="1"
+                app:sCenterTextSize="@dimen/sp_14"
+                app:sCenterTextColor="@color/title_black"
+                app:sShapeCornersRadius="12dp"
+                app:sShapeSelectorNormalColor="@color/bg_white"
+                app:sUseShape="true"
+                app:sUseRipple="false">
+            </com.allen.library.SuperTextView>
+
+            <com.allen.library.SuperTextView
+                android:visibility="gone"
+                android:id="@+id/invitePowerSpt"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:sCenterTopTextString="@string/invite_power"
+                app:sCenterTopTextSize="@dimen/sp_12"
+                app:sCenterTopTextColor="@color/text_gray"
+                app:sCenterTextString="推选"
+                app:sCenterTextSize="@dimen/sp_14"
+                app:sCenterTextColor="@color/title_black"
+                app:sShapeCornersRadius="12dp"
+                app:sShapeSelectorNormalColor="@color/bg_white"
+                app:sUseShape="true"
+                app:sUseRipple="false">
+            </com.allen.library.SuperTextView>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/invitedThisMonthSpt"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:sCenterTopTextString="@string/invited_this_month"
+                app:sCenterTopTextSize="@dimen/sp_12"
+                app:sCenterTopTextColor="@color/text_gray"
+                app:sCenterTextString="推选"
+                app:sCenterTextSize="@dimen/sp_14"
+                app:sCenterTextColor="@color/title_black"
+                app:sShapeCornersRadius="12dp"
+                app:sShapeSelectorNormalColor="@color/bg_white"
+                app:sUseShape="true"
+                app:sUseRipple="false">
+            </com.allen.library.SuperTextView>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/cumulativeInvitationSpt"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:sCenterViewGravity="right_center"
+                app:sCenterTopTextString="@string/cumulative_invitation"
+                app:sCenterTopTextSize="@dimen/sp_12"
+                app:sCenterTopTextColor="@color/text_gray"
+                app:sCenterTextString="推选"
+                app:sCenterTextSize="@dimen/sp_14"
+                app:sCenterTextColor="@color/title_black"
+                app:sShapeCornersRadius="12dp"
+                app:sShapeSelectorNormalColor="@color/bg_white"
+                app:sUseShape="true"
+                app:sUseRipple="false">
+            </com.allen.library.SuperTextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/asset_space"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

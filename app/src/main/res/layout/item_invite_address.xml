@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/bg_white"
+    android:padding="15dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.xut.widget.SuperTextView
+            android:id="@+id/account_name_spt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            app:sLeftViewMarginLeft="0dp"
+            app:sLeftViewGravity="left_center"
+            app:sLeftTopTextString="@string/account_name"
+            app:sLeftTopTextSize="@dimen/sp_12"
+            app:sLeftTopTextColor="@color/text_gray"
+            app:sLeftTextString="推选"
+            app:sLeftTextSize="@dimen/sp_14"
+            app:sLeftTextColor="@color/title_black"
+            app:sShapeCornersRadius="12dp"
+            app:sShapeSelectorNormalColor="@color/bg_white"
+            app:sUseShape="true"
+            app:sUseRipple="false">
+        </com.xut.widget.SuperTextView>
+
+        <com.xut.widget.SuperTextView
+            android:id="@+id/gain_spt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            app:sLeftViewMarginLeft="0dp"
+            app:sLeftViewGravity="left_center"
+            app:sLeftTopTextString="@string/total_revenue"
+            app:sLeftTopTextSize="@dimen/sp_12"
+            app:sLeftTopTextColor="@color/text_gray"
+            app:sLeftTextString="推选"
+            app:sLeftTextSize="@dimen/sp_14"
+            app:sLeftTextColor="@color/title_black"
+            app:sShapeCornersRadius="12dp"
+            app:sShapeSelectorNormalColor="@color/bg_white"
+            app:sUseShape="true"
+            app:sUseRipple="false">
+        </com.xut.widget.SuperTextView>
+
+    </LinearLayout>
+
+    <com.xut.widget.SuperTextView
+        android:id="@+id/account_address_spt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sLeftViewMarginLeft="0dp"
+        app:sLeftViewGravity="left_center"
+        app:sLeftTopTextString="@string/title_user_address2"
+        app:sLeftTopTextSize="@dimen/sp_12"
+        app:sLeftTopTextColor="@color/text_gray"
+        app:sLeftTextString="推选"
+        app:sLeftTextSize="@dimen/sp_14"
+        app:sLeftTextColor="@color/title_black"
+        app:sShapeCornersRadius="12dp"
+        app:sShapeSelectorNormalColor="@color/bg_white"
+        app:sUseShape="true"
+        app:sUseRipple="false">
+    </com.xut.widget.SuperTextView>
+
+</LinearLayout>

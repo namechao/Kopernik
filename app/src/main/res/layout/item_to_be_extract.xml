@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/bg_white"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dp_24"
+    android:layout_marginTop="12dp"
+    android:paddingBottom="@dimen/dp_24"
+    android:paddingLeft="@dimen/dp_15"
+    android:paddingRight="@dimen/dp_15"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/to_be_extract"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/to_be_extract"
+        android:textColor="@color/asset_opt_frame_normal_text"
+        android:textSize="@dimen/dp_14"
+        app:layout_constraintBottom_toBottomOf="@+id/cancel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cancel" />
+
+    <com.allen.library.SuperButton
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginRight="@dimen/dp_11"
+        android:paddingStart="12dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="4dp"
+        android:text="@string/cancel"
+        android:textColor="@color/title_black"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="@+id/withdrawCoin"
+        app:layout_constraintRight_toLeftOf="@+id/withdrawCoin"
+        app:layout_constraintTop_toTopOf="@+id/withdrawCoin"
+        app:sCornersRadius="2dp"
+        app:sSelectorNormalColor="@color/bg_white"
+        app:sSelectorPressedColor="@color/security_btn_press"
+        app:sStrokeColor="@color/contact_item_border"
+        app:sStrokeWidth="1dp"
+        app:sUseSelector="true" />
+
+    <com.allen.library.SuperButton
+        android:id="@+id/withdrawCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:paddingStart="12dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="4dp"
+        android:text="@string/title_asset_withdraw"
+        android:textColor="@color/title_black"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sCornersRadius="2dp"
+        app:sSelectorNormalColor="@color/bg_white"
+        app:sSelectorPressedColor="@color/security_btn_press"
+        app:sStrokeColor="@color/contact_item_border"
+        app:sStrokeWidth="1dp"
+        app:sUseSelector="true" />
+
+    <TextView
+        android:id="@+id/num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_17"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/to_be_extract"
+        android:textColor="@color/asset_text_gray"
+        android:textSize="@dimen/dp_12"
+        android:text="@string/title_vote_his_num" />
+    <TextView
+        android:id="@+id/transformTime"
+        app:layout_constraintTop_toBottomOf="@id/num"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/dp_17"
+        android:textColor="@color/asset_text_gray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dp_12"
+        android:text="@string/transform_time"/>
+    <TextView
+        android:id="@+id/transform_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/transformTime"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/dp_17"
+        android:textColor="@color/asset_text_gray"
+        android:textSize="@dimen/dp_12"
+        android:text="@string/title_finance_state"/>
+    <TextView
+        android:id="@+id/transformNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_finance_state"
+        android:textColor="@color/asset_text_gray"
+        android:textSize="@dimen/dp_12"
+        app:layout_constraintBottom_toBottomOf="@+id/num"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/num" />
+    <TextView
+        android:id="@+id/transfromTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_finance_state"
+        android:textSize="@dimen/dp_12"
+        app:layout_constraintBottom_toBottomOf="@+id/transformTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/asset_text_gray"
+        app:layout_constraintTop_toTopOf="@+id/transformTime" />
+    <TextView
+        android:id="@+id/transformStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_finance_state"
+        android:textSize="@dimen/dp_12"
+        app:layout_constraintBottom_toBottomOf="@+id/transform_status"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/asset_text_gray"
+        app:layout_constraintTop_toTopOf="@+id/transform_status" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

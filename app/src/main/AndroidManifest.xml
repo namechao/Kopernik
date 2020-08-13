@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.kopernik">
+    <!-- x5声明的权限 -->
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:name="com.kopernik.app.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name="com.kopernik.ui.asset.AssetTransformActivty"></activity>
+        <activity android:name="com.kopernik.ui.asset.ToBeExtractedListActivity" />
+        <activity android:name=".ui.asset.AssetTransformTipActivity" />
+        <activity
+            android:name="com.kopernik.ui.account.ImportMnemonicConfirmActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name="com.kopernik.ui.setting.SkinActivity" />
+        <activity android:name="com.kopernik.ui.Ecology.NodeLeaderBoardActivity" />
+        <activity android:name="com.kopernik.ui.Ecology.ReferendumDetailsActivity" />
+        <activity android:name="com.kopernik.ui.Ecology.ReferendumListActivity" />
+        <activity android:name="com.kopernik.ui.setting.VerifyPwActivity" />
+        <activity android:name="com.kopernik.ui.Ecology.NodeAboutActivity" />
+        <activity android:name="com.kopernik.ui.setting.AddContactActivity" />
+        <activity android:name="com.kopernik.ui.setting.ContactActivity" />
+        <activity android:name="com.kopernik.ui.setting.QRCodeActivity" />
+        <activity android:name="com.kopernik.ui.asset.MapTimeLineActivity" />
+        <activity android:name="com.kopernik.ui.asset.MapActivity" />
+        <activity android:name="com.kopernik.ui.Ecology.RedeemTimeLineActivity" />
+        <activity android:name="com.kopernik.ui.Ecology.MyVoteHistoryActivity" />
+        <activity android:name="com.kopernik.ui.Ecology.ChooseNodeLogoActivity" />
+        <activity android:name="com.kopernik.ui.Ecology.NodeRegisterActivity" />
+        <activity android:name="com.kopernik.ui.Ecology.VoteOperateActivity" />
+        <activity android:name="com.kopernik.ui.Ecology.MyVoteActivity" />
+        <activity android:name="com.kopernik.ui.setting.ExportMnemonicSuccessActivity" />
+        <activity android:name="com.kopernik.ui.setting.ExportMnemonicActivity" />
+        <activity android:name="com.kopernik.ui.setting.ModifyPassActivity" />
+        <activity android:name="com.kopernik.ui.setting.ModifyNickActivity" />
+        <activity android:name="com.kopernik.ui.setting.SecurityActivity" />
+        <activity android:name="com.kopernik.ui.setting.InviteAddressActivity" />
+        <activity android:name="com.kopernik.ui.setting.SwitchAccountActivity" />
+        <activity android:name="com.kopernik.ui.setting.VersionActivity" />
+        <activity android:name="com.kopernik.ui.setting.AboutUsActivity" />
+        <activity android:name="com.kopernik.ui.setting.BaseSettingActivity" />
+        <activity android:name="com.kopernik.ui.Ecology.VoteBetActivity" />
+        <activity android:name="com.kopernik.ui.Ecology.WebViewActivity" />
+        <activity android:name="com.kopernik.ui.asset.WithdrawCoinActivity" />
+        <activity android:name="com.kopernik.ui.asset.DepositCoinActivity" />
+        <activity android:name="com.kopernik.ui.asset.CrossChainTxActivity" />
+        <activity android:name="com.kopernik.ui.asset.AssetDetailsActivity" />
+        <activity android:name="com.kopernik.ui.asset.OtherAssetDetailsActivity" />
+        <activity android:name="com.kopernik.ui.asset.DepositMoneyActivity" />
+        <activity android:name="com.kopernik.ui.asset.TransferActivity" />
+        <activity android:name="com.kopernik.ui.account.ImportMnemonicActivity" />
+        <activity android:name="com.kopernik.ui.account.MnemonicConfirmActivity" />
+        <activity android:name="com.kopernik.ui.account.AddNewAccountActivity" />
+        <activity android:name="com.kopernik.ui.account.ChooseAccountActivity" />
+        <activity android:name="com.kopernik.ui.account.CreateAccountActivity" />
+        <activity
+            android:name="com.kopernik.ui.MainActivity"
+            android:fitsSystemWindows="true"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.kopernik.ui.SplashActivity"
+            android:theme="@style/AppTheme.StartingWindowTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
+            android:label="dexopt"
+            android:process=":dexopt" /> <!-- 适配全面屏 -->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" /> <!-- 适配华为（huawei）刘海屏 -->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" /> <!-- 适配小米（xiaomi）刘海屏 -->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
+    </application>
+
+</manifest>

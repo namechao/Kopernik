@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="now_loading">로드 중…</string>
+    <string name="error_1">네트워크 연결 오류</string>
+    <string name="error_2">네트워크 연결 시간 초과</string>
+    <string name="error_3">서버가 요청을 거부 함</string>
+    <string name="error_4">알 수없는 오류</string>
+    <string name="error_5">데이터 해석 오류</string>
+    <string name="error_6">인증서 오류</string>
+
+</resources>

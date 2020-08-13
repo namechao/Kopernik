@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/bg_white"
+    android:padding="15dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/time_spt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sLeftViewMarginLeft="0dp"
+        app:sLeftViewGravity="left_center"
+        app:sLeftTextString="8月15"
+        app:sLeftTextSize="@dimen/sp_16"
+        app:sLeftTextColor="@color/time_line_year"
+        app:sCenterTextString="15:23:11"
+        app:sCenterTextSize="@dimen/sp_12"
+        app:sCenterTextColor="@color/text_gray999"
+        app:sCenterViewGravity="left_center"
+        app:sShapeSelectorNormalColor="@color/bg_white"
+        app:sUseShape="true"
+        app:sUseRipple="false">
+    </com.allen.library.SuperTextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp">
+
+            <com.kopernik.app.widget.roundedimageview.RoundedImageView
+                android:id="@+id/rounded_iv"
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:src="@drawable/dot_bg"
+                app:riv_corner_radius="50dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:background="@color/time_line_year"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp">
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/desc1_spt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:sLeftViewMarginLeft="0dp"
+                app:sLeftViewGravity="left_center"
+                app:sLeftTextString="投票数量"
+                app:sLeftTextSize="@dimen/sp_13"
+                app:sLeftTextColor="@color/text_gray"
+                app:sRightTextString="15:23:11"
+                app:sRightTextSize="@dimen/sp_13"
+                app:sRightTextColor="@color/title_black"
+                app:sRightViewMarginRight="0dp"
+                app:sCenterViewGravity="left_center"
+                app:sShapeSelectorNormalColor="@color/bg_white"
+                app:sUseShape="true"
+                app:sUseRipple="false">
+            </com.allen.library.SuperTextView>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/desc2_spt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:sLeftViewMarginLeft="0dp"
+                app:sLeftViewGravity="left_center"
+                app:sLeftTextString="投票数量"
+                app:sLeftTextSize="@dimen/sp_13"
+                app:sLeftTextColor="@color/text_gray"
+                app:sRightTextString="15:23:11"
+                app:sRightTextSize="@dimen/sp_13"
+                app:sRightTextColor="@color/title_black"
+                app:sRightViewMarginRight="0dp"
+                app:sCenterViewGravity="left_center"
+                app:sShapeSelectorNormalColor="@color/bg_white"
+                app:sUseShape="true"
+                app:sUseRipple="false">
+            </com.allen.library.SuperTextView>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/desc3_spt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:sLeftViewMarginLeft="0dp"
+                android:layout_marginTop="10dp"
+                app:sLeftViewGravity="left_center"
+                app:sLeftTextString="投票数量"
+                app:sLeftTextSize="@dimen/sp_13"
+                app:sLeftTextColor="@color/text_gray"
+                app:sRightTextString="15:23:11"
+                app:sRightTextSize="@dimen/sp_13"
+                app:sRightTextColor="@color/title_black"
+                app:sRightViewMarginRight="0dp"
+                app:sCenterViewGravity="left_center"
+                app:sShapeSelectorNormalColor="@color/bg_white"
+                app:sUseShape="true"
+                app:sUseRipple="false">
+            </com.allen.library.SuperTextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

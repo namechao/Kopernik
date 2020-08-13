@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/head_layout"/>
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/balanceSpt"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        app:sLeftTextString="@string/balance_of2"
+        app:sLeftTextSize="@dimen/sp_14"
+        app:sLeftTextColor="@color/text_gray999"
+        app:sRightTextSize="@dimen/sp_15"
+        app:sRightTextColor="@color/title_black"
+        app:sDividerLineType="none"
+        app:sShapeSelectorNormalColor="@color/white"
+        app:sShapeSelectorPressedColor="@color/white"
+        app:sUseShape="true">
+    </com.allen.library.SuperTextView>
+
+    <include
+        android:id="@+id/valueInputLL"
+        layout="@layout/layout_common_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/dnsMapHintTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dns_map_hint"
+        android:textSize="12dp"
+        android:textColor="@color/red"
+        android:layout_margin="20dp"/>
+
+    <Button
+        android:text="@string/confirm_ok"
+        android:layout_width="match_parent"
+        android:background="@drawable/btn_enable_bg"
+        android:layout_height="44dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:textColor="@color/btn_enable_text_bg"
+        android:enabled="false"
+        android:id="@+id/okBtn"
+        android:gravity="center" />
+
+</LinearLayout>

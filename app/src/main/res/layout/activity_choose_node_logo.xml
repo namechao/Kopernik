@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/white">
+
+    <include
+        layout="@layout/head_layout"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <com.allen.library.SuperButton
+        android:id="@+id/okBtn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/confirm"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        app:sSelectorNormalColor="@color/node_choose_normal"
+        app:sSelectorPressedColor="@color/node_choose_disable"
+        app:sSelectorDisableColor="@color/node_choose_disable"
+        android:enabled="true"
+        app:sUseSelector="true"/>
+
+</LinearLayout>

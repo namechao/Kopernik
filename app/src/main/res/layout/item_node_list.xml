@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:id="@+id/root_view"
+    android:background="@drawable/normal_node_bg"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/logo_view"
+            android:layout_alignParentStart="true"
+            android:layout_width="35dp"
+            android:layout_height="35dp">
+
+            <ImageView
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_25"
+                android:layout_centerInParent="true"
+                android:id="@+id/node_icon_iv" />
+
+            <com.allen.library.SuperButton
+                android:id="@+id/node_own_spb"
+                android:layout_width="wrap_content"
+                android:layout_height="13dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="@string/own"
+                android:textColor="@color/white_normal"
+                android:textSize="7dp"
+                app:sCornersRadius="3dp"
+                app:sSelectorDisableColor="@color/node_myself_tag_bg"
+                app:sUseSelector="true"
+                android:enabled="false"
+                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true">
+            </com.allen.library.SuperButton>
+
+        </RelativeLayout>
+       
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_toEndOf="@+id/logo_view"
+            android:id="@+id/node_name_tv"
+            android:text="gfdsgfdsgfd"
+            android:textColor="@color/title_black"
+            android:textSize="18sp"/>
+
+        <com.allen.library.SuperButton
+            android:id="@+id/node_status_spb"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="推选"
+            android:textColor="@color/white_normal"
+            android:textSize="10dp"
+            app:sCornersRadius="5dp"
+            app:sSelectorDisableColor="@color/node_quit_bg"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/node_name_tv"
+            app:sUseSelector="true"
+            android:enabled="false">
+        </com.allen.library.SuperButton>
+
+        <com.allen.library.SuperButton
+            android:id="@+id/node_vote_spb"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/tx_type_dialog_choose_text"
+            android:textSize="@dimen/sp_12"
+            android:text="@string/node_vote"
+            app:sUseSelector="true"
+            app:sStrokeWidth="1dp"
+            app:sSelectorNormalColor="@color/bg_white"
+            app:sCornersRadius="15dp"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/node_self_bonded_spt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            app:sLeftViewMarginLeft="0dp"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/node_name_tv"
+            app:sLeftViewGravity="left_center"
+            app:sLeftTopTextString="@string/self_bonded"
+            app:sLeftTopTextSize="@dimen/sp_12"
+            app:sLeftTopTextColor="@color/text_gray"
+            app:sLeftTextString="推选"
+            app:sLeftTextSize="@dimen/sp_14"
+            app:sLeftTextColor="@color/title_black"
+            app:sShapeCornersRadius="12dp"
+            app:sShapeSelectorNormalColor="@color/bg_white"
+            app:sUseRipple="false"
+            app:sUseShape="true">
+        </com.allen.library.SuperTextView>
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/node_total_votes_spt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            app:sLeftViewMarginLeft="0dp"
+            app:sLeftViewGravity="left_center"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/node_name_tv"
+            app:sLeftTopTextString="@string/total_votes"
+            app:sLeftTopTextSize="@dimen/sp_12"
+            app:sLeftTopTextColor="@color/text_gray"
+            app:sLeftTextString="推选"
+            app:sLeftTextSize="@dimen/sp_14"
+            app:sLeftTextColor="@color/title_black"
+            app:sShapeCornersRadius="12dp"
+            app:sShapeSelectorNormalColor="@color/bg_white"
+            app:sUseRipple="false"
+            app:sUseShape="true">
+        </com.allen.library.SuperTextView>
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/node_jackpot_balance_spt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            app:sLeftViewMarginLeft="0dp"
+            app:sLeftViewGravity="left_center"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/node_name_tv"
+            app:sLeftTopTextString="@string/jackpot_balance"
+            app:sLeftTopTextSize="@dimen/sp_12"
+            app:sLeftTopTextColor="@color/text_gray"
+            app:sLeftTextString="推选"
+            app:sLeftTextSize="@dimen/sp_14"
+            app:sLeftTextColor="@color/title_black"
+            app:sShapeCornersRadius="12dp"
+            app:sShapeSelectorNormalColor="@color/bg_white"
+            app:sUseShape="true"
+            app:sUseRipple="false">
+        </com.allen.library.SuperTextView>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="now_loading">loading…</string>
+    <string name="error_1">Network connection error</string>
+    <string name="error_2">network connection timeout</string>
+    <string name="error_3">server reject request </string>
+    <string name="error_4">unknown error</string>
+    <string name="error_5">Data parsing error</string>
+    <string name="error_6">Certificate error</string>
+</resources>

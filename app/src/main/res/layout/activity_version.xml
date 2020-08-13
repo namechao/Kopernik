@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <include
+        layout="@layout/head_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="100dp"
+        android:paddingBottom="50dp"
+        android:background="@color/bg_white"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/version_logo_icon" />
+
+        <TextView
+            android:id="@+id/versionTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/title_black"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/updateSpt"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        app:sLeftTextString="@string/app_update"
+        app:sLeftTextColor="@color/version_title"
+        app:sLeftTextSize="15dp"
+        app:sRightIconRes="@mipmap/icon_arrow"
+        app:sRightTextString="@string/current_is_new_version"
+        app:sRightTextColor="@color/text_gray"
+        app:sRightTextSize="14dp"
+        app:sDividerLineType="none"
+        app:sShapeSelectorNormalColor="@color/bg_white"
+        app:sShapeSelectorPressedColor="@color/security_btn_press"
+        app:sUseRipple="true">
+    </com.allen.library.SuperTextView>
+
+</LinearLayout>

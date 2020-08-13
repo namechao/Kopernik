@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/head_layout_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="42dp"
+    android:orientation="vertical"
+    android:background="@color/bg_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/title_financial_record"
+            android:textColor="@color/title_black"
+            android:textSize="@dimen/sp_15" />
+
+        <TextView
+            android:id="@+id/choose_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/all"
+            android:textColor="@color/head_function_text"
+            android:textSize="@dimen/sp_14"
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/icon_arrow_down"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/head_div"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/split_line"/>
+
+</LinearLayout>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/head_layout_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/bg_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:background="@drawable/asset_details_bg">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:text="@string/balance_of2"
+                android:textColor="@color/available_balance_text"
+                android:layout_centerInParent="true"
+                android:layout_alignParentStart="true"/>
+
+            <CheckBox
+                android:id="@+id/eye_cb"
+                android:layout_width="22dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="@dimen/dp_14"
+                android:layout_marginEnd="@dimen/dp_14"
+                android:button="@null"
+                android:checked="true"
+                android:background="@drawable/ic_asset_details_show_selector"
+                android:layout_centerInParent="true"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/balance_of_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_30"
+                android:text="0"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:textColor="@color/available_balance"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_centerInParent="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/extraction_recommend_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/extract"
+                android:textSize="14dp"
+                android:paddingLeft="@dimen/dp_18"
+                android:paddingTop="@dimen/dp_8"
+                android:paddingBottom="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_10"
+                android:textColor="@color/white"
+                android:background="@drawable/withdrawal_miner_recom_bg" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/vote_freeze_spt"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:sLeftViewMarginLeft="0dp"
+                app:sLeftViewGravity="left_center"
+                app:sLeftTopTextString="@string/title_asset_lock"
+                app:sLeftTopTextSize="@dimen/sp_11"
+                app:sLeftTopTextColor="@color/asset_text_gray"
+                app:sLeftTextString="0"
+                app:sLeftTextSize="@dimen/sp_15"
+                app:sLeftTextColor="@color/white_normal"
+                app:sShapeCornersRadius="12dp"
+                app:sShapeSelectorNormalColor="@color/asset_details_bg"
+                app:sUseShape="true"
+                app:sUseRipple="false"/>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/tx_freeze_spt"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:layout_height="wrap_content"
+                app:sLeftViewMarginLeft="0dp"
+                app:sLeftViewGravity="left_center"
+                app:sLeftTopTextString="@string/title_deal_block"
+                app:sLeftTopTextSize="@dimen/sp_11"
+                app:sLeftTopTextColor="@color/asset_text_gray"
+                app:sLeftTextString="0"
+                app:sLeftTextSize="@dimen/sp_15"
+                app:sLeftTextColor="@color/white_normal"
+                app:sShapeCornersRadius="12dp"
+                app:sShapeSelectorNormalColor="@color/asset_details_bg"
+                app:sUseRipple="false"
+                app:sUseShape="true"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/dns_total_balance_div"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/asset_line"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/dns_node_gain_spt"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:sLeftViewMarginLeft="0dp"
+                app:sLeftViewGravity="left_center"
+                app:sLeftTopTextString="@string/title_gain_node"
+                app:sLeftTopTextSize="@dimen/sp_11"
+                app:sLeftTopTextColor="@color/asset_text_gray"
+                app:sLeftTextString="0"
+                app:sLeftTextSize="@dimen/sp_15"
+                app:sLeftTextColor="@color/white_normal"
+                app:sShapeCornersRadius="12dp"
+                app:sShapeSelectorNormalColor="@color/asset_details_bg"
+                app:sUseRipple="false"
+                app:sUseShape="true"/>
+            <com.allen.library.SuperTextView
+                android:id="@+id/dns_total_balance_spt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                app:sLeftViewMarginLeft="0dp"
+                app:sLeftViewGravity="left_center"
+                app:sLeftTopTextString="@string/title_balance_sum"
+                app:sLeftTopTextSize="@dimen/sp_11"
+                app:sLeftTopTextColor="@color/asset_text_gray"
+                app:sLeftTextString="0"
+                app:sLeftTextSize="@dimen/sp_15"
+                app:sLeftTextColor="@color/white_normal"
+                app:sShapeCornersRadius="12dp"
+                app:sShapeSelectorNormalColor="@color/asset_details_bg"
+                app:sUseRipple="false"
+                app:sUseShape="true"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

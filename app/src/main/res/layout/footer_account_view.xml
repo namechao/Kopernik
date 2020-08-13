@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@color/white">
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/created_account_spt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:sLeftTextColor="@color/version_title"
+        app:sLeftTextSize="15dp"
+        app:sLeftTextString="@string/import_or_created_account"
+        app:sRightIconRes="@mipmap/icon_arrow"
+        app:sRightIconWidth="10dp"
+        app:sRightIconHeight="10dp"
+        app:sDividerLineType="bottom"
+        app:sDividerLineColor="@color/dialog_line4"
+        app:sDividerLineHeight="1dp"
+        app:sShapeSelectorNormalColor="@color/bg_white"
+        app:sShapeSelectorPressedColor="@color/security_btn_press"
+        app:sUseRipple="true">
+    </com.allen.library.SuperTextView>
+
+</LinearLayout>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/head_layout_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="10dp"
+    android:layout_marginBottom="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="充值"
+            android:textStyle="bold"
+            android:textColor="@color/title_black"
+            android:textSize="@dimen/sp_15" />
+
+        <com.allen.library.SuperButton
+            android:id="@+id/cancel_withdraw_spb"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/title_black"
+            android:textSize="@dimen/sp_12"
+            android:text="@string/cancel_withdraw"
+            app:sUseSelector="true"
+            app:sStrokeWidth="1dp"
+            app:sStrokeColor="@color/gray3"
+            app:sSelectorNormalColor="@color/bg_white"
+            app:sCornersRadius="15dp"/>
+
+    </LinearLayout>
+
+    <com.allen.library.SuperButton
+        android:id="@+id/tx_hash_spt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sLeftViewMarginLeft="0dp"
+        app:sLeftViewGravity="left_center"
+        app:sLeftTopTextString="@string/title_deal_hash"
+        app:sLeftTopTextSize="@dimen/sp_12"
+        app:sLeftTopTextColor="@color/asset_tx_title"
+        app:sLeftTextString="@string/title_deal_hash"
+        app:sLeftTextSize="@dimen/sp_14"
+        app:sLeftTextColor="@color/title_black"
+        app:sShapeCornersRadius="12dp"
+        app:sRightIconRes="@mipmap/icon_copy"
+        app:sShapeSelectorNormalColor="@color/white"
+        app:sShapeSelectorPressedColor="@color/white"
+        app:sUseShape="true">
+    </com.allen.library.SuperButton>
+
+    <com.allen.library.SuperButton
+        android:id="@+id/recharge_address_spt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sLeftViewMarginLeft="0dp"
+        app:sLeftViewGravity="left_center"
+        app:sLeftTopTextString="@string/transfer_addr"
+        app:sLeftTopTextSize="@dimen/sp_12"
+        app:sLeftTopTextColor="@color/asset_tx_title"
+        app:sLeftTextSize="@dimen/sp_14"
+        app:sLeftLines="1"
+        app:sLeftTextColor="@color/title_black"
+        app:sLeftTextString="dfs"
+        app:sShapeCornersRadius="12dp"
+        app:sRightTopTextString=" "
+        app:sRightIconRes="@mipmap/icon_copy"
+        app:sShapeSelectorNormalColor="@color/white"
+        app:sShapeSelectorPressedColor="@color/white"
+        app:sUseShape="true">
+    </com.allen.library.SuperButton>
+
+    <com.allen.library.SuperButton
+        android:id="@+id/time_spt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sLeftViewMarginLeft="0dp"
+        app:sLeftViewGravity="left_center"
+        app:sLeftTopTextString="@string/title_vote_his_time"
+        app:sLeftTopTextSize="@dimen/sp_12"
+        app:sLeftTopTextColor="@color/asset_tx_title"
+        app:sLeftTextString="@string/title_deal_hash"
+        app:sLeftTextSize="@dimen/sp_14"
+        app:sLeftTextColor="@color/title_black"
+        app:sShapeCornersRadius="12dp"
+        app:sShapeSelectorNormalColor="@color/white"
+        app:sShapeSelectorPressedColor="@color/white"
+        app:sUseShape="true">
+    </com.allen.library.SuperButton>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/amount_spt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:sLeftViewMarginLeft="0dp"
+            app:sLeftViewGravity="left_center"
+            app:sLeftTopTextString="@string/title_vote_his_num"
+            app:sLeftTopTextSize="@dimen/sp_12"
+            app:sLeftTopTextColor="@color/asset_tx_title"
+            app:sLeftTextString="@string/title_deal_hash"
+            app:sLeftTextSize="@dimen/sp_14"
+            app:sLeftTextColor="@color/title_black"
+            app:sShapeCornersRadius="12dp"
+            app:sShapeSelectorNormalColor="@color/white"
+            app:sShapeSelectorPressedColor="@color/white"
+            app:sUseShape="true">
+        </com.allen.library.SuperTextView>
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/status_spt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:sLeftViewMarginLeft="0dp"
+            app:sLeftViewGravity="left_center"
+            app:sLeftTopTextString="@string/title_finance_state"
+            app:sLeftTopTextSize="@dimen/sp_12"
+            app:sLeftTopTextColor="@color/asset_tx_title"
+            app:sLeftTextString="@string/title_deal_hash"
+            app:sLeftTextSize="@dimen/sp_14"
+            app:sLeftTextColor="@color/title_black"
+            app:sShapeCornersRadius="12dp"
+            app:sShapeSelectorNormalColor="@color/white"
+            app:sShapeSelectorPressedColor="@color/white"
+            app:sUseShape="true">
+        </com.allen.library.SuperTextView>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.asset.AssetTransformTipActivity">
+  <androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:paddingLeft="@dimen/dp_15"
+       android:paddingRight="@dimen/dp_15"
+       android:orientation="vertical">
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textColor="@color/version_title"
+           android:layout_marginLeft="@dimen/dp_3"
+           android:layout_marginTop="@dimen/dp_26"
+           android:textSize="@dimen/sp_14"
+           android:text="@string/important_remind"/>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="@dimen/dp_3"
+           android:layout_marginTop="@dimen/dp_3"
+           android:textSize="@dimen/sp_12"
+           android:textColor="@color/version_title"
+           android:text="@string/important_remind_msg"/>
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="@dimen/dp_19"
+           android:background="@drawable/asset_details_bg"
+           >
+           <TextView
+               android:id="@+id/one_step"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintLeft_toLeftOf="parent"
+               android:paddingTop="@dimen/dp_5"
+               android:paddingBottom="@dimen/dp_5"
+               android:paddingLeft="@dimen/dp_20"
+               android:paddingRight="@dimen/dp_20"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="@color/glob_status"
+               android:textSize="@dimen/dp_14"
+               android:background="@drawable/step_bg"
+               android:text="@string/first_step"/>
+
+           <TextView
+               android:id="@+id/one_step1"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="@dimen/dp_25"
+               android:layout_marginTop="@dimen/dp_24"
+               android:layout_marginRight="@dimen/dp_25"
+               android:text="@string/first_step_one"
+               android:textColor="@color/mnemonic_type"
+               android:textSize="@dimen/dp_14"
+               app:layout_constraintLeft_toLeftOf="parent"
+               app:layout_constraintRight_toRightOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/one_step" />
+
+           <TextView
+               android:id="@+id/one_step2"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="@dimen/dp_25"
+               android:layout_marginTop="@dimen/dp_10"
+               android:layout_marginRight="@dimen/dp_25"
+               android:text="@string/first_step_two"
+               android:textColor="@color/mnemonic_type"
+               android:textSize="@dimen/dp_14"
+               app:layout_constraintLeft_toLeftOf="parent"
+               app:layout_constraintRight_toRightOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/one_step1" />
+
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="@dimen/dp_15"
+               android:layout_marginTop="@dimen/dp_12"
+               android:layout_marginRight="@dimen/dp_15"
+               android:layout_marginBottom="@dimen/dp_15"
+               android:gravity="right"
+               android:text="@string/first_step_bottom"
+               android:textColor="@color/version_title"
+               android:textSize="@dimen/dp_12"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintLeft_toLeftOf="parent"
+               app:layout_constraintRight_toRightOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/one_step2" />
+       </androidx.constraintlayout.widget.ConstraintLayout>
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="@dimen/dp_24"
+           android:background="@drawable/asset_details_bg"
+           >
+           <TextView
+               android:id="@+id/two_step"
+               app:layout_constraintLeft_toLeftOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:paddingTop="@dimen/dp_5"
+               android:paddingBottom="@dimen/dp_5"
+               android:paddingLeft="@dimen/dp_20"
+               android:paddingRight="@dimen/dp_20"
+               android:textColor="@color/glob_status"
+               android:textSize="@dimen/dp_14"
+               android:background="@drawable/step_bg"
+               android:text="@string/second_step"/>
+
+           <TextView
+               android:id="@+id/two_step1"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="@dimen/dp_25"
+               android:layout_marginTop="@dimen/dp_24"
+               android:layout_marginRight="@dimen/dp_25"
+               android:text="@string/second_step_one"
+               android:textColor="@color/mnemonic_type"
+               android:textSize="@dimen/dp_14"
+               app:layout_constraintLeft_toLeftOf="parent"
+               app:layout_constraintRight_toRightOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/two_step" />
+
+           <TextView
+               android:id="@+id/two_step2"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="@dimen/dp_25"
+               android:layout_marginTop="@dimen/dp_10"
+               android:layout_marginRight="@dimen/dp_25"
+               android:text="@string/second_step_two"
+               android:textColor="@color/mnemonic_type"
+               android:textSize="@dimen/dp_14"
+               app:layout_constraintLeft_toLeftOf="parent"
+               app:layout_constraintRight_toRightOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/two_step1" />
+
+           <TextView
+               android:id="@+id/two_step3"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="@dimen/dp_25"
+               android:layout_marginTop="@dimen/dp_10"
+               android:layout_marginRight="@dimen/dp_25"
+               android:text="@string/second_step_three"
+               android:textColor="@color/mnemonic_type"
+               android:textSize="@dimen/dp_14"
+               app:layout_constraintLeft_toLeftOf="parent"
+               app:layout_constraintRight_toRightOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/two_step2" />
+
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="@dimen/dp_15"
+               android:layout_marginTop="@dimen/dp_20"
+               android:layout_marginRight="@dimen/dp_15"
+               android:layout_marginBottom="@dimen/dp_14"
+               android:text="@string/second_step_bottom"
+               android:gravity="right"
+               android:textColor="@color/version_title"
+               android:textSize="@dimen/dp_12"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintLeft_toLeftOf="parent"
+               app:layout_constraintRight_toRightOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/two_step3" />
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
+       <Button
+           android:id="@+id/netStep"
+           android:layout_width="match_parent"
+           android:layout_height="44dp"
+           android:layout_marginTop="33dp"
+           android:background="@drawable/btn_enable_bg"
+           android:enabled="true"
+           android:gravity="center"
+           android:text="@string/i_know"
+           android:textColor="@color/white" />
+   </LinearLayout>
+
+  </androidx.core.widget.NestedScrollView>
+</LinearLayout>

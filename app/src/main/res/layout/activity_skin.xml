@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/background"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/head_layout"/>
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/whiteSkinSpt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        app:sLeftTextColor="@color/version_title"
+        app:sLeftTextSize="15dp"
+        app:sLeftTextString="白色"
+        app:sRightIconRes="@mipmap/choose_done_icon"
+        app:sRightIconWidth="20dp"
+        app:sRightIconHeight="15dp"
+        app:sDividerLineType="bottom"
+        app:sDividerLineColor="@color/dialog_line4"
+        app:sDividerLineHeight="1dp"
+        app:sShapeSelectorNormalColor="@color/bg_white"
+        app:sShapeSelectorPressedColor="@color/security_btn_press"
+        app:sUseShape="true"
+        app:sUseRipple="true">
+    </com.allen.library.SuperTextView>
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/goldSkinSpt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:sLeftTextColor="@color/version_title"
+        app:sLeftTextSize="15dp"
+        app:sLeftTextString="黑色"
+        app:sRightIconRes="@mipmap/choose_done_icon"
+        app:sRightIconWidth="20dp"
+        app:sRightIconHeight="15dp"
+        app:sDividerLineType="bottom"
+        app:sDividerLineColor="@color/dialog_line4"
+        app:sDividerLineHeight="1dp"
+        app:sShapeSelectorNormalColor="@color/bg_white"
+        app:sShapeSelectorPressedColor="@color/security_btn_press"
+        app:sUseShape="true"
+        app:sUseRipple="true">
+    </com.allen.library.SuperTextView>
+
+</LinearLayout>

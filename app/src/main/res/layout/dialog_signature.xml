@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/dialog_signature_bg"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center|left">
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/node_register_confirm"
+            android:textSize="@dimen/sp_16"
+            android:layout_weight="1"
+            android:textColor="@color/black"/>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/use_fingerprint_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/fingerprint_icon"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/use_pw_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/input_password"
+            android:textSize="@dimen/sp_16"
+            android:textColor="@color/input_pwd_text"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tx_title1_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tx_title1_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="节点名称"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/text_gray"/>
+
+        <TextView
+            android:id="@+id/tx_desc1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:text="节点名称"
+            android:gravity="right"
+            android:textSize="15dp"
+            android:textColor="@color/title_black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tx_title2_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tx_title2_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="节点费用"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/text_gray"/>
+
+        <TextView
+            android:id="@+id/tx_desc2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="节点费用"
+            android:gravity="right"
+            android:textSize="15dp"
+            android:textColor="@color/title_black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tx_title3_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tx_title3_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="节点费用"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/text_gray"/>
+
+        <TextView
+            android:id="@+id/tx_desc3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="节点费用"
+            android:gravity="right"
+            android:textSize="15dp"
+            android:textColor="@color/title_black"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/balance_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="可用余额"
+        android:textSize="@dimen/sp_12"
+        android:textColor="#3c6b91"/>
+
+    <EditText
+        android:id="@+id/tx_input1_et"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:paddingStart="15dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:hint="@string/please_input_node"
+        android:textSize="15sp"
+        android:singleLine="true"
+        android:textColor="@color/title_black"
+        android:textColorHint="@color/hint_gray"
+        android:background="@drawable/signature_edit_bg"
+        android:minHeight="45dp"
+        android:paddingEnd="35dp"
+        android:paddingRight="35dp"
+        android:layout_height="wrap_content"/>
+
+
+    <EditText
+        android:id="@+id/password_et"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:paddingStart="15dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:hint="@string/input_password"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:inputType="textPassword"
+        android:textColor="@color/title_black"
+        android:textColorHint="@color/hint_gray"
+        android:background="@drawable/signature_edit_bg"
+        android:minHeight="45dp"
+        android:paddingEnd="35dp"
+        android:paddingRight="35dp"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="@string/user_sign_confirm"
+        android:layout_width="match_parent"
+        android:background="@drawable/btn_enable_bg"
+        android:layout_height="44dp"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/btn_enable_text_bg"
+        android:enabled="false"
+        android:id="@+id/ok"
+        android:gravity="center" />
+
+</LinearLayout>

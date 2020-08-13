@@ -1,0 +1,2 @@
+include ':app',':mvvmlin'
+rootProject.name = "Kopernik"

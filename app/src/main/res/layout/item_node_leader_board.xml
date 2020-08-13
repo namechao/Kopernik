@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@color/background"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/ranking_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="@string/ranking"
+        android:textSize="14dp"
+        android:textColor="@color/leader_board_no"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.allen.library.SuperButton
+            android:id="@+id/super_spb"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:minWidth="20dp"
+            app:sCornersRadius="5dp"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            app:sSelectorDisableColor="#3f73fd"
+            android:text="@string/super_hint"
+            android:enabled="false"
+            app:sUseSelector="true"/>
+
+        <com.allen.library.SuperButton
+            android:id="@+id/genesis_spb"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:minWidth="20dp"
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp"
+            android:layout_marginStart="5dp"
+            app:sCornersRadius="5dp"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            app:sSelectorDisableColor="#c69f69"
+            android:text="@string/genesis"
+            android:enabled="false"
+            app:sUseSelector="true"/>
+
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/name"
+            android:textSize="14dp"
+            android:textColor="@color/leader_board_no"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/accumulated_points_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="@string/accumulated_points"
+        android:textSize="14dp"
+        android:textColor="@color/leader_board_no"/>
+
+</LinearLayout>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/bg_white"
+    android:paddingTop="15dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/logo_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/token_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/title_black"
+            android:layout_toRightOf="@id/logo_iv"
+            android:textSize="@dimen/sp_15"
+            android:text="DNS"/>
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@mipmap/icon_arrow"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/balance_of_spt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            app:sLeftViewMarginLeft="0dp"
+            app:sLeftViewGravity="left_center"
+            app:sLeftTopTextString="@string/title_asset_use"
+            app:sLeftTopTextSize="@dimen/sp_12"
+            app:sLeftTopTextColor="@color/text_gray"
+            app:sLeftTextString="推选"
+            app:sLeftTextSize="@dimen/sp_14"
+            app:sLeftTextColor="@color/title_black"
+            app:sShapeSelectorNormalColor="@color/bg_white"
+            app:sShapeSelectorPressedColor="@color/bg_white"
+            app:sUseShape="true"
+            app:sUseRipple="false">
+        </com.allen.library.SuperTextView>
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/freeze_spt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            app:sLeftViewMarginLeft="0dp"
+            app:sLeftViewGravity="left_center"
+            app:sLeftTopTextString="@string/title_asset_lock"
+            app:sLeftTopTextSize="@dimen/sp_12"
+            app:sLeftTopTextColor="@color/text_gray"
+            app:sLeftTextString="推选"
+            app:sLeftTextSize="@dimen/sp_14"
+            app:sLeftTextColor="@color/title_black"
+            app:sShapeSelectorNormalColor="@color/bg_white"
+            app:sShapeSelectorPressedColor="@color/bg_white"
+            app:sUseShape="true"
+            app:sUseRipple="false">
+        </com.allen.library.SuperTextView>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/cnyc_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_gray"
+        android:textSize="12dp"
+        android:layout_marginTop="@dimen/dp_4"
+        android:text="25435435"
+        android:maxLines="1"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:ellipsize="end" />
+    <View
+        android:id="@+id/split_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/split_line"/>
+
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="63dp"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <!--<com.xut.widget.roundedimageview.roundedimageview.RoundedImageView-->
+        <!--android:id="@+id/node_logo_iv"-->
+        <!--app:riv_corner_radius="50dp"-->
+        <!--android:layout_width="57dp"-->
+        <!--android:layout_height="57dp"-->
+        <!--android:src="@color/orange"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_gravity="center"/>-->
+
+    <!--<ImageView-->
+        <!--android:id="@+id/node_logo_select_iv"-->
+        <!--android:layout_width="20dp"-->
+        <!--android:layout_height="20dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginStart="-16dp"-->
+        <!--android:layout_toEndOf="@+id/node_logo_iv"-->
+        <!--android:src="@mipmap/iv_select_bg" />-->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.kopernik.app.widget.roundedimageview.RoundedImageView
+            android:id="@+id/node_logo_iv"
+            app:riv_corner_radius="50dp"
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:src="@color/orange"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/node_logo_select_iv"
+            android:layout_width="63dp"
+            android:layout_height="63dp"
+            android:src="@mipmap/iv_select_bg"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+</RelativeLayout>

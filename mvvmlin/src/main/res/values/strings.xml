@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Kopernik</string>
+    <string name="now_loading">加载中…</string>
+    <string name="error_1">网络连接错误</string>
+    <string name="error_2">网络连接超时</string>
+    <string name="error_3">服务器拒绝请求</string>
+    <string name="error_4">未知错误</string>
+    <string name="error_5">数据解析错误</string>
+    <string name="error_6">证书错误</string>
+</resources>

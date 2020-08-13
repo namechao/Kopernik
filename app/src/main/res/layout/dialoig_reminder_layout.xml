@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_reminder_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<TextView
+    android:id="@+id/title"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_20"
+    android:layout_marginRight="@dimen/dp_20"
+    android:textColor="@color/title_black"
+    android:textSize="@dimen/sp_18"
+    android:layout_marginTop="@dimen/dp_18"
+    android:text="@string/confirm_withdraw" />
+
+    <TextView
+        android:id="@+id/content"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="@dimen/sp_15"
+        android:layout_marginRight="@dimen/sp_15"
+        android:text=""
+        android:layout_marginTop="@dimen/dp_20"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/title_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:background="@drawable/btn_enable_bg"
+        android:enabled="true"
+        android:gravity="center"
+        android:text="@string/string_no"
+        android:paddingLeft="@dimen/dp_26"
+        android:paddingRight="@dimen/dp_26"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_10"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginBottom="@dimen/dp_18"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintRight_toLeftOf="@id/confirm"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteY="269dp" />
+
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:background="@drawable/btn_enable_bg"
+        android:enabled="true"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="@dimen/dp_20"
+        android:text="@string/string_yes"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/cancel"
+        app:layout_constraintLeft_toRightOf="@id/cancel"
+        android:paddingLeft="@dimen/dp_26"
+        android:paddingRight="@dimen/dp_26"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cancel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/alert_bg"
+    android:layout_margin="50dp"
+    android:paddingTop="20dp">
+
+    <ImageView
+        android:id="@+id/icon_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/open_fingerprint_icon"/>
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/use_fingerprint"
+        android:textColor="@color/title_black"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/error_msg_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:textSize="13dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/dialog_line"/>
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/cancel_spt"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        app:sShapeCornersBottomLeftRadius="5dp"
+        app:sShapeCornersBottomRightRadius="5dp"
+        app:sCenterTextString="@string/cancel"
+        app:sCenterTextColor="@color/text_gray"
+        app:sCenterTextSize="15dp"
+        app:sShapeSelectorNormalColor="@color/bg_white"
+        app:sShapeSelectorPressedColor="@color/bg_white"
+        app:sUseShape="true"/>
+
+</LinearLayout>
