@@ -14,7 +14,7 @@ import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.UserConfig
 import com.kopernik.app.utils.KeyboardUtils
 import com.kopernik.app.utils.ToastUtils
-import com.kopernik.ui.account.bean.AccountBean
+import com.kopernik.ui.login.bean.AccountBean
 import com.kopernik.ui.setting.viewModel.UpdateNickViewModel
 import kotlinx.android.synthetic.main.activity_modify_nick.*
 

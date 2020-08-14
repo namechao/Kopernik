@@ -24,7 +24,7 @@
         <activity android:name="com.kopernik.ui.asset.ToBeExtractedListActivity" />
         <activity android:name=".ui.asset.AssetTransformTipActivity" />
         <activity
-            android:name="com.kopernik.ui.account.ImportMnemonicConfirmActivity"
+            android:name="com.kopernik.ui.login.ImportMnemonicConfirmActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name="com.kopernik.ui.setting.SkinActivity" />
         <activity android:name="com.kopernik.ui.Ecology.NodeLeaderBoardActivity" />
@@ -62,14 +62,13 @@
         <activity android:name="com.kopernik.ui.asset.OtherAssetDetailsActivity" />
         <activity android:name="com.kopernik.ui.asset.DepositMoneyActivity" />
         <activity android:name="com.kopernik.ui.asset.TransferActivity" />
-        <activity android:name="com.kopernik.ui.account.ImportMnemonicActivity" />
-        <activity android:name="com.kopernik.ui.account.MnemonicConfirmActivity" />
-        <activity android:name="com.kopernik.ui.account.AddNewAccountActivity" />
-        <activity android:name="com.kopernik.ui.account.ChooseAccountActivity" />
-        <activity android:name="com.kopernik.ui.account.CreateAccountActivity" />
+        <activity android:name="com.kopernik.ui.login.ImportMnemonicActivity" />
+        <activity android:name="com.kopernik.ui.login.MnemonicConfirmActivity" />
+        <activity android:name="com.kopernik.ui.login.AddNewAccountActivity" />
+        <activity android:name="com.kopernik.ui.login.LoginActivity" />
+        <activity android:name="com.kopernik.ui.login.CreateAccountActivity" />
         <activity
             android:name="com.kopernik.ui.MainActivity"
-            android:fitsSystemWindows="true"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />

@@ -30,8 +30,7 @@ abstract class NewBaseActivity<VM : BaseViewModel, DB : ViewDataBinding>:BaseAct
     }
     private fun initImmersionBar() {
             ImmersionBar.with(this)
-                .statusBarColor(R.color.glob_status) //状态栏颜色，不写默认透明色
-                .navigationBarColor(R.color.black) //导航栏颜色，不写默认黑色
+                .statusBarColor(R.color.colorAccent) //状态栏颜色，不写默认透明色
                 .fitsSystemWindows(true)
                 .keyboardEnable(true)
                 .keyboardMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN) //单独指定软键盘模式

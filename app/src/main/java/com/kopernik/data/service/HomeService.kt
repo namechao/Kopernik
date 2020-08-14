@@ -1,7 +1,7 @@
 package com.kopernik.data.service
 
 import com.pcl.mvvm.app.base.BaseResult
-import com.kopernik.ui.account.bean.AccountBean
+import com.kopernik.ui.login.bean.AccountBean
 import com.kopernik.ui.asset.entity.ExtractBean
 import com.kopernik.ui.setting.entity.ContactBean
 import com.kopernik.ui.setting.entity.UpdateBean

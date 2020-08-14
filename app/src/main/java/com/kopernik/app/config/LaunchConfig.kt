@@ -3,12 +3,12 @@ package com.kopernik.app.config
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import com.kopernik.ui.account.ImportMnemonicConfirmActivity
+import com.kopernik.ui.login.ImportMnemonicConfirmActivity
 import com.kopernik.ui.MainActivity
 import com.kopernik.ui.Ecology.*
 import com.kopernik.ui.Ecology.entity.CheckRegisterInfo
-import com.kopernik.ui.account.*
-import com.kopernik.ui.account.bean.Mnemonic
+import com.kopernik.ui.login.*
+import com.kopernik.ui.login.bean.Mnemonic
 import com.kopernik.ui.asset.*
 import com.kopernik.ui.setting.*
 
@@ -22,7 +22,7 @@ object LaunchConfig {
     //进选择账户
     fun startChooseAccountAc(context: Context) {
         val intent =
-            Intent(context, ChooseAccountActivity::class.java)
+            Intent(context, LoginActivity::class.java)
         context.startActivity(intent)
     }
 

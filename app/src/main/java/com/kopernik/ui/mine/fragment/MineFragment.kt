@@ -1,16 +1,12 @@
 package com.kopernik.ui.mine.fragment
 
 import android.os.Bundle
-import androidx.annotation.Nullable
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.aleyn.mvvm.base.NoViewModel
-import com.github.lzyzsd.jsbridge.BridgeWebView
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseFragment
-import com.kopernik.app.baseweb.BaseWebViewFragment
 import kotlinx.android.synthetic.main.fragment_trade.*
-import com.kopernik.data.api.Api
 
 /**
  * A simple [Fragment] subclass.
@@ -18,7 +14,7 @@ import com.kopernik.data.api.Api
  * create an instance of this fragment.
  */
 class MineFragment : NewBaseFragment<NoViewModel, ViewDataBinding>() {
-
+    var ishow=false
     companion object{
         fun newInstance() = MineFragment()
     }
@@ -26,5 +22,23 @@ class MineFragment : NewBaseFragment<NoViewModel, ViewDataBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
+        lottieAnimationView.imageAssetsFolder = "mines";
+        lottieAnimationView.setAnimation("mines.json");
+        lottieAnimationView.loop(true);
     }
+
+    override fun onResume() {
+        super.onResume()
+            lottieAnimationView.playAnimation();
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (hidden){
+            lottieAnimationView.pauseAnimation()
+        }else{
+            lottieAnimationView.playAnimation();
+        }
+    }
+
 }

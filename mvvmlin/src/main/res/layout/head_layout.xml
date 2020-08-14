@@ -3,8 +3,7 @@
     android:id="@+id/headRootView"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:orientation="vertical"
-    android:background="@color/bg_white">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,7 +26,7 @@
                 android:id="@+id/headBackIv"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:src="@drawable/icon_back"
+                android:src="@mipmap/ic_back"
                 android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true" />
 
@@ -83,6 +82,7 @@
 
     <View
         android:id="@+id/headDiv"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/head_line"/>

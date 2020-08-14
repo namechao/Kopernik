@@ -97,7 +97,7 @@
             android:id="@+id/cancelMapping"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/mapping_selector"
+            android:drawableTop="@drawable/ecology_tab_selector"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="@dimen/sp_12"

@@ -20,8 +20,8 @@ import com.kopernik.app.events.LocalEvent
 import com.kopernik.app.factory.ViewModelFactory
 import com.kopernik.app.utils.APPHelper
 import com.kopernik.app.utils.ToastUtils
-import com.kopernik.ui.account.bean.AccountBean
-import com.kopernik.ui.account.bean.AccountListBean
+import com.kopernik.ui.login.bean.AccountBean
+import com.kopernik.ui.login.bean.AccountListBean
 import com.kopernik.ui.setting.viewModel.DefaultViewModel
 import kotlinx.android.synthetic.main.activity_switch_account.*
 

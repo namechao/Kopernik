@@ -11,7 +11,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.UserConfig
-import com.kopernik.ui.account.adapter.MnemonicAdapter
+import com.kopernik.ui.login.adapter.MnemonicAdapter
 import kotlinx.android.synthetic.main.activity_export_mnemonic_success.*
 
 class ExportMnemonicSuccessActivity : NewBaseActivity<NoViewModel,ViewDataBinding>() {

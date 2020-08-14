@@ -2,8 +2,8 @@ package com.kopernik.app.config
 
 import com.google.gson.Gson
 import com.tencent.mmkv.MMKV
-import com.kopernik.ui.account.bean.AccountBean
-import com.kopernik.ui.account.bean.Mnemonic
+import com.kopernik.ui.login.bean.AccountBean
+import com.kopernik.ui.login.bean.Mnemonic
 import java.util.*
 
 class UserConfig {

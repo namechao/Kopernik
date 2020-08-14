@@ -17,7 +17,6 @@ import com.kopernik.ui.Ecology.fragment.NodeListFragment
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.Ecology.viewModel.NodeViewModel
-import kotlinx.android.synthetic.main.fragment_node.*
 import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"

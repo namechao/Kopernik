@@ -534,12 +534,13 @@
 
 
     <!-- 新项目文字资源-->
-
+<!--    底部tab-->
     <string name="nav_title_main">首页</string>
     <string name="nav_title_mine">矿场</string>
     <string name="nav_title_ecology">生态</string>
     <string name="nav_title_asset">资产</string>
     <string name="nav_title_my">我的</string>
+<!--    我的相关-->
     <string name="name_verified">实名认证</string>
     <string name="google_verified">谷歌认证</string>
     <string name="login_password">登录密码</string>
@@ -547,11 +548,35 @@
     <string name="invite_friend">邀请好友</string>
     <string name="about_us">关于我们</string>
     <string name="verson_code">版本号</string>
+<!--    矿场相关-->
     <string name="income">累计收益(UTDM)</string>
     <string name="buy_mine_m">购买矿机</string>
     <string name="synthesis_utc">合成UTC</string>
-
-
+<!--    生态相关-->
+    <string name="ecology_tab_title">Kopernik  NETWORK生态应用场景</string>
+    <string name="ecology_tab_title1_1">合成UTC</string>
+    <string name="ecology_tab_title1_2">合成UTC</string>
+    <string name="ecology_tab_title1_3">合成UTC</string>
+    <string name="ecology_tab_title1_4">合成UTC</string>
+    <string name="ecology_tab_content1">
+        全球健康骑行基金会是基于健康公益而设立的、与全球上百家知名车企合作的首个骑行基金会，成立于新加坡。它的宗旨在帮助更多的人，建立健康低碳出行的生活方式；同时在通过每日骑行获得奖励，更获得健康的身体；以健康休闲度假骑游为主题，通过去中心化的全球骑游俱乐部，由各地骑游俱乐部发起人创建骑游路线，引领全球休闲度假骑游方式；并与全球景区酒店合作并创建首个全球景区分时租赁度假骑游平台。作为哥白尼网络生态的一部分，全球健康骑行基金会将接纳
+    </string>
+    <string name="ecology_tab_content2">
+        全球健康骑行基金会是基于健康公益而设立的、与全球上百家知名车企合作的首个骑行基金会，成立于新加坡。它的宗旨在帮助更多的人，建立健康低碳出行的生活方式；同时在通过每日骑行获得奖励，更获得健康的身体；以健康休闲度假骑游为主题，通过去中心化的全球骑游俱乐部，由各地骑游俱乐部发起人创建骑游路线，引领全球休闲度假骑游方式；并与全球景区酒店合作并创建首个全球景区分时租赁度假骑游平台。作为哥白尼网络生态的一部分，全球健康骑行基金会将接纳
+    </string>
+    <string name="ecology_tab_content3">
+       生态海滨+科技文化”将成为的柬埔寨新城市七星海的名片。通过引入数字经济与数字技术，全力打造智慧化数字城市。塑造“生态+人文”的特色海滨城市环境，从而导入旅游度假、商业服务、科技生产等高端功能，同时关注多样宜居的生活环境设计，吸引人才留驻。哥白尼网络将导入自有生态用户与机构，并且使用跨链技术串联其他公链生态中的用户和机构，帮助七星海一起建设科技之城。七星海城市内商家将逐步接入哥白尼网络生态，在哥白尼链跨链技术的帮助下支持等种数字资产消费，建设国家化智慧数字城市。哥白尼网络还将帮助建设便捷的数字退税通道，使得七星海成为全球首座数支持数字资产退税的黑科技旅游城市。UTC持有者在消费与退税时可获得哥白尼网络奖励，同时将分享城市建设的红利，如使用UTC进行房屋投资、公司开办等。
+    </string>
+    <string name="ecology_tab_content4">
+        缅甸大其力旅游度假村以休闲旅游为主导，博彩业为引擎，致力于打造“金三角”地区最豪华博彩文化度假中心。哥白尼网络将全力支持大其力旅游度假村的数字化基础设施建设，尤其是涉及大量国外旅客的跨境支付问提。哥白尼网络的跨链技术将有效帮助解决境外旅游消费支付问题，以优质的数字化服务体验帮助缅甸大其力旅游度假村吸引更多优质海外消费者。作为度假村数字化基础设施建设的参与者，哥白尼网络生态用户也将分享相关支付带来的佣金红利。同时UTC持有这在度假村进行消费时，更将获得度假折扣和返利。
+    </string>
+     <!-- 登录相关-->
+    <string name="login_welcome">欢迎来到</string>
+    <string name="login_phone">手机登录</string>
+    <string name="login_email">邮箱登录</string>
+    <string name="login_input_phone_hint">请输入手机号</string>
+    <string name="login_input_password_hint">请输入密码</string>
+    <string name="login_input_e_hint">请输入邮箱</string>
 
     <!-- 新项目文字资源-->
 </resources>

@@ -3,10 +3,12 @@ package com.kopernik.ui
 import android.Manifest
 import android.annotation.TargetApi
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
@@ -23,7 +25,6 @@ import com.allenliu.versionchecklib.v2.builder.UIData
 import com.allenliu.versionchecklib.v2.callback.CustomVersionDialogListener
 import com.allenliu.versionchecklib.v2.callback.ForceUpdateListener
 import com.allenliu.versionchecklib.v2.callback.RequestVersionListener
-import com.blankj.utilcode.util.BarUtils
 import com.google.gson.Gson
 import com.gyf.immersionbar.ImmersionBar
 import com.kopernik.BuildConfig
@@ -39,11 +40,11 @@ import com.kopernik.app.utils.KeyboardUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.app.utils.fingerprint.FingerprintHelper
 import com.kopernik.data.api.Api
-import com.kopernik.ui.account.bean.AccountBean
-import com.kopernik.ui.account.bean.AccountListBean
-import com.kopernik.ui.fragment.AssetFragment
-import com.kopernik.ui.fragment.EcologyFragment
-import com.kopernik.ui.fragment.HomeFragment
+import com.kopernik.ui.login.bean.AccountBean
+import com.kopernik.ui.login.bean.AccountListBean
+import com.kopernik.ui.asset.fragment.AssetFragment
+import com.kopernik.ui.Ecology.fragment.EcologyFragment
+import com.kopernik.ui.home.fragment.HomeFragment
 import com.kopernik.ui.mine.fragment.MineFragment
 import com.kopernik.ui.my.fragment.MyFragment
 import com.kopernik.ui.setting.entity.UpdateBean2
@@ -64,7 +65,7 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
     private val homeFragment=HomeFragment.newInstance()
     private val mineFragment= MineFragment.newInstance()
     private val ecologyFragment= EcologyFragment.newInstance()
-    private val assetFragment=AssetFragment.newInstance()
+    private val assetFragment= AssetFragment.newInstance()
     private val myFragment= MyFragment.newInstance()
     var navCtl: NavigationController? =null
     private var mWebview: WebView?=null
@@ -77,14 +78,15 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
     override fun layoutId()=R.layout.activity_main
 
     override fun initView(savedInstanceState: Bundle?) {
-        BarUtils.setStatusBarColor(this, resources.getColor(R.color.colorPrimary))
+
         initView()
         initSmartRefreshLayout()
     }
 
-
-
-
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        ImmersionBar.with(this).reset().init()
+        return super.onCreateView(name, context, attrs)
+    }
     override fun initData() {
         requestCodeQRCodePermissions()
         requestUpdateInfo()
@@ -113,7 +115,6 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
             override fun onSelected(index: Int, old: Int) {
                 mIndex=index
                 switchPage(index, old)
-                resetImmersionBar(index)
             }
 
             override fun onRepeat(index: Int) {
@@ -273,40 +274,6 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
     }
 
 
-    private fun resetImmersionBar(position: Int) {
-        when (position) {
-            4->{
-                ImmersionBar.with(this).reset().init()
-            }
-            3 -> {
-                ImmersionBar.with(this)
-                    .statusBarColor(R.color.asset_fg_status)
-                    .navigationBarColor(R.color.white)
-                    .init()
-            }
-            2 -> {
-                ImmersionBar.with(this)
-                    .statusBarColor(R.color.white)
-                    .navigationBarColor(R.color.white)
-                    .statusBarDarkFont(false)
-                    .init()
-            }
-            else -> {
-                ImmersionBar.with(this)
-                    .statusBarColor(R.color.glob_status)
-                    .navigationBarColor(R.color.white)
-                    .statusBarDarkFont(false)
-                    .init()
-            }
-        }
-//        } else {
-//            ImmersionBar.with(this)
-//                .statusBarColor(R.color.white_status)
-//                .navigationBarColor(R.color.black)
-//                .statusBarDarkFont(true)
-//                .init()
-//        }
-    }
 
     /**
      * 使状态栏透明
