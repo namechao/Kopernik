@@ -84,7 +84,7 @@ class MnemonicConfirmActivity : NewBaseActivity<NoViewModel, ViewDataBinding>() 
                 check()
             }
         btConfirm.setOnClickListener(View.OnClickListener { v: View? ->
-            LaunchConfig.startCreatedAccountAc(this, mnemonicBean)
+//            LaunchConfig.startCreatedAccountAc(this, mnemonicBean)
             finish()
         })
     }

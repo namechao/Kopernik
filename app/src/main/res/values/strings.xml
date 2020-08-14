@@ -577,6 +577,11 @@
     <string name="login_input_phone_hint">请输入手机号</string>
     <string name="login_input_password_hint">请输入密码</string>
     <string name="login_input_e_hint">请输入邮箱</string>
+    <string name="login_register">快速注册</string>
+    <string name="login_forget_psw">忘记密码</string>
+    <string name="login_change_password">修改登录密码</string>
+    <string name="login_change_password_tip">密码8-16位，必须包含大小写字母和数字。</string>
+    <string name="login_send_code">秒后重发送</string>
 
     <!-- 新项目文字资源-->
 </resources>

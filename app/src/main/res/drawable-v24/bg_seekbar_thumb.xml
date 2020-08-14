@@ -1,0 +1,10 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 按下状态-->
+    <item android:drawable="@mipmap/deposit_coin" android:state_pressed="true" />
+
+<!--    &lt;!&ndash; 有焦点状态 &ndash;&gt;-->
+    <item android:drawable="@mipmap/deposit_coin" android:state_focused="true" />
+
+<!--    &lt;!&ndash; 普通状态 &ndash;&gt;-->
+    <item android:drawable="@mipmap/deposit_coin" />
+</selector>

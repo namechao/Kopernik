@@ -26,9 +26,9 @@ object LaunchConfig {
         context.startActivity(intent)
     }
 
-    fun startAddNewAccountAc(context: Context) {
+    fun startForgetPasswordNextActivity(context: Context) {
         val intent =
-            Intent(context, AddNewAccountActivity::class.java)
+            Intent(context, ForgetPasswordNextActivity::class.java)
         context.startActivity(intent)
     }
 
@@ -51,13 +51,11 @@ object LaunchConfig {
         context.startActivity(intent)
     }
 
-    fun startCreatedAccountAc(
-        context: Context,
-        mnemonic: Mnemonic?
+    fun startForgetPasswordActivity(
+        context: Context
     ) {
         val intent =
-            Intent(context, CreateAccountActivity::class.java)
-        intent.putExtra(CreateAccountActivity.MNEMONIC_EXTRA, mnemonic)
+            Intent(context, ForgetPasswordActivity::class.java)
         context.startActivity(intent)
     }
 

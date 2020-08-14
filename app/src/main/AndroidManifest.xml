@@ -64,9 +64,9 @@
         <activity android:name="com.kopernik.ui.asset.TransferActivity" />
         <activity android:name="com.kopernik.ui.login.ImportMnemonicActivity" />
         <activity android:name="com.kopernik.ui.login.MnemonicConfirmActivity" />
-        <activity android:name="com.kopernik.ui.login.AddNewAccountActivity" />
+        <activity android:name="com.kopernik.ui.login.ForgetPasswordNextActivity" />
         <activity android:name="com.kopernik.ui.login.LoginActivity" />
-        <activity android:name="com.kopernik.ui.login.CreateAccountActivity" />
+        <activity android:name="com.kopernik.ui.login.ForgetPasswordActivity" />
         <activity
             android:name="com.kopernik.ui.MainActivity"
             android:hardwareAccelerated="true"
