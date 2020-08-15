@@ -600,5 +600,8 @@
     <string name="re_login_confirm_psw">确认登录密码</string>
     <string name="user_protocol_title">UTC用户协议</string>
     <string name="totle_mines">总矿量</string>
+    <string name="receive_UTK">领取UTK</string>
+    <string name="receive_dialog_top">本次可领取UTK数量</string>
+    <string name="tv_get_it">立即领取</string>
     <!-- 新项目文字资源-->
 </resources>
