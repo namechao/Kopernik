@@ -12,6 +12,7 @@ import com.kopernik.R
 import com.kopernik.app.base.NewBaseFragment
 import com.kopernik.app.dialog.ReminderDialog
 import com.kopernik.ui.home.adadpter.AutoPollAdapter
+import com.kopernik.ui.home.adadpter.HomeAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -82,6 +83,12 @@ open class HomeFragment: NewBaseFragment<NoViewModel, ViewDataBinding>() {
             }
 
         }
+        //下方列表
+        recyclerView.layoutManager=LinearLayoutManager(activity)
+        var adapter= HomeAdapter()
+        recyclerView.adapter=adapter
+        var data= arrayListOf("saga","asfafaas","afafasgagaga","dfdadfafa","asdsagassasa","asgasgagaga")
+        adapter.setNewData(data)
     }
 
 

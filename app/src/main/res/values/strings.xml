@@ -599,9 +599,18 @@
     <string name="re_login_setup_psw">请设置登录密码</string>
     <string name="re_login_confirm_psw">确认登录密码</string>
     <string name="user_protocol_title">UTC用户协议</string>
+<!--    首页相关-->
     <string name="totle_mines">总矿量</string>
     <string name="receive_UTK">领取UTK</string>
     <string name="receive_dialog_top">本次可领取UTK数量</string>
     <string name="tv_get_it">立即领取</string>
+    <string name="tv_real_m">实时行情</string>
+    <string name="coin_name">名称</string>
+    <string name="coin_price">最新价</string>
+    <string name="coin_rise_fall">涨跌幅</string>
+    <string name="coin_name_b">24H量 0</string>
+<!--    资产相关-->
+    <string name="asset_total">我的总资产(CNY)</string>
+
     <!-- 新项目文字资源-->
 </resources>

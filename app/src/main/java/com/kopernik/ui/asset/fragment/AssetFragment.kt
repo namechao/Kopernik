@@ -44,6 +44,11 @@ class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
+        recyclerView.layoutManager=LinearLayoutManager(activity)
+        var adapter=AssetAdapter()
+        recyclerView.adapter=adapter
+        var  list= arrayListOf("ssdsadsa","asdsadad","Asdsdsa","asdsda")
+        adapter.setNewData(list)
     }
 
 
