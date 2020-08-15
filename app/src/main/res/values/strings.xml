@@ -576,12 +576,29 @@
     <string name="login_email">邮箱登录</string>
     <string name="login_input_phone_hint">请输入手机号</string>
     <string name="login_input_password_hint">请输入密码</string>
+    <string name="login_verify">验证码</string>
+    <string name="login_input_psw_hint">请输入新密码</string>
+    <string name="login_inputa_psw_hint">请再次输入新密码</string>
     <string name="login_input_e_hint">请输入邮箱</string>
     <string name="login_register">快速注册</string>
     <string name="login_forget_psw">忘记密码</string>
     <string name="login_change_password">修改登录密码</string>
     <string name="login_change_password_tip">密码8-16位，必须包含大小写字母和数字。</string>
     <string name="login_send_code">秒后重发送</string>
-
+    <string name="login_agreement_tip">登录即同意</string>
+    <string name="login_agreement">《UTC用户服务协议》</string>
+<!--    注册相关-->
+    <string name="re_phone">手机注册</string>
+    <string name="re_email">邮箱注册</string>
+    <string name="re_verify_code">获取验证码</string>
+    <string name="re_input_code">请输入验证码</string>
+    <string name="re_invite_code">邀请码（必填）</string>
+    <string name="re_quick_register">快速注册</string>
+    <string name="re_login_title">登录</string>
+    <string name="re_login_psw">登录密码</string>
+    <string name="re_login_setup_psw">请设置登录密码</string>
+    <string name="re_login_confirm_psw">确认登录密码</string>
+    <string name="user_protocol_title">UTC用户协议</string>
+    <string name="totle_mines">总矿量</string>
     <!-- 新项目文字资源-->
 </resources>

@@ -24,7 +24,7 @@
         <activity android:name="com.kopernik.ui.asset.ToBeExtractedListActivity" />
         <activity android:name=".ui.asset.AssetTransformTipActivity" />
         <activity
-            android:name="com.kopernik.ui.login.ImportMnemonicConfirmActivity"
+            android:name="com.kopernik.ui.login.RegisterSetUpPasswordActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name="com.kopernik.ui.setting.SkinActivity" />
         <activity android:name="com.kopernik.ui.Ecology.NodeLeaderBoardActivity" />
@@ -62,8 +62,8 @@
         <activity android:name="com.kopernik.ui.asset.OtherAssetDetailsActivity" />
         <activity android:name="com.kopernik.ui.asset.DepositMoneyActivity" />
         <activity android:name="com.kopernik.ui.asset.TransferActivity" />
-        <activity android:name="com.kopernik.ui.login.ImportMnemonicActivity" />
-        <activity android:name="com.kopernik.ui.login.MnemonicConfirmActivity" />
+        <activity android:name="com.kopernik.ui.login.RegisterActivity" />
+        <activity android:name="com.kopernik.ui.login.UserProtocolActivity" />
         <activity android:name="com.kopernik.ui.login.ForgetPasswordNextActivity" />
         <activity android:name="com.kopernik.ui.login.LoginActivity" />
         <activity android:name="com.kopernik.ui.login.ForgetPasswordActivity" />

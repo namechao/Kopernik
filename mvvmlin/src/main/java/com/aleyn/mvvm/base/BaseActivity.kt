@@ -160,7 +160,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompa
         headTitleTv.text = titleName
     }
 
-    open fun setTitleAndRightRes(titleName: String?, resId: Int,  functionName: String?,onClikItem:OnRightClickItem) {
+    open fun setTitleAndRightRes(titleName: String?, resId: Int,  functionName: String?,onClickItem:OnRightClickItem) {
         initHeadLayoutId()
         rightTv.visibility = View.VISIBLE
         rightTv.text = functionName
@@ -168,7 +168,16 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompa
         rightIv.setImageResource(resId)
         headTitleTv.text = titleName
         rightTv.setOnClickListener {
-            onClikItem?.onClick()
+            onClickItem?.onClick()
+        }
+    }
+    open fun setTitleAndRightonClick(titleName: String?,  functionName: String?,onClickItem:OnRightClickItem) {
+        initHeadLayoutId()
+        rightTv.visibility = View.VISIBLE
+        rightTv.text = functionName
+        headTitleTv.text = titleName
+        rightTv.setOnClickListener {
+            onClickItem?.onClick()
         }
     }
    open interface OnRightClickItem {

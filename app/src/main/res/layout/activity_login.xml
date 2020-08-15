@@ -12,7 +12,7 @@
     android:layout_height="wrap_content"
        android:textSize="26sp"
        android:textColor="@color/white"
-       android:layout_marginTop="115dp"
+       android:layout_marginTop="80dp"
        android:layout_marginLeft="30dp"
        android:text="Hello，"/>
 <LinearLayout
@@ -89,8 +89,6 @@
          app:layout_constraintTop_toTopOf="parent"
          app:layout_constraintLeft_toLeftOf="parent"
          app:layout_constraintBottom_toBottomOf="parent"
-         android:layout_marginTop="@dimen/dp_5"
-         android:layout_marginBottom="@dimen/dp_5"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:textSize="@dimen/sp_17"
@@ -112,13 +110,15 @@
      <EditText
          android:id="@+id/etInput"
          android:layout_width="0dp"
-         android:layout_height="0dp"
+         android:layout_height="@dimen/dp_46"
          app:layout_constraintTop_toTopOf="parent"
          app:layout_constraintBottom_toBottomOf="parent"
          app:layout_constraintRight_toLeftOf="@+id/icClear"
          android:textColor="@color/white"
          app:layout_constraintLeft_toRightOf="@+id/line"
          android:hint="@string/login_input_phone_hint"
+         android:inputType="phone"
+         android:textCursorDrawable="@null"
          android:textColorHint="@color/color_665F93"
          android:background="@null"
          android:textSize="@dimen/sp_17"/>
@@ -129,7 +129,8 @@
          app:layout_constraintRight_toRightOf="parent"
          app:layout_constraintTop_toTopOf="parent"
          app:layout_constraintBottom_toBottomOf="parent"
-         android:src="@mipmap/ic_back"/>
+         android:padding="@dimen/dp_10"
+         android:src="@mipmap/ic_clear"/>
 
 <View
     android:layout_width="match_parent"
@@ -146,7 +147,7 @@
         >
         <EditText
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/dp_46"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/icEye"
@@ -154,7 +155,9 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:hint="@string/login_input_password_hint"
             android:textColorHint="@color/color_665F93"
+            android:textCursorDrawable="@null"
             android:background="@null"
+            android:inputType="textPassword"
             android:textSize="@dimen/sp_17"/>
         <ImageView
             android:id="@+id/icEye"
@@ -163,8 +166,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginBottom="@dimen/dp_10"
             android:padding="@dimen/dp_10"
             android:src="@mipmap/ic_back"/>
 
@@ -199,7 +200,7 @@
         android:background="@drawable/btn_enable_bg"
         android:textColor="@color/btn_enable_text_bg"
         android:layout_height="44dp"
-        android:enabled="false"
+        android:enabled="true"
         android:layout_marginTop="25dp"
         android:gravity="center" />
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -232,4 +233,24 @@
             android:text="@string/login_forget_psw"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="67dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_8284B6"
+            android:text="@string/login_agreement_tip"/>
+        <TextView
+            android:id="@+id/userProtocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_7F80FD"
+            android:textSize="@dimen/sp_12"
+            android:text="@string/login_agreement"/>
+    </LinearLayout>
 </LinearLayout>

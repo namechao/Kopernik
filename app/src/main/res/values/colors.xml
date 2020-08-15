@@ -196,4 +196,8 @@
     <color name="btn_disable">#39305D</color>
     <color name="btn_press">#7039305D</color>
     <color name="color_AC9EE5">#AC9EE5</color>
+    <color name="text_unable">#5D5386</color>
+    <color name="color_8284B6">#8284B6</color>
+    <color name="color_7F80FD">#7F80FD</color>
+    <color name="color_760887">#760887</color>
 </resources>

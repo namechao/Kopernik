@@ -3,7 +3,7 @@ package com.kopernik.app.config
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import com.kopernik.ui.login.ImportMnemonicConfirmActivity
+import com.kopernik.ui.login.RegisterSetUpPasswordActivity
 import com.kopernik.ui.MainActivity
 import com.kopernik.ui.Ecology.*
 import com.kopernik.ui.Ecology.entity.CheckRegisterInfo
@@ -32,22 +32,18 @@ object LaunchConfig {
         context.startActivity(intent)
     }
 
-    fun startMnemonicConfirmAc(
-        context: Context,
-        mnemonic: Mnemonic?
+    fun startUserProtocolActivity(
+        context: Context
     ) {
         val intent =
-            Intent(context, MnemonicConfirmActivity::class.java)
-        intent.putExtra(MnemonicConfirmActivity.MNEMONIC_EXTRA, mnemonic)
+            Intent(context, UserProtocolActivity::class.java)
         context.startActivity(intent)
     }
 
-    fun startImportMnemonicConfirmAc(
-        context: Context,
-        mnemonic: Mnemonic?
+    fun startRegisterSetUpPasswordActivity(
+        context: Context
     ) {
-        val intent = Intent(context, ImportMnemonicConfirmActivity::class.java)
-        intent.putExtra(ImportMnemonicConfirmActivity.MNEMONIC_EXTRA, mnemonic)
+        val intent = Intent(context, RegisterSetUpPasswordActivity::class.java)
         context.startActivity(intent)
     }
 
@@ -59,9 +55,9 @@ object LaunchConfig {
         context.startActivity(intent)
     }
 
-    fun startImportMnemonicAc(context: Context) {
+    fun startRegisterActivity(context: Context) {
         val intent =
-            Intent(context, ImportMnemonicActivity::class.java)
+            Intent(context, RegisterActivity::class.java)
         context.startActivity(intent)
     }
 

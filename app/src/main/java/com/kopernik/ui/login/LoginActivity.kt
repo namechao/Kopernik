@@ -24,6 +24,16 @@ class LoginActivity : NewBaseActivity<NoViewModel, ViewDataBinding>() {
         forgetPsw.setOnClickListener {
             LaunchConfig.startForgetPasswordActivity(this)
         }
+        confirmBtn.setOnClickListener {
+            LaunchConfig.startMainAc(this)
+        }
+        register.setOnClickListener {
+            LaunchConfig.startRegisterActivity(this)
+        }
+        //协议
+        userProtocol.setOnClickListener {
+          LaunchConfig.startUserProtocolActivity(this)
+        }
     }
 
     override fun initData() {
