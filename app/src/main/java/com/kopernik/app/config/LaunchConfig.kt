@@ -8,7 +8,6 @@ import com.kopernik.ui.MainActivity
 import com.kopernik.ui.Ecology.*
 import com.kopernik.ui.Ecology.entity.CheckRegisterInfo
 import com.kopernik.ui.login.*
-import com.kopernik.ui.login.bean.Mnemonic
 import com.kopernik.ui.asset.*
 import com.kopernik.ui.setting.*
 
@@ -135,7 +134,7 @@ object LaunchConfig {
 
     fun startAssetDetailsAc(context: Context, type: Int,assetTitle:String) {
         val intent =
-            Intent(context, AssetDetailsActivity::class.java)
+            Intent(context, UYTAssetActivity::class.java)
         intent.putExtra("chainType", type)
         intent.putExtra("assetTitle", assetTitle)
         context.startActivity(intent)
@@ -323,6 +322,16 @@ object LaunchConfig {
     fun startUTCAssetActivity(context: Context) {
         val intent =
             Intent(context, UTCAssetActivity::class.java)
+        context.startActivity(intent)
+    }
+    fun startUTKAssetActivity(context: Context) {
+        val intent =
+            Intent(context, UTKAssetActivity::class.java)
+        context.startActivity(intent)
+    }
+    fun startUDMTAssetActivity(context: Context) {
+        val intent =
+            Intent(context, UDMTAssetActivity::class.java)
         context.startActivity(intent)
     }
 

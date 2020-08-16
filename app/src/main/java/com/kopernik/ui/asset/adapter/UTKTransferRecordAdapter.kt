@@ -10,7 +10,7 @@ import com.kopernik.ui.asset.entity.ExtractItem
 
 class UTKTransferRecordAdapter(
     data: List<String>
-) :BaseQuickAdapter<String, UTCRecordHolder>(R.layout.item_exchange_record,data){
+) :BaseQuickAdapter<String, UTCRecordHolder>(R.layout.item_transfer_record,data){
     override fun convert(helper: UTCRecordHolder?, item: String?) {
 
     }

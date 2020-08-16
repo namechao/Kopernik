@@ -628,6 +628,14 @@
     <string name="asset_exchange_proportion">当前兑换比例  UTC : UTK = 1 : 1</string>
     <string name="asset_trade_psw">请输入交易密码</string>
     <string name="asset_confirm_exchange">确认兑换</string>
+    <string name="asset_receive_counts">领取数量</string>
+    <string name="asset_transfer_counts">转账数量</string>
+    <string name="asset_other_id">对方ID</string>
+    <string name="asset_mine_m">矿机</string>
+    <string name="asset_mine_output">产出量</string>
+    <string name="asset_utk_transfer">UTK转账</string>
+    <string name="asset_udmt_fin_record">UTDM财务记录</string>
+    <string name="asset_udmt_balance">UTDM余额</string>
 
 
     <!-- 新项目文字资源-->

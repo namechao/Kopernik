@@ -8,9 +8,9 @@ import com.kopernik.ui.asset.adapter.viewHolder.UTCRecordHolder
 import com.kopernik.ui.asset.entity.ExtractItem
 
 
-class UTKReceiveRecordAdapter(
+class UDMTFinanceRecordsAdapter(
     data: List<String>
-) :BaseQuickAdapter<String, UTCRecordHolder>(R.layout.item_receive_record,data){
+) :BaseQuickAdapter<String, UTCRecordHolder>(R.layout.item_finance_record,data){
     override fun convert(helper: UTCRecordHolder?, item: String?) {
 
     }

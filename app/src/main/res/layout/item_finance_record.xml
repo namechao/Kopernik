@@ -10,7 +10,7 @@
        android:layout_height="wrap_content"
        android:orientation="horizontal">
        <TextView
-           android:id="@+id/asset_synthesis_time"
+           android:id="@+id/asset_udmt_time"
            android:textColor="@color/color_AA9CCA"
            android:textSize="@dimen/sp_12"
            android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
            />
 
        <TextView
-           android:id="@+id/asset_handling_fee"
+           android:id="@+id/asset_mine_m"
            android:textColor="@color/color_AA9CCA"
            android:textSize="@dimen/sp_12"
            android:layout_width="0dp"
@@ -35,7 +35,7 @@
            android:gravity="center"
            />
        <TextView
-           android:id="@+id/asset_synthesis_counts"
+           android:id="@+id/asset_mine_output"
            android:textColor="@color/color_AA9CCA"
            android:textSize="@dimen/sp_12"
            android:layout_width="0dp"

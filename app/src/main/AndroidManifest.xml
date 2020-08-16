@@ -61,7 +61,7 @@
         <activity android:name=".ui.asset.WithdrawCoinActivity" />
         <activity android:name=".ui.asset.DepositCoinActivity" />
         <activity android:name=".ui.asset.CrossChainTxActivity" />
-        <activity android:name=".ui.asset.AssetDetailsActivity" />
+        <activity android:name=".ui.asset.UYTAssetActivity" />
         <activity android:name=".ui.asset.OtherAssetDetailsActivity" />
         <activity android:name=".ui.asset.DepositMoneyActivity" />
         <activity android:name=".ui.asset.TransferActivity" />

@@ -21,13 +21,13 @@ import com.kopernik.ui.asset.entity.AssetDetailsChildBean
 import com.kopernik.ui.asset.entity.AssetDetailsItemBean
 import com.kopernik.ui.asset.entity.WithdrawEarningsBean
 import com.kopernik.ui.asset.viewModel.AssetDetailsViewModel
-import kotlinx.android.synthetic.main.activity_asset_details.*
-import kotlinx.android.synthetic.main.activity_asset_details.recyclerView
-import kotlinx.android.synthetic.main.activity_asset_details.smartRefreshLayout
-import kotlinx.android.synthetic.main.activity_asset_details.transferAccounts
+import kotlinx.android.synthetic.main.activity_uyt_asset.*
+import kotlinx.android.synthetic.main.activity_uyt_asset.recyclerView
+import kotlinx.android.synthetic.main.activity_uyt_asset.smartRefreshLayout
+import kotlinx.android.synthetic.main.activity_uyt_asset.transferAccounts
 
 
-class AssetDetailsActivity : NewBaseActivity<AssetDetailsViewModel, ViewDataBinding>() {
+class UYTAssetActivity : NewBaseActivity<AssetDetailsViewModel, ViewDataBinding>() {
     companion object{
 
          val UYT = 1
@@ -49,7 +49,7 @@ class AssetDetailsActivity : NewBaseActivity<AssetDetailsViewModel, ViewDataBind
 
 
 
-    override fun layoutId()=R.layout.activity_asset_details
+    override fun layoutId()=R.layout.activity_uyt_asset
 
     override fun initView(savedInstanceState: Bundle?) {
         chainType = intent.getIntExtra("chainType", 1)
@@ -93,7 +93,7 @@ class AssetDetailsActivity : NewBaseActivity<AssetDetailsViewModel, ViewDataBind
       collectMoney.setOnClickListener {
           UserConfig.singleton?.mnemonic?.address?.let {
               LaunchConfig.startDepositMoneyActivity(
-                  this@AssetDetailsActivity,
+                  this@UYTAssetActivity,
                   chainType,
                   it
               )
@@ -103,15 +103,15 @@ class AssetDetailsActivity : NewBaseActivity<AssetDetailsViewModel, ViewDataBind
         //转账
         transferAccounts.setOnClickListener {
             viewModel.run {
-                transferaccount(chainName).observe(this@AssetDetailsActivity, Observer {
+                transferaccount(chainName).observe(this@UYTAssetActivity, Observer {
                     if (it.status == 200) {
                         LaunchConfig.startTransferAc(
-                            this@AssetDetailsActivity,
+                            this@UYTAssetActivity,
                             chainType,
                             chainName
                         )
                     } else {
-                        ToastUtils.showShort(this@AssetDetailsActivity, it.errorMsg)
+                        ToastUtils.showShort(this@UYTAssetActivity, it.errorMsg)
                     }
                 })
             }
@@ -119,7 +119,7 @@ class AssetDetailsActivity : NewBaseActivity<AssetDetailsViewModel, ViewDataBind
         //投票
         vote.setOnClickListener {
             LaunchConfig.startMyVoteAc(
-                this@AssetDetailsActivity
+                this@UYTAssetActivity
             )
         }
     }
@@ -168,7 +168,7 @@ class AssetDetailsActivity : NewBaseActivity<AssetDetailsViewModel, ViewDataBind
     //获取资产和下边记录列表
     private fun getAssetAndListData() {
         viewModel.run {
-           getAsset().observe(this@AssetDetailsActivity, androidx.lifecycle.Observer {
+           getAsset().observe(this@UYTAssetActivity, androidx.lifecycle.Observer {
                if (it.status==200){
                    assetBean = it.data
                         val info =
@@ -196,7 +196,7 @@ class AssetDetailsActivity : NewBaseActivity<AssetDetailsViewModel, ViewDataBind
                 "pageNumber" to pageNumber.toString(),
                 "pageSize" to pageSize.toString()
             )
-            getAssetDetails(map).observe(this@AssetDetailsActivity, Observer {
+            getAssetDetails(map).observe(this@UYTAssetActivity, Observer {
                 val datas: List<AssetDetailsChildBean.DatasBean> = it.data.datas!!
                 val existData: MutableList<AssetDetailsItemBean> =
                     ArrayList()
