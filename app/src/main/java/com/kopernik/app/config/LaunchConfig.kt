@@ -188,19 +188,19 @@ object LaunchConfig {
         context.startActivity(intent)
     }
 
-    fun ToBeExtractedListAc(
-        context: Context,
-        type: Int,
-        chainName: String,
-        availableAmount: String
-    ) {
-        val intent =
-            Intent(context, ToBeExtractedListActivity::class.java)
-        intent.putExtra("chainName", chainName)
-        intent.putExtra("chainType", type)
-        intent.putExtra("availableAmount", availableAmount)
-        context.startActivity(intent)
-    }
+//    fun ToBeExtractedListAc(
+//        context: Context,
+//        type: Int,
+//        chainName: String,
+//        availableAmount: String
+//    ) {
+//        val intent =
+//            Intent(context, ToBeExtractedListActivity::class.java)
+//        intent.putExtra("chainName", chainName)
+//        intent.putExtra("chainType", type)
+//        intent.putExtra("availableAmount", availableAmount)
+//        context.startActivity(intent)
+//    }
 
     fun AssetTransformAc(context: Context, type: Int, name: String, availableAmount: String) {
         val intent = Intent(context, AssetTransformActivty::class.java)
@@ -318,6 +318,11 @@ object LaunchConfig {
     fun startAboutUsActivityAc(context: Context) {
         val intent =
             Intent(context, AboutUsActivity::class.java)
+        context.startActivity(intent)
+    }
+    fun startUTCAssetActivity(context: Context) {
+        val intent =
+            Intent(context, UTCAssetActivity::class.java)
         context.startActivity(intent)
     }
 

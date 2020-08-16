@@ -100,12 +100,12 @@ class OtherAssetDetailsActivity : NewBaseActivity<AssetDetailsViewModel, ViewDat
                 cashwithdrawal(chainName).observe(this@OtherAssetDetailsActivity, Observer {
                     if (it.status == 200) {
 
-                        LaunchConfig.ToBeExtractedListAc(
-                            this@OtherAssetDetailsActivity,
-                            chainType,
-                            chainName,
-                            it.data.availableAmount
-                        )
+//                        LaunchConfig.ToBeExtractedListAc(
+//                            this@OtherAssetDetailsActivity,
+//                            chainType,
+//                            chainName,
+//                            it.data.availableAmount
+//                        )
                     } else {
                         ToastUtils.showShort(this@OtherAssetDetailsActivity, it.errorMsg)
                     }

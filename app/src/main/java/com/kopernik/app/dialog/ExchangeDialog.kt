@@ -14,39 +14,31 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import com.kopernik.R
-import com.kopernik.app.config.UserConfig
 import com.kopernik.ui.asset.entity.*
 import com.kopernik.ui.asset.util.OnClickFastListener
 import com.kopernik.app.utils.KeyboardUtils
 
-class WithdrawCoinDialog : DialogFragment(),
+class ExchangeDialog : DialogFragment(),
     FingerprintDialog.AuthenticationCallback {
-    private var titleRootView1: LinearLayout? = null
-    private var titleRootView2: LinearLayout? = null
-    private var useFingerprintIv: ImageView? = null
-    private var titleTv: TextView? = null
-    private var usePwTv: TextView? = null
-    private var titleName1: TextView? = null
-    private var titleName2: TextView? = null
-    private var desc1: TextView? = null
-    private var desc2: TextView? = null
-    private var desc3: TextView? = null
-    private var desc2Unit: TextView? = null
-    private var desc3Unit: TextView? = null
+
+
+
+    private var desc: TextView? = null
+
+
     private var passwordEt: EditText? = null
+    private var exchangeCounts: EditText? = null
     private var okBtn: Button? = null
     private var type = 0
     private var useFingerprint = false
     private var fingerprintDialog: FingerprintDialog? = null
-    private var wdbean: WithdrawCoinBean? = null
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        wdbean = arguments?.getParcelable("withdraw")
         val dialog =
             Dialog(activity!!, R.style.BottomDialog)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_withdraw_coin)
+        dialog.setContentView(R.layout.dialog_exchange)
         dialog.setCanceledOnTouchOutside(true)
         val window = dialog.window
         window!!.setWindowAnimations(R.style.AnimBottom)
@@ -67,44 +59,18 @@ class WithdrawCoinDialog : DialogFragment(),
     }
 
     private fun initView(dialog: Dialog) {
-        usePwTv = dialog.findViewById(R.id.use_pw_tv)
-        useFingerprintIv =
-            dialog.findViewById(R.id.use_fingerprint_iv)
-        titleTv = dialog.findViewById(R.id.title_tv)
-        titleRootView1 = dialog.findViewById(R.id.tx_title1_ll)
-        titleRootView2 = dialog.findViewById(R.id.tx_title2_ll)
-        titleName1 = dialog.findViewById(R.id.tx_title1_name_tv)
-        titleName2 = dialog.findViewById(R.id.tx_title2_name_tv)
-        desc1 = dialog.findViewById(R.id.tx_desc1)
-        desc2 = dialog.findViewById(R.id.tx_desc2)
+        desc = dialog.findViewById(R.id.tx_desc)
         passwordEt = dialog.findViewById(R.id.password_et)
+        passwordEt?.addTextChangedListener(passwordWatcher)
+        exchangeCounts = dialog.findViewById(R.id.exchange_counts)
+        passwordEt?.addTextChangedListener(passwordWatcher)
         okBtn = dialog.findViewById(R.id.ok)
-        desc3 = dialog.findViewById(R.id.tx_desc3)
-        desc2Unit = dialog.findViewById(R.id.tx_desc2_unit)
-        desc3Unit = dialog.findViewById(R.id.tx_desc3_unit)
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
         }
-        wdbean?.let {
-            desc1?.text = it.addressHash
-            desc2?.text = it.withdrawNumber
-            desc2Unit?.text = it.withdrawNumberUnit
-            desc3?.text = it.mineFee
-            desc3Unit?.text = it.mineFeeUnit
-        }
 
-        //获取是否使用指纹
-        UserConfig.singleton?.isUseFingerprint?.let { useFingerprint = it }
-        if (!useFingerprint) {
-            useFingerprintIv?.visibility = View.GONE
-            usePwTv?.visibility = View.GONE
-        } else {
-            initVerifyType(true)
-        }
-        useFingerprintIv?.setOnClickListener(View.OnClickListener { initVerifyType(true) })
-        usePwTv?.setOnClickListener(View.OnClickListener { initVerifyType(false) })
-        passwordEt?.addTextChangedListener(passwordWatcher)
+
         okBtn?.setOnClickListener(clickFastListener)
     }
 
@@ -120,22 +86,7 @@ class WithdrawCoinDialog : DialogFragment(),
         }
     }
 
-    private fun initVerifyType(useFingerprint: Boolean) {
-        this.useFingerprint = useFingerprint
-        if (useFingerprint) {
-            KeyboardUtils.hideSoftKeyboard(passwordEt)
-            passwordEt!!.setText("")
-            usePwTv!!.visibility = View.VISIBLE
-            useFingerprintIv!!.visibility = View.GONE
-            passwordEt!!.visibility = View.GONE
-            enableBtn()
-        } else {
-            usePwTv!!.visibility = View.GONE
-            useFingerprintIv!!.visibility = View.VISIBLE
-            passwordEt!!.visibility = View.VISIBLE
-            disableBtn()
-        }
-    }
+
 
     var passwordWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(
@@ -186,11 +137,10 @@ class WithdrawCoinDialog : DialogFragment(),
     }
 
     companion object {
-        fun newInstance(type: Int, bean: Any?): WithdrawCoinDialog {
-            val fragment = WithdrawCoinDialog()
+        fun newInstance(type: Int): ExchangeDialog {
+            val fragment = ExchangeDialog()
             val bundle = Bundle()
             bundle.putInt("type", type)
-            bundle.putParcelable("withdraw", bean as Parcelable?)
             fragment.arguments = bundle
             return fragment
         }

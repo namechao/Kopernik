@@ -49,6 +49,12 @@ class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
         recyclerView.adapter=adapter
         var  list= arrayListOf("ssdsadsa","asdsadad","Asdsdsa","asdsda")
         adapter.setNewData(list)
+        adapter.setOnItemClickListener { adapter, view, position ->
+            when(position){
+                0-> activity?.let { LaunchConfig.startUTCAssetActivity(it) }
+
+            }
+        }
     }
 
 

@@ -10,7 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
-import com.kopernik.app.dialog.WithdrawCoinDialog
+import com.kopernik.app.dialog.ExchangeDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.asset.entity.WithdrawCoinBean
@@ -84,8 +84,8 @@ companion object{
         wdBean.withdrawNumber = availableAmount
         wdBean.withdrawNumberUnit = ""
         wdBean.mineFeeUnit = ""
-        var extractDialog = WithdrawCoinDialog.newInstance(1, wdBean)
-        extractDialog!!.setOnRequestListener(object : WithdrawCoinDialog.RequestListener {
+        var extractDialog = ExchangeDialog.newInstance(1)
+        extractDialog!!.setOnRequestListener(object : ExchangeDialog.RequestListener {
             override fun onRequest(type: Int, params: String) {
                 checkPsw(params, extractDialog)
             }
@@ -106,7 +106,7 @@ companion object{
     }
 
     //检查密码是否正确
-    fun checkPsw(params: String, extractDialog: WithdrawCoinDialog) {
+    fun checkPsw(params: String, extractDialog: ExchangeDialog) {
         viewModel.verifyPsw(params).observe(this, Observer {
             if (it.status == 200) {
                 submitWithDrawlCoin()
