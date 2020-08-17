@@ -44,11 +44,11 @@ class MyFragment : NewBaseFragment<NodeViewModel, ViewDataBinding>() {
             activity?.let { LaunchConfig.startForgetPasswordActivity(it) }
         }
         //修改交易密码
-        changeLoginPsw.setOnClickListener {
+        tradePsw.setOnClickListener {
             activity?.let { LaunchConfig.startTradePasswordActivity(it) }
         }
-        //修改交易密码
-        changeLoginPsw.setOnClickListener {
+        //关于我们
+        aboutUs.setOnClickListener {
             activity?.let { LaunchConfig.startAboutUsActivityAc(it) }
         }
     }

@@ -150,7 +150,7 @@
         app:sBottomDividerLineMarginRight="@dimen/dp_15"
         app:sUseRipple="true"></com.allen.library.SuperTextView>
     <com.allen.library.SuperTextView
-        android:id="@+id/languageSpt"
+        android:id="@+id/tradePsw"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:sLeftTextColor="@color/white"
@@ -199,7 +199,7 @@
         app:sBottomDividerLineMarginRight="@dimen/dp_15"
         app:sUseRipple="true"></com.allen.library.SuperTextView>
     <com.allen.library.SuperTextView
-        android:id="@+id/languageSpt"
+        android:id="@+id/aboutUs"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:sLeftTextColor="@color/white"
