@@ -35,7 +35,6 @@
             app:layout_constraintLeft_toRightOf="@+id/line"
             android:hint="@string/intput_name"
             android:textColorHint="@color/color_665F93"
-            android:textStyle="bold"
             android:inputType="textPassword"
             android:background="@null"
             android:textCursorDrawable="@null"
@@ -84,7 +83,6 @@
             android:hint="@string/intput_id_card"
             android:textColorHint="@color/color_665F93"
             android:textCursorDrawable="@null"
-            android:textStyle="bold"
             android:background="@null"
             android:inputType="textPassword"
             android:textSize="@dimen/sp_17"/>

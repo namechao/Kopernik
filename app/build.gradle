@@ -10,6 +10,12 @@ android {
             keyAlias 'kopernik'
             keyPassword '123456'
         }
+        debug {
+            storeFile file('F:\\AndroidProject\\Project\\Kopernik\\kopernik.keystore')
+            storePassword '123456'
+            keyAlias 'kopernik'
+            keyPassword '123456'
+        }
     }
     compileSdkVersion 28
     buildToolsVersion "30.0.0"
