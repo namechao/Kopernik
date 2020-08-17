@@ -11,11 +11,11 @@ class AutoPollRecyclerView(
     attrs: AttributeSet?
 ) : RecyclerView(context!!, attrs) {
     var autoPollTask: AutoPollTask
-    private var running=false //标示是否正在自动轮询 = false
-    private var canRun=false //标示是否可以自动轮询,可在不需要的是否置false = false
+    private var running=true //标示是否正在自动轮询 = false
+    private var canRun=true //标示是否可以自动轮询,可在不需要的是否置false = false
 
     class AutoPollTask(reference: AutoPollRecyclerView) : Runnable {
-        private val mReference: WeakReference<AutoPollRecyclerView>
+        private val mReference: WeakReference<AutoPollRecyclerView> = WeakReference(reference)
         override fun run() {
             val recyclerView = mReference.get()
             if (recyclerView != null && recyclerView.running && recyclerView.canRun) {
@@ -27,12 +27,11 @@ class AutoPollRecyclerView(
             }
         }
 
-        //使用弱引用持有外部类引用->防止内存泄漏
-        init {
-            mReference = WeakReference(reference)
-        }
     }
 
+    override fun getBottomFadingEdgeStrength(): Float {
+        return 0f
+    }
     //开启:如果正在运行,先停止->再开启
     fun start() {
         if (running) stop()
@@ -51,8 +50,8 @@ class AutoPollRecyclerView(
             MotionEvent.ACTION_DOWN -> if (running) stop()
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_OUTSIDE -> if (canRun) start()
         }
-        return  false //注释掉onTouchEvent()方法里面的stop和start方法，则列表自动滚动且不可触摸
-//        return super.onTouchEvent(e)
+//        return  false //注释掉onTouchEvent()方法里面的stop和start方法，则列表自动滚动且不可触摸
+        return super.onTouchEvent(e)
     }
 
     companion object {

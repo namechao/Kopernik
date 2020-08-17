@@ -37,6 +37,7 @@ class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
                 0-> activity?.let { LaunchConfig.startUTCAssetActivity(it) }
                 1-> activity?.let { LaunchConfig.startUTKAssetActivity(it) }
                 2-> activity?.let { LaunchConfig.startUDMTAssetActivity(it) }
+                3-> activity?.let { LaunchConfig.startUYTAssetActivity(it) }
             }
         }
     }

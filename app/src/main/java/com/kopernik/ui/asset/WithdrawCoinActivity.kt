@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.dialog.ExchangeDialog
+import com.kopernik.app.dialog.WithdrawlDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.asset.entity.WithdrawCoinBean
@@ -22,33 +23,25 @@ import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.EasyPermissions.PermissionCallbacks
 import java.math.BigDecimal
 
-class WithdrawCoinActivity : NewBaseActivity<WithdrawCoinDetailsViewModel,ViewDataBinding>(), PermissionCallbacks {
+class WithdrawCoinActivity : NewBaseActivity<WithdrawCoinDetailsViewModel,ViewDataBinding>() {
 companion object{
     private const val REQUEST_CODE = 1
     private const val REQUEST_CODE_QRCODE_PERMISSIONS = 2
 }
-    private var type = 1
-    private var id = -1
+
     private var balanaceOf: BigDecimal? = null
     private var fee: String? = null
     private var iconType:String=""
     private var availableAmount:String=""
-    private val perms = arrayOf(
-        Manifest.permission.CAMERA,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE
-    )
+
     override fun layoutId()=R.layout.activity_withdraw_coin
     override fun initView(savedInstanceState: Bundle?) {
-        type = intent.getIntExtra("type", -1)
-        id = intent.getIntExtra("id", -1)
         availableAmount = intent.getStringExtra("availableAmount")
-        if (type == -1) finish()
-        setTitle(getString(R.string.title_asset_withdraw))
+        setTitle(getString(R.string.title_asset_withdrawl))
     }
 
     override fun initData() {
-        withdrawlAddress!!.addTextChangedListener(textWatcher)
+        eTWithdrwalAddress!!.addTextChangedListener(textWatcher)
         okBtn.setOnClickListener {
 //            if (remark!!.text.toString().length > 64) {
 //                ToastUtils.showShort(getActivity(), getString(R.string.remark_too_long))
@@ -60,19 +53,13 @@ companion object{
                 ToastUtils.showShort(getActivity(), getString(R.string.tip_alert_no_asset_transfer))
                 return@setOnClickListener
             }
-            val addr = withdrawlAddress!!.text.toString()
+            val addr = eTWithdrwalAddress!!.text.toString()
             if (!addr.matches(Regex("^(1|3)[a-zA-Z\\d]{24,33}$"))) {
                 ToastUtils.showShort(getActivity(), getString(R.string.btc_addr_error))
                 return@setOnClickListener
             }
         }
-        ivScan!!.setOnClickListener { v: View? ->
-            if (!EasyPermissions.hasPermissions(this, *perms)) {
-                requestCodeQRCodePermissions()
-                return@setOnClickListener
-            }
-            XQRCode.startScan(this, REQUEST_CODE)
-        }
+
 
     }
 
@@ -80,33 +67,23 @@ companion object{
     private fun showDialog() {
         var wdBean = WithdrawCoinBean()
         wdBean.mineFee = fee
-        wdBean.addressHash = withdrawlAddress!!.text.toString()
+        wdBean.addressHash = eTWithdrwalAddress!!.text.toString()
         wdBean.withdrawNumber = availableAmount
         wdBean.withdrawNumberUnit = ""
         wdBean.mineFeeUnit = ""
-        var extractDialog = ExchangeDialog.newInstance(1)
-        extractDialog!!.setOnRequestListener(object : ExchangeDialog.RequestListener {
+        var dialog = WithdrawlDialog.newInstance(1)
+        dialog!!.setOnRequestListener(object : WithdrawlDialog.RequestListener {
             override fun onRequest(type: Int, params: String) {
-                checkPsw(params, extractDialog)
+                checkPsw(params, dialog)
             }
         })
-        extractDialog!!.show(supportFragmentManager, "withdrawRecommed")
+        dialog!!.show(supportFragmentManager, "withdrawRecommed")
     }
 
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?
-    ) {
-        super.onActivityResult(requestCode, resultCode, data)
-        //处理二维码扫描结果
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            handleScanResult(data)
-        }
-    }
+
 
     //检查密码是否正确
-    fun checkPsw(params: String, extractDialog: ExchangeDialog) {
+    fun checkPsw(params: String, extractDialog: WithdrawlDialog) {
         viewModel.verifyPsw(params).observe(this, Observer {
             if (it.status == 200) {
                 submitWithDrawlCoin()
@@ -119,9 +96,9 @@ companion object{
 
     private fun submitWithDrawlCoin() {
         var map = mapOf(
-            "id" to id.toString(),
-            "address" to withdrawlAddress.text.toString().trim(),
-            "memo" to remark.text.toString().trim()
+            "id" to "",
+            "address" to eTWithdrwalAddress.text.toString().trim(),
+            "memo" to etRemark.text.toString().trim()
         )
         viewModel.run {
             submitWithDrawlCoin(map).observe(this@WithdrawCoinActivity, Observer {
@@ -148,8 +125,7 @@ companion object{
             if (bundle != null) {
                 if (bundle.getInt(XQRCode.RESULT_TYPE) == XQRCode.RESULT_SUCCESS) {
                     val result = bundle.getString(XQRCode.RESULT_DATA)
-                    withdrawlAddress!!.setText(result)
-                    ivScan!!.visibility = View.GONE
+                    eTWithdrwalAddress!!.setText(result)
                 } else if (bundle.getInt(XQRCode.RESULT_TYPE) == XQRCode.RESULT_FAILED) {
                     ToastUtils.showShort(getActivity(), getString(R.string.decode_qrcode_error))
                 }
@@ -179,33 +155,11 @@ companion object{
         }
 
         override fun afterTextChanged(s: Editable) {
-            okBtn.isEnabled = withdrawlAddress!!.text.toString().isNotEmpty()
-            if (withdrawlAddress!!.text.toString().isNotEmpty()) {
-                ivScan!!.visibility = View.GONE
-            } else {
-                ivScan!!.visibility = View.VISIBLE
-            }
+            okBtn.isEnabled = eTWithdrwalAddress!!.text.toString().isNotEmpty()
         }
     }
 
 
 
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-    }
 
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
-        XQRCode.startScan(this, REQUEST_CODE)
-    }
-
-
-
-    @AfterPermissionGranted(REQUEST_CODE_QRCODE_PERMISSIONS)
-    private fun requestCodeQRCodePermissions() {
-        EasyPermissions.requestPermissions(
-            this,
-            getString(R.string.qrcode_permissions),
-            REQUEST_CODE_QRCODE_PERMISSIONS,
-            *perms
-        )
-    }
 }

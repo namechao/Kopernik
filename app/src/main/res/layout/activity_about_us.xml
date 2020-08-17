@@ -3,129 +3,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/background"
+    android:background="@color/colorAccent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <include
         layout="@layout/head_layout"/>
 
-    <com.allen.library.SuperTextView
-        android:visibility="gone"
-        android:id="@+id/twitterSpt"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        app:sBackgroundDrawableRes="@color/white"
-        app:sLeftTextColor="@color/black"
-        app:sLeftTextSize="15dp"
-        app:sLeftTextString="Twitter"
-        app:sRightTextSize="@dimen/dp_13"
-        app:sRightTextColor="@color/text_gray"
-        app:sRightIconRes="@mipmap/icon_arrow"
-        app:sRightIconWidth="10dp"
-        app:sRightIconHeight="10dp"
-        app:sDividerLineType="bottom"
-        app:sDividerLineColor="@color/dialog_line2"
-        app:sDividerLineHeight="1dp"
-        app:sUseRipple="false">
-    </com.allen.library.SuperTextView>
-
-    <com.allen.library.SuperTextView
-        android:visibility="gone"
-        android:id="@+id/githubSpt"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:sBackgroundDrawableRes="@color/white"
-        app:sLeftTextColor="@color/black"
-        app:sLeftTextSize="15dp"
-        app:sLeftTextString="GitHub"
-        app:sRightTextSize="@dimen/dp_13"
-        app:sRightTextColor="@color/text_gray"
-        app:sRightIconRes="@mipmap/icon_arrow"
-        app:sRightIconWidth="10dp"
-        app:sRightIconHeight="10dp"
-        app:sDividerLineType="bottom"
-        app:sDividerLineColor="@color/gray"
-        app:sDividerLineHeight="1dp"
-        app:sUseRipple="true">
-    </com.allen.library.SuperTextView>
-
-    <com.allen.library.SuperTextView
-        android:layout_marginTop="10dp"
-        android:id="@+id/telegramSpt"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:sLeftTextColor="@color/security_title"
-        app:sLeftTextSize="15dp"
-        app:sLeftTextString="Email"
-        app:sRightTextSize="@dimen/dp_13"
-        app:sRightTextColor="@color/text_gray"
-        app:sRightIconRes="@mipmap/icon_arrow"
-        app:sRightIconWidth="10dp"
-        app:sRightIconHeight="10dp"
-        app:sDividerLineType="none"
-        app:sDividerLineColor="@color/dialog_line2"
-        app:sDividerLineHeight="1dp"
-        app:sShapeSelectorNormalColor="@color/bg_white"
-        app:sShapeSelectorPressedColor="@color/security_btn_press"
-        app:sUseRipple="true">
-    </com.allen.library.SuperTextView>
-
-    <com.allen.library.SuperTextView
-        android:visibility="gone"
-        android:id="@+id/wechatSpt"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:sLeftTextColor="@color/security_title"
-        app:sLeftTextSize="15dp"
-        app:sLeftTextString="Wechat"
-        app:sRightTextSize="@dimen/dp_13"
-        app:sRightTextColor="@color/text_gray"
-        app:sRightIconRes="@mipmap/icon_arrow"
-        app:sRightIconWidth="10dp"
-        app:sRightIconHeight="10dp"
-        app:sDividerLineType="bottom"
-        app:sDividerLineColor="@color/gray"
-        app:sDividerLineHeight="1dp"
-        app:sUseRipple="true">
-    </com.allen.library.SuperTextView>
-
-    <!--当前版本-->
-    <LinearLayout
-        android:id="@+id/versionLL"
+    <ImageView
+        android:layout_width="117dp"
+        android:layout_height="117dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_25"
+        android:src="@mipmap/logo"/>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:background="@color/bg_white"
-        android:layout_marginTop="@dimen/dp_30">
-
-        <TextView
-            style="@style/black_15"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:layout_weight="1"
-            android:text="@string/current_version"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/versinoTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_gray"
-            android:textSize="12dp"
-            android:text="V 9.0.0"/>
-
-        <ImageView
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:scaleType="fitEnd"
-            android:src="@mipmap/icon_arrow"/>
-
-    </LinearLayout>
+        android:layout_marginTop="@dimen/dp_25"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/white"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:text="@string/about_us_content"/>
 
 </LinearLayout>

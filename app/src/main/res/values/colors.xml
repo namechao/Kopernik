@@ -187,6 +187,7 @@
     <color name="colorAccent">#24193D</color>
     <color name="color_3324193D">#3324193D</color>
     <color name="color_FFCF32">#FFCF32</color>
+    <color name="color_FFCF02">#FFCF02</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="color_332852">#332852</color>
@@ -201,4 +202,5 @@
     <color name="color_7F80FD">#7F80FD</color>
     <color name="color_760887">#760887</color>
     <color name="color_20222F">#20222F</color>
+    <color name="color_C69B00">#C69B00</color>
 </resources>

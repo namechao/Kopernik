@@ -54,7 +54,7 @@
             android:gravity="center"
             android:drawablePadding="@dimen/dp_4"
             android:textColor="@color/mnemonic_type"
-            android:text="@string/title_asset_recharge"
+            android:text="@string/title_asset_deposit"
             android:textSize="@dimen/sp_12"
             />
         <TextView
@@ -67,7 +67,7 @@
             android:textSize="@dimen/sp_12"
             android:drawablePadding="@dimen/dp_4"
             android:textColor="@color/mnemonic_type"
-            android:text="@string/title_asset_withdraw"
+            android:text="@string/title_asset_deposit"
             />
         <TextView
             android:id="@+id/transferAccounts"

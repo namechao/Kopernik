@@ -6,7 +6,7 @@ import com.allen.library.SuperTextView
 import com.chad.library.adapter.base.BaseViewHolder
 import com.kopernik.R
 
-class AssetDetailsChildItemHolder(view: View?) : BaseViewHolder(view) {
+class UYTAssetViewHolder(view: View?) : BaseViewHolder(view) {
     var typeTv: TextView? = null
         get() {
             if (field == null) {

@@ -150,8 +150,7 @@
     <string name="title_asset_map">Mapping</string>
     <string name="title_asset_map_count">Number of maps</string>
     <string name="title_asset_map_fee">Mapping cost</string>
-    <string name="title_asset_withdraw">Withdraw</string>
-    <string name="title_asset_recharge">Deposit</string>
+
     <string name="tip_please_check_word">Please check the mnemonic</string>
     <string name="tip_please_pass_confirm">Please confirm the password</string>
     <string name="tip_create_account_success">Created successfully</string>
@@ -518,4 +517,10 @@
     <string name="asset_tip_3">Withdrawing income often can maximize income</string>
     <string name="logout_account">Log out</string>
     <string name="logout_hint">After exiting the account, all wallet data will be deleted. Please make sure that the wallet is backed up.</string>
+
+
+<!-- 哥白尼-->
+    <string name="title_asset_withdrawl">Withdraw</string>
+    <string name="title_asset_deposit">Deposit</string>
+
 </resources>

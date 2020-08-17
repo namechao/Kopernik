@@ -48,7 +48,7 @@
     <string name="i_know">我知道了</string>
     <string name="string_yes">是</string>
     <string name="string_no">否</string>
-    <string name="withdraw_num">提币数量</string>
+
     <string name="asset_transform">资产转换</string>
     <string name="confirm_withdraw">确认提现 ？</string>
     <string name="i_remember">我记住了</string>
@@ -70,15 +70,13 @@
     <string name="miner_fee">矿工费</string>
     <string name="estimated_miner_fee">预计矿工费</string>
     <string name="mining_revenue">挖矿收益</string>
-    <string name="withdrawal_address">提币地址</string>
-    <string name="withdrawal_number">提币数量</string>
+ >
     <string name="record_operation">操作</string>
     <string name="to_be_extract">待提</string>
     <string name="to_be_extract_list">待提列表</string>
     <string name="interest_drawn">待提利息</string>
     <string name="extraction_mining_income">提取挖矿收益</string>
-    <string name="confirm">确定</string>
-    <string name="confirm_ok">确认</string>
+
     <string name="user_create_remembered">我已备份助记词</string>
     <string name="please_input_topic">请输入标签</string>
     <string name="please_input_referrer">推荐账户(地址)</string>
@@ -113,7 +111,7 @@
     <string name="hint_node_assets_base">抵押金额</string>
     <string name="tip_user_balance">可用余额</string>
     <string name="test_value">1000 UYT</string>
-    <string name="hint_note">备注(64个字符以内)</string>
+
     <string name="hint_input_vote_num">请输入投票数量</string>
     <string name="title_vote_count">投票数量</string>
     <string name="title_switch_count">转投数量</string>
@@ -157,8 +155,7 @@
     <string name="title_asset_map">映射</string>
     <string name="title_asset_map_count">映射数量</string>
     <string name="title_asset_map_fee">映射费用</string>
-    <string name="title_asset_withdraw">提币</string>
-    <string name="title_asset_recharge">充币</string>
+
     <string name="tip_please_check_word">请检查助记词</string>
     <string name="tip_please_pass_confirm">请确认密码输入</string>
     <string name="tip_create_account_success">创建成功</string>
@@ -200,7 +197,7 @@
     <string name="title_financial_record">财务记录</string>
     <string name="title_deal_hash">交易哈希</string>
     <string name="title_recharge_address">充值地址</string>
-    <string name="title_finance_state">状态</string>
+
     <string name="title_finance_note">备注</string>
     <string name="title_account_login">点击导入/新增帐户</string>
     <string name="title_node_user">节点用户</string>
@@ -302,7 +299,7 @@
     <string name="cancel">取消</string>
     <string name="success">成功</string>
     <string name="please_input_remark">请输入备注(64个字符以内)</string>
-    <string name="copy_address">复制地址</string>
+
     <!-- 别去掉 \n-->
     <string name="uyt_recharge_rules">• 请勿向上述地址充值任何非 UYT 资产，否则资产将不可找回\n• 您充值至上述地址后，需要整个网络节点的确认，6次网络确认后到账\n• 最小充值金额：0.01 UYT，小于最小金额的充值将不会上账且无法退回\n• 请务必确认电脑及浏览器安全，防止信息被篡改或泄露</string>
     <string name="btc_recharge_rules">• 请勿向上述地址充值任何非 BTC 资产，否则资产将不可找回\n• 您充值至上述地址后，需要整个网络节点的确认，6次网络确认后到账\n• 最小充值金额：0.01 BTC，小于最小金额的充值将不会上账且无法退回\n• 请务必确认电脑及浏览器安全，防止信息被篡改或泄露</string>
@@ -546,6 +543,18 @@
     <string name="invite_friend">邀请好友</string>
     <string name="about_us">关于我们</string>
     <string name="verson_code">版本号</string>
+    <string name="real_name_tip">为了您的资产安全，请花一分钟时间设置</string>
+    <string name="intput_name">请输入您的姓名</string>
+    <string name="intput_id_card">请确认您的身份证号</string>
+    <string name="authentic_tip">一旦认证，不可修改。</string>
+    <string name="title_real_authentic">进行实名认证</string>
+    <string name="title_set_trade_psw">设置交易密码</string>
+    <string name="title_change_trade_psw">修改交易密码</string>
+    <string name="change_trade_psw">请输入六位数新交易密码</string>
+    <string name="confirm_trade_psw">请确认新交易密码</string>
+    <string name="reminder_tip">温馨提示</string>
+    <string name="reminder_tip_content">请妥善保管您的交易密码</string>
+    <string name="about_us_content">网络也可以创建一个更加高效、透明、可信、且具备自我驱动力的旅游生态，各类参与者可以共享一个点对点的去中心化旅游新世界。</string>
     <!--    矿场相关-->
     <string name="income">累计收益(UTDM)</string>
     <string name="buy_mine_m">购买矿机</string>
@@ -636,7 +645,30 @@
     <string name="asset_utk_transfer">UTK转账</string>
     <string name="asset_udmt_fin_record">UTDM财务记录</string>
     <string name="asset_udmt_balance">UTDM余额</string>
-
-
+    <string name="asset_d_p_record">充提记录</string>
+    <string name="asset_from_address">来源地址</string>
+    <string name="title_finance_state">状态</string>
+    <string name="title_asset_withdrawl">提币</string>
+    <string name="title_asset_deposit">充币</string>
+    <string name="uyt_deposit_rules">• 请勿向上述地址充值任何非 UYT 资产，否则资产将不可找回。\n• UYT收款到账需要约3个区块确认。\n• 最小充值金额：0.01 UYT，小于最小金额的充值将不会上账且无法退回\n• 请务必确认手机安全，防止信息被篡改或泄露</string>
+    <string name="uyt_withdrawl_rules">• 为保障资金安全，我们会对提币进行人工审核，请耐心等待。\n• 请务必确认手机安全，防止信息被篡改或泄露。</string>
+    <string name="uyt_transfer_rules">• 为保障资金安全，请仔细核对方UID。\n• 请务必确认手机安全，防止信息被篡改或泄露。</string>
+    <string name="balance_counts">可用余额</string>
+    <string name="copy_address">复制地址</string>
+    <string name="copy_memo">复制memo</string>
+    <string name="desposit_address">UYT提币地址</string>
+    <string name="memo_tip">请务必复制Memo，否则充值无法到账</string>
+    <string name="withdraw_num">提币数量</string>
+    <string name="hint_note">备注(64个字符以内)</string>
+    <string name="withdrawl_tip">UYT提币提示</string>
+    <string name="withdrawl_confirm">确认提币</string>
+    <string name="inout_google_code">请输入谷歌验证码</string>
+    <string name="withdrawal_address">提币地址</string>
+    <string name="withdrawal_number">提币数量</string>
+    <string name="confirm">确定</string>
+    <string name="confirm_ok">确认</string>
+    <string name="uyt_transfer">UYT转账</string>
+    <string name="uyt_transfer_counts">转账数量</string>
+    <string name="my_setting">设置</string>
     <!-- 新项目文字资源-->
 </resources>

@@ -17,6 +17,7 @@ import com.kopernik.ui.Ecology.fragment.NodeListFragment
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.Ecology.viewModel.NodeViewModel
+import kotlinx.android.synthetic.main.fragment_my.*
 import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -30,8 +31,26 @@ class MyFragment : NewBaseFragment<NodeViewModel, ViewDataBinding>() {
     override fun layoutId() = R.layout.fragment_my
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-
-
+      //设置
+        setting.setOnClickListener {
+            activity?.let {LaunchConfig.startSettingActivityAc(it) }
+        }
+        //实名认证
+        realNameAuth.setOnClickListener {
+            activity?.let { LaunchConfig.startRealNameAuthenticationActivity(it) }
+        }
+       //修改登录密码
+        changeLoginPsw.setOnClickListener {
+            activity?.let { LaunchConfig.startForgetPasswordActivity(it) }
+        }
+        //修改交易密码
+        changeLoginPsw.setOnClickListener {
+            activity?.let { LaunchConfig.startTradePasswordActivity(it) }
+        }
+        //修改交易密码
+        changeLoginPsw.setOnClickListener {
+            activity?.let { LaunchConfig.startAboutUsActivityAc(it) }
+        }
     }
 
     override fun onEvent(event: LocalEvent<Any>) {

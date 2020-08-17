@@ -20,7 +20,7 @@ import com.kopernik.R
         position: Int
     ) {
         val content = mData[position % mData.size]
-        holder.content.text = content
+        holder?.content?.text = content
     }
 
     override fun getItemCount(): Int {
@@ -29,11 +29,13 @@ import com.kopernik.R
 
     inner class BaseViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-        var content: TextView
-
-        init {
-            content = itemView.findViewById(R.id.content)
-        }
+        var content: TextView? = null
+            get() {
+                if (field == null) {
+                    field = itemView.findViewById(R.id.content)
+                }
+                return field
+            }
     }
 
      override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {

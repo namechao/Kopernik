@@ -20,12 +20,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.asset.UDMTAssetActivity"></activity>
+        <activity android:name=".ui.my.RealNameAuthenticationActivity"></activity>
+        <activity android:name=".ui.asset.UDMTAssetActivity" />
         <activity android:name=".ui.asset.UTKAssetActivity" />
         <activity android:name=".ui.asset.UTCAssetActivity" />
         <activity android:name=".ui.asset.AssetTransformActivty" />
-        <activity android:name=".ui.asset.ToBeExtractedListActivity" />
-        <activity android:name=".ui.asset.AssetTransformTipActivity" />
         <activity
             android:name=".ui.login.RegisterSetUpPasswordActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
@@ -54,8 +53,11 @@
         <activity android:name=".ui.setting.InviteAddressActivity" />
         <activity android:name=".ui.setting.SwitchAccountActivity" />
         <activity android:name=".ui.setting.VersionActivity" />
-        <activity android:name=".ui.setting.AboutUsActivity" />
-        <activity android:name=".ui.setting.BaseSettingActivity" />
+        <activity android:name=".ui.my.AboutUsActivity" />
+        <activity android:name=".ui.my.SettingActivity" />
+        <activity android:name=".ui.my.ForgetTradePasswordNextActivity" />
+        <activity android:name=".ui.my.ForgetTradePasswordActivity" />
+        <activity android:name=".ui.login.ForgetPasswordActivity" />
         <activity android:name=".ui.Ecology.VoteBetActivity" />
         <activity android:name=".ui.Ecology.WebViewActivity" />
         <activity android:name=".ui.asset.WithdrawCoinActivity" />

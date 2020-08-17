@@ -20,22 +20,27 @@ class DepositMoneyActivity : NewBaseActivity<NoViewModel,ViewDataBinding>() {
     override fun layoutId()=R.layout.activity_deposit_money
 
     override fun initView(savedInstanceState: Bundle?) {
-        setTitle("UYT" + resources.getString(R.string.title_recharge_address))
-        val type = intent.getIntExtra("type", -1)
+        setTitle( resources.getString(R.string.title_asset_deposit))
         val address = intent.getStringExtra("address")
-        if (type == -1) finish()
         if (StringUtils.isEmpty(address)) {
             ToastUtils.showShort(getActivity(), getString(R.string.address_is_empty))
             finish()
         } else {
-            rulesTv.setText(getString(R.string.uyt_recharge_rules))
-            addressTv.setText(address)
-            copyTv .setOnClickListener(View.OnClickListener { v: View? ->
-                    APPHelper.copy(
+            rulesTv.text = getString(R.string.uyt_deposit_rules)
+            addressTv.text = address
+            tvCopyAddress .setOnClickListener(View.OnClickListener {
+                APPHelper.copy(
                         this,
                         address
                     )
                 })
+            tvMemo.text=""
+            tvCopyMemo.setOnClickListener(View.OnClickListener {
+                APPHelper.copy(
+                    this,
+                    address
+                )
+            })
       QRCodeEncoderModel.EncodeQRCode(address)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ bitmap -> qrcodeIv.setImageBitmap(bitmap) })

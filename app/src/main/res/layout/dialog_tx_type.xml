@@ -14,7 +14,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/dialog_line2"/>
+        android:background="@color/color_392F55"/>
 
     <TextView
         android:text="@string/cancel"

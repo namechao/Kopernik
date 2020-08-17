@@ -52,7 +52,6 @@ class LanguageDialog : DialogFragment() {
         cancelTv?.setOnClickListener { dismiss() }
         datas.add(activity!!.resources.getString(R.string.chinese))
         datas.add(activity!!.resources.getString(R.string.english))
-        datas.add(activity!!.resources.getString(R.string.korean))
         val adapter =
             Adapter(R.layout.item_tx_type, datas)
         val layoutManager =

@@ -3,6 +3,8 @@ package com.kopernik.ui.home.fragment
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.TranslateAnimation
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.databinding.ViewDataBinding
@@ -47,7 +49,7 @@ open class HomeFragment: NewBaseFragment<NoViewModel, ViewDataBinding>() {
                 list1
                 )
         }
-        noticeRecyclerView.setAdapter(autoPollAdapter)
+        noticeRecyclerView.adapter = autoPollAdapter
         //启动滚动
         noticeRecyclerView.start()
     var  list= arrayListOf("10月1日起，达到Cha.in节点福利门槛用户的额外福利为节点所得用户投资","下个会早点哦","你没找吧")
@@ -89,6 +91,13 @@ open class HomeFragment: NewBaseFragment<NoViewModel, ViewDataBinding>() {
         recyclerView.adapter=adapter
         var data= arrayListOf("saga","asfafaas","afafasgagaga","dfdadfafa","asdsagassasa","asgasgagaga")
         adapter.setNewData(data)
+        val translateAnimation = TranslateAnimation(0f, 0f, 80f, 50f)
+        translateAnimation.duration = 1000
+        translateAnimation.repeatCount = Animation.INFINITE
+        translateAnimation.repeatMode = Animation.REVERSE
+        clGold.animation = translateAnimation //这里iv就是我们要执行动画的item，例如一个imageView
+
+        translateAnimation.start()
     }
 
 

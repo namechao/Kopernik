@@ -27,65 +27,25 @@ import kotlinx.android.synthetic.main.activity_transfer.*
 import java.math.BigDecimal
 
 class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
-    companion object {
-        val UYT = 1
 
-        val BTC = 2
 
-        val ETH = 3
-
-        val USDT = 4
-
-        val HT = 5
-    }
-
-    private var webview: WebView? = null
-    private var contactIv: ImageView? = null
-    private var valueEt: EditText? = null
-    private var addressEt: EditText? = null
-    private var remarkEt: android.widget.EditText? = null
-    private var chainType = 1
-    private var chainName = ""
     private var balanaceOf: BigDecimal? = null
     private var fee: String? = null
 
     override fun layoutId() = R.layout.activity_transfer
 
     override fun initView(savedInstanceState: Bundle?) {
-        intent.getIntExtra("chainType", -1)?.let {
-            chainType = it
-        }
-        intent.getStringExtra("chainName")?.let {
-            chainName = it
-        }
-        if (chainType == -1) finish()
-        setTitle(resources.getString(R.string.title_asset_transfer))
-        valueEt = input1LL.findViewById(R.id.input_et)
-        addressEt = input2LL.findViewById(R.id.input_et)
-        remarkEt = input3LL.findViewById(R.id.input_et)
-        input1LL.findViewById<TextView>(R.id.edit_require_tv).visibility = View.GONE
-        input2LL.findViewById<TextView>(R.id.edit_require_tv).visibility = View.GONE
-        input3LL.findViewById<TextView>(R.id.edit_require_tv).visibility = View.GONE
-        valueEt?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
-        addressEt?.maxLines = 2
-        valueEt?.addTextChangedListener(textWatcher)
-        addressEt?.addTextChangedListener(textWatcher)
-        remarkEt?.addTextChangedListener(textWatcher)
-        valueEt?.hint = getString(R.string.please_input_transfer_count)
-        remarkEt!!.hint = getString(R.string.please_input_remark)
+        setTitle("UYT"+resources.getString(R.string.title_asset_transfer))
+        eTUidAddress?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        eTTransferCounts?.maxLines = 2
+        eTUidAddress?.addTextChangedListener(textWatcher)
+        eTTransferCounts?.addTextChangedListener(textWatcher)
+        etRemark?.addTextChangedListener(textWatcher)
+        eTUidAddress?.hint = getString(R.string.please_input_transfer_count)
+        etRemark!!.hint = getString(R.string.please_input_remark)
 
-        contactIv = input2LL.findViewById(R.id.input_clear_iv)
-        contactIv?.setImageResource(R.mipmap.contact_icon)
-        contactIv?.visibility = View.VISIBLE
-        when (chainType) {
-            UYT -> addressEt?.hint = getString(R.string.please_input_dns_transfer_address)
-            BTC -> addressEt?.hint = getString(R.string.please_input_btc_transfer_address)
-            ETH -> addressEt?.hint = getString(R.string.please_input_eth_transfer_address)
-            USDT -> addressEt?.hint = getString(R.string.please_input_usdt_transfer_address)
-            HT -> addressEt?.hint = getString(R.string.please_input_eth_transfer_address)
-        }
 //        checkStatus()
-        confirm.setOnClickListener {
+        okBtn.setOnClickListener {
 //            if (fee == null) return@setOnClickListener
 //            if (balanaceOf!!.compareTo(BigDecimal("0")) == 0) {
 //                ToastUtils.showShort(getActivity(), getString(R.string.tip_alert_no_asset_transfer))
@@ -93,7 +53,7 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
 //            }
 //            if (chainType == UYT) {
 //                if (balanaceOf?.compareTo(
-//                        BigDecimal(valueEt?.text.toString())
+//                        BigDecimal(eTUidAddress?.text.toString())
 //                            .add(BigDecimal(fee))
 //                    )!! < 0
 //                ) {
@@ -101,43 +61,34 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
 //                    return@setOnClickListener
 //                }
 //            } else {
-//                if (balanaceOf?.compareTo(BigDecimal(valueEt?.text.toString()))!! < 0) {
+//                if (balanaceOf?.compareTo(BigDecimal(eTUidAddress?.text.toString()))!! < 0) {
 //                    ToastUtils.showShort(getActivity(), getString(R.string.tip_alert_max_vlue))
 //                    return@setOnClickListener
 //                }
 //            }
-//            if (addressEt!!.text.toString() == UserConfig.singleton?.accountBean
+//            if (eTTransferCounts!!.text.toString() == UserConfig.singleton?.accountBean
 //                    ?.loginAcountHash
 //            ) {
 //                ToastUtils.showShort(getActivity(), getString(R.string.can_not_transfer_to_self))
 //                return@setOnClickListener
 //            }
-//            if (BigDecimal(valueEt?.text.toString()) <= BigDecimal("0")
+//            if (BigDecimal(eTUidAddress?.text.toString()) <= BigDecimal("0")
 //            ) {
 //                ToastUtils.showShort(getActivity(), getString(R.string.transfer_value_error))
 //                return@setOnClickListener
 //            }
-//            if (remarkEt!!.text.toString().length > 64) {
+//            if (etRemark!!.text.toString().length > 64) {
 //                ToastUtils.showShort(getActivity(), getString(R.string.remark_too_long))
 //                return@setOnClickListener
 //            }
             showDialog()
         }
-        contactIv?.setOnClickListener(View.OnClickListener { v: View? ->
-            LaunchConfig.startContactForResult(
-                this,
-                1
-            )
-        })
+
     }
 
-    //显示提取收益输入密码弹窗
+    //显示输入密码弹窗
     private fun showDialog() {
-        var wdBean = TransferDialogBean()
-        wdBean.addressHash = addressEt?.text.toString().trim()
-        wdBean.transferNumber = resources.getString(R.string.title_gain_recomment) + chainName
-        wdBean.free = "850 UYT"
-        var extractDialog = TransferDialog.newInstance(1, wdBean)
+        var extractDialog = TransferDialog.newInstance(1)
         extractDialog!!.setOnRequestListener(object : TransferDialog.RequestListener {
             override fun onRequest(type: Int, params: String) {
                 checkPsw(params, extractDialog)
@@ -150,7 +101,7 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
     fun checkPsw(params: String, extractDialog: TransferDialog) {
         viewModel.verifyPsw(params).observe(this, Observer {
             if (it.status == 200) {
-                confirmTransfer()
+                okBtnTransfer()
                 extractDialog!!.dismiss()
             } else {
                 ErrorCode.showErrorMsg(getActivity(), it.status)
@@ -158,33 +109,12 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
         })
     }
 
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        @Nullable data: Intent?
-    ) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            if (data != null) addressEt!!.setText(data.getStringExtra("contact"))
-        }
-    }
+
 
     override fun initData() {
-        initWebview()
+
     }
 
-    //    初始化加载js
-    private fun initWebview() {
-        if (webview == null) webview = WebView(this)
-        webview?.let {
-            it.settings.javaScriptEnabled = true
-            it.settings.allowFileAccess = true
-            it.settings.domStorageEnabled = true
-            it.webViewClient = WebViewClient()
-            it.webChromeClient = WebChromeClient()
-            it.loadUrl("file:///android_asset/build/index.html")
-        }
-    }
 
 //    private fun checkStatus() {
 //        OkGo.< BaseBean < AssetOptBean > > get<BaseBean<AssetOptBean>>(ServiceUrl.checkTransferStatus)
@@ -247,18 +177,8 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
 //            })
 //    }
 
-    private fun confirmTransfer() {
-        UserConfig.singleton?.mnemonic?.mnemonic?.let { list ->
-            val sb = StringBuilder()
-            for (i in list.indices) {
-                sb.append(list[i]).append(" ")
-            }
-            webview?.evaluateJavascript(
-                "transfer($chainType,'${addressEt?.text.toString().trim()}','${sb.toString().trim()}','1000000000000')"
-            ) {
+    private fun okBtnTransfer() {
 
-            }
-        }
 
     }
 
@@ -280,8 +200,8 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
         }
 
         override fun afterTextChanged(s: Editable) {
-            confirm.isEnabled =
-                valueEt!!.text.toString().isNotEmpty() && addressEt!!.text.toString().isNotEmpty()
+            okBtn.isEnabled =
+                eTUidAddress!!.text.toString().isNotEmpty() && eTTransferCounts!!.text.toString().isNotEmpty()
         }
     }
 

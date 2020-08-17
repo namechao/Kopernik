@@ -30,11 +30,11 @@ class CrossChainTxAdapter( private val type: Int) :
             } else {
                 helper.cancelWithdrawSpb?.visibility = View.GONE
             }
-            helper.typeTv?.text = mContext.resources.getString(R.string.title_asset_withdraw)
+            helper.typeTv?.text = mContext.resources.getString(R.string.title_asset_deposit)
             helper.rechargeAddrSpt
                 ?.setLeftTopString(mContext.resources.getString(R.string.withdraw_address))
         } else {
-            helper.typeTv?.text = mContext.resources.getString(R.string.title_asset_recharge)
+            helper.typeTv?.text = mContext.resources.getString(R.string.title_asset_deposit)
             helper.rechargeAddrSpt?.setLeftTopString(
                 mContext.resources.getString(R.string.title_recharge_address)
             )

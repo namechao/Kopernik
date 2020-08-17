@@ -9,6 +9,7 @@ import com.kopernik.ui.Ecology.*
 import com.kopernik.ui.Ecology.entity.CheckRegisterInfo
 import com.kopernik.ui.login.*
 import com.kopernik.ui.asset.*
+import com.kopernik.ui.my.*
 import com.kopernik.ui.setting.*
 
 object LaunchConfig {
@@ -28,6 +29,18 @@ object LaunchConfig {
     fun startForgetPasswordNextActivity(context: Context) {
         val intent =
             Intent(context, ForgetPasswordNextActivity::class.java)
+        context.startActivity(intent)
+    }
+
+    fun startTradePasswordNextActivity(context: Context) {
+        val intent =
+            Intent(context, ForgetTradePasswordNextActivity::class.java)
+        context.startActivity(intent)
+    }
+
+    fun startTradePasswordActivity(context: Context) {
+        val intent =
+            Intent(context, ForgetTradePasswordActivity::class.java)
         context.startActivity(intent)
     }
 
@@ -168,21 +181,18 @@ object LaunchConfig {
     }
     fun startDepositMoneyActivity(
         context: Context,
-        type: Int,
         address: String?
     ) {
         val intent =
             Intent(context, DepositMoneyActivity::class.java)
-        intent.putExtra("type", type)
         intent.putExtra("address", address)
         context.startActivity(intent)
     }
 
-    fun startWithdrawCoinAc(context: Context, id: Int, type: Int, availableAmount: String) {
+    fun startWithdrawCoinAc(context: Context, availableAmount: String) {
         val intent =
             Intent(context, WithdrawCoinActivity::class.java)
-        intent.putExtra("type", type)
-        intent.putExtra("id", id)
+
         intent.putExtra("availableAmount", availableAmount)
         context.startActivity(intent)
     }
@@ -302,9 +312,14 @@ object LaunchConfig {
         context.startActivity(intent)
     }
 
-    fun startBaseSettingActivityAc(context: Context) {
+    fun startSettingActivityAc(context: Context) {
         val intent =
-            Intent(context, BaseSettingActivity::class.java)
+            Intent(context, SettingActivity::class.java)
+        context.startActivity(intent)
+    }
+    fun startRealNameAuthenticationActivity(context: Context) {
+        val intent =
+            Intent(context, RealNameAuthenticationActivity::class.java)
         context.startActivity(intent)
     }
 
@@ -334,7 +349,11 @@ object LaunchConfig {
             Intent(context, UDMTAssetActivity::class.java)
         context.startActivity(intent)
     }
-
+    fun startUYTAssetActivity(context: Context) {
+        val intent =
+            Intent(context, UYTAssetActivity::class.java)
+        context.startActivity(intent)
+    }
     fun startWebViewAc(
         context: Context,
         url: String?,

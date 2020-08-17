@@ -1,4 +1,4 @@
-package com.kopernik.ui.setting
+package com.kopernik.ui.my
 
 import android.os.Bundle
 import android.view.View
@@ -20,20 +20,7 @@ class AboutUsActivity : NewBaseActivity<NoViewModel,ViewDataBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         setTitle(getString(R.string.title_about_us))
-        EventBus.getDefault().post(LocalEvent<Any>(LocalEvent.openSetting))
-        versinoTv.text = BuildConfig.VERSION_NAME
-        telegramSpt.setRightString(AboutUsConstant.email)
-        telegramSpt.setOnClickListener { v ->
-            APPHelper.copy(
-               this,
-                AboutUsConstant.email
-            )
-        }
-        versionLL.setOnClickListener(View.OnClickListener { v: View? ->
-            LaunchConfig.startVersionAc(
-                this
-            )
-        })
+
     }
 
 
