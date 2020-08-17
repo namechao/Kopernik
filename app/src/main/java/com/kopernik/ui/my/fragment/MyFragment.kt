@@ -51,6 +51,14 @@ class MyFragment : NewBaseFragment<NodeViewModel, ViewDataBinding>() {
         aboutUs.setOnClickListener {
             activity?.let { LaunchConfig.startAboutUsActivityAc(it) }
         }
+        //google验证
+        googleAuthen.setOnClickListener {
+            activity?.let { LaunchConfig.startGoogleVerifyActivity(it) }
+        }
+     //邀请朋友
+    inviteFriends.setOnClickListener {
+            activity?.let { LaunchConfig.startInviteFriendsActivity(it) }
+        }
     }
 
     override fun onEvent(event: LocalEvent<Any>) {

@@ -37,6 +37,31 @@ object LaunchConfig {
             Intent(context, ForgetTradePasswordNextActivity::class.java)
         context.startActivity(intent)
     }
+   fun startGoogleVerifyFirstStepActivity(context: Context) {
+        val intent =
+            Intent(context, GoogleVerifyFirstStepActivity::class.java)
+        context.startActivity(intent)
+    }
+    fun startGoogleVerifyActivity(context: Context) {
+        val intent =
+            Intent(context, GoogleVerifyActivity::class.java)
+        context.startActivity(intent)
+    }
+   fun startGoogleVerifySecondStepActivity(context: Context) {
+        val intent =
+            Intent(context, GoogleVerifySecondStepActivity::class.java)
+        context.startActivity(intent)
+    }
+   fun startInviteFriendsActivity(context: Context) {
+        val intent =
+            Intent(context, InviteFriendsActivity::class.java)
+        context.startActivity(intent)
+    }
+   fun startGoogleVerifiedActivity(context: Context) {
+        val intent =
+            Intent(context, GoogleVerifiedActivity::class.java)
+        context.startActivity(intent)
+    }
 
     fun startTradePasswordActivity(context: Context) {
         val intent =
