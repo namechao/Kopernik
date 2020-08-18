@@ -1,15 +1,13 @@
 package com.kopernik.app.dialog
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.Gravity
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
+import android.view.*
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
@@ -20,50 +18,44 @@ import com.kopernik.app.utils.KeyboardUtils
 
 class PurchaseDialog : DialogFragment(),
     FingerprintDialog.AuthenticationCallback {
-
-
-
-    private var desc: TextView? = null
-
-
     private var passwordEt: EditText? = null
-    private var exchangeCounts: EditText? = null
     private var okBtn: Button? = null
     private var type = 0
-    private var useFingerprint = false
-    private var fingerprintDialog: FingerprintDialog? = null
-
+    private var miningMachineType:TextView?=null
+    private var miningMachinePrice:TextView?=null
+    private var payUytCoins:TextView?=null
+    private var balanceNotEnough:TextView?=null
+    private var uytBalance:TextView?=null
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog =
-            Dialog(activity!!, R.style.BottomDialog)
+            Dialog(activity!!, R.style.AlertDialogStyle)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_purchase)
         dialog.setCanceledOnTouchOutside(true)
         val window = dialog.window
-        window!!.setWindowAnimations(R.style.AnimBottom)
         window.setBackgroundDrawableResource(R.color.transparent)
         val lp = window.attributes
-        lp.gravity = Gravity.BOTTOM
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+        lp.gravity = Gravity.CENTER
+        lp.width =    ( window.windowManager.defaultDisplay.width * 0.86).toInt()
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT
-        //        lp.height =  getActivity().getWindowManager().getDefaultDisplay().getHeight() * 3 / 5;
+        //        lp.height =
         window.attributes = lp
         val bundle = arguments
         type = bundle!!.getInt("type")
-        fingerprintDialog = FingerprintDialog.newInstance(2, null)
-        fingerprintDialog?.setAuthenticationCallback(this)
-
         initView(dialog)
         return dialog
     }
 
     private fun initView(dialog: Dialog) {
-        desc = dialog.findViewById(R.id.tx_desc)
+        miningMachineType = dialog.findViewById(R.id.mining_machine_type)
+        miningMachinePrice = dialog.findViewById(R.id.mining_machine_price)
+        payUytCoins = dialog.findViewById(R.id.pay_uyt_coins)
+        balanceNotEnough = dialog.findViewById(R.id.tv_balance_not_enough)
+        uytBalance = dialog.findViewById(R.id.uyt_balance)
         passwordEt = dialog.findViewById(R.id.password_et)
         passwordEt?.addTextChangedListener(passwordWatcher)
-        exchangeCounts = dialog.findViewById(R.id.exchange_counts)
-        passwordEt?.addTextChangedListener(passwordWatcher)
+
         okBtn = dialog.findViewById(R.id.ok)
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
@@ -77,10 +69,6 @@ class PurchaseDialog : DialogFragment(),
     //点击确定按钮回调到页面进行网络请求处理
     var clickFastListener: OnClickFastListener = object : OnClickFastListener() {
         override fun onFastClick(v: View) {
-            if (useFingerprint) {
-                fingerprintDialog!!.show(fragmentManager!!, "fingerprint")
-                return
-            }
             KeyboardUtils.hideSoftKeyboard(passwordEt)
             listener?.let { it.onRequest(type,passwordEt!!.text.toString().trim()) }
         }
@@ -106,13 +94,12 @@ class PurchaseDialog : DialogFragment(),
         }
 
         override fun afterTextChanged(s: Editable) {
-            if (!useFingerprint) {
+
                 if (passwordEt!!.text.toString().isNotEmpty()) {
                     enableBtn()
                 } else {
                     disableBtn()
                 }
-            }
         }
     }
 
@@ -145,4 +132,5 @@ class PurchaseDialog : DialogFragment(),
             return fragment
         }
     }
+
 }

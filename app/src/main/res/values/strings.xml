@@ -600,6 +600,20 @@
     <string name="runtime_mm">运行矿机</string>
     <string name="out_time_mm">过期矿机</string>
     <string name="balance_not_enough">（当前余额不足）</string>
+    <string name="mining_machine_name">矿机名称</string>
+    <string name="mining_machine_price">矿机价格</string>
+    <string name="mining_machine_speed">挖矿速度</string>
+    <string name="mining_machine_update_counts">(每日更新一次)</string>
+    <string name="mining_wave_counts">定波数</string>
+    <string name="mining_machine_times">倍</string>
+    <string name="pay_uyt_coins">消耗等额UYT</string>
+    <string name="uyt_balance">UYT余额</string>
+    <string name="mining_machine_type1">体验矿机</string>
+    <string name="mining_machine_type2">微型矿机</string>
+    <string name="mining_machine_type3">中型矿机</string>
+    <string name="mining_machine_type4">大型矿机</string>
+    <string name="mining_machine_type5">云型矿机</string>
+    <string name="mining_machine_type6">超级矿机</string>
     <!--    生态相关-->
     <string name="ecology_tab_title">Kopernik  NETWORK生态应用场景</string>
     <string name="ecology_tab_title1_1">合成UTC</string>
