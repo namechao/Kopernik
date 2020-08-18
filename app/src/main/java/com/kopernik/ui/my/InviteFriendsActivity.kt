@@ -9,7 +9,6 @@ import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.ui.login.viewmodel.CreateAccountViewModel
 import com.kopernik.ui.my.adapter.InviteFriendsAdapter
-import kotlinx.android.synthetic.main.activity_forget_password.*
 import kotlinx.android.synthetic.main.activity_invite_friends.*
 
 class InviteFriendsActivity : NewBaseActivity<CreateAccountViewModel, ViewDataBinding>() {
@@ -18,7 +17,7 @@ class InviteFriendsActivity : NewBaseActivity<CreateAccountViewModel, ViewDataBi
     override fun layoutId()=R.layout.activity_invite_friends
 
     override fun initView(savedInstanceState: Bundle?) {
-        confirmBtn.setOnClickListener {
+        llGeneratePoster.setOnClickListener {
             LaunchConfig.startTradePasswordNextActivity(this)
         }
         var list= arrayListOf("ssss","sdfsdfsdfs","asasdsdasdsada")

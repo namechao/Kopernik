@@ -9,6 +9,8 @@ import com.kopernik.ui.Ecology.*
 import com.kopernik.ui.Ecology.entity.CheckRegisterInfo
 import com.kopernik.ui.login.*
 import com.kopernik.ui.asset.*
+import com.kopernik.ui.mine.PurchaseMiningMachineryActivity
+import com.kopernik.ui.mine.SynthetiseUTCActivity
 import com.kopernik.ui.my.*
 import com.kopernik.ui.setting.*
 
@@ -357,6 +359,16 @@ object LaunchConfig {
     fun startAboutUsActivityAc(context: Context) {
         val intent =
             Intent(context, AboutUsActivity::class.java)
+        context.startActivity(intent)
+    }
+    fun startSynthetiseUTCActivity(context: Context) {
+        val intent =
+            Intent(context, SynthetiseUTCActivity::class.java)
+        context.startActivity(intent)
+    }
+    fun startPurchaseMiningMachineryActivity(context: Context) {
+        val intent =
+            Intent(context, PurchaseMiningMachineryActivity::class.java)
         context.startActivity(intent)
     }
     fun startUTCAssetActivity(context: Context) {

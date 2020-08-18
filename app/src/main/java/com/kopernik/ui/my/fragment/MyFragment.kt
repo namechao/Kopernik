@@ -55,8 +55,8 @@ class MyFragment : NewBaseFragment<NodeViewModel, ViewDataBinding>() {
         googleAuthen.setOnClickListener {
             activity?.let { LaunchConfig.startGoogleVerifyActivity(it) }
         }
-     //邀请朋友
-    inviteFriends.setOnClickListener {
+         //邀请朋友
+          inviteFriends.setOnClickListener {
             activity?.let { LaunchConfig.startInviteFriendsActivity(it) }
         }
     }

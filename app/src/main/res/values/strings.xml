@@ -140,7 +140,7 @@
     <string name="title_safe_center">安全中心</string>
     <string name="title_base_set">基本设置</string>
     <string name="title_node_related">节点相关</string>
-    <string name="title_about_us">关于我们</string>
+
     <string name="title_asset_xut">UYT资产</string>
     <string name="title_asset_use">可用</string>
     <string name="title_asset_lock">冻结</string>
@@ -584,10 +584,21 @@
    <string name="my_invite_time">邀请时间</string>
    <string name="my_fans">我的粉丝</string>
    <string name="generate_poster">生成邀请海报</string>
+   <string name="title_about_us">关于我们</string>
+   <string name="title_purchase_mm">购买矿机</string>
+   <string name="button_purchase">购买</string>
     <!--    矿场相关-->
     <string name="income">累计收益(UTDM)</string>
-    <string name="buy_mine_m">购买矿机</string>
     <string name="synthesis_utc">合成UTC</string>
+    <string name="purchase_mm_tip">购买矿机挖矿</string>
+    <string name="purchase_mm_tip1">最多可达3倍收益回报</string>
+    <string name="ic_mm_tip1">3倍总收益</string>
+    <string name="ic_mm_tip2">100%挖矿效率</string>
+    <string name="ic_mm_tip3">每日收益</string>
+    <string name="ic_mm_tip4">0撸机制</string>
+    <string name="purchase_mm">购买矿机</string>
+    <string name="runtime_mm">运行矿机</string>
+    <string name="out_time_mm">过期矿机</string>
     <!--    生态相关-->
     <string name="ecology_tab_title">Kopernik  NETWORK生态应用场景</string>
     <string name="ecology_tab_title1_1">合成UTC</string>

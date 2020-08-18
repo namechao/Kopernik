@@ -61,6 +61,7 @@
         <activity android:name=".ui.my.InviteFriendsActivity" />
         <activity android:name=".ui.my.GoogleVerifyFirstStepActivity" />
         <activity android:name=".ui.my.GoogleVerifySecondStepActivity" />
+        <activity android:name=".ui.my.GoogleVerifyActivity" />
         <activity android:name=".ui.login.ForgetPasswordActivity" />
         <activity android:name=".ui.Ecology.VoteBetActivity" />
         <activity android:name=".ui.Ecology.WebViewActivity" />
@@ -75,6 +76,8 @@
         <activity android:name=".ui.login.UserProtocolActivity" />
         <activity android:name=".ui.login.ForgetPasswordNextActivity" />
         <activity android:name=".ui.login.LoginActivity" />
+        <activity android:name=".ui.mine.SynthetiseUTCActivity" />
+        <activity android:name=".ui.mine.PurchaseMiningMachineryActivity" />
 
         <activity
             android:name=".ui.MainActivity"

@@ -10,7 +10,7 @@
       android:layout_width="match_parent"
       android:scaleType="fitXY"
       android:adjustViewBounds="true"
-      android:layout_height="0dp"
+      android:layout_height="wrap_content"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.0"
@@ -67,6 +67,8 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:background="@mipmap/ic_buy_mine" />
 
     <ImageView
@@ -86,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
         android:gravity="center"
-        android:text="@string/buy_mine_m"
+        android:text="@string/purchase_mm"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_15"
         app:layout_constraintBottom_toBottomOf="@+id/image1"
@@ -109,6 +111,8 @@
 
     <ImageView
         android:id="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_synthesis" />
