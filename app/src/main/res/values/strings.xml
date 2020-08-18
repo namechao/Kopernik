@@ -599,6 +599,7 @@
     <string name="purchase_mm">购买矿机</string>
     <string name="runtime_mm">运行矿机</string>
     <string name="out_time_mm">过期矿机</string>
+    <string name="balance_not_enough">（当前余额不足）</string>
     <!--    生态相关-->
     <string name="ecology_tab_title">Kopernik  NETWORK生态应用场景</string>
     <string name="ecology_tab_title1_1">合成UTC</string>
