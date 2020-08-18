@@ -11,6 +11,8 @@ import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
+import com.kopernik.app.dialog.ChoseAreaCodeDialog
+import com.kopernik.app.dialog.UDMTDialog
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : NewBaseActivity<NoViewModel, ViewDataBinding>() {
@@ -34,6 +36,16 @@ class LoginActivity : NewBaseActivity<NoViewModel, ViewDataBinding>() {
         userProtocol.setOnClickListener {
           LaunchConfig.startUserProtocolActivity(this)
         }
+        tvPhoneHead.setOnClickListener {
+            var doialog = ChoseAreaCodeDialog.newInstance(1)
+            doialog!!.setOnRequestListener(object : ChoseAreaCodeDialog.RequestListener {
+                override fun onRequest(type: Int, params: String) {
+
+                }
+            })
+            doialog!!.show(supportFragmentManager, "doialog")
+        }
+
     }
 
     override fun initData() {

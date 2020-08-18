@@ -296,7 +296,7 @@
     <string name="freeze_time">冻结时间</string>
     <string name="unlock_time">解锁时间</string>
     <string name="all">全部</string>
-    <string name="cancel">取消</string>
+
     <string name="success">成功</string>
     <string name="please_input_remark">请输入备注(64个字符以内)</string>
 
@@ -649,6 +649,7 @@
     <string name="login_send_code">秒后重发送</string>
     <string name="login_agreement_tip">登录即同意</string>
     <string name="login_agreement">《UTC用户服务协议》</string>
+    <string name="chose_area_code">选择区号</string>
     <!--    注册相关-->
     <string name="re_phone">手机注册</string>
     <string name="re_email">邮箱注册</string>
@@ -725,5 +726,6 @@
     <string name="uyt_transfer">UYT转账</string>
     <string name="uyt_transfer_counts">转账数量</string>
     <string name="my_setting">设置</string>
+    <string name="cancel">取消</string>
     <!-- 新项目文字资源-->
 </resources>

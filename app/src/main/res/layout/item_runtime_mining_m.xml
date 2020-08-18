@@ -100,9 +100,22 @@
             android:text="(每日更新一次)"
             android:textColor="@color/color_A49CC2"
             android:textSize="@dimen/sp_12" />
-        <androidx.appcompat.widget.AppCompatSeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_marginTop="5dp"
+            android:max="100"
+            android:progress="50"
+            android:progressDrawable="@drawable/progress_bg"
+            android:layout_width="85dp"
+            android:layout_height="5dp"/>
+        <TextView
+            android:id="@+id/tv_precent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dp_10"
+            android:textColor="@color/color_FFCF32"
+            android:text="18%"/>
     </LinearLayout>
     <View
         android:id="@+id/line"
