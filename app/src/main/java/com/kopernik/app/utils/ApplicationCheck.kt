@@ -47,7 +47,7 @@ class ApplicationCheck(val context: Context) {
 
 
      fun check(): Boolean {
-         var virtualPkgs= hashSetOf("com.excelliance.dualaid","com.ft.mapp")
+         var virtualPkgs= hashSetOf("com.excelliance.dualaid","com.ft.mapp","com.droi.adocker.pro")
          var bufr: BufferedReader? = null
         try {
             bufr = BufferedReader(FileReader("/proc/self/maps"))
