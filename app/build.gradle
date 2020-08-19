@@ -5,28 +5,27 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         release {
-            storeFile file('/Users/zhanglichao/AndroidProject/Kopernik/kopernik.keystore')
+            storeFile file('F:\\AndroidProject\\Project\\Kopernik\\kopernik.keystore')
             storePassword '123456'
             keyAlias 'kopernik'
             keyPassword '123456'
         }
         debug {
-            storeFile file('/Users/zhanglichao/AndroidProject/Kopernik/kopernik.keystore')
+            storeFile file('F:\\AndroidProject\\Project\\Kopernik\\kopernik.keystore')
             storePassword '123456'
             keyAlias 'kopernik'
             keyPassword '123456'
         }
     }
-    compileSdkVersion 28
-    buildToolsVersion "30.0.0"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.kopernik"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     dataBinding {
