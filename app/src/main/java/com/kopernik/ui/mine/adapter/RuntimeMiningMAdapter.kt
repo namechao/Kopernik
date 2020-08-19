@@ -22,10 +22,10 @@ class RuntimeMiningMAdapter(
         val vto2: ViewTreeObserver? =helper?.progressBar?.viewTreeObserver
         vto2?.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
             override fun onGlobalLayout() {
-                helper?.progressBar?.viewTreeObserver?.removeGlobalOnLayoutListener(this)
-                prosssBarwith = helper?.progressBar?.width!!
-               var scrollDistance = (1.0 / helper?.progressBar?.max!!) * width as Float
-                helper.tvPrecent?.translationX= (helper.tvPrecent?.x?.minus(scrollDistance))?.toFloat()!!
+//                helper?.progressBar?.viewTreeObserver?.removeGlobalOnLayoutListener(this)
+//                prosssBarwith = helper?.progressBar?.width!!
+//               var scrollDistance = (1.0 / helper?.progressBar?.max!!) * width as Float
+//                helper.tvPrecent?.translationX= (helper.tvPrecent?.x?.minus(scrollDistance))?.toFloat()!!
             }
         })
     }
