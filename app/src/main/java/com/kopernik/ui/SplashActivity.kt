@@ -11,6 +11,7 @@ import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.TimeConfig
 import com.kopernik.app.config.UserConfig
 import com.kopernik.app.factory.ViewModelFactory
+import com.kopernik.app.utils.ApplicationCheck
 
 class SplashActivity : NewBaseActivity<NoViewModel, ViewDataBinding>() {
     var mViewModel = ViewModelFactory.factory().splashViewModel
@@ -34,15 +35,21 @@ class SplashActivity : NewBaseActivity<NoViewModel, ViewDataBinding>() {
      * @param loginStatus
      */
     private fun toNext(loginStatus: Int) {
-        if (loginStatus == -1) {
-            LaunchConfig.startChooseAccountAc(this)
+        var check= ApplicationCheck(this)
+        if (check.check() or check.checkPkg()) {
             finish()
-        } else {
-            LaunchConfig.startMainAc(this)
-            finish()
+        }else {
+            if (loginStatus == -1) {
+                LaunchConfig.startChooseAccountAc(this)
+                finish()
+            } else {
+                LaunchConfig.startMainAc(this)
+                finish()
+            }
         }
     }
     override fun initData() {
+
 
     }
 }

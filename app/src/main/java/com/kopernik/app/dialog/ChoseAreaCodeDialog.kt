@@ -1,25 +1,28 @@
 package com.kopernik.app.dialog
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.os.Parcelable
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.*
-import android.widget.*
+import android.util.Log
+import android.view.Gravity
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
+import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kopernik.R
-import com.kopernik.ui.asset.entity.*
+import com.kopernik.app.widget.library.adapter.ScrollPickerAdapter
+import com.kopernik.app.widget.library.view.ScrollPickerView
 import com.kopernik.ui.asset.util.OnClickFastListener
-import com.kopernik.app.utils.KeyboardUtils
+import java.util.*
 
 class ChoseAreaCodeDialog : DialogFragment(){
     private var confirm: TextView? = null
     private var type = 0
-    private var numberPicker:NumberPicker?=null
+    private var numberPicker: ScrollPickerView?=null
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog =
@@ -51,6 +54,27 @@ class ChoseAreaCodeDialog : DialogFragment(){
         dialog.findViewById<TextView>(R.id.cancel).setOnClickListener { dismiss() }
 
         confirm?.setOnClickListener(clickFastListener)
+        val list: MutableList<String> =
+            ArrayList()
+        for (i in 0..19) {
+            val itemData = "item: $i"
+            list.add(itemData)
+        }
+
+        val builder: ScrollPickerAdapter.ScrollPickerAdapterBuilder<String> =
+            ScrollPickerAdapter.ScrollPickerAdapterBuilder<String>(activity)
+                .setDataList(list)
+                .selectedItemOffset(1)
+                .visibleItemNumber(3)
+                .setDivideLineColor("#E5E5E5")
+                .setItemViewProvider(null)
+                .setOnScrolledListener { v ->
+                    val text = v.tag as String
+                    Log.d("aaaaaaaaaa","ssd")
+                }
+        val mScrollPickerAdapter = builder.build()
+        numberPicker?.layoutManager=LinearLayoutManager(activity)
+        numberPicker?.adapter=mScrollPickerAdapter
     }
 
     //点击确定按钮回调到页面进行网络请求处理

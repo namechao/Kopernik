@@ -36,10 +36,10 @@
         android:textColor="@color/white"
         android:textSize="@dimen/sp_14"
         android:text="@string/confirm"/>
-     <NumberPicker
+     <com.kopernik.app.widget.library.view.ScrollPickerView
          android:id="@+id/numberPicker"
          app:layout_constraintTop_toBottomOf="@+id/title_chose"
-
+         android:layout_marginTop="@dimen/dp_26"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"/>
 
