@@ -14,7 +14,7 @@
             android:textColor="@color/color_AA9CCA"
             android:textSize="@dimen/sp_14"
             android:layout_width="0dp"
-            android:layout_weight="1.2"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/asset_synthesis_time"
             android:paddingTop="@dimen/dp_14"
@@ -44,6 +44,7 @@
             android:text="@string/asset_mine_output"
             android:paddingTop="@dimen/dp_14"
             android:paddingBottom="@dimen/sp_14"
+            android:layout_marginRight="15dp"
             android:gravity="center"
             />
     </LinearLayout>

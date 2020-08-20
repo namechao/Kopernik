@@ -14,7 +14,6 @@ import com.kopernik.ui.asset.adapter.UTCExchangeRecordAdapter
 import com.kopernik.ui.asset.adapter.UTCSynthesisRecordAdapter
 import com.kopernik.ui.asset.adapter.UTKReceiveRecordAdapter
 import com.kopernik.ui.asset.adapter.UTKTransferRecordAdapter
-import kotlinx.android.synthetic.main.activity_utc_asset.*
 import kotlinx.android.synthetic.main.activity_utk_asset.*
 import kotlinx.android.synthetic.main.activity_utk_asset.recyclerView
 
@@ -24,13 +23,13 @@ class UTKAssetActivity : NewFullScreenBaseActivity<NoViewModel,ViewDataBinding>(
     override fun initView(savedInstanceState: Bundle?) {
         recyclerView.layoutManager= LinearLayoutManager(this)
         var list= arrayListOf("gadgg","asfagadga","asfafas","asagagasgadgdsfdsfasfa")
-        var adpter= UTCExchangeRecordAdapter(list)
+        var adpter= UTKReceiveRecordAdapter(list)
         adpter.addHeaderView(LayoutInflater.from(this).inflate(R.layout.item_receive_record_head,null))
         recyclerView.adapter=adpter
-        recyclerView.layoutManager= LinearLayoutManager(this)
-        var adpter1= UTCSynthesisRecordAdapter(list)
+        recyclerView1.layoutManager= LinearLayoutManager(this)
+        var adpter1= UTKTransferRecordAdapter(list)
         adpter1.addHeaderView(LayoutInflater.from(this).inflate(R.layout.item_transfer_record_head,null))
-        recyclerView.adapter=adpter1
+        recyclerView1.adapter=adpter1
         transfer.setOnClickListener {
             var dialog = UTKTransferDialog.newInstance(1)
             dialog!!.setOnRequestListener(object : UTKTransferDialog.RequestListener {

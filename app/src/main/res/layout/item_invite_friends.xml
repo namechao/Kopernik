@@ -40,7 +40,7 @@
         app:layout_constraintTop_toTopOf="@+id/invite_uid"
         app:layout_constraintBottom_toBottomOf="@+id/invite_uid"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
         android:textColor="@color/color_AA9CCA"
         android:textSize="@dimen/sp_14"
         />

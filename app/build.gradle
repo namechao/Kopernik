@@ -21,12 +21,12 @@ android {
     buildToolsVersion "30.0.0"
 
     defaultConfig {
-        applicationId "com.kopernik"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        flavorDimensions "default"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     dataBinding {
@@ -41,6 +41,22 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+        dev {
+            applicationId 'com.kopernik.dev'
+            resValue "string", "app_name", "kopernik_dev"
+            manifestPlaceholders = [APPLICATION_ID: applicationId]
+            buildConfigField "boolean", "IS_JUST_TEST", "false"
+            versionName = "dev" + rootProject.ext.android.versionName
+        }
+        online {
+            applicationId 'com.kopernik'
+            resValue "string", "app_name", "kopernik"
+            manifestPlaceholders = [APPLICATION_ID: applicationId]
+            buildConfigField "boolean", "IS_JUST_TEST", "false"
+            versionName = "V" + rootProject.ext.android.versionName
         }
     }
     applicationVariants.all {
@@ -58,6 +74,9 @@ android {
                 it.outputFileName = fileName
             }
         }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 

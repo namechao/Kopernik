@@ -141,7 +141,7 @@
         app:layout_constraintTop_toTopOf="@+id/invitUid"
         app:layout_constraintBottom_toBottomOf="@+id/invitUid"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
         android:textColor="@color/color_AA9CCA"
         android:textSize="@dimen/sp_14"
         />

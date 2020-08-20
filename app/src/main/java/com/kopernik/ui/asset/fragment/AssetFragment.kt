@@ -34,7 +34,7 @@ class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
         adapter.setNewData(list)
         adapter.setOnItemClickListener { adapter, view, position ->
             when(position){
-                0-> activity?.let { LaunchConfig.startUTCAssetActivity(it) }
+                0-> {activity?.let { LaunchConfig.startUTCAssetActivity(it) }}
                 1-> activity?.let { LaunchConfig.startUTKAssetActivity(it) }
                 2-> activity?.let { LaunchConfig.startUDMTAssetActivity(it) }
                 3-> activity?.let { LaunchConfig.startUYTAssetActivity(it) }

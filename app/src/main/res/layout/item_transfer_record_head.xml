@@ -14,7 +14,7 @@
         android:textColor="@color/color_AA9CCA"
         android:textSize="@dimen/sp_14"
         android:layout_width="0dp"
-        android:layout_weight="1.5"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:text="@string/asset_synthesis_time"
         android:paddingTop="@dimen/dp_14"
@@ -28,7 +28,7 @@
         android:textColor="@color/color_AA9CCA"
         android:textSize="@dimen/sp_14"
         android:layout_width="0dp"
-        android:layout_weight="1.5"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:text="@string/asset_other_id"
         android:paddingTop="@dimen/dp_14"
@@ -46,6 +46,18 @@
         android:paddingBottom="@dimen/sp_14"
         android:gravity="center"
         />
+        <TextView
+            android:textColor="@color/color_AA9CCA"
+            android:textSize="@dimen/sp_14"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/asset_handling_fees"
+            android:paddingTop="@dimen/dp_14"
+            android:paddingBottom="@dimen/sp_14"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            />
 </LinearLayout>
 <View
 android:layout_width="match_parent"
