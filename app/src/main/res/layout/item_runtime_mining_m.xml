@@ -116,6 +116,7 @@
             android:textSize="@dimen/dp_10"
             android:textColor="@color/color_FFCF32"
             android:text="18%"/>
+
     </LinearLayout>
     <View
         android:id="@+id/line"
