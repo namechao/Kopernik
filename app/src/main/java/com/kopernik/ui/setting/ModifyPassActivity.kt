@@ -88,11 +88,11 @@ class ModifyPassActivity : NewBaseActivity<UpdatePasswordViewModel, ViewDataBind
             if (it.status == 200) {
                 ToastUtils.showShort(getActivity(), getString(R.string.tip_change_success))
                 //删除指纹解锁
-                if (UserConfig?.singleton?.isUseFingerprint!!) {
-                    FingerprintHelper.getInstance().init(getActivity())
-                    FingerprintHelper.getInstance().closeAuthenticate()
-                    UserConfig?.singleton?.isUseFingerprint = false
-                }
+//                if (UserConfig?.singleton?.isUseFingerprint!!) {
+//                    FingerprintHelper.getInstance().init(getActivity())
+//                    FingerprintHelper.getInstance().closeAuthenticate()
+//                    UserConfig?.singleton?.isUseFingerprint = false
+//                }
                 finish()
             } else {
                 ToastUtils.showShort(this, it.errorMsg)

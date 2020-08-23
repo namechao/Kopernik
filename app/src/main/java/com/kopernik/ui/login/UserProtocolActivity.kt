@@ -14,7 +14,6 @@ import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.ui.login.adapter.MnemonicAdapter
 import com.kopernik.ui.login.adapter.MnemonicInputAdapter
 import com.kopernik.app.utils.SpacesItemDecoration
-import com.kopernik.ui.login.bean.Mnemonic
 import java.util.*
 
 class UserProtocolActivity : NewBaseActivity<NoViewModel, ViewDataBinding>() {

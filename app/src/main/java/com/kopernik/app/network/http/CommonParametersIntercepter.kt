@@ -23,7 +23,7 @@ class CommonParametersIntercepter : Interceptor {
             // 封装公共参数
             var token="8Db50d812b2568acfbc818d82d837551ae8d93b02ff8ef7b58c4b0f9289277b7"
             if (UserConfig.singleton!=null){
-                UserConfig.singleton!!.token?.let {
+                UserConfig.singleton!!.accountBean?.token?.let {
                     token=it
                 }
             }

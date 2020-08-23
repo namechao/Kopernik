@@ -9,13 +9,26 @@ import com.kopernik.ui.setting.entity.ContactBean
 import com.kopernik.ui.setting.entity.UpdateBean
 
 class HomeRepository private constructor(private val newWork: HomeNetWork):BaseModel(){
-    suspend fun createAccount(acountLabel:String,acountPwd:String,
-                              chainHash:String,  acountHash:String):BaseResult<AccountBean>{
-        return newWork.creatAccount(acountLabel, acountPwd, chainHash, acountHash)
+    suspend fun sendCode(phone:String):BaseResult<Any>{
+        return newWork.sendCode(phone)
     }
-
-    suspend fun importAccount(map: Map<String, String>): BaseResult<AccountBean> {
-        return newWork.importAccount(map)
+    suspend fun sendEmailCode(phone:String):BaseResult<Any>{
+        return newWork.sendEmailCode(phone)
+    }
+    suspend fun checkPhone(phone:String,verifyCode:String):BaseResult<Any>{
+        return newWork.checkPhone(phone,verifyCode)
+    }
+    suspend fun checkEMail(email:String,verifyCode:String):BaseResult<Any>{
+        return newWork.checkEMail(email,verifyCode)
+    }
+    suspend fun createAccount(map: Map<String, String>): BaseResult<AccountBean> {
+        return newWork.createAccount(map)
+    }
+    suspend fun forgetPassword(map: Map<String, String>): BaseResult<AccountBean> {
+        return newWork.forgetPassword(map)
+    }
+    suspend fun login(map: Map<String, String>): BaseResult<AccountBean> {
+        return newWork.login(map)
     }
 
     suspend fun updatePassword(map: Map<String, String>): BaseResult<Any> {

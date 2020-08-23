@@ -84,11 +84,11 @@ class MapActivity : NewBaseActivity<NoViewModel,ViewDataBinding>() {
         }
         if (type == WithdrawConstant.DNS) {
             if (mapType == MapConstant.MAP) {
-                if (StringUtils.isEmpty(UserConfig.singleton?.accountBean?.nodeHash)) {
-                    dnsMapHintTv.text = resources.getString(R.string.dns_map_hint2)
-                } else {
-                    dnsMapHintTv.text = resources.getString(R.string.dns_map_hint)
-                }
+//                if (StringUtils.isEmpty(UserConfig.singleton?.accountBean?.nodeHash)) {
+//                    dnsMapHintTv.text = resources.getString(R.string.dns_map_hint2)
+//                } else {
+//                    dnsMapHintTv.text = resources.getString(R.string.dns_map_hint)
+//                }
                 dnsMapHintTv.visibility = View.VISIBLE
                 checkDnsMapStatus()
             } else {

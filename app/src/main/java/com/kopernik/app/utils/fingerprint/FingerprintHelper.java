@@ -60,7 +60,7 @@ public class FingerprintHelper extends FingerprintManager.AuthenticationCallback
 
     public void generateKey() {
         //在keystore中生成加密密钥
-        mLocalAndroidKeyStore.generateKey(UserConfig.getSingleton().getAccount().getLoginAcountHash() + FingerprintAndroidKeyStore.keyName);
+        mLocalAndroidKeyStore.generateKey("UserConfig.getSingleton().getAccount().getLoginAcountHash() + FingerprintAndroidKeyStore.keyName");
         setPurpose(KeyProperties.PURPOSE_ENCRYPT);
     }
 

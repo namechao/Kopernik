@@ -14,14 +14,28 @@ import retrofit2.http.*
 
 interface HomeService {
     @FormUrlEncoded
-    @POST("register/saveuser")
-    suspend fun createAccount(@Field("acountLabel") acountLabel:String,@Field("acountPwd") acountPwd:String,
-                              @Field("chainHash")chainHash:String,@Field("acountHash") acountHash:String):BaseResult<AccountBean>
+    @POST("user/sendPhone")
+    suspend fun sendCode(@Field("phone") phone:String):BaseResult<Any>
+    @FormUrlEncoded
+    @POST("user/sendMail")
+    suspend fun sendEmailCode(@Field("phone") phone:String):BaseResult<Any>
+    @FormUrlEncoded
+    @POST("user/checkPhone")
+    suspend fun checkPhone(@Field("phone") phone:String,@Field("verifyCode") verifyCode:String):BaseResult<Any>
+    @FormUrlEncoded
+    @POST("user/checkEMail")
+    suspend fun checkEMail(@Field("email") phone:String,@Field("verifyCode") verifyCode:String):BaseResult<Any>
     //确认导入账户
     @FormUrlEncoded
-    @POST("register/updateuser")
-    suspend fun importAccount(@FieldMap map: Map<String, String>): BaseResult<AccountBean>
-
+    @POST("user/saveuser")
+    suspend fun createAccount(@FieldMap map: Map<String, String>): BaseResult<AccountBean>
+    @FormUrlEncoded
+    @POST("user/saveLoginPwd")
+    suspend fun forgetPassword(@FieldMap map: Map<String, String>): BaseResult<AccountBean>
+    //登录
+    @FormUrlEncoded
+    @POST("user/login")
+    suspend fun login(@FieldMap map: Map<String, String>): BaseResult<AccountBean>
     //更新密码
     @FormUrlEncoded
     @POST("register/updatepwd")

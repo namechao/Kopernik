@@ -20,7 +20,7 @@ object Api {
 //    val baseUrl =
 //        if (AppConfig.isDebug) "http://47.57.24.215:8089/mobile/v1/" else "https://uyt.com/mobile/v1/"
     val baseUrl =
-        if (AppConfig.isDebug) "http://47.57.24.215:8089/chain/mobile/v2/" else "https://kopernik.com/mobile/v1/"
+        if (AppConfig.isDebug) "http://123.57.8.136:80/" else "https://kopernik.com/mobile/v1/"
     val appSearch =
         if (AppConfig.isDebug) "http://47.57.24.215:8086/#/appSearch/" else "https://kopernik.com/#/appSearch/"
     val home =

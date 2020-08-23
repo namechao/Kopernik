@@ -16,16 +16,16 @@ class NodeAdapter(layoutResId: Int) :
     override fun convert(helper: NodeViewHolder, item: NodeBean.DatasBean) {
         helper?.logoIv?.context?.let { Glide.with(it).load(item.imgurl).into(helper.logoIv!!) }
         helper.nameTv?.text = item.name
-        if (UserConfig.singleton?.getAccount() == null) {
-            helper.voteSpb?.visibility = View.INVISIBLE
-        } else {
-            helper.voteSpb?.visibility = View.VISIBLE
-        }
-        if (item.isSelfNode) {
-            helper.ownSpb?.visibility = View.VISIBLE
-        } else {
-            helper.ownSpb?.visibility = View.GONE
-        }
+//        if (UserConfig.singleton?.getAccount() == null) {
+//            helper.voteSpb?.visibility = View.INVISIBLE
+//        } else {
+//            helper.voteSpb?.visibility = View.VISIBLE
+//        }
+//        if (item.isSelfNode) {
+//            helper.ownSpb?.visibility = View.VISIBLE
+//        } else {
+//            helper.ownSpb?.visibility = View.GONE
+//        }
         if (item.recommendNode == null || item.recommendNode!!.isEmpty()) {
             helper.statusSpb?.text = mContext.getString(R.string.creation)
             helper.statusSpb?.visibility = View.VISIBLE
@@ -115,11 +115,11 @@ class NodeAdapter(layoutResId: Int) :
                 helper.voteSpb?.visibility = View.VISIBLE
                 helper.statusSpb?.visibility = View.INVISIBLE
             }
-            if (UserConfig.singleton?.getAccount() == null) {
-                helper.voteSpb?.visibility = View.INVISIBLE
-            } else {
-                helper.voteSpb?.visibility = View.VISIBLE
-            }
+//            if (UserConfig.singleton?.getAccount() == null) {
+//                helper.voteSpb?.visibility = View.INVISIBLE
+//            } else {
+//                helper.voteSpb?.visibility = View.VISIBLE
+//            }
             //普通节点
             helper.rootView?.background = ContextCompat.getDrawable(mContext, R.drawable.normal_node_bg)
             helper.statusSpb?.setShapeSelectorDisableColor(

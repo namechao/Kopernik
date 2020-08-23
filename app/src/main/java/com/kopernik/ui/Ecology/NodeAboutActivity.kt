@@ -21,14 +21,14 @@ class NodeAboutActivity : NewBaseActivity<NoViewModel,ViewDataBinding>() {
         setTitle(getString(R.string.title_node_related))
         mEventBus.post(LocalEvent<Any>(LocalEvent.openSetting))
         modifyNodeLogoSpt.setOnClickListener {
-            if (StringUtils.isEmpty(UserConfig.singleton?.getAccount()?.nodeHash)) {
-                ToastUtils.showShort(getActivity(), getString(R.string.user_has_not_node))
-            } else {
-                LaunchConfig.startChooseNodeLogoAc(
-                    this,
-                    UserConfig.singleton?.getAccount()?.nodeHash
-                )
-            }
+//            if (StringUtils.isEmpty(UserConfig.singleton?.getAccount()?.nodeHash)) {
+//                ToastUtils.showShort(getActivity(), getString(R.string.user_has_not_node))
+//            } else {
+//                LaunchConfig.startChooseNodeLogoAc(
+//                    this,
+//                    UserConfig.singleton?.getAccount()?.nodeHash
+//                )
+//            }
         }
     }
 

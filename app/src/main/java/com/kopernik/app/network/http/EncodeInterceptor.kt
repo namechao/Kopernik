@@ -8,7 +8,7 @@ import okhttp3.Response
 class EncodeInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        var token =if (UserConfig.singleton?.token==null) "" else UserConfig.singleton?.token
+        var token =if (UserConfig.singleton?.accountBean?.token==null) "" else UserConfig.singleton?.accountBean?.token
         val request = chain.request().newBuilder()
                 .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
                 .addHeader("apptype", "android")

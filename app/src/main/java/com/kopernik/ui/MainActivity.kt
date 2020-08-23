@@ -193,83 +193,83 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
         }
         else if (event.status_type.equals(LocalEvent.reLogin)) {
             //删除指纹解锁
-            if (UserConfig.singleton?.isUseFingerprint!!) {
-                FingerprintHelper.getInstance().init(getActivity())
-                FingerprintHelper.getInstance().closeAuthenticate()
-                UserConfig.singleton?.isUseFingerprint=false
-            }
-            if (reLoginDialog == null) {
-                val allAccountListStr: String? = UserConfig.singleton?.allAccount
-                var accountListBean: AccountListBean? = null
-                if (allAccountListStr != null && !allAccountListStr.isEmpty()) {
-                    accountListBean = Gson().fromJson<AccountListBean>(
-                        allAccountListStr,
-                        AccountListBean::class.java
-                    )
-                    var delAccountBean: AccountBean? = null
-                    var delBehaviorAccountBean: AccountBean? = null
-                    for (bean in accountListBean.accounts!!) {
-                        if (bean.loginAcountHash
-                                .equals(UserConfig.singleton!!.accountBean?.loginAcountHash!!)
-                        ) {
-                            delAccountBean = bean
-                            break
-                        }
-                    }
-                    for (bean in accountListBean.behaviorAccounts!!) {
-                        if (bean.loginAcountHash
-                                .equals(UserConfig.singleton!!.accountBean?.loginAcountHash)
-                        ) {
-                            delBehaviorAccountBean = bean
-                            break
-                        }
-                    }
-                    accountListBean.accounts?.remove(delAccountBean)
-                    accountListBean.behaviorAccounts?.remove(delBehaviorAccountBean)
-                    UserConfig.singleton?.allAccount=Gson().toJson(accountListBean)
-                }
-                reLoginDialog = UYTQuitAlertDialog(this)
-                    .setCancelable(false)
-                    .setTitle(getActivity()!!.getString(R.string.account_abnormal))
-                    .setMsg(
-                        java.lang.String.format(
-                            getActivity()!!.getString(R.string.account_abnormal_hint),
-                            UserConfig.singleton?.accountBean?.loginlabel
-                        )
-                    )
-                    .setButton1(
-                        getActivity()!!.getString(R.string.import_or_created_account),
-                        View.OnClickListener {
-                            val intent = intent
-                            finish()
-                            startActivity(intent)
-                            LaunchConfig.startChooseAccountAc(this)
-                        }
-                        )
-                if (accountListBean != null && accountListBean.accounts?.size!! > 0) {
-                    reLoginDialog
-                        ?.setButton2(getActivity()!!.getString(R.string.switch_account),
-                        View.OnClickListener {
-                            val intent = intent
-                            finish()
-                            startActivity(intent)
-                            LaunchConfig.startSwitchAccountAc(getActivity()!!)
-                        }
-                            )
-                        ?.setSkip(getActivity()!!.getString(R.string.user_jump),
-                        View.OnClickListener {
-                            val intent = intent
-                            finish()
-                            startActivity(intent)
-                        })
-                }
-                UserConfig.singleton?.accountString="skip"
-                UserConfig.singleton?.clear()
-                mEventBus.post(LocalEvent<Any>(LocalEvent.reloadAsset))
-                reLoginDialog?.show()
-            } else {
-                if (!reLoginDialog?.isShowing!!) reLoginDialog?.show()
-            }
+//            if (UserConfig.singleton?.isUseFingerprint!!) {
+//                FingerprintHelper.getInstance().init(getActivity())
+//                FingerprintHelper.getInstance().closeAuthenticate()
+//                UserConfig.singleton?.isUseFingerprint=false
+//            }
+//            if (reLoginDialog == null) {
+//                val allAccountListStr: String? = UserConfig.singleton?.allAccount
+//                var accountListBean: AccountListBean? = null
+//                if (allAccountListStr != null && !allAccountListStr.isEmpty()) {
+//                    accountListBean = Gson().fromJson<AccountListBean>(
+//                        allAccountListStr,
+//                        AccountListBean::class.java
+//                    )
+//                    var delAccountBean: AccountBean? = null
+//                    var delBehaviorAccountBean: AccountBean? = null
+//                    for (bean in accountListBean.accounts!!) {
+//                        if (bean.loginAcountHash
+//                                .equals(UserConfig.singleton!!.accountBean?.loginAcountHash!!)
+//                        ) {
+//                            delAccountBean = bean
+//                            break
+//                        }
+//                    }
+//                    for (bean in accountListBean.behaviorAccounts!!) {
+//                        if (bean.loginAcountHash
+//                                .equals(UserConfig.singleton!!.accountBean?.loginAcountHash)
+//                        ) {
+//                            delBehaviorAccountBean = bean
+//                            break
+//                        }
+//                    }
+//                    accountListBean.accounts?.remove(delAccountBean)
+//                    accountListBean.behaviorAccounts?.remove(delBehaviorAccountBean)
+//                    UserConfig.singleton?.allAccount=Gson().toJson(accountListBean)
+//                }
+//                reLoginDialog = UYTQuitAlertDialog(this)
+//                    .setCancelable(false)
+//                    .setTitle(getActivity()!!.getString(R.string.account_abnormal))
+//                    .setMsg(
+//                        java.lang.String.format(
+//                            getActivity()!!.getString(R.string.account_abnormal_hint),
+//                            UserConfig.singleton?.accountBean?.loginlabel
+//                        )
+//                    )
+//                    .setButton1(
+//                        getActivity()!!.getString(R.string.import_or_created_account),
+//                        View.OnClickListener {
+//                            val intent = intent
+//                            finish()
+//                            startActivity(intent)
+//                            LaunchConfig.startChooseAccountAc(this)
+//                        }
+//                        )
+//                if (accountListBean != null && accountListBean.accounts?.size!! > 0) {
+//                    reLoginDialog
+//                        ?.setButton2(getActivity()!!.getString(R.string.switch_account),
+//                        View.OnClickListener {
+//                            val intent = intent
+//                            finish()
+//                            startActivity(intent)
+//                            LaunchConfig.startSwitchAccountAc(getActivity()!!)
+//                        }
+//                            )
+//                        ?.setSkip(getActivity()!!.getString(R.string.user_jump),
+//                        View.OnClickListener {
+//                            val intent = intent
+//                            finish()
+//                            startActivity(intent)
+//                        })
+//                }
+//                UserConfig.singleton?.accountString="skip"
+//                UserConfig.singleton?.clear()
+//                mEventBus.post(LocalEvent<Any>(LocalEvent.reloadAsset))
+//                reLoginDialog?.show()
+//            } else {
+//                if (!reLoginDialog?.isShowing!!) reLoginDialog?.show()
+//            }
         }
     }
 
@@ -418,18 +418,18 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
 
     // TODO: 2019/9/8 改为 4
     private fun initAccountListForVersionCode3() {
-        if (UserConfig.singleton?.getAccount() != null &&
-            UserConfig.singleton?.allAccount==null && BuildConfig.VERSION_CODE < 5
-        ) {
-            val gson = Gson()
-            val accountListBean = AccountListBean()
-            val accounts: MutableList<AccountBean> =
-                java.util.ArrayList()
-            accounts.add( UserConfig.singleton?.getAccount()!!)
-            accountListBean.accounts=accounts
-            accountListBean.behaviorAccounts=accounts
-            UserConfig.singleton?.allAccount=gson.toJson(accountListBean)
-        }
+//        if (UserConfig.singleton?.getAccount() != null &&
+//            UserConfig.singleton?.allAccount==null && BuildConfig.VERSION_CODE < 5
+//        ) {
+//            val gson = Gson()
+//            val accountListBean = AccountListBean()
+//            val accounts: MutableList<AccountBean> =
+//                java.util.ArrayList()
+//            accounts.add( UserConfig.singleton?.getAccount()!!)
+//            accountListBean.accounts=accounts
+//            accountListBean.behaviorAccounts=accounts
+//            UserConfig.singleton?.allAccount=gson.toJson(accountListBean)
+//        }
     }
 
     private fun requestUpdateInfo() {

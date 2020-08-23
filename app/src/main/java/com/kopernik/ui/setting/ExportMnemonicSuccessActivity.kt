@@ -35,9 +35,9 @@ class ExportMnemonicSuccessActivity : NewBaseActivity<NoViewModel,ViewDataBindin
         recyclerView.setLayoutManager(flexboxLayoutManager)
 
         confirmTv.setOnClickListener(View.OnClickListener { v: View? -> finish() })
-        UserConfig.singleton?.mnemonic?.let {
-            adapter?.setNewData(it.mnemonic)
-        }
+//        UserConfig.singleton?.mnemonic?.let {
+//            adapter?.setNewData(it.mnemonic)
+//        }
 
     }
 

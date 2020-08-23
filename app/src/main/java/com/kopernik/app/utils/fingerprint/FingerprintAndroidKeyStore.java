@@ -54,7 +54,7 @@ public class FingerprintAndroidKeyStore {
     FingerprintManager.CryptoObject getCryptoObject(int purpose, byte[] IV) {
         try {
             mStore.load(null);
-            final SecretKey key = (SecretKey) mStore.getKey(UserConfig.getSingleton().getAccount().getLoginAcountHash() + keyName, null);
+            final SecretKey key = (SecretKey) mStore.getKey(  keyName, null);
             if (key == null) {
                 return null;
             }

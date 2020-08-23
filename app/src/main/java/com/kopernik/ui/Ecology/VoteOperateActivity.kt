@@ -64,14 +64,14 @@ class VoteOperateActivity : NewBaseActivity<VoteOperateViewModel,ViewDataBinding
             input2.visibility = View.GONE
             inputEt1!!.addTextChangedListener(input1TextWatcher)
         } else if (type == TURN) {
-            if (UserConfig.singleton?.getAccount()?.loginAcountHash.equals(nodeAddress)) {
-                initTvFunctionHead(
-                    getString(R.string.title_vote_turn),
-                    getString(R.string.timeline)
-                )
-            } else {
-                setTitle(getString(R.string.title_vote_turn))
-            }
+//            if (UserConfig.singleton?.getAccount()?.loginAcountHash.equals(nodeAddress)) {
+//                initTvFunctionHead(
+//                    getString(R.string.title_vote_turn),
+//                    getString(R.string.timeline)
+//                )
+//            } else {
+//                setTitle(getString(R.string.title_vote_turn))
+//            }
             requestType = "SWITCH_TO"
             inputEt1!!.hint = getString(R.string.please_input_turn_count)
             inputEt2!!.hint = getString(R.string.please_input_turn_address)

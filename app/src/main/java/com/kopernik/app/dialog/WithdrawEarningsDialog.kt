@@ -84,14 +84,7 @@ class WithdrawEarningsDialog : DialogFragment(),
             desc2?.text=it.twoLineRight
         }
 
-        //获取是否使用指纹
-        UserConfig.singleton?.isUseFingerprint?.let { useFingerprint =it  }
-        if (!useFingerprint) {
-            useFingerprintIv?.visibility = View.GONE
-            usePwTv?.visibility = View.GONE
-        } else {
-            initVerifyType(true)
-        }
+
         useFingerprintIv?.setOnClickListener(View.OnClickListener { initVerifyType(true) })
         usePwTv?.setOnClickListener(View.OnClickListener { initVerifyType(false) })
         passwordEt?.addTextChangedListener(passwordWatcher)

@@ -52,10 +52,10 @@ class ModifyNickActivity : NewBaseActivity<UpdateNickViewModel, ViewDataBinding>
         viewModel.updateNick(map).observe(this, Observer {
             if (it.status === 200) {
                 ToastUtils.showShort(getActivity(), getString(R.string.tip_change_success))
-                val accountBean: AccountBean? = UserConfig.singleton?.getAccount()
-                accountBean?.loginlabel = nickEt!!.text.toString()
-                UserConfig.singleton?.accountString = Gson().toJson(accountBean)
-                finish()
+//                val accountBean: AccountBean? = UserConfig.singleton?.getAccount()
+//                accountBean?.loginlabel = nickEt!!.text.toString()
+//                UserConfig.singleton?.accountString = Gson().toJson(accountBean)
+//                finish()
             } else {
                 ToastUtils.showShort(getActivity(), it.errorMsg)
             }

@@ -419,19 +419,6 @@ class SignatureDialog : DialogFragment(),
         }
 
         override fun afterTextChanged(s: Editable) {
-            if (UserConfig.singleton?.isUseFingerprint!!) {
-                if (!input1?.text.toString().isEmpty()) {
-                    enableBtn();
-                } else {
-                    disableBtn();
-                }
-            } else {
-                if (input1?.text.toString().isNotEmpty() && passwordEt?.text.toString().isNotEmpty()) {
-                    enableBtn();
-                } else {
-                    disableBtn();
-                }
-            }
         }
     }
     var passwordWatcher: TextWatcher = object : TextWatcher {

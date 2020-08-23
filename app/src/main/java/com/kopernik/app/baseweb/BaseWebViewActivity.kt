@@ -109,9 +109,6 @@ abstract class BaseWebViewActivity<T:BaseViewModel,U:ViewDataBinding> : NewBaseA
         skinName = "glob"
 //        }
         var `val` = ""
-        singleton?.token?.let {
-            `val` =  it
-        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             mBridgeWebView?.evaluateJavascript(

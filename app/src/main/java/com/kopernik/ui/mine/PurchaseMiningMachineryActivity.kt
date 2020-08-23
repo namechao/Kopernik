@@ -8,11 +8,9 @@ import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aleyn.mvvm.base.NoViewModel
-import com.kopernik.BuildConfig
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.dialog.PurchaseDialog
-import com.kopernik.app.dialog.UDMTDialog
 import com.kopernik.ui.mine.adapter.OutTimeMiningMAdapter
 import com.kopernik.ui.mine.adapter.PurchaseMiningMAdapter
 import com.kopernik.ui.mine.adapter.RuntimeMiningMAdapter

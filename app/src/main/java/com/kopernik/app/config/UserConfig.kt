@@ -3,7 +3,7 @@ package com.kopernik.app.config
 import com.google.gson.Gson
 import com.tencent.mmkv.MMKV
 import com.kopernik.ui.login.bean.AccountBean
-import com.kopernik.ui.login.bean.Mnemonic
+import com.kopernik.ui.login.bean.User
 import java.util.*
 
 class UserConfig {
@@ -20,7 +20,6 @@ class UserConfig {
     private val TAG_ALL_ACCOUNT = "all_account"
     private val TAG_MNEMONIC = "mnemonic"
     private val systemLocal = Locale.SIMPLIFIED_CHINESE
-    var accountBean: AccountBean? =null
     var masterUrl: String?
         get() = MMKV.defaultMMKV().decodeString(TAG_MASTER_URL, "http://www.baidu.com")
         set(master) {
@@ -69,17 +68,6 @@ class UserConfig {
             MMKV.defaultMMKV().encode(TAG_RELOAD_TRAD_WEB, b)
         }
 
-    var isUseFingerprint: Boolean
-        get() = MMKV.defaultMMKV().decodeBool(
-            accountBean?.loginAcountHash
-                .toString() + TAG_USE_FINGERPRINT, false
-        )
-        set(b) {
-            MMKV.defaultMMKV().encode(
-               UserConfig.singleton?.accountBean?.loginAcountHash
-                    .toString() + TAG_USE_FINGERPRINT, b
-            )
-        }
 
     var noticeId: Int
         get() = MMKV.defaultMMKV().decodeInt(TAG_NOTICE, -1)
@@ -93,42 +81,20 @@ class UserConfig {
             MMKV.defaultMMKV().encode(TAG_ALL_ACCOUNT, data)
         }
 
-    var  token:String? = null
-        get(){
-      if (accountBean==null) {
-          val json=accountString
-          if (json!!.isNotEmpty() &&json!="skip"){
-              val mGson = Gson()
-              accountBean = mGson.fromJson<AccountBean>(json, AccountBean::class.java)
-          }
-      }
-      return accountBean?.token
-    }
-    var mnemonic:Mnemonic?
+    var accountBean:User?
        set(value) {
-           MMKV.defaultMMKV().remove(TAG_MNEMONIC)
-           MMKV.defaultMMKV().encode(TAG_MNEMONIC, Gson().toJson(value))
+           MMKV.defaultMMKV().remove(TAG_ACCOUNT)
+           MMKV.defaultMMKV().encode(TAG_ACCOUNT, Gson().toJson(value))
        }
        get() {
-          var mnemonivStr= MMKV.defaultMMKV().decodeString(TAG_MNEMONIC, "")
-           var mnemonic:Mnemonic?=null
-           if (mnemonivStr.isNotEmpty()) {
-               mnemonic = Gson().fromJson<Mnemonic>(mnemonivStr, Mnemonic::class.java)
+          var accountString= MMKV.defaultMMKV().decodeString(TAG_MNEMONIC, "")
+           var accountBean:User?=null
+           if (accountString.isNotEmpty()) {
+               accountBean = Gson().fromJson<User>(accountString, User::class.java)
            }
-          return mnemonic
+          return accountBean
        }
 
-      fun getAccount():AccountBean?{
-          if (accountBean==null) {
-              accountString?.let {
-                  if (it.isNotEmpty() && it != "skip") {
-                      val gson = Gson()
-                      accountBean = gson.fromJson<AccountBean>(it, AccountBean::class.java)
-                  }
-              }
-          }
-          return accountBean
-      }
     fun clear(){
         if (accountBean!=null) {
             accountBean = null

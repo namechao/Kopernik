@@ -87,17 +87,17 @@ class AssetTransformActivty : NewBaseActivity<NoViewModel,ViewDataBinding>() {
     }
 
     private fun confirmExtracted() {
-        UserConfig.singleton?.mnemonic?.mnemonic?.let { list ->
-            val sb = StringBuilder()
-            for (i in list.indices) {
-                sb.append(list[i]).append(" ")
-            }
-            webview?.evaluateJavascript(
-                "widthdrawlCoin($chainType,'${sb.toString().trim()}','1000000000000')"
-            ) {
-
-            }
-        }
+//        UserConfig.singleton?.mnemonic?.mnemonic?.let { list ->
+//            val sb = StringBuilder()
+//            for (i in list.indices) {
+//                sb.append(list[i]).append(" ")
+//            }
+//            webview?.evaluateJavascript(
+//                "widthdrawlCoin($chainType,'${sb.toString().trim()}','1000000000000')"
+//            ) {
+//
+//            }
+//        }
 
 
     }

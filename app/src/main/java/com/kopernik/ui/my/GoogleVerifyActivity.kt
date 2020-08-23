@@ -6,11 +6,11 @@ import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
 
-import com.kopernik.ui.login.viewmodel.CreateAccountViewModel
+import com.kopernik.ui.login.viewmodel.RegisterViewModel
 
 import kotlinx.android.synthetic.main.activity_google_verify.*
 
-class GoogleVerifyActivity : NewBaseActivity<CreateAccountViewModel, ViewDataBinding>() {
+class GoogleVerifyActivity : NewBaseActivity<RegisterViewModel, ViewDataBinding>() {
 
 
     override fun layoutId()=R.layout.activity_google_verify

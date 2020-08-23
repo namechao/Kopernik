@@ -5,10 +5,10 @@ import androidx.databinding.ViewDataBinding
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
-import com.kopernik.ui.login.viewmodel.CreateAccountViewModel
+import com.kopernik.ui.login.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.activity_forget_password.*
 
-class GoogleVerifiedActivity : NewBaseActivity<CreateAccountViewModel, ViewDataBinding>() {
+class GoogleVerifiedActivity : NewBaseActivity<RegisterViewModel, ViewDataBinding>() {
 
 
     override fun layoutId()=R.layout.activity_google_verified

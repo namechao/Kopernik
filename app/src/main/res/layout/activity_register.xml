@@ -43,35 +43,41 @@
         android:layout_marginLeft="@dimen/dp_30"
         android:orientation="horizontal">
         <LinearLayout
+            android:id="@+id/llPhoneRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tvPhoneRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_16"
                 android:text="@string/re_phone"
-                android:textColor="@color/white"/>
+                android:textColor="@color/color_ffcf32"/>
             <View
+                android:id="@+id/tvPhoneRegisterLine"
                 android:layout_width="20dp"
                 android:layout_height="2dp"
                 android:layout_marginTop="@dimen/dp_4"
-                android:background="@color/white"/>
+                android:background="@color/color_ffcf32"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/llEmailRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:gravity="center"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tvEmailRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_16"
                 android:text="@string/re_email"
                 android:textColor="@color/white"/>
             <View
+                android:id="@+id/tvEmailRegisterLine"
                 android:layout_width="20dp"
                 android:layout_height="2dp"
                 android:layout_marginTop="@dimen/dp_4"
@@ -85,11 +91,16 @@
         android:layout_marginRight="@dimen/dp_30"
         android:layout_marginTop="@dimen/dp_15"
         >
+        <LinearLayout
+            android:id="@+id/llHeader"
+            android:layout_width="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/tvPhoneHead"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_17"
@@ -97,17 +108,17 @@
             android:paddingTop="@dimen/dp_10"
             android:paddingBottom="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
+            android:drawablePadding="@dimen/dp_10"
+            android:drawableRight="@mipmap/ic_china"
             android:text="+86"/>
-        <View
-            app:layout_constraintTop_toTopOf="@id/tvPhoneHead"
-            app:layout_constraintBottom_toBottomOf="@id/tvPhoneHead"
-            app:layout_constraintLeft_toRightOf="@id/tvPhoneHead"
-            android:layout_marginRight="@dimen/dp_15"
+        <ImageView
+            android:layout_marginRight="@dimen/dp_10"
             app:layout_constraintRight_toLeftOf="@+id/etInput"
             android:id="@+id/line"
-            android:layout_width="1dp"
-            android:layout_height="16dp"
-            android:background="@color/color_E9E9E9"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          android:src="@mipmap/ic_arrow_bottom"/>
+        </LinearLayout>
         <EditText
             android:id="@+id/etInput"
             android:layout_width="0dp"
@@ -116,7 +127,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/icClear"
             android:textColor="@color/white"
-            app:layout_constraintLeft_toRightOf="@+id/line"
+            app:layout_constraintLeft_toRightOf="@+id/llHeader"
             android:hint="@string/login_input_phone_hint"
             android:inputType="phone"
             android:textCursorDrawable="@null"
@@ -147,6 +158,7 @@
         android:layout_marginTop="@dimen/dp_15"
         >
         <EditText
+            android:id="@+id/verifyCode"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_46"
             app:layout_constraintTop_toTopOf="parent"
@@ -155,6 +167,7 @@
             android:textColor="@color/white"
             app:layout_constraintLeft_toLeftOf="parent"
             android:hint="@string/re_input_code"
+            android:maxLength="6"
             android:textColorHint="@color/color_665F93"
             android:textCursorDrawable="@null"
             android:background="@null"
@@ -187,6 +200,7 @@
         android:layout_marginTop="@dimen/dp_15"
         >
         <EditText
+            android:id="@+id/etInviteCode"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_46"
             app:layout_constraintTop_toTopOf="parent"
@@ -198,7 +212,7 @@
             android:textColorHint="@color/color_665F93"
             android:textCursorDrawable="@null"
             android:background="@null"
-            android:inputType="number"
+            android:inputType="text"
             android:textSize="@dimen/sp_17"/>
 
         <View
@@ -239,9 +253,14 @@
             android:textSize="@dimen/sp_12"
             android:text="@string/login_agreement"/>
     </LinearLayout>
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_marginTop="@dimen/dp_26"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
     <SeekBar
         android:id="@+id/sbProgress"
-        android:layout_marginTop="@dimen/dp_26"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="100"
@@ -253,4 +272,43 @@
         android:thumb="@drawable/bg_seekbar_thumb"
         android:thumbOffset="-1dp"
         />
+
+       <TextView
+           android:id="@+id/tvSeekBar"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:text="@string/tv_slide_verify"
+           android:textColor="@color/color_FFA29C"
+           android:textSize="@dimen/sp_15"
+           android:textStyle="bold"
+           app:layout_constraintBottom_toBottomOf="@+id/sbProgress"
+           app:layout_constraintEnd_toEndOf="@+id/sbProgress"
+           app:layout_constraintStart_toStartOf="@+id/sbProgress"
+           app:layout_constraintTop_toTopOf="@+id/sbProgress" />
+       <TextView
+           android:id="@+id/tvVerifySu"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:text="@string/tv_verify_suceess"
+           android:textStyle="bold"
+           android:visibility="gone"
+           android:textColor="@color/color_2B2147"
+           android:textSize="@dimen/sp_15"
+           app:layout_constraintBottom_toBottomOf="@+id/sbProgress"
+           app:layout_constraintEnd_toEndOf="@+id/sbProgress"
+           app:layout_constraintStart_toStartOf="@+id/sbProgress"
+           app:layout_constraintTop_toTopOf="@+id/sbProgress" />
+       <ImageView
+           android:visibility="gone"
+           android:id="@+id/ivVerifySucess"
+           android:layout_width="@dimen/dp_18"
+           android:layout_height="@dimen/dp_18"
+           android:src="@mipmap/ic_seek_fill"
+           android:layout_marginRight="@dimen/dp_50"
+           app:layout_constraintBottom_toBottomOf="@+id/sbProgress"
+           app:layout_constraintEnd_toEndOf="@+id/sbProgress"
+           app:layout_constraintTop_toTopOf="@+id/sbProgress" />
+   </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

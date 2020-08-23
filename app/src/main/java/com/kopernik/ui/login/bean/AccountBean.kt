@@ -16,16 +16,23 @@ import java.io.Serializable
  * @Version:        1.0
  */
 data class AccountBean(
-    val loginAcountHash: String = "",
-    var loginlabel: String = "",
-    val nodeHash: String,
-    val token: String,
-    val imgUrl: String
+    val user: User
 )
 
-data class Mnemonic(
-    val mnemonic: List<String>,
-    val address: String,
-    val publicKey: String,
-    val seed: String
-) : Serializable
+data class User(
+    val createTime: Long,
+    val email: Any,
+    val ggPwd: Any,
+    val id: Int,
+    val idCard: Any,
+    val invitationCode: String,
+    val level: Int,
+    val loginPwd: String,
+    val memo: String,
+    val name: Any,
+    val parentUid: Int,
+    val phone: String,
+    val salePwd: Any,
+    val token: String,
+    val uid: Int
+)

@@ -17,12 +17,12 @@ public class FingerprintSharedPreference {
     }
 
     String getData(String keyName) {
-        return preferences.getString(UserConfig.getSingleton().getAccount().getLoginAcountHash() + keyName, "");
+        return preferences.getString("UserConfig.getSingleton().getAccount().getLoginAcountHash() + keyName", "");
     }
 
     boolean storeData(String key, String data) {
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(UserConfig.getSingleton().getAccount().getLoginAcountHash() + key, data);
+//        editor.putString(UserConfig.getSingleton().getAccount().getLoginAcountHash() + key, data);
         return editor.commit();
     }
 }

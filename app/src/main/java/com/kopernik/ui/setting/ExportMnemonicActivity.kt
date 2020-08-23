@@ -61,11 +61,11 @@ class ExportMnemonicActivity : NewBaseActivity<ExportMnemonicViewModel,ViewDataB
                 Observer {
                     if (it.status==200) {
                         if (it.data.toString().equals("true")) {
-                            UserConfig.singleton?.mnemonic?.let {
-                                LaunchConfig.startExportMnemonicSuccessAc(
-                                    this@ExportMnemonicActivity
-                                )
-                            }
+//                            UserConfig.singleton?.mnemonic?.let {
+//                                LaunchConfig.startExportMnemonicSuccessAc(
+//                                    this@ExportMnemonicActivity
+//                                )
+//                            }
 
                         finish()
                         } else {

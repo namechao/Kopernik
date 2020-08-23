@@ -1,17 +1,16 @@
 package com.kopernik.ui.my
 
 import android.os.Bundle
-import android.widget.LinearLayout
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
-import com.kopernik.ui.login.viewmodel.CreateAccountViewModel
+import com.kopernik.ui.login.viewmodel.RegisterViewModel
 import com.kopernik.ui.my.adapter.InviteFriendsAdapter
 import kotlinx.android.synthetic.main.activity_invite_friends.*
 
-class InviteFriendsActivity : NewBaseActivity<CreateAccountViewModel, ViewDataBinding>() {
+class InviteFriendsActivity : NewBaseActivity<RegisterViewModel, ViewDataBinding>() {
 
 
     override fun layoutId()=R.layout.activity_invite_friends

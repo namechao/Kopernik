@@ -62,11 +62,11 @@ class SwitchAccountActivity : NewBaseActivity<NoViewModel,ViewDataBinding>() {
             if (view.id == R.id.account_name_spt) {
                 val accountBeans: List<AccountBean> = adapter.data as List<AccountBean>
                 val item: AccountBean = accountBeans[position]
-                if (UserConfig.singleton?.accountBean != null &&
-                    item.loginAcountHash == UserConfig.singleton?.accountBean?.loginAcountHash
-                ) {
+//                if (UserConfig.singleton?.accountBean != null &&
+//                    item.loginAcountHash == UserConfig.singleton?.accountBean?.loginAcountHash
+//                ) {
                     return@OnItemChildClickListener
-                }
+//                }
                 showLoading()
                 //设置当前使用的账户
                 UserConfig.singleton?.accountString=gson.toJson(item)
@@ -74,17 +74,17 @@ class SwitchAccountActivity : NewBaseActivity<NoViewModel,ViewDataBinding>() {
                 var lastAccountBean: AccountBean? = null
                 var currentAccountBean: AccountBean? = null
                 for (i in 0 until accountListBean?.behaviorAccounts?.size!!) {
-                    if (accountListBean?.behaviorAccounts?.get(i)?.loginAcountHash
-                            .equals(item.loginAcountHash)
-                    ) {
-                        currentAccountBean = accountListBean?.behaviorAccounts?.get(i)
-                    }
-                    if (accountListBean?.behaviorAccounts?.get(i)?.loginAcountHash
-                            .equals(UserConfig.singleton?.accountBean?.loginAcountHash)
-                    ) {
-                        lastAccountBean = accountListBean?.behaviorAccounts?.get(i)
-                    }
-                    if (lastAccountBean != null && currentAccountBean != null) break
+//                    if (accountListBean?.behaviorAccounts?.get(i)?.loginAcountHash
+//                            .equals(item.loginAcountHash)
+//                    ) {
+//                        currentAccountBean = accountListBean?.behaviorAccounts?.get(i)
+//                    }
+//                    if (accountListBean?.behaviorAccounts?.get(i)?.loginAcountHash
+//                            .equals(UserConfig.singleton?.accountBean?.loginAcountHash)
+//                    ) {
+//                        lastAccountBean = accountListBean?.behaviorAccounts?.get(i)
+//                    }
+//                    if (lastAccountBean != null && currentAccountBean != null) break
                 }
                 accountListBean?.behaviorAccounts?.remove(currentAccountBean)
                 accountListBean?.behaviorAccounts?.remove(lastAccountBean)
@@ -118,27 +118,27 @@ class SwitchAccountActivity : NewBaseActivity<NoViewModel,ViewDataBinding>() {
     inner class AccountAdapter(accountListBean: AccountListBean?, context: Context) :
         BaseQuickAdapter<AccountBean, BaseViewHolder>(R.layout.item_account) {
         override fun convert(helper: BaseViewHolder, item: AccountBean) {
-            val accountName: SuperTextView = helper.getView(R.id.account_name_spt)
-            accountName.setLeftString(item.loginlabel)
-            val currentAccount: AccountBean? = UserConfig.singleton?.accountBean
-            if (currentAccount == null) {
-                accountName.rightIconIV.visibility = View.INVISIBLE
-                val lastAccountHash: String ?=
-                    accountListBean?.behaviorAccounts?.get(0)?.loginAcountHash
-                if (item.loginAcountHash == lastAccountHash) {
-                    accountName.setRightString(this@SwitchAccountActivity.getString(R.string.last_use))
-                        .useShape()
-                } else {
-                    accountName.setRightString("").useShape()
-                }
-            } else {
-                accountName.setRightString("").useShape()
-                if (item.loginAcountHash == currentAccount.loginAcountHash) {
-                    accountName.rightIconIV.visibility = View.VISIBLE
-                } else {
-                    accountName.rightIconIV.visibility = View.GONE
-                }
-            }
+//            val accountName: SuperTextView = helper.getView(R.id.account_name_spt)
+//            accountName.setLeftString(item.loginlabel)
+//            val currentAccount: AccountBean? = UserConfig.singleton?.accountBean
+//            if (currentAccount == null) {
+//                accountName.rightIconIV.visibility = View.INVISIBLE
+//                val lastAccountHash: String ?=
+//                    accountListBean?.behaviorAccounts?.get(0)?.loginAcountHash
+//                if (item.loginAcountHash == lastAccountHash) {
+//                    accountName.setRightString(this@SwitchAccountActivity.getString(R.string.last_use))
+//                        .useShape()
+//                } else {
+//                    accountName.setRightString("").useShape()
+//                }
+//            } else {
+//                accountName.setRightString("").useShape()
+//                if (item.loginAcountHash == currentAccount.loginAcountHash) {
+//                    accountName.rightIconIV.visibility = View.VISIBLE
+//                } else {
+//                    accountName.rightIconIV.visibility = View.GONE
+//                }
+//            }
             helper.addOnClickListener(R.id.account_name_spt)
         }
     }

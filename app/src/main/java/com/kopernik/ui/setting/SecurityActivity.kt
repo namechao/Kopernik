@@ -37,7 +37,7 @@ class SecurityActivity : NewBaseActivity<NoViewModel,ViewDataBinding>(),
         exportWordsSpt.setOnClickListener({ v -> LaunchConfig.startExportMnemonicAc(this) })
 
         fingerprintCb = fingerprintSpt.getCheckBox()
-        UserConfig.singleton?.isUseFingerprint?.let { fingerprintCb?.setChecked(it) }
+//        UserConfig.singleton?.isUseFingerprint?.let { fingerprintCb?.setChecked(it) }
         //0 支持指纹但是没有录入指纹； 1：有可用指纹； -1，手机不支持指纹
         FingerprintHelper.getInstance().init(getActivity())
         if (UserConfig.singleton?.accountBean == null ||
@@ -51,7 +51,7 @@ class SecurityActivity : NewBaseActivity<NoViewModel,ViewDataBinding>(),
     @RequiresApi(Build.VERSION_CODES.M)
     var useFingerprint =
         View.OnClickListener {
-            fingerprintCb!!.isChecked = UserConfig.singleton?.isUseFingerprint!!
+//            fingerprintCb!!.isChecked = UserConfig.singleton?.isUseFingerprint!!
             if (FingerprintHelper.getInstance()
                     .checkFingerprintAvailable(getActivity()) == 0
             ) {
@@ -62,29 +62,29 @@ class SecurityActivity : NewBaseActivity<NoViewModel,ViewDataBinding>(),
                     .show()
                 return@OnClickListener
             }
-            if (!UserConfig.singleton?.isUseFingerprint!!) {
-                LaunchConfig.startVerifyPwAcForResult(this, 100)
-            } else {
-                UYTAlertDialog(this)
-                    .setTitle(getString(R.string.hint))
-                    .setMsg(getString(R.string.close_fingerprint_notice))
-                    .setNegativeButton(getString(R.string.cancel), null)
-                    .setPositiveButton(
-                        getString(R.string.not_in_service),
-                        object : OnClickFastListener() {
-                            override fun onFastClick(v: View?) {
-                                FingerprintHelper.getInstance().init(this@SecurityActivity)
-                                FingerprintHelper.getInstance().closeAuthenticate()
-                                UserConfig.singleton?.isUseFingerprint=false
-                                fingerprintCb!!.isChecked = false
-                                ToastUtils.showShort(
-                                    getActivity(),
-                                    getString(R.string.stop_success)
-                                )
-                            }
-                        })
-                    .show()
-            }
+//            if (!UserConfig.singleton?.isUseFingerprint!!) {
+//                LaunchConfig.startVerifyPwAcForResult(this, 100)
+//            } else {
+//                UYTAlertDialog(this)
+//                    .setTitle(getString(R.string.hint))
+//                    .setMsg(getString(R.string.close_fingerprint_notice))
+//                    .setNegativeButton(getString(R.string.cancel), null)
+//                    .setPositiveButton(
+//                        getString(R.string.not_in_service),
+//                        object : OnClickFastListener() {
+//                            override fun onFastClick(v: View?) {
+//                                FingerprintHelper.getInstance().init(this@SecurityActivity)
+//                                FingerprintHelper.getInstance().closeAuthenticate()
+//                                UserConfig.singleton?.isUseFingerprint=false
+//                                fingerprintCb!!.isChecked = false
+//                                ToastUtils.showShort(
+//                                    getActivity(),
+//                                    getString(R.string.stop_success)
+//                                )
+//                            }
+//                        })
+//                    .show()
+//            }
         }
 
     override fun initData() {
@@ -92,7 +92,7 @@ class SecurityActivity : NewBaseActivity<NoViewModel,ViewDataBinding>(),
     }
     override fun onResume() {
         super.onResume()
-        fingerprintCb!!.isChecked = UserConfig.singleton?.isUseFingerprint!!
+//        fingerprintCb!!.isChecked = UserConfig.singleton?.isUseFingerprint!!
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -114,7 +114,7 @@ class SecurityActivity : NewBaseActivity<NoViewModel,ViewDataBinding>(),
 
    override fun onAuthenticationSucceeded(purpose: Int, value: String) {
         if (purpose == KeyProperties.PURPOSE_ENCRYPT) {
-            UserConfig.singleton?.isUseFingerprint=true
+//            UserConfig.singleton?.isUseFingerprint=true
             fingerprintCb!!.isChecked = true
             ToastUtils.showShort(getActivity(), getString(R.string.use_fingerprint_success))
         }

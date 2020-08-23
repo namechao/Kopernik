@@ -86,11 +86,11 @@ class ChooseNodeLogoActivity : NewBaseActivity<ChooseNodeLogoViewModel, ViewData
                     logoDatas = it.data
                     if (it.data != null && it.data.isNotEmpty()) {
                         for (i in it.data.indices) {
-                            if (it.data[i].img
-                                    .equals(UserConfig.singleton?.accountBean?.imgUrl)
-                            ) {
-                                choosePosition = i
-                            }
+//                            if (it.data[i].img
+//                                    .equals(UserConfig.singleton?.accountBean?.imgUrl)
+//                            ) {
+//                                choosePosition = i
+//                            }
                         }
                         adapter?.setNewData(logoDatas)
                     }

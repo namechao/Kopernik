@@ -130,23 +130,7 @@ abstract class BaseWebViewFragment<T : BaseViewModel, U : ViewDataBinding>() : B
 //        if (!StringUtils.isEmpty(SkinPreference.getInstance().getSkinName())) {
             skinName = "glob"
 //        }
-        var token = ""
-             singleton?.token?.let {
-                 token =  it
-            }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mBridgeWebView?.evaluateJavascript(
-                    "window.localSorage.setItem('$key','$token');",
-                    null
-                )
-            mBridgeWebView?.evaluateJavascript("window.localStorage.setItem('locale','$local');", null)
-            mBridgeWebView?.evaluateJavascript("window.localStorage.setItem('skin','$skinName');", null)
-        } else {
-            mBridgeWebView?.loadUrl("javascript:(function({window.localStorage.setItem('$key','$token')})()")
-            mBridgeWebView?.loadUrl("javascript:(function({window.localStorage.setItem('locale','$local')})()")
-            mBridgeWebView?.loadUrl("javascript:(function({window.localStorage.setItem('skin','$skinName')})()")
-        }
     }
     //对返回按键做处理
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

@@ -10,19 +10,22 @@ import androidx.annotation.Nullable;
 
 import com.kopernik.R;
 import com.kopernik.app.widget.library.IViewProvider;
+import com.kopernik.ui.login.bean.LoginCountryBean;
 
 
-public class DefaultItemViewProvider implements IViewProvider<String> {
+public class DefaultItemViewProvider implements IViewProvider<LoginCountryBean> {
     @Override
     public int resLayout() {
         return R.layout.scroll_picker_default_item_layout;
     }
 
     @Override
-    public void onBindView(@NonNull View view, @Nullable String text) {
+    public void onBindView(@NonNull View view, @Nullable LoginCountryBean bean) {
         TextView tv = view.findViewById(R.id.tv_content);
-        tv.setText(text);
-        view.setTag(text);
+        TextView iv = view.findViewById(R.id.iv_content);
+        iv.setBackgroundResource(bean.getResId());
+        tv.setText(bean.getHeader());
+        view.setTag(bean.getHeader());
         tv.setTextSize(18);
     }
 

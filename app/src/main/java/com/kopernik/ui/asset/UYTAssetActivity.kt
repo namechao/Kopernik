@@ -145,7 +145,7 @@ class UYTAssetActivity : NewFullScreenBaseActivity<AssetDetailsViewModel, ViewDa
     }
     //确定提取接口
     fun extract() {
-        if (UserConfig.singleton?.getAccount()==null) return
+//        if (UserConfig.singleton?.getAccount()==null) return
         viewModel.getGains("UYT").observe(this, Observer {
             if (it.status==200){
                 ToastUtils.showShort(this, getString(R.string.extracted_successfully))

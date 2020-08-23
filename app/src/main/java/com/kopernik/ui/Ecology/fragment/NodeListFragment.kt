@@ -80,7 +80,7 @@ class NodeListFragment : NewBaseFragment<NodeListViewModel, ViewDataBinding>(),
         smartRefreshLayout.autoRefresh()
         adapter?.setOnItemChildClickListener { adapter, view, position ->
             if (view.id === R.id.node_vote_spb) {
-                if (UserConfig.singleton?.getAccount() == null) return@setOnItemChildClickListener
+//                if (UserConfig.singleton?.getAccount() == null) return@setOnItemChildClickListener
                 val bean: NodeBean.DatasBean = adapter.data[position] as NodeBean.DatasBean
                 LaunchConfig.startVoteBetAc(activity!!, VoteBetActivity.VOTE, bean.nodeHash)
             }
@@ -116,7 +116,7 @@ class NodeListFragment : NewBaseFragment<NodeListViewModel, ViewDataBinding>(),
             "pageNumber" to pagerNumber.toString()
         )
         if (UserConfig.singleton?.accountBean != null) {
-            UserConfig.singleton?.token?.let { map.put("token", it) }
+//            UserConfig.singleton?.token?.let { map.put("token", it) }
         }
         viewModel.run {
             getNodeList(url, map).observe(this@NodeListFragment, Observer {
