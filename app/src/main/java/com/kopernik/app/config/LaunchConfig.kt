@@ -19,7 +19,8 @@ object LaunchConfig {
     fun startMainAc(context: Context) {
         val intent =
             Intent(context, MainActivity::class.java)
-        context.startActivity(intent)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+          context.startActivity(intent)
     }
     //进选择账户
     fun startChooseAccountAc(context: Context) {
@@ -28,16 +29,20 @@ object LaunchConfig {
         context.startActivity(intent)
     }
 
-    fun startForgetPasswordNextActivity(context: Context) {
+    fun startForgetPasswordNextActivity(context: Activity ,registerType: Int,changePasswordType:Int,account:String) {
         val intent =
             Intent(context, ForgetPasswordNextActivity::class.java)
-        context.startActivity(intent)
+        intent.putExtra("registerType",registerType)
+        intent.putExtra("account",account)
+        intent.putExtra("changePasswordType",changePasswordType)
+        context.startActivityForResult(intent,10)
     }
 
-    fun startTradePasswordNextActivity(context: Context) {
+    fun startTradePasswordNextActivity(context: Activity,changeTradePasswordType:Int) {
         val intent =
             Intent(context, ForgetTradePasswordNextActivity::class.java)
-        context.startActivity(intent)
+            intent.putExtra("changeTradePasswordType",changeTradePasswordType)
+        context.startActivityForResult(intent,13)
     }
    fun startGoogleVerifyFirstStepActivity(context: Context) {
         val intent =
@@ -65,9 +70,11 @@ object LaunchConfig {
         context.startActivity(intent)
     }
 
-    fun startTradePasswordActivity(context: Context) {
+    fun startTradePasswordActivity(context: Context,registerType:Int,changeTradePasswordType:Int) {
         val intent =
             Intent(context, ForgetTradePasswordActivity::class.java)
+        intent.putExtra("changeTradePasswordType",changeTradePasswordType)
+        intent.putExtra("registerType",registerType)
         context.startActivity(intent)
     }
 
@@ -80,20 +87,24 @@ object LaunchConfig {
     }
 
     fun startRegisterSetUpPasswordActivity(
-        context: Context,type:String,acount:String,invitationCode:String
+        context: Activity,type:String,acount:String,invitationCode:String
     ) {
         val intent = Intent(context, RegisterSetUpPasswordActivity::class.java)
         intent.putExtra("type",type)
         intent.putExtra("acount",acount)
         intent.putExtra("invitationCode",invitationCode)
-        context.startActivity(intent)
+        context.startActivityForResult(intent,12)
     }
 
     fun startForgetPasswordActivity(
-        context: Context
+        context: Context,
+        registerType:Int,changePasswordType:Int
     ) {
         val intent =
             Intent(context, ForgetPasswordActivity::class.java)
+           intent.putExtra("registerType",registerType)
+           intent.putExtra("changePasswordType",changePasswordType)
+
         context.startActivity(intent)
     }
 

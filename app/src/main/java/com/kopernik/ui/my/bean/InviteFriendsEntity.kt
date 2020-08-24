@@ -1,32 +1,34 @@
-package com.kopernik.ui.login.bean
-
-import java.io.Serializable
+package com.kopernik.ui.my.bean
 
 /**
  *
- * @ProjectName:    UYT
- * @Package:        com.kopernik.ui.login.bean
- * @ClassName:      Account
+ * @ProjectName:    Kopernik
+ * @Package:        com.kopernik.ui.my.bean
+ * @ClassName:      InviteFriendsEntity
  * @Description:     java类作用描述
  * @Author:         zhanglichao
- * @CreateDate:     2020/7/10 3:06 PM
+ * @CreateDate:     2020/8/24 4:01 PM
  * @UpdateUser:     更新者
- * @UpdateDate:     2020/7/10 3:06 PM
+ * @UpdateDate:     2020/8/24 4:01 PM
  * @UpdateRemark:   更新说明
  * @Version:        1.0
  */
-data class AccountBean(
-    val user: User
+data class InviteFriendsEntity(
+    val datas: List<InviteFriendsItem>,
+    val pageNum: Int,
+    val pageSize: Int,
+    val pages: Int,
+    val total: Int
 )
 
-data class User(
+data class InviteFriendsItem(
     val createTime: String,
     val email: String,
     val ggPwd: String,
     val id: String,
     val idCard: String,
     val invitationCode: String,
-    val level: String,
+    val level: Int,
     val loginPwd: String,
     val memo: String,
     val name: String,

@@ -10,18 +10,26 @@ import android.widget.EditText
 import androidx.databinding.ViewDataBinding
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
+import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.viewmodel.RegisterSetUpPasswordViewModel
 import dev.utils.common.encrypt.MD5Utils
+import kotlinx.android.synthetic.main.activity_forget_password_next.*
 import kotlinx.android.synthetic.main.activity_set_up_password.*
 import kotlinx.android.synthetic.main.activity_set_up_password.confirmBtn
+import kotlinx.android.synthetic.main.activity_set_up_password.etInput
+import kotlinx.android.synthetic.main.activity_set_up_password.etInputAgain
+import kotlinx.android.synthetic.main.activity_set_up_password.icClear
+import kotlinx.android.synthetic.main.activity_set_up_password.icClear1
+import kotlinx.android.synthetic.main.activity_set_up_password.icEye
+import kotlinx.android.synthetic.main.activity_set_up_password.icEye1
 import java.util.*
 
 class RegisterSetUpPasswordActivity :
     NewBaseActivity<RegisterSetUpPasswordViewModel, ViewDataBinding>() {
-    private var type=""
+    private var type=-1
     private var acount=""
     private var invitationCode=""
     private var openEye=false
@@ -29,7 +37,7 @@ class RegisterSetUpPasswordActivity :
     override fun layoutId() = R.layout.activity_set_up_password
     override fun initView(savedInstanceState: Bundle?) {
         setTitle(getString(R.string.title_set_password))
-        intent.getStringExtra("type")?.let {
+        intent.getIntExtra("type",-1)?.let {
            type =it
         }
         intent.getStringExtra("acount")?.let {
@@ -62,23 +70,31 @@ class RegisterSetUpPasswordActivity :
         icEye.setOnClickListener {
             if (!openEye){//开眼逻辑
                 //从密码不可见模式变为密码可见模式
-                etInput.transformationMethod = HideReturnsTransformationMethod.getInstance();
-                icEye.setBackgroundResource(R.mipmap.ic_open_eye)
+                etInput.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                openEye = true
+                etInput.setSelection(etInput.text.toString().length)
+                icEye.setImageResource(R.mipmap.ic_open_eye)
             }else{//闭眼逻辑
                 //从密码可见模式变为密码不可见模式
-                etInput.transformationMethod = PasswordTransformationMethod.getInstance();
-                icEye.setBackgroundResource(R.mipmap.ic_close_eye)
+                etInput.transformationMethod = PasswordTransformationMethod.getInstance()
+                openEye = false
+                etInput.setSelection(etInput.text.toString().length)
+                icEye.setImageResource(R.mipmap.ic_close_eye)
             }
         }
         icEye1.setOnClickListener {
             if (!openEye1){//开眼逻辑
                 //从密码不可见模式变为密码可见模式
-                etInputAgain.transformationMethod = HideReturnsTransformationMethod.getInstance();
-                icEye1.setBackgroundResource(R.mipmap.ic_open_eye)
+                etInputAgain.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                openEye1 = true
+                etInputAgain.setSelection(etInputAgain.text.toString().length)
+                icEye1.setImageResource(R.mipmap.ic_open_eye)
             }else{//闭眼逻辑
                 //从密码可见模式变为密码不可见模式
-                etInputAgain.transformationMethod = PasswordTransformationMethod.getInstance();
-                icEye1.setBackgroundResource(R.mipmap.ic_close_eye)
+                etInputAgain.transformationMethod = PasswordTransformationMethod.getInstance()
+                openEye1 = false
+                etInputAgain.setSelection(etInputAgain.text.toString().length)
+                icEye1.setImageResource(R.mipmap.ic_close_eye)
             }
         }
     }
@@ -102,11 +118,11 @@ class RegisterSetUpPasswordActivity :
     //导入网络请求
     private fun register() {
         viewModel.run {
-            createAccount(type,acount,invitationCode,MD5Utils.md5(etInput?.text.toString().trim())).observe(this@RegisterSetUpPasswordActivity, androidx.lifecycle.Observer {
+            createAccount(type.toString(),acount,invitationCode,MD5Utils.md5(etInput?.text.toString().trim())).observe(this@RegisterSetUpPasswordActivity, androidx.lifecycle.Observer {
              if (it.status==200){
                  UserConfig.singleton?.accountBean=it.data.user
                  ToastUtils.showShort(this@RegisterSetUpPasswordActivity,this@RegisterSetUpPasswordActivity.getString(R.string.register_success))
-                  finish()
+                 LaunchConfig.startMainAc(this@RegisterSetUpPasswordActivity)
              }else{
                  ToastUtils.showShort(this@RegisterSetUpPasswordActivity,it.status.toString())
              }

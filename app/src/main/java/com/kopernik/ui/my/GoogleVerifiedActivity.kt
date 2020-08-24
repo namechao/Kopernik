@@ -16,7 +16,7 @@ class GoogleVerifiedActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
     override fun initView(savedInstanceState: Bundle?) {
         setTitle(resources.getString(R.string.title_set_trade_psw))
         confirmBtn.setOnClickListener {
-            LaunchConfig.startTradePasswordNextActivity(this)
+//            LaunchConfig.startTradePasswordNextActivity(this)
         }
     }
 

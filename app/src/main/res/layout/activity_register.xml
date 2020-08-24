@@ -109,8 +109,14 @@
             android:paddingBottom="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
             android:drawablePadding="@dimen/dp_10"
-            android:drawableRight="@mipmap/ic_china"
             android:text="+86"/>
+            <ImageView
+                android:id="@+id/ivPhoneHead"
+                android:layout_marginRight="@dimen/dp_10"
+                app:layout_constraintRight_toLeftOf="@+id/etInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_china"/>
         <ImageView
             android:layout_marginRight="@dimen/dp_10"
             app:layout_constraintRight_toLeftOf="@+id/etInput"

@@ -12,7 +12,7 @@ class ExportMnemonicViewModel : BaseViewModel() {
 
     fun exportMnemonic(psw:String): MutableLiveData<BaseResult<Any>> {
         launchGo({
-            accountBean.value = homeRepository.verifyPwd(psw)
+//            accountBean.value = homeRepository.verifyPwd(psw)
         })
         return accountBean
     }

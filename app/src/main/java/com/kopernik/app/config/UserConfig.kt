@@ -87,7 +87,7 @@ class UserConfig {
            MMKV.defaultMMKV().encode(TAG_ACCOUNT, Gson().toJson(value))
        }
        get() {
-          var accountString= MMKV.defaultMMKV().decodeString(TAG_MNEMONIC, "")
+          var accountString= MMKV.defaultMMKV().decodeString(TAG_ACCOUNT, "")
            var accountBean:User?=null
            if (accountString.isNotEmpty()) {
                accountBean = Gson().fromJson<User>(accountString, User::class.java)

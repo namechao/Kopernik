@@ -41,11 +41,29 @@ class MyFragment : NewBaseFragment<NodeViewModel, ViewDataBinding>() {
         }
        //修改登录密码
         changeLoginPsw.setOnClickListener {
-            activity?.let { LaunchConfig.startForgetPasswordActivity(it) }
+
+            //已登录
+            if (UserConfig.singleton?.accountBean!=null){
+                if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
+                    activity?.let { LaunchConfig.startForgetPasswordActivity(it,1,2) }
+                }else{
+                    activity?.let { LaunchConfig.startForgetPasswordActivity(it,2,2) }
+                }
+            }
+
+
         }
         //修改交易密码
         tradePsw.setOnClickListener {
-            activity?.let { LaunchConfig.startTradePasswordActivity(it) }
+            //已登录
+            if (UserConfig.singleton?.accountBean!=null){
+                if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
+                    activity?.let { LaunchConfig.startTradePasswordActivity(it, 1,1) }
+                }else{
+                    activity?.let { LaunchConfig.startTradePasswordActivity(it, 1,1) }
+                }
+            }
+
         }
         //关于我们
         aboutUs.setOnClickListener {

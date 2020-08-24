@@ -20,72 +20,74 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.my.RealNameAuthenticationActivity"></activity>
-        <activity android:name=".ui.asset.UDMTAssetActivity" />
-        <activity android:name=".ui.asset.UTKAssetActivity" />
-        <activity android:name=".ui.asset.UTCAssetActivity" />
-        <activity android:name=".ui.asset.AssetTransformActivty" />
+        <activity android:name=".ui.my.RealNameAuthenticationActivity"  android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.asset.UDMTAssetActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.UTKAssetActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.UTCAssetActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.AssetTransformActivty"   android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.login.RegisterSetUpPasswordActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.setting.SkinActivity" />
-        <activity android:name=".ui.Ecology.NodeLeaderBoardActivity" />
-        <activity android:name=".ui.Ecology.ReferendumDetailsActivity" />
-        <activity android:name=".ui.Ecology.ReferendumListActivity" />
-        <activity android:name=".ui.setting.VerifyPwActivity" />
-        <activity android:name=".ui.Ecology.NodeAboutActivity" />
-        <activity android:name=".ui.setting.AddContactActivity" />
-        <activity android:name=".ui.setting.ContactActivity" />
-        <activity android:name=".ui.setting.QRCodeActivity" />
-        <activity android:name=".ui.asset.MapTimeLineActivity" />
-        <activity android:name=".ui.asset.MapActivity" />
-        <activity android:name=".ui.Ecology.RedeemTimeLineActivity" />
-        <activity android:name=".ui.Ecology.MyVoteHistoryActivity" />
-        <activity android:name=".ui.Ecology.ChooseNodeLogoActivity" />
-        <activity android:name=".ui.Ecology.NodeRegisterActivity" />
-        <activity android:name=".ui.Ecology.VoteOperateActivity" />
-        <activity android:name=".ui.Ecology.MyVoteActivity" />
-        <activity android:name=".ui.setting.ExportMnemonicSuccessActivity" />
-        <activity android:name=".ui.setting.ExportMnemonicActivity" />
-        <activity android:name=".ui.setting.ModifyPassActivity" />
-        <activity android:name=".ui.setting.ModifyNickActivity" />
-        <activity android:name=".ui.setting.SecurityActivity" />
-        <activity android:name=".ui.setting.InviteAddressActivity" />
-        <activity android:name=".ui.setting.SwitchAccountActivity" />
-        <activity android:name=".ui.setting.VersionActivity" />
-        <activity android:name=".ui.my.AboutUsActivity" />
-        <activity android:name=".ui.my.SettingActivity" />
-        <activity android:name=".ui.my.ForgetTradePasswordNextActivity" />
-        <activity android:name=".ui.my.ForgetTradePasswordActivity" />
-        <activity android:name=".ui.my.GoogleVerifiedActivity" />
-        <activity android:name=".ui.my.InviteFriendsActivity" />
-        <activity android:name=".ui.my.GoogleVerifyFirstStepActivity" />
-        <activity android:name=".ui.my.GoogleVerifySecondStepActivity" />
-        <activity android:name=".ui.my.GoogleVerifyActivity" />
-        <activity android:name=".ui.login.ForgetPasswordActivity" />
-        <activity android:name=".ui.Ecology.VoteBetActivity" />
-        <activity android:name=".ui.Ecology.WebViewActivity" />
-        <activity android:name=".ui.asset.WithdrawCoinActivity" />
-        <activity android:name=".ui.asset.DepositCoinActivity" />
-        <activity android:name=".ui.asset.CrossChainTxActivity" />
-        <activity android:name=".ui.asset.UYTAssetActivity" />
-        <activity android:name=".ui.asset.OtherAssetDetailsActivity" />
-        <activity android:name=".ui.asset.DepositMoneyActivity" />
-        <activity android:name=".ui.asset.TransferActivity" />
-        <activity android:name=".ui.login.RegisterActivity" />
-        <activity android:name=".ui.login.UserProtocolActivity" />
-        <activity android:name=".ui.login.ForgetPasswordNextActivity" />
-        <activity android:name=".ui.login.LoginActivity" />
-        <activity android:name=".ui.mine.SynthetiseUTCActivity" />
-        <activity android:name=".ui.mine.PurchaseMiningMachineryActivity" />
+        <activity android:name=".ui.Ecology.NodeLeaderBoardActivity"  android:screenOrientation="portrait" />
+        <activity android:name=".ui.Ecology.ReferendumDetailsActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.Ecology.ReferendumListActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.VerifyPwActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.Ecology.NodeAboutActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.AddContactActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.ContactActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.QRCodeActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.MapTimeLineActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.MapActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.Ecology.RedeemTimeLineActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.Ecology.MyVoteHistoryActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.Ecology.ChooseNodeLogoActivity"  android:screenOrientation="portrait" />
+        <activity android:name=".ui.Ecology.NodeRegisterActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.Ecology.VoteOperateActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.Ecology.MyVoteActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.ExportMnemonicSuccessActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.ExportMnemonicActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.ModifyPassActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.ModifyNickActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.SecurityActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.InviteAddressActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.SwitchAccountActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.VersionActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.my.AboutUsActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.my.SettingActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.my.ForgetTradePasswordNextActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.my.ForgetTradePasswordActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.my.GoogleVerifiedActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.my.InviteFriendsActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.my.GoogleVerifyFirstStepActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.my.GoogleVerifySecondStepActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.my.GoogleVerifyActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.login.ForgetPasswordActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.Ecology.VoteBetActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.Ecology.WebViewActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.WithdrawCoinActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.DepositCoinActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.CrossChainTxActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.UYTAssetActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.OtherAssetDetailsActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.DepositMoneyActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.TransferActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.login.RegisterActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.login.UserProtocolActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.login.ForgetPasswordNextActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.login.LoginActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.mine.SynthetiseUTCActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.mine.PurchaseMiningMachineryActivity"   android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.MainActivity"
             android:hardwareAccelerated="true"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.StartingWindowTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

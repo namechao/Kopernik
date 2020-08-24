@@ -10,10 +10,10 @@ import com.kopernik.ui.login.bean.AccountBean
 class ForgetPasswordViewModel : BaseViewModel() {
     private val homeRepository by lazy { InjectorUtil.getHomeRepository() }
 
-    private val accountBean = SingleLiveEvent<BaseResult<AccountBean>>()
+    private val accountBean = SingleLiveEvent<BaseResult<Any>>()
 
     fun forgetPassword(
-        type: String, acount: String, pwd:String): SingleLiveEvent<BaseResult<AccountBean>> {
+        type: String, acount: String, pwd:String): SingleLiveEvent<BaseResult<Any>> {
         launchGo({
             var map = mapOf(
                 "type" to type,

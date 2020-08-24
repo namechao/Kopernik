@@ -8,17 +8,14 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
-import com.google.gson.Gson
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
-import com.kopernik.app.config.UserConfig
 import com.kopernik.app.utils.KeyboardUtils
 import com.kopernik.app.utils.ToastUtils
-import com.kopernik.ui.login.bean.AccountBean
-import com.kopernik.ui.setting.viewModel.UpdateNickViewModel
+import com.kopernik.ui.my.ViewModel.ForgetTradePasswordViewModel
 import kotlinx.android.synthetic.main.activity_modify_nick.*
 
-class ModifyNickActivity : NewBaseActivity<UpdateNickViewModel, ViewDataBinding>() {
+class ModifyNickActivity : NewBaseActivity<ForgetTradePasswordViewModel, ViewDataBinding>() {
     private var nickEt: EditText? = null
 
 
@@ -49,17 +46,17 @@ class ModifyNickActivity : NewBaseActivity<UpdateNickViewModel, ViewDataBinding>
     private fun modify() {
         var nicklabel = nickEt?.text.toString().trim()
         var map = mapOf("acountLabel" to nicklabel)
-        viewModel.updateNick(map).observe(this, Observer {
-            if (it.status === 200) {
-                ToastUtils.showShort(getActivity(), getString(R.string.tip_change_success))
-//                val accountBean: AccountBean? = UserConfig.singleton?.getAccount()
-//                accountBean?.loginlabel = nickEt!!.text.toString()
-//                UserConfig.singleton?.accountString = Gson().toJson(accountBean)
-//                finish()
-            } else {
-                ToastUtils.showShort(getActivity(), it.errorMsg)
-            }
-        })
+//        viewModel.updateNick(map).observe(this, Observer {
+//            if (it.status === 200) {
+//                ToastUtils.showShort(getActivity(), getString(R.string.tip_change_success))
+////                val accountBean: AccountBean? = UserConfig.singleton?.getAccount()
+////                accountBean?.loginlabel = nickEt!!.text.toString()
+////                UserConfig.singleton?.accountString = Gson().toJson(accountBean)
+////                finish()
+//            } else {
+//                ToastUtils.showShort(getActivity(), it.errorMsg)
+//            }
+//        })
     }
 
     private var textWatcher: TextWatcher = object : TextWatcher {

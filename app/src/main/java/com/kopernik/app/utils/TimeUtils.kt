@@ -34,6 +34,16 @@ object TimeUtils {
         val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         return format.format(Date(java.lang.Long.valueOf(timeStamp)))
     }
+    /**
+     * 13 位
+     * @param timeStamp
+     * @return
+     */
+    fun TimeStampYearToData(timeStamp: String?): String {
+        if (timeStamp == null || timeStamp == "0" || timeStamp.isEmpty()) return "无"
+        val format = SimpleDateFormat("yyyy.MM.dd")
+        return format.format(Date(java.lang.Long.valueOf(timeStamp)))
+    }
 
     /**
      * 13 位
@@ -42,8 +52,7 @@ object TimeUtils {
      */
     fun timeStampToYear(timeStamp: String?): String {
         if (timeStamp == null || timeStamp == "0" || timeStamp.isEmpty()) return "无"
-        val format: SimpleDateFormat
-        format = if (UserConfig.singleton?.languageTag === 1) {
+        val format: SimpleDateFormat = if (UserConfig.singleton?.languageTag === 1) {
             SimpleDateFormat("MM月dd日")
         } else {
             SimpleDateFormat("MM-dd")
@@ -64,9 +73,7 @@ object TimeUtils {
 
     fun isPingTimeOut(pingTime: Long): Boolean {
         if (pingTime == 0L) return false
-        return if (currentTimeLong() - pingTime > 40) {
-            true
-        } else false
+        return currentTimeLong() - pingTime > 40
     }
 
     fun currentDate(): String {

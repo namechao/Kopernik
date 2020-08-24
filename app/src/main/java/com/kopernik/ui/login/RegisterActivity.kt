@@ -76,7 +76,8 @@ class RegisterActivity : NewBaseActivity<RegisterViewModel, ViewDataBinding>() {
 
             //手机登录
             if (registerType==1) {
-                if (etInput.text.toString().trim().isNullOrEmpty() && !etInput.text.toString()
+                if (etInput.text.toString().trim().isNullOrEmpty()) ToastUtils.showShort(this, resources.getString(R.string.phone_not_empty))
+                if (!etInput.text.toString()
                         .trim().matches(
                         Regex("1[0-9]{10}"))
                 ) {
@@ -93,9 +94,10 @@ class RegisterActivity : NewBaseActivity<RegisterViewModel, ViewDataBinding>() {
                     }
                 }
             }else{//邮箱获取验证码
-                if (etInput.text.toString().trim().isNullOrEmpty() && !etInput.text.toString()
+                if (etInput.text.toString().trim().isNullOrEmpty()) ToastUtils.showShort(this, resources.getString(R.string.email_not_empty))
+                if (!etInput.text.toString()
                         .trim().matches(
-                            Regex("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,4}"))
+                            Regex("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}"))
                 ) {
                     ToastUtils.showShort(this, resources.getString(R.string.verify_email_error))
                     return@setOnClickListener
@@ -124,10 +126,9 @@ override fun initData() {
         tvPhoneRegisterLine.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
         tvEmailRegister.setTextColor(resources.getColor(R.color.white))
         tvEmailRegisterLine.setBackgroundColor(resources.getColor(R.color.white))
-        etInput.hint=resources.getString(R.string.re_phone)
+        etInput.hint=resources.getString(R.string.login_input_phone_hint)
         etInput.inputType=InputType.TYPE_CLASS_PHONE
-        tvPhoneHead.visibility= View.VISIBLE
-        line.visibility=View.VISIBLE
+        llHeader.visibility= View.VISIBLE
         etInput.setText("")
     }
     //邮箱登录
@@ -137,12 +138,10 @@ override fun initData() {
         tvPhoneRegisterLine.setBackgroundColor(resources.getColor(R.color.white))
         tvEmailRegister.setTextColor(resources.getColor(R.color.color_ffcf32))
         tvEmailRegisterLine.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
-        etInput.hint=resources.getString(R.string.re_email)
+        etInput.hint=resources.getString(R.string.login_input_email_hint)
         etInput.inputType=InputType.TYPE_CLASS_TEXT
         etInput.setText("")
-        tvPhoneHead.visibility= View.GONE
-        line.visibility=View.GONE
-
+        llHeader.visibility= View.GONE
     }
     //清除
     icClear.setOnClickListener {
@@ -155,11 +154,26 @@ override fun initData() {
             ToastUtils.showShort(this, resources.getString(R.string.verify_slide_right))
             return@setOnClickListener
         }
+
+     if (registerType==1){
+         //手机号不为空
+         if (etInput.text.toString().trim().isNullOrEmpty()) ToastUtils.showShort(this, resources.getString(R.string.phone_not_empty))
+         if (!etInput.text.toString()
+                 .trim().matches(
+                     Regex("1[0-9]{10}"))
+         ) {
+             ToastUtils.showShort(this, resources.getString(R.string.verify_phone_error))
+             return@setOnClickListener
+         }
+         //验证码
+         if (verifyCode.text.toString().trim().isNullOrEmpty()){
+             ToastUtils.showShort(this, resources.getString(R.string.re_input_code))
+             return@setOnClickListener}
+        //邀请码
         if (etInviteCode.text.toString().trim().isNullOrEmpty()){
             ToastUtils.showShort(this, resources.getString(R.string.verify_invite_code_error))
             return@setOnClickListener
         }
-     if (registerType==1){
         viewModel.run {
          checkPhone(etInput.text.toString().trim(),verifyCode.text.toString().trim()).observe(this@RegisterActivity, Observer {
              if (it.status == 200) {
@@ -175,6 +189,24 @@ override fun initData() {
          })
         }
      }else{
+         //邮箱不为空
+         if (etInput.text.toString().trim().isNullOrEmpty()) ToastUtils.showShort(this, resources.getString(R.string.email_not_empty))
+         if (!etInput.text.toString()
+                 .trim().matches(
+                     Regex("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}"))
+         ) {
+             ToastUtils.showShort(this, resources.getString(R.string.verify_email_error))
+             return@setOnClickListener
+         }
+         //验证码
+         if (verifyCode.text.toString().trim().isNullOrEmpty()){
+             ToastUtils.showShort(this, resources.getString(R.string.re_input_code))
+             return@setOnClickListener}
+         //邀请码
+         if (etInviteCode.text.toString().trim().isNullOrEmpty()){
+             ToastUtils.showShort(this, resources.getString(R.string.verify_invite_code_error))
+             return@setOnClickListener
+         }
          viewModel.run {
              checkEMail(etInput.text.toString().trim(),verifyCode.text.toString().trim()).observe(this@RegisterActivity, Observer {
                  if (it.status == 200) {
@@ -222,6 +254,9 @@ private fun resetOkBtn() {
     }
     fun showDialog(){
         val view: View = LayoutInflater.from(this).inflate(R.layout.dialog_chose_area_code, null)
+        // 创建PopupWindow对象，指定宽度和高度
+        val popupWindow =
+            PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         var recycleView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recycleView?.layoutManager= LinearLayoutManager(this)
         val list: MutableList<LoginCountryBean> = ArrayList()
@@ -232,26 +267,24 @@ private fun resetOkBtn() {
         list.add(LoginCountryBean(R.mipmap.ic_australia,"+61"))
         list.add(LoginCountryBean(R.mipmap.ic_singapore,"+65"))
         var adapter= ChoseAreaAdapter(list)
-        adapter.setOnItemChildClickListener { adapter, view, position ->
-
+        adapter.setOnItemClickListener { adapter, view, position ->
+            tvPhoneHead.text=(adapter.data[position] as LoginCountryBean).header
+            ivPhoneHead.setBackgroundResource((adapter.data[position] as LoginCountryBean).resId)
+            popupWindow.dismiss()
         }
         recycleView?.adapter=adapter
 
-        // 创建PopupWindow对象，指定宽度和高度
-        val window =
-            PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        window.width = recycleView.getWidth()
+
+//        window.width = recycleView.getWidth()
         // 设置动画
         //window.setAnimationStyle(R.style.popup_window_anim);
         // 设置可以获取焦点
-        window.isFocusable = true
+        popupWindow.isFocusable = true
         // 设置可以触摸弹出框以外的区域
-        window.isOutsideTouchable = true
+        popupWindow.isOutsideTouchable = true
         // 更新popupwindow的状态
-        window.update()
+        popupWindow.update()
         // 以下拉的方式显示，并且可以设置显示的位置
-        //window.showAsDropDown(llHeader, 0, 20);
-        window.showAtLocation(llHeader, Gravity.LEFT or Gravity.BOTTOM, 0, 50) //这里的50是因为我底部按钮的高度是50
-
+        popupWindow.showAsDropDown(llHeader, 0, 20)
     }
 }

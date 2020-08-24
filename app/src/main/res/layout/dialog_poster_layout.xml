@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+ <androidx.constraintlayout.widget.ConstraintLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
+     <ImageView
+         android:id="@+id/posterBg"
+         app:layout_constraintTop_toTopOf="parent"
+         android:adjustViewBounds="true"
+         android:layout_width="match_parent"
+         android:layout_height="0dp"
+         app:layout_constraintLeft_toLeftOf="parent"
+         app:layout_constraintRight_toRightOf="parent"
+         android:src="@mipmap/ic_poster_bg"/>
+
+     <ImageView
+         android:id="@+id/qrcodeIv"
+         android:layout_width="100dp"
+         android:layout_height="100dp"
+         android:layout_gravity="center"
+         android:background="@color/title_black"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.26"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintVertical_bias="0.89" />
+ </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/llSavePoster"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="37dp"
+        android:background="@drawable/btn_enable_bg"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/saveTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:drawableLeft="@mipmap/ic_download"
+            android:text="@string/save_to_picture"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

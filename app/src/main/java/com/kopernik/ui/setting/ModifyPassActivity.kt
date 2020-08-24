@@ -13,15 +13,13 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
-import com.kopernik.app.config.UserConfig
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
-import com.kopernik.app.utils.fingerprint.FingerprintHelper
-import com.kopernik.ui.setting.viewModel.UpdatePasswordViewModel
+import com.kopernik.ui.my.ViewModel.InviteFriendsViewModel
 import kotlinx.android.synthetic.main.activity_modify_pass.*
 
 
-class ModifyPassActivity : NewBaseActivity<UpdatePasswordViewModel, ViewDataBinding>() {
+class ModifyPassActivity : NewBaseActivity<InviteFriendsViewModel, ViewDataBinding>() {
     private var oldPwdEt: EditText? = null
     private var newPwd1: EditText? = null
     private var newPwd2: EditText? = null
@@ -84,20 +82,20 @@ class ModifyPassActivity : NewBaseActivity<UpdatePasswordViewModel, ViewDataBind
             "acountPwd" to oldPassword,
             "newPwd" to newPassword
         )
-        viewModel.updatePassword(map).observe(this, Observer {
-            if (it.status == 200) {
-                ToastUtils.showShort(getActivity(), getString(R.string.tip_change_success))
-                //删除指纹解锁
-//                if (UserConfig?.singleton?.isUseFingerprint!!) {
-//                    FingerprintHelper.getInstance().init(getActivity())
-//                    FingerprintHelper.getInstance().closeAuthenticate()
-//                    UserConfig?.singleton?.isUseFingerprint = false
-//                }
-                finish()
-            } else {
-                ToastUtils.showShort(this, it.errorMsg)
-            }
-        })
+//        viewModel.updatePassword(map).observe(this, Observer {
+//            if (it.status == 200) {
+//                ToastUtils.showShort(getActivity(), getString(R.string.tip_change_success))
+//                //删除指纹解锁
+////                if (UserConfig?.singleton?.isUseFingerprint!!) {
+////                    FingerprintHelper.getInstance().init(getActivity())
+////                    FingerprintHelper.getInstance().closeAuthenticate()
+////                    UserConfig?.singleton?.isUseFingerprint = false
+////                }
+//                finish()
+//            } else {
+//                ToastUtils.showShort(this, it.errorMsg)
+//            }
+//        })
 
     }
     var textWatcher: TextWatcher = object : TextWatcher {

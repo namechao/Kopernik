@@ -16,18 +16,33 @@ import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.viewmodel.ForgetPasswordViewModel
 import dev.utils.common.encrypt.MD5Utils
 import kotlinx.android.synthetic.main.activity_forget_password_next.*
-
+import kotlinx.android.synthetic.main.activity_forget_password_next.confirmBtn
+import kotlinx.android.synthetic.main.activity_forget_password_next.etInput
+import kotlinx.android.synthetic.main.activity_forget_password_next.icClear
+import kotlinx.android.synthetic.main.activity_forget_password_next.icEye
 
 class ForgetPasswordNextActivity : NewBaseActivity<ForgetPasswordViewModel, ViewDataBinding>() {
     private var openEye=false
     private var openEye1=false
-    private var acount=""
+    private var type=-1
+    private  var changePasswordType=-1
+    private var account=""
     override fun layoutId()=R.layout.activity_forget_password_next
     override fun initView(savedInstanceState: Bundle?) {
-        intent.getStringExtra("acount")?.let {
-            acount =it
+        intent.getIntExtra("changePasswordType",-1)?.let{
+            changePasswordType=it
         }
-        setTitle(getString(R.string.login_change_password))
+        intent.getIntExtra("registerType",-1)?.let {
+            type =it
+        }
+        intent.getStringExtra("account")?.let {
+            account =it
+        }
+        if (changePasswordType==1) {
+            setTitle(resources.getString(R.string.setup_login_password))
+        }else{
+            setTitle(resources.getString(R.string.login_change_password))
+        }
         etInput?.addTextChangedListener(
             passwordInputListener
         )
@@ -43,28 +58,40 @@ class ForgetPasswordNextActivity : NewBaseActivity<ForgetPasswordViewModel, View
         icEye.setOnClickListener {
             if (!openEye){//开眼逻辑
                 //从密码不可见模式变为密码可见模式
-                etInput.transformationMethod = HideReturnsTransformationMethod.getInstance();
-                icEye.setBackgroundResource(R.mipmap.ic_open_eye)
+                etInput.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                openEye = true
+                etInput.setSelection(etInput.text.toString().length)
+                icEye.setImageResource(R.mipmap.ic_open_eye)
             }else{//闭眼逻辑
                 //从密码可见模式变为密码不可见模式
-                etInput.transformationMethod = PasswordTransformationMethod.getInstance();
-                icEye.setBackgroundResource(R.mipmap.ic_close_eye)
+                etInput.transformationMethod = PasswordTransformationMethod.getInstance()
+                openEye = false
+                etInput.setSelection(etInput.text.toString().length)
+                icEye.setImageResource(R.mipmap.ic_close_eye)
             }
         }
         icEye1.setOnClickListener {
             if (!openEye1){//开眼逻辑
                 //从密码不可见模式变为密码可见模式
-                etInputAgain.transformationMethod = HideReturnsTransformationMethod.getInstance();
-                icEye1.setBackgroundResource(R.mipmap.ic_open_eye)
+                etInputAgain.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                openEye1 = true
+                etInputAgain.setSelection(etInputAgain.text.toString().length)
+                icEye1.setImageResource(R.mipmap.ic_open_eye)
             }else{//闭眼逻辑
                 //从密码可见模式变为密码不可见模式
-                etInputAgain.transformationMethod = PasswordTransformationMethod.getInstance();
-                icEye1.setBackgroundResource(R.mipmap.ic_close_eye)
+                etInputAgain.transformationMethod = PasswordTransformationMethod.getInstance()
+                openEye1 = false
+                etInputAgain.setSelection(etInputAgain.text.toString().length)
+                icEye1.setImageResource(R.mipmap.ic_close_eye)
             }
         }
         confirmBtn.setOnClickListener {
             if (!(etInput!!.text.toString().trim().length in 8..16&& StringUtils.isContainAll(etInput!!.text.toString().trim()))){
                 ToastUtils.showShort(getActivity(), getString(R.string.intput_password_error))
+                return@setOnClickListener
+            }
+            if (etInputAgain!!.text.toString().trim().isNullOrEmpty()){
+                ToastUtils.showShort(getActivity(), getString(R.string.input_pasword_again_error))
                 return@setOnClickListener
             }
             //点击按钮密码输入俩次是否一致
@@ -81,12 +108,13 @@ class ForgetPasswordNextActivity : NewBaseActivity<ForgetPasswordViewModel, View
     //导入网络请求
     private fun register() {
         viewModel.run {
-            forgetPassword("1",acount, MD5Utils.md5(etInput?.text.toString().trim())).observe(this@ForgetPasswordNextActivity, androidx.lifecycle.Observer {
+            forgetPassword(type.toString(),account, MD5Utils.md5(etInput?.text.toString().trim())).observe(this@ForgetPasswordNextActivity, androidx.lifecycle.Observer {
                 if (it.status==200){
                     ToastUtils.showShort(this@ForgetPasswordNextActivity,this@ForgetPasswordNextActivity.getString(R.string.forget_password_success))
+                    setResult(11)
                     finish()
                 }else{
-                    ToastUtils.showShort(this@ForgetPasswordNextActivity,it.status.toString())
+                    ToastUtils.showShort(this@ForgetPasswordNextActivity,it.errorMsg)
                 }
             })
         }
@@ -112,7 +140,8 @@ class ForgetPasswordNextActivity : NewBaseActivity<ForgetPasswordViewModel, View
 
         override fun afterTextChanged(s: Editable) {
             val str = etInput!!.text.toString()
-            confirmBtn.isEnabled = str.isNotEmpty()
+            val str1=etInputAgain!!.text.toString()
+            confirmBtn.isEnabled = str.isNotEmpty()&&str1.isNotEmpty()
         }
     }
     private var passwordInputListener1: TextWatcher = object : TextWatcher {
@@ -133,8 +162,9 @@ class ForgetPasswordNextActivity : NewBaseActivity<ForgetPasswordViewModel, View
         }
 
         override fun afterTextChanged(s: Editable) {
-            val str = etInputAgain!!.text.toString()
-            confirmBtn.isEnabled = str.isNotEmpty()
+            val str = etInput!!.text.toString()
+            val str1=etInputAgain!!.text.toString()
+            confirmBtn.isEnabled = str.isNotEmpty()&&str1.isNotEmpty()
         }
     }
 

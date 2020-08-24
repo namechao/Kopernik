@@ -14,10 +14,10 @@ import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.KeyboardUtils
-import com.kopernik.ui.setting.viewModel.VerifyPasswordViewModel
+import com.kopernik.ui.my.ViewModel.RealNameViewModel
 import kotlinx.android.synthetic.main.activity_verify_pw.*
 
-class VerifyPwActivity : NewBaseActivity<VerifyPasswordViewModel,ViewDataBinding>() {
+class VerifyPwActivity : NewBaseActivity<RealNameViewModel,ViewDataBinding>() {
     private var editText: EditText? = null
 
     override fun layoutId()=R.layout.activity_verify_pw
@@ -53,18 +53,18 @@ class VerifyPwActivity : NewBaseActivity<VerifyPasswordViewModel,ViewDataBinding
         okBtn.setOnClickListener { checkPw() }
     }
     private fun checkPw() {
-        KeyboardUtils.hideSoftKeyboard(editText)
-        viewModel.verifyPsw(editText!!.text.toString().trim()).observe(this, Observer {
-
-            if (it.status==200) {
-                        val intent = Intent()
-                        intent.putExtra("pw", editText!!.text.toString())
-                        setResult(RESULT_OK, intent)
-                        finish()
-                    } else {
-                  ErrorCode.showErrorMsg(getActivity(), it.status)
-                    }
-        })
+//        KeyboardUtils.hideSoftKeyboard(editText)
+//        viewModel.verifyPsw(editText!!.text.toString().trim()).observe(this, Observer {
+//
+//            if (it.status==200) {
+//                        val intent = Intent()
+//                        intent.putExtra("pw", editText!!.text.toString())
+//                        setResult(RESULT_OK, intent)
+//                        finish()
+//                    } else {
+//                  ErrorCode.showErrorMsg(getActivity(), it.status)
+//                    }
+//        })
     }
     override fun initData() {
 

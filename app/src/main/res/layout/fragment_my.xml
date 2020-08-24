@@ -104,6 +104,7 @@
         android:id="@+id/googleAuthen"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:visibility="gone"
         app:sLeftTextColor="@color/white"
         app:sLeftTextSize="15dp"
         app:sLeftTextString="@string/google_verified"

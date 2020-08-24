@@ -5,6 +5,9 @@ import com.pcl.mvvm.app.base.BaseResult
 import com.kopernik.data.network.HomeNetWork
 import com.kopernik.ui.login.bean.AccountBean
 import com.kopernik.ui.asset.entity.ExtractBean
+import com.kopernik.ui.login.bean.User
+import com.kopernik.ui.my.bean.InviteFriendsEntity
+import com.kopernik.ui.my.bean.InviteFriendsItem
 import com.kopernik.ui.setting.entity.ContactBean
 import com.kopernik.ui.setting.entity.UpdateBean
 
@@ -24,19 +27,19 @@ class HomeRepository private constructor(private val newWork: HomeNetWork):BaseM
     suspend fun createAccount(map: Map<String, String>): BaseResult<AccountBean> {
         return newWork.createAccount(map)
     }
-    suspend fun forgetPassword(map: Map<String, String>): BaseResult<AccountBean> {
+    suspend fun forgetPassword(map: Map<String, String>): BaseResult<Any> {
         return newWork.forgetPassword(map)
     }
     suspend fun login(map: Map<String, String>): BaseResult<AccountBean> {
         return newWork.login(map)
     }
 
-    suspend fun updatePassword(map: Map<String, String>): BaseResult<Any> {
-        return newWork.updatePassword(map)
+    suspend fun inviteFriends(map: Map<String, String>): BaseResult<InviteFriendsEntity> {
+        return newWork.inviteFriends(map)
     }
 
-    suspend fun updateNick(map: Map<String, String>): BaseResult<Any> {
-        return newWork.updateNick(map)
+    suspend fun changeTradePsw(map: Map<String, String>): BaseResult<Any> {
+        return newWork.changeTradePsw(map)
     }
 
     suspend fun addContact(map: Map<String, String>): BaseResult<Any> {
@@ -50,8 +53,8 @@ class HomeRepository private constructor(private val newWork: HomeNetWork):BaseM
     suspend fun delContact(id: Int): BaseResult<Any> {
         return newWork.delContact(id)
     }
-    suspend fun verifyPwd(pwd: String): BaseResult<Any> {
-        return newWork.verifyPwd(pwd)
+    suspend fun realNameAuth(name: String,idCard:String): BaseResult<Any> {
+        return newWork.realNameAuth(name,idCard)
     }
     suspend fun checkAppVersion(): BaseResult<UpdateBean> {
         return newWork.checkAppVersion()

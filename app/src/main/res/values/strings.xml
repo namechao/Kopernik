@@ -537,6 +537,7 @@
     <string name="nav_title_my">我的</string>
     <!--    我的相关-->
     <string name="name_verified">实名认证</string>
+    <string name="name_auth_sucess">实名认证成功</string>
     <string name="google_verified">谷歌认证</string>
     <string name="login_password">登录密码</string>
     <string name="trade_password">交易密码</string>
@@ -575,6 +576,12 @@
     <string name="google_reset_verified">充值谷歌两步验证</string>
     <string name="google_reset_verified1">如果谷歌验证器遗失，或者\n想要迁移到别的手机，请提供如下信息来重置</string>
    <string name="input_login_password_hint">请输入登录密码</string>
+   <string name="invite_grade0">无级别</string>
+   <string name="invite_grade1">一级</string>
+   <string name="invite_grade2">二级</string>
+   <string name="invite_grade3">三级</string>
+   <string name="invite_grade4">四级</string>
+   <string name="invite_grade5">五级</string>
    <string name="submit">提交</string>
    <string name="invite_friends">邀请好友</string>
    <string name="invite_friends_mine">一起来挖矿</string>
@@ -587,6 +594,8 @@
    <string name="title_about_us">关于我们</string>
    <string name="title_purchase_mm">购买矿机</string>
    <string name="button_purchase">购买</string>
+   <string name="save_to_picture">保存至相册</string>
+   <string name="save_to_picture_success">已保存至相册</string>
     <!--    矿场相关-->
     <string name="income">累计收益(UTDM)</string>
     <string name="synthesis_utc">合成UTC</string>
@@ -642,11 +651,13 @@
     <string name="login_verify">验证码</string>
     <string name="login_input_psw_hint">请输入新密码</string>
     <string name="login_inputa_psw_hint">请再次输入新密码</string>
-    <string name="login_input_e_hint">请输入邮箱</string>
+    <string name="login_input_email_hint">请输入邮箱</string>
     <string name="login_register">快速注册</string>
     <string name="login_forget_psw">忘记密码</string>
     <string name="login_change_password">修改登录密码</string>
+    <string name="setup_login_password">设置登录密码</string>
     <string name="forget_password_success">密码重置成功</string>
+    <string name="forget_trade_password_success">密码重置成功</string>
     <string name="login_change_password_tip">密码8-16位，必须包含大小写字母和数字。</string>
 
     <string name="login_send_code">秒后重发送</string>
@@ -670,8 +681,12 @@
     <string name="user_protocol_title">UTC用户协议</string>
     <string name="verify_phone_error">请输入正确手机号</string>
     <string name="verify_email_error">请输入正确邮箱</string>
+    <string name="phone_not_empty">手机号不能为空</string>
+    <string name="email_not_empty">邮箱不能为空</string>
+    <string name="password_not_empty">邮箱不能为空</string>
     <string name="verify_invite_code_error">请输入邀请码</string>
     <string name="input_verify_code_error">请输入6位的验证码</string>
+    <string name="input_pasword_again_error">请再次输入密码</string>
     <string name="verify_slide_right">请滑动滑块到最右侧</string>
    <string name="intput_password_error">请输入8-16位密码，并且必须包含大小写字母和数字。</string>
     <!--    首页相关-->

@@ -15,25 +15,25 @@ class RegisterViewModel :BaseViewModel(){
     private val checkPhoneCode = SingleLiveEvent<BaseResult<Any>>()
     private val checkEmailCode = SingleLiveEvent<BaseResult<Any>>()
 
-    fun sendCode(sendCode:String): MutableLiveData<BaseResult<Any>> {
+    fun sendCode(sendCode:String): SingleLiveEvent<BaseResult<Any>> {
         launchGo({
             phoneCode.value = homeRepository.sendCode(sendCode)
         })
         return phoneCode
     }
-    fun sendEmailCode(sendCode:String): MutableLiveData<BaseResult<Any>> {
+    fun sendEmailCode(sendCode:String): SingleLiveEvent<BaseResult<Any>> {
         launchGo({
             emailCode.value = homeRepository.sendEmailCode(sendCode)
         })
         return emailCode
     }
-    fun checkPhone(phone: String, verifyCode:String): MutableLiveData<BaseResult<Any>> {
+    fun checkPhone(phone: String, verifyCode:String): SingleLiveEvent<BaseResult<Any>> {
         launchGo({
             checkPhoneCode.value = homeRepository.checkPhone(phone,verifyCode)
         })
         return checkPhoneCode
     }
-    fun checkEMail(email: String, verifyCode:String): MutableLiveData<BaseResult<Any>> {
+    fun checkEMail(email: String, verifyCode:String): SingleLiveEvent<BaseResult<Any>> {
         launchGo({
             checkEmailCode.value = homeRepository.checkEMail(email,verifyCode)
         })
