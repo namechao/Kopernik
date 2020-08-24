@@ -20,6 +20,7 @@ import java.io.IOException
  */
 class MineFragment : NewBaseFragment<NoViewModel, ViewDataBinding>() {
     var ishow=false
+    var isOpenSound=false
     companion object{
         fun newInstance() = MineFragment()
     }
@@ -51,17 +52,28 @@ class MineFragment : NewBaseFragment<NoViewModel, ViewDataBinding>() {
         buyMine.setOnClickListener {
             activity?.let { it1 -> LaunchConfig.startPurchaseMiningMachineryActivity(it1) }
         }
+        ivSound.setOnClickListener {
+            if (!isOpenSound){
+                isOpenSound=true
+                //打开音乐
+                player.start()
+                ivSound.setImageResource(R.mipmap.ic_open_sound)
+            }else{
+                //关闭音乐
+                isOpenSound=false
+                player.pause()
+                ivSound.setImageResource(R.mipmap.ic_close_sound)
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        player.start()
         lottieAnimationView.playAnimation();
     }
 
     override fun onPause() {
         super.onPause()
-        player.stop()
         lottieAnimationView.cancelAnimation()
     }
 
@@ -71,6 +83,13 @@ class MineFragment : NewBaseFragment<NoViewModel, ViewDataBinding>() {
     }
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
+        if (!isOpenSound&&!hidden){
+            //打开音乐
+            player.start()
+        }else{
+            //关闭音乐
+            player.pause()
+        }
         if (hidden){
             lottieAnimationView.pauseAnimation()
         }else{

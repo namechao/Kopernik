@@ -12,7 +12,6 @@
       android:adjustViewBounds="true"
       android:layout_height="wrap_content"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.0"
       app:lottie_loop="true"
       tools:layout_editor_absoluteX="82dp" />
@@ -24,6 +23,17 @@
       android:src="@mipmap/ic_mine_top"
       android:scaleType="fitXY"
       android:adjustViewBounds="true" />
+   <ImageView
+       android:id="@+id/ivSound"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@mipmap/ic_close_sound"
+       app:layout_constraintTop_toTopOf="@+id/incomeTop"
+       app:layout_constraintBottom_toBottomOf="@+id/incomeTop"
+       app:layout_constraintRight_toRightOf="parent"
+       android:padding="@dimen/dp_5"
+       android:layout_marginRight="@dimen/dp_10"
+       />
     <TextView
         android:id="@+id/incomeTop"
         android:layout_width="wrap_content"

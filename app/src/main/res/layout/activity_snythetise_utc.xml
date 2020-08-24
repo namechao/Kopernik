@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/colorAccent"
     android:layout_height="match_parent"
@@ -11,7 +12,7 @@
         android:layout_width="match_parent"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -25,6 +26,17 @@
         android:layout_marginTop="37dp"
         android:padding="@dimen/dp_15"
         android:src="@mipmap/ic_back"/>
+    <ImageView
+        android:id="@+id/ivSound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_close_sound"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:padding="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_50"
+        android:layout_marginRight="@dimen/dp_10"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,29 +48,151 @@
         app:layout_constraintRight_toRightOf="parent"
         android:textStyle="bold"
         android:text="@string/synthesis_utc"/>
-    <LinearLayout
-        android:id="@+id/llSnythetiseUTC"
-        android:layout_width="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ecology_tab_press"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:gravity="center"
-        android:layout_marginBottom="85dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:paddingTop="14dp"
-            android:paddingBottom="14dp"
-            android:textSize="@dimen/dp_15"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:drawableLeft="@mipmap/ic_synthesis_utc"
-            android:text="@string/synthesis_utc"/>
 
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_mine_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+    <ImageView
+        android:id="@+id/ivSnythetise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@mipmap/ic_snythetise_utc"
+        />
+    <ImageView
+        android:id="@+id/ivLeftBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivSnythetise"
+        android:src="@mipmap/ic_mine_left"
+        />
+     <TextView
+         android:id="@+id/tvCoinType1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textStyle="bold"
+         android:textSize="@dimen/sp_12"
+         android:layout_marginRight="@dimen/dp_15"
+         android:textColor="@color/color_852C0F"
+         android:text="UDTM"
+         app:layout_constraintRight_toRightOf="@+id/ivLeftBg"
+         app:layout_constraintTop_toTopOf="@+id/ivLeftBg"
+         app:layout_constraintVertical_chainStyle="packed"
+         app:layout_constraintBottom_toTopOf="@+id/tvUDMTCoin"
+         />
+    <TextView
+        android:id="@+id/tvUDMTCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/color_FC2C00"
+        app:layout_constraintLeft_toLeftOf="@+id/tvCoinType1"
+        app:layout_constraintRight_toRightOf="@+id/tvCoinType1"
+        android:text="12"
+        app:layout_constraintBottom_toBottomOf="@+id/ivLeftBg"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@+id/tvCoinType1"
+        />
+    <ImageView
+        android:id="@+id/ivRightBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivSnythetise"
+        android:src="@mipmap/ic_mine_right"
+        />
+    <TextView
+        android:id="@+id/tvCoinType2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_12"
+        android:layout_marginRight="@dimen/dp_15"
+        android:textColor="@color/color_852C0F"
+        android:text="UTK"
+        app:layout_constraintRight_toRightOf="@+id/ivRightBg"
+        app:layout_constraintTop_toTopOf="@+id/ivRightBg"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@+id/tvUTKtCoin"
+        />
+    <TextView
+        android:id="@+id/tvUTKtCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/color_FC2C00"
+        app:layout_constraintLeft_toLeftOf="@+id/tvCoinType2"
+        app:layout_constraintRight_toRightOf="@+id/tvCoinType2"
+        android:text="12"
+        app:layout_constraintBottom_toBottomOf="@+id/ivRightBg"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@+id/tvCoinType2"
+        />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_minus_mine"
+        android:layout_marginRight="@dimen/dp_20"
+        app:layout_constraintBottom_toBottomOf="@+id/editText"
+        app:layout_constraintEnd_toStartOf="@+id/editText"
+        app:layout_constraintTop_toTopOf="@+id/editText" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_plus_mine"
+        android:layout_marginLeft="@dimen/dp_20"
+        app:layout_constraintBottom_toBottomOf="@+id/editText"
+        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintTop_toTopOf="@+id/editText"
+        app:layout_constraintVertical_bias="0.0" />
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:background="@mipmap/ic_mine_edit"
+        android:gravity="center"
+        android:hint="@string/input_counts"
+        android:paddingLeft="@dimen/dp_15"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingRight="@dimen/dp_15"
+        android:paddingBottom="@dimen/dp_5"
+        android:textColorHint="@color/color_852C0F"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/color_665F93"
+        android:layout_marginBottom="29dp"
+        android:text="@string/current_exchange_precent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
  <androidx.constraintlayout.widget.ConstraintLayout
+     android:id="@+id/clPoster"
      android:layout_width="match_parent"
      android:layout_height="wrap_content">
      <ImageView
@@ -18,12 +19,12 @@
          app:layout_constraintRight_toRightOf="parent"
          android:src="@mipmap/ic_poster_bg"/>
 
-     <ImageView
+     <com.qmuiteam.qmui.widget.QMUIRadiusImageView
          android:id="@+id/qrcodeIv"
          android:layout_width="100dp"
          android:layout_height="100dp"
          android:layout_gravity="center"
-         android:background="@color/title_black"
+         android:background="@color/white"
          app:layout_constraintBottom_toBottomOf="parent"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintHorizontal_bias="0.26"

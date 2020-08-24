@@ -31,12 +31,34 @@ class MyFragment : NewBaseFragment<NodeViewModel, ViewDataBinding>() {
     override fun layoutId() = R.layout.fragment_my
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
+        UserConfig.singleton?.accountBean?.phone?.let {
+            tvPhoneNumber.text=it
+        }
+        UserConfig.singleton?.accountBean?.email?.let {
+            tvPhoneNumber.text=it
+        }
+        UserConfig.singleton?.accountBean?.uid?.let {
+            tvId.text="ID："+it
+        }
+        //是否实名
+        if (UserConfig.singleton?.accountBean?.name.isNullOrEmpty()){
+            realNameAuth.setRightString(getString(R.string.no_setting))
+        }else{
+            realNameAuth.setRightString(getString(R.string.had_settting))
+        }
+        //交易密码
+        if (UserConfig.singleton?.accountBean?.salePwd.isNullOrEmpty()){
+            tradePsw.setRightString(getString(R.string.no_setting))
+        }else{
+            tradePsw.setRightString(getString(R.string.had_settting))
+        }
       //设置
         setting.setOnClickListener {
             activity?.let {LaunchConfig.startSettingActivityAc(it) }
         }
         //实名认证
         realNameAuth.setOnClickListener {
+            if (UserConfig.singleton?.accountBean?.name.isNullOrEmpty())
             activity?.let { LaunchConfig.startRealNameAuthenticationActivity(it) }
         }
        //修改登录密码
@@ -58,9 +80,18 @@ class MyFragment : NewBaseFragment<NodeViewModel, ViewDataBinding>() {
             //已登录
             if (UserConfig.singleton?.accountBean!=null){
                 if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
-                    activity?.let { LaunchConfig.startTradePasswordActivity(it, 1,1) }
+                    if (UserConfig.singleton?.accountBean?.salePwd.isNullOrEmpty()){
+                        activity?.let { LaunchConfig.startTradePasswordActivity(it, 1,1) }
+                    }else{
+                        activity?.let { LaunchConfig.startTradePasswordActivity(it, 1,2) }
+                    }
+
                 }else{
+                    if (UserConfig.singleton?.accountBean?.salePwd.isNullOrEmpty()){
                     activity?.let { LaunchConfig.startTradePasswordActivity(it, 1,1) }
+                    }else{
+                        activity?.let { LaunchConfig.startTradePasswordActivity(it, 1,2) }
+                    }
                 }
             }
 

@@ -7,13 +7,14 @@ import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ImmersionBar
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
+import com.kopernik.app.base.NewFullScreenBaseActivity
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.TimeConfig
 import com.kopernik.app.config.UserConfig
 import com.kopernik.app.factory.ViewModelFactory
 import com.kopernik.app.utils.ApplicationCheck
 
-class SplashActivity : NewBaseActivity<NoViewModel, ViewDataBinding>() {
+class SplashActivity : NewFullScreenBaseActivity<NoViewModel, ViewDataBinding>() {
     var mViewModel = ViewModelFactory.factory().splashViewModel
     override fun layoutId() = R.layout.activity_splash
 

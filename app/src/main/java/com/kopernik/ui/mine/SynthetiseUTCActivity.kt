@@ -13,12 +13,15 @@ import com.kopernik.app.base.NewFullScreenBaseActivity
 import com.kopernik.app.dialog.UDMTDialog
 
 import kotlinx.android.synthetic.main.activity_snythetise_utc.*
+import kotlinx.android.synthetic.main.activity_snythetise_utc.ivSound
+import kotlinx.android.synthetic.main.activity_snythetise_utc.lottieAnimationView
 import kotlinx.android.synthetic.main.activity_udmt_asset.*
+import kotlinx.android.synthetic.main.fragment_trade.*
 import java.io.IOException
 
 
 class SynthetiseUTCActivity : NewFullScreenBaseActivity<NoViewModel,ViewDataBinding>() {
-
+    var isOpenSound=false
     override fun layoutId()=R.layout.activity_snythetise_utc
     var player = MediaPlayer()
     override fun initView(savedInstanceState: Bundle?) {
@@ -40,27 +43,38 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<NoViewModel,ViewDataBind
             e.printStackTrace()
         }
         //合成utc
-        llSnythetiseUTC.setOnClickListener {
-            ///兑换
-                var dialog = UDMTDialog.newInstance(1)
-            dialog!!.setOnRequestListener(object : UDMTDialog.RequestListener {
-                    override fun onRequest(type: Int, params: String) {
-
-                    }
-                })
-            dialog!!.show(supportFragmentManager, "withdrawRecommed")
+//        llSnythetiseUTC.setOnClickListener {
+//            ///兑换
+//                var dialog = UDMTDialog.newInstance(1)
+//            dialog!!.setOnRequestListener(object : UDMTDialog.RequestListener {
+//                    override fun onRequest(type: Int, params: String) {
+//
+//                    }
+//                })
+//            dialog!!.show(supportFragmentManager, "withdrawRecommed")
+//        }
+        ivSound.setOnClickListener {
+            if (!isOpenSound){
+                isOpenSound=true
+                //打开音乐
+                player.start()
+                ivSound.setImageResource(R.mipmap.ic_open_sound)
+            }else{
+                //关闭音乐
+                isOpenSound=false
+                player.pause()
+                ivSound.setImageResource(R.mipmap.ic_close_sound)
+            }
         }
-
     }
 
     override fun onResume() {
-        player.start()
         super.onResume()
         lottieAnimationView.playAnimation()
     }
     override fun onDestroy() {
-        player.stop()
         super.onDestroy()
+        player.stop()
         lottieAnimationView.cancelAnimation()
     }
 

@@ -236,7 +236,7 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
         var adapter= ChoseAreaAdapter(list)
         adapter.setOnItemClickListener { adapter, view, position ->
             tvPhoneHead.text=(adapter.data[position] as LoginCountryBean).header
-            ivPhoneHead.setBackgroundResource((adapter.data[position] as LoginCountryBean).resId)
+            ivPhoneHead.setImageResource((adapter.data[position] as LoginCountryBean).resId)
             popupWindow.dismiss()
         }
         recycleView?.adapter=adapter

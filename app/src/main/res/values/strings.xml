@@ -537,6 +537,8 @@
     <string name="nav_title_my">我的</string>
     <!--    我的相关-->
     <string name="name_verified">实名认证</string>
+    <string name="no_setting">未设置</string>
+    <string name="had_settting">已设置</string>
     <string name="name_auth_sucess">实名认证成功</string>
     <string name="google_verified">谷歌认证</string>
     <string name="login_password">登录密码</string>
@@ -617,12 +619,14 @@
     <string name="mining_machine_times">倍</string>
     <string name="pay_uyt_coins">消耗等额UYT</string>
     <string name="uyt_balance">UYT余额</string>
+    <string name="input_counts">输入数量</string>
     <string name="mining_machine_type1">体验矿机</string>
     <string name="mining_machine_type2">微型矿机</string>
     <string name="mining_machine_type3">中型矿机</string>
     <string name="mining_machine_type4">大型矿机</string>
     <string name="mining_machine_type5">云型矿机</string>
     <string name="mining_machine_type6">超级矿机</string>
+    <string name="current_exchange_precent">当前兑换比例</string>
     <!--    生态相关-->
     <string name="ecology_tab_title">Kopernik  NETWORK生态应用场景</string>
     <string name="ecology_tab_title1_1">合成UTC</string>
