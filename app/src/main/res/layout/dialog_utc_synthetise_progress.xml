@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+  <FrameLayout
+      android:id="@+id/flProgress"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.39"
+      android:layout_width="wrap_content"
+      android:visibility="visible"
+      android:layout_height="wrap_content">
+     <ImageView
+         android:id="@+id/ivProgressBarBg"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:src="@mipmap/ic_progress_bar_bg" />
+     <com.kopernik.app.widget.RoundProgressBar
+         android:id="@+id/roundProgressBar"
+         android:layout_width="160dp"
+         android:layout_height="160dp"
+         app:roundColor="@color/color_736749"
+         app:roundProgressColor="@color/color_FFCF32"
+         app:roundWidth="10dip"
+         android:layout_gravity="center"
+         app:textColor="@color/color_FFCF32"
+         app:textIsDisplayable="true"
+         app:textSize="18sp" />
+  </FrameLayout>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/clCoinSuccess"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.39"
+    android:visibility="gone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+   <ImageView
+       android:id="@+id/ivGetCoinBg"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:src="@mipmap/ic_mine_coin_bg" />
+
+   <ImageView
+       android:id="@+id/ivCoin"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="84dp"
+       android:src="@mipmap/ic_mine_coin"
+       android:paddingLeft="@dimen/dp_15"
+       android:paddingRight="@dimen/dp_15"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="@+id/ivGetCoinBg" />
+
+   <TextView
+       android:id="@+id/tvGetCoin"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="28dp"
+       android:text="恭喜你获得8个UTC"
+       android:textColor="@color/white"
+       android:textSize="@dimen/sp_18"
+       android:textStyle="bold"
+       app:layout_constraintEnd_toEndOf="@+id/ivGetCoinBg"
+       app:layout_constraintHorizontal_bias="0.498"
+       app:layout_constraintStart_toStartOf="@+id/ivGetCoinBg"
+       app:layout_constraintTop_toBottomOf="@+id/ivCoin" />
+
+   <TextView
+       android:id="@+id/tvIKnow"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="40dp"
+       android:background="@drawable/ecology_tab_press"
+       android:gravity="center"
+       android:paddingTop="10dp"
+       android:paddingBottom="10dp"
+       android:text="@string/i_know"
+       android:textColor="@color/black"
+       android:textSize="@dimen/sp_15"
+       android:textStyle="bold"
+       app:layout_constraintEnd_toEndOf="@+id/ivCoin"
+       app:layout_constraintStart_toStartOf="@+id/ivCoin"
+       app:layout_constraintTop_toBottomOf="@+id/tvGetCoin" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

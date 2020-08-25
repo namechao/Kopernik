@@ -11,6 +11,8 @@ import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.base.NewFullScreenBaseActivity
 import com.kopernik.app.dialog.UDMTDialog
+import com.kopernik.app.dialog.UTCDialog
+import com.kopernik.app.dialog.UTCSynthetiseProgerssDialog
 
 import kotlinx.android.synthetic.main.activity_snythetise_utc.*
 import kotlinx.android.synthetic.main.activity_snythetise_utc.ivSound
@@ -43,16 +45,18 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<NoViewModel,ViewDataBind
             e.printStackTrace()
         }
         //合成utc
-//        llSnythetiseUTC.setOnClickListener {
+        ivSnythetise.setOnClickListener {
+            var dialog = UTCSynthetiseProgerssDialog.newInstance(1)
+            dialog!!.show(supportFragmentManager, "progress")
 //            ///兑换
-//                var dialog = UDMTDialog.newInstance(1)
-//            dialog!!.setOnRequestListener(object : UDMTDialog.RequestListener {
+//                var dialog = UTCDialog.newInstance(1)
+//            dialog!!.setOnRequestListener(object : UTCDialog.RequestListener {
 //                    override fun onRequest(type: Int, params: String) {
 //
 //                    }
 //                })
 //            dialog!!.show(supportFragmentManager, "withdrawRecommed")
-//        }
+        }
         ivSound.setOnClickListener {
             if (!isOpenSound){
                 isOpenSound=true

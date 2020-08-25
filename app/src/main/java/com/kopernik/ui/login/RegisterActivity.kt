@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aleyn.mvvm.base.NoViewModel
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
+import com.kopernik.app.base.NewFullScreenBaseActivity
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.dialog.ChoseAreaCodeDialog
 import com.kopernik.app.utils.ToastUtils
@@ -32,7 +33,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 import java.util.ArrayList
 
 
-class RegisterActivity : NewBaseActivity<RegisterViewModel, ViewDataBinding>() {
+class RegisterActivity : NewFullScreenBaseActivity<RegisterViewModel, ViewDataBinding>() {
 
     override fun layoutId() = R.layout.activity_register
     private var registerType=1//默认手机注册
@@ -157,7 +158,10 @@ override fun initData() {
 
      if (registerType==1){
          //手机号不为空
-         if (etInput.text.toString().trim().isNullOrEmpty()) ToastUtils.showShort(this, resources.getString(R.string.phone_not_empty))
+         if (etInput.text.toString().trim().isNullOrEmpty()) {
+             ToastUtils.showShort(this, resources.getString(R.string.phone_not_empty))
+             return@setOnClickListener
+         }
          if (!etInput.text.toString()
                  .trim().matches(
                      Regex("1[0-9]{10}"))
@@ -269,7 +273,7 @@ private fun resetOkBtn() {
         var adapter= ChoseAreaAdapter(list)
         adapter.setOnItemClickListener { adapter, view, position ->
             tvPhoneHead.text=(adapter.data[position] as LoginCountryBean).header
-            ivPhoneHead.setBackgroundResource((adapter.data[position] as LoginCountryBean).resId)
+            ivPhoneHead.setImageResource((adapter.data[position] as LoginCountryBean).resId)
             popupWindow.dismiss()
         }
         recycleView?.adapter=adapter

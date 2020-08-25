@@ -41,7 +41,7 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
             changePasswordType=it
         }
         if (changePasswordType==1) {
-            setTitle(resources.getString(R.string.setup_login_password))
+            setTitle(resources.getString(R.string.login_forget_psw))
         }else{
             setTitle(resources.getString(R.string.login_change_password))
         }
@@ -97,7 +97,10 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
                     }
                 }
             }else{//邮箱获取验证码
-                if (etInput.text.toString().trim().isNullOrEmpty()) ToastUtils.showShort(this, resources.getString(R.string.email_not_empty))
+                if (etInput.text.toString().trim().isNullOrEmpty()) {
+                    ToastUtils.showShort(this, resources.getString(R.string.email_not_empty))
+                    return@setOnClickListener
+                }
                 if (!etInput.text.toString()
                         .trim().matches(
                             Regex("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}"))
@@ -122,7 +125,10 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
         confirmBtn.setOnClickListener {
             if (registerType==1){
                 //手机号不为空
-                if (etInput.text.toString().trim().isNullOrEmpty()) ToastUtils.showShort(this, resources.getString(R.string.phone_not_empty))
+                if (etInput.text.toString().trim().isNullOrEmpty()){
+                    ToastUtils.showShort(this, resources.getString(R.string.phone_not_empty))
+                    return@setOnClickListener
+                }
                 if (!etInput.text.toString()
                         .trim().matches(
                             Regex("1[0-9]{10}"))

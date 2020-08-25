@@ -1,5 +1,6 @@
 package com.kopernik.ui.my.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
@@ -17,6 +18,8 @@ import com.kopernik.ui.Ecology.fragment.NodeListFragment
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.Ecology.viewModel.NodeViewModel
+import com.kopernik.ui.MainActivity
+import com.kopernik.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.fragment_my.*
 import java.util.*
 private const val ARG_PARAM1 = "param1"
@@ -107,6 +110,14 @@ class MyFragment : NewBaseFragment<NodeViewModel, ViewDataBinding>() {
          //邀请朋友
           inviteFriends.setOnClickListener {
             activity?.let { LaunchConfig.startInviteFriendsActivity(it) }
+        }
+        exitLogin.setOnClickListener {
+            UserConfig.singleton?.accountString=null
+            val intent =
+                Intent(context, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            activity?.finish()
         }
     }
 

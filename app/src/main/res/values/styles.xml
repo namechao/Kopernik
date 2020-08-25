@@ -12,7 +12,7 @@
         <!--<item name="android:windowBackground">@color/splash</item>-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">@mipmap/ic_splash</item>
+<!--        <item name="android:windowBackground">@mipmap/ic_splash</item>-->
     </style>
 
     <style name="my_dialog" parent="@android:style/Theme.Holo.DialogWhenLarge">

@@ -22,6 +22,7 @@ import com.aleyn.mvvm.base.NoViewModel
 import com.gyf.immersionbar.ImmersionBar
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
+import com.kopernik.app.base.NewFullScreenBaseActivity
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.ChoseAreaCodeDialog
@@ -50,9 +51,10 @@ import kotlinx.android.synthetic.main.activity_login.tvPhoneRegister
 import kotlinx.android.synthetic.main.activity_login.tvPhoneRegisterLine
 import kotlinx.android.synthetic.main.activity_login.tvSeekBar
 import kotlinx.android.synthetic.main.activity_login.tvVerifySu
+import kotlinx.android.synthetic.main.activity_register.*
 import java.util.ArrayList
 
-class LoginActivity : NewBaseActivity<LoginViewModel, ViewDataBinding>() {
+class LoginActivity : NewFullScreenBaseActivity<LoginViewModel, ViewDataBinding>() {
     private var registerType=1//默认手机注册
     private var slideVerify=false
     private var openEye=false
@@ -74,15 +76,6 @@ class LoginActivity : NewBaseActivity<LoginViewModel, ViewDataBinding>() {
         //协议
         userProtocol.setOnClickListener {
           LaunchConfig.startUserProtocolActivity(this)
-        }
-        tvPhoneHead.setOnClickListener {
-            var doialog = ChoseAreaCodeDialog.newInstance(1)
-            doialog!!.setOnRequestListener(object : ChoseAreaCodeDialog.RequestListener {
-                override fun onRequest(type: Int, params: String) {
-
-                }
-            })
-            doialog!!.show(supportFragmentManager, "doialog")
         }
         sbProgress.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -107,6 +100,7 @@ class LoginActivity : NewBaseActivity<LoginViewModel, ViewDataBinding>() {
             }
 
         })
+        //显示区号选择
         llHeader.setOnClickListener {
             showDialog()
         }
@@ -240,10 +234,11 @@ class LoginActivity : NewBaseActivity<LoginViewModel, ViewDataBinding>() {
         var adapter= ChoseAreaAdapter(list)
         adapter.setOnItemClickListener { adapter, view, position ->
             tvPhoneHead.text=(adapter.data[position] as LoginCountryBean).header
-            ivPhoneHead.setBackgroundResource((adapter.data[position] as LoginCountryBean).resId)
+            ivPhoneHead.setImageResource((adapter.data[position] as LoginCountryBean).resId)
             popupWindow.dismiss()
         }
         recycleView?.adapter=adapter
+
 
 //        window.width = recycleView.getWidth()
         // 设置动画

@@ -45,7 +45,7 @@
     <string name="audit_failures">审核失败</string>
 
     <string name="transform_time">转换时间</string>
-    <string name="i_know">我知道了</string>
+
     <string name="string_yes">是</string>
     <string name="string_no">否</string>
 
@@ -537,6 +537,7 @@
     <string name="nav_title_my">我的</string>
     <!--    我的相关-->
     <string name="name_verified">实名认证</string>
+    <string name="exit_login">退出登录</string>
     <string name="no_setting">未设置</string>
     <string name="had_settting">已设置</string>
     <string name="name_auth_sucess">实名认证成功</string>
@@ -599,8 +600,10 @@
    <string name="save_to_picture">保存至相册</string>
    <string name="save_to_picture_success">已保存至相册</string>
     <!--    矿场相关-->
+   <string name="i_know">我知道了</string>
     <string name="income">累计收益(UTDM)</string>
     <string name="synthesis_utc">合成UTC</string>
+    <string name="synthesis_bt">合成</string>
     <string name="purchase_mm_tip">购买矿机挖矿</string>
     <string name="purchase_mm_tip1">最多可达3倍收益回报</string>
     <string name="ic_mm_tip1">3倍总收益</string>
