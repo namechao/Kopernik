@@ -8,7 +8,7 @@ import com.kopernik.ui.asset.entity.*
 
 class AssetRepository private constructor(private val newWork: AssetNetWork):BaseModel(){
 
-    suspend fun getAsset(): BaseResult<AssetBean> {
+    suspend fun getAsset(): BaseResult<AssetEntity> {
         return newWork.getAsset()
     }
 
@@ -16,9 +16,7 @@ class AssetRepository private constructor(private val newWork: AssetNetWork):Bas
         return newWork.getTobeExtractedList(map)
     }
 
-    suspend fun getAssetDetails(map: Map<String?, String?>): BaseResult<AssetDetailsChildBean> {
-        return newWork.getAssetDetails(map)
-    }
+
 
     suspend fun submitWithDrawlCoin(map: Map<String, String>): BaseResult<Any> {
         return newWork.submitWithDrawlCoin(map)
@@ -41,17 +39,17 @@ class AssetRepository private constructor(private val newWork: AssetNetWork):Bas
         return newWork.getGains(iconType)
     }
 
-    suspend fun deposit(iconType: String): BaseResult<AddressHash> {
-        return newWork.deposit(iconType)
-    }
-
-    suspend fun cashwithdrawal(iconType: String): BaseResult<AvailableAmount> {
-        return newWork.cashwithdrawal(iconType)
-    }
-
-    suspend fun transferaccount(iconType: String): BaseResult<TransferAccount> {
-        return newWork.transferaccount(iconType)
-    }
+//    suspend fun deposit(iconType: String): BaseResult<AddressHash> {
+//        return newWork.deposit(iconType)
+//    }
+//
+//    suspend fun cashwithdrawal(iconType: String): BaseResult<AvailableAmount> {
+//        return newWork.cashwithdrawal(iconType)
+//    }
+//
+//    suspend fun transferaccount(iconType: String): BaseResult<TransferAccount> {
+//        return newWork.transferaccount(iconType)
+//    }
 
     suspend fun saveGains(): BaseResult<Any> {
         return newWork.saveGains()

@@ -18,6 +18,8 @@ class HomeNetWork {
     suspend fun addContact(map: Map<String, String>) = mService.addContact(map)
     suspend fun checkAppVersion() = mService.checkAppVersion()
     suspend fun getContacts() = mService.getContacts()
+    suspend fun getMachineList() = mService.getMachineList()
+    suspend fun getMachine( map:Map<String,String>) = mService.getMachine(map)
     suspend fun delContact(id: Int) = mService.delContact(id)
     suspend fun realNameAuth(name: String,idCard:String) = mService.realNameAuth(name,idCard)
     suspend fun getGains(iconType: String) = mService.getGains(iconType)

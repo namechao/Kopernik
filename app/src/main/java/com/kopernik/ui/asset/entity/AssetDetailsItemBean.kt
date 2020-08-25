@@ -1,7 +1,7 @@
 package com.kopernik.ui.asset.entity
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
-
+data class AssetBean(val data:String)
 class AssetDetailsItemBean : MultiItemEntity {
     private var itemType: Int
     var titleName: String? = null

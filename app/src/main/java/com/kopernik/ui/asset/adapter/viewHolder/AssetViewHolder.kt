@@ -17,6 +17,30 @@ class AssetViewHolder(view: View?) : BaseViewHolder(view) {
             return field
         }
         private set
+    var assetHead: ImageView? = null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.asset_head)
+            }
+            return field
+        }
+        private set
+    var assetCounts: TextView? = null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.asset_counts)
+            }
+            return field
+        }
+        private set
+    var assetCny: TextView? = null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.asset_cny)
+            }
+            return field
+        }
+        private set
 
 
 

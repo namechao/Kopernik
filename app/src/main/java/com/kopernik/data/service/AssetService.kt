@@ -13,8 +13,8 @@ import retrofit2.http.*
 interface AssetService {
 
     //获取所有资产
-    @GET("asset/asset")
-    suspend fun getAsset(): BaseResult<AssetBean>
+    @GET("asset/details")
+    suspend fun getAsset(): BaseResult<AssetEntity>
 
     //跨链充提记录
     @GET("asset/cashwithdrawalrecord")
@@ -27,21 +27,15 @@ interface AssetService {
     //取消提现
     @GET
     suspend fun cancelcash(@Url url: String): BaseResult<Any>
-
-    //资产详情
-    @FormUrlEncoded
-    @POST("asset/record")
-    suspend fun getDetailsAsset(@FieldMap map: Map<String?, String?>): BaseResult<AssetDetailsChildBean>
-
-    //充币按钮
-    @GET("asset/recharge")
-    suspend fun deposit(@Query("iconType") iconType:String): BaseResult<AddressHash>
-    //提币按钮校验
-    @GET("asset/cashwithdrawal")
-    suspend fun cashwithdrawal(@Query("iconType") iconType:String): BaseResult<AvailableAmount>
-    //转账按钮校验
-    @GET("asset/transferaccount")
-    suspend fun transferaccount(@Query("iconType") iconType: String): BaseResult<TransferAccount>
+//    //充币按钮
+//    @GET("asset/recharge")
+//    suspend fun deposit(@Query("iconType") iconType:String): BaseResult<AddressHash>
+//    //提币按钮校验
+//    @GET("asset/cashwithdrawal")
+//    suspend fun cashwithdrawal(@Query("iconType") iconType:String): BaseResult<AvailableAmount>
+//    //转账按钮校验
+//    @GET("asset/transferaccount")
+//    suspend fun transferaccount(@Query("iconType") iconType: String): BaseResult<TransferAccount>
 
     //获取推荐收益
     @GET("asset/gains")

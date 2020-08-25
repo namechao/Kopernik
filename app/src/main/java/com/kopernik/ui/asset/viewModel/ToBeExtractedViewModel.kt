@@ -20,7 +20,7 @@ class ToBeExtractedViewModel : BaseViewModel() {
 
     fun cancelWithdrawl(map: Map<String?, String?>): MutableLiveData<BaseResult<AssetDetailsChildBean>> {
         launchGo({
-            assetDetailsBean.value = homeRepository.getAssetDetails(map)
+//            assetDetailsBean.value = homeRepository.getAssetDetails(map)
         })
         return assetDetailsBean
     }

@@ -540,6 +540,8 @@
     <string name="exit_login">退出登录</string>
     <string name="no_setting">未设置</string>
     <string name="had_settting">已设置</string>
+    <string name="had_verified">已验证</string>
+    <string name="no_verify">未验证</string>
     <string name="name_auth_sucess">实名认证成功</string>
     <string name="google_verified">谷歌认证</string>
     <string name="login_password">登录密码</string>
@@ -616,9 +618,9 @@
     <string name="balance_not_enough">（当前余额不足）</string>
     <string name="mining_machine_name">矿机名称</string>
     <string name="mining_machine_price">矿机价格</string>
-    <string name="mining_machine_speed">挖矿速度</string>
+    <string name="mining_machine_speed">当前算速</string>
     <string name="mining_machine_update_counts">(每日更新一次)</string>
-    <string name="mining_wave_counts">定波数</string>
+    <string name="mining_power">挖矿算力</string>
     <string name="mining_machine_times">倍</string>
     <string name="pay_uyt_coins">消耗等额UYT</string>
     <string name="uyt_balance">UYT余额</string>

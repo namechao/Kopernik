@@ -13,8 +13,10 @@ import com.aleyn.mvvm.base.NoViewModel
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseFragment
 import com.kopernik.app.dialog.ReminderDialog
+import com.kopernik.ui.home.ViewModel.HomeViewModel
 import com.kopernik.ui.home.adadpter.AutoPollAdapter
 import com.kopernik.ui.home.adadpter.HomeAdapter
+import com.kopernik.ui.home.viewholder.HomeViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -31,7 +33,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
  * @UpdateRemark:   更新说明
  * @Version:        1.0
  */
-open class HomeFragment: NewBaseFragment<NoViewModel, ViewDataBinding>() {
+open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
 
     companion object{
         fun newInstance() = HomeFragment()

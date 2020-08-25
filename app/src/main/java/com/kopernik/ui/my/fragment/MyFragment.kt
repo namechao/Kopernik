@@ -35,7 +35,10 @@ class MyFragment : NewBaseFragment<NodeViewModel, ViewDataBinding>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         UserConfig.singleton?.accountBean?.phone?.let {
-            tvPhoneNumber.text=it
+            if (it.length>5){
+                tvPhoneNumber.text="${it.subSequence(0,3)} ****${it.subSequence(it.length-4,it.length)}"
+            }
+
         }
         UserConfig.singleton?.accountBean?.email?.let {
             tvPhoneNumber.text=it
@@ -45,9 +48,9 @@ class MyFragment : NewBaseFragment<NodeViewModel, ViewDataBinding>() {
         }
         //是否实名
         if (UserConfig.singleton?.accountBean?.name.isNullOrEmpty()){
-            realNameAuth.setRightString(getString(R.string.no_setting))
+            realNameAuth.setRightString(getString(R.string.no_verify))
         }else{
-            realNameAuth.setRightString(getString(R.string.had_settting))
+            realNameAuth.setRightString(getString(R.string.had_verified))
         }
         //交易密码
         if (UserConfig.singleton?.accountBean?.salePwd.isNullOrEmpty()){

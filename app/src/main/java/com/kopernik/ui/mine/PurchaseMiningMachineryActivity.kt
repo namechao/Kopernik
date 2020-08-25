@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aleyn.mvvm.base.NoViewModel
 import com.kopernik.R
@@ -14,16 +15,22 @@ import com.kopernik.app.dialog.PurchaseDialog
 import com.kopernik.ui.mine.adapter.OutTimeMiningMAdapter
 import com.kopernik.ui.mine.adapter.PurchaseMiningMAdapter
 import com.kopernik.ui.mine.adapter.RuntimeMiningMAdapter
+import com.kopernik.ui.mine.viewModel.MineMachineryViewModel
+import com.scwang.smartrefresh.layout.api.RefreshLayout
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener
 import kotlinx.android.synthetic.main.activity_purchase_mining_machinery.*
 import kotlinx.android.synthetic.main.activity_purchase_mining_machinery.llTab
 import kotlinx.android.synthetic.main.activity_purchase_mining_machinery.recyclerView
 import kotlinx.android.synthetic.main.activity_udmt_asset.*
 
 
-class PurchaseMiningMachineryActivity : NewBaseActivity<NoViewModel,ViewDataBinding>() {
+class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,ViewDataBinding>() {
 
     override fun layoutId()=R.layout.activity_purchase_mining_machinery
-
+    //0购买矿机列表 1有效矿机 2过期矿机
+    private var machinngType=0
+    var adapter= PurchaseMiningMAdapter(arrayListOf())
+    
     override fun initView(savedInstanceState: Bundle?) {
         setTitle(getString(R.string.title_purchase_mm))
         //购买矿机
@@ -32,34 +39,51 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<NoViewModel,ViewDataBind
         llTab1.setOnClickListener { onTabOnClick(false,true,false) }
         //过时矿机
         llTab2.setOnClickListener {  onTabOnClick(false,false,true)}
-    }
-
-
-    override fun initData() {
-        var list= arrayListOf("gadgg","asfagadga","asfafas","asagagasgadgdsfdsfasfa","ssdsdad","Asdadasdasda","asfafafafaa")
-        recyclerView.layoutManager= LinearLayoutManager(this)
-        var adpter= PurchaseMiningMAdapter(list)
-        adpter.setOnItemClickListener { adapter, view, position ->
-
+        smartRefreshLayout.setOnRefreshListener {
+            getList()
+        }
+        adapter?.setOnItemChildClickListener { adapter, view, position -> 
+            if (view.id==R.id.tv_purchase){
                 var dialog = PurchaseDialog.newInstance(1)
-            dialog!!.setOnRequestListener(object : PurchaseDialog.RequestListener {
+                dialog!!.setOnRequestListener(object : PurchaseDialog.RequestListener {
                     override fun onRequest(type: Int, params: String) {
 
                     }
                 })
-            dialog!!.show(supportFragmentManager, "withdrawRecommed")
+                dialog!!.show(supportFragmentManager, "withdrawRecommed")
+            }
         }
-        recyclerView.adapter=adpter
+        smartRefreshLayout.autoRefresh()
+    }
+    fun getList(){
+        viewModel.run {
+            getMachineList().observe(this@PurchaseMiningMachineryActivity, Observer { data ->
+                smartRefreshLayout.finishRefresh()
+                 if (data.status==200){
+                     data.data.nachineList?.let {
+                         adapter?.setNewData(it)
+                     }
+                    
+                 }
+            })
+//            var map= mapOf("status" to "1","pageNumber" to "1" ,"pageSize" to "10")
+//            getMachine(map).observe(this@PurchaseMiningMachineryActivity, Observer {
+//
+//            })
+        }
+    }
 
 
-
+    override fun initData() {
+        recyclerView.layoutManager= LinearLayoutManager(this)
+        recyclerView.adapter=adapter
         recyclerView1.layoutManager= LinearLayoutManager(this)
-        var adpter1= RuntimeMiningMAdapter(list)
+        var adpter1= RuntimeMiningMAdapter(arrayListOf())
         recyclerView1.adapter=adpter1
 
 
         recyclerView2.layoutManager= LinearLayoutManager(this)
-        var adpter2= OutTimeMiningMAdapter(list)
+        var adpter2= OutTimeMiningMAdapter(arrayListOf())
         recyclerView2.adapter=adpter2
     }
 

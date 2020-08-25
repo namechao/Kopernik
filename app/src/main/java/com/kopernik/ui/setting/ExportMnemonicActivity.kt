@@ -9,18 +9,19 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
+import com.aleyn.mvvm.base.NoViewModel
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.ToastUtils
-import com.kopernik.ui.setting.viewModel.ExportMnemonicViewModel
 import kotlinx.android.synthetic.main.activity_export_mnemonic.*
 
-class ExportMnemonicActivity : NewBaseActivity<ExportMnemonicViewModel,ViewDataBinding>() {
+class ExportMnemonicActivity : NewBaseActivity<NoViewModel,ViewDataBinding>() {
 
     private var pwdEt: EditText? = null
+
     override fun layoutId()=R.layout.activity_export_mnemonic
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -31,7 +32,7 @@ class ExportMnemonicActivity : NewBaseActivity<ExportMnemonicViewModel,ViewDataB
         pwdEt?.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT)
         pwdEt?.addTextChangedListener(textWatcher)
         pwdEt?.setHint(getString(R.string.please_input_pass))
-        okBtn.setOnClickListener { exportMnemonic() }
+        okBtn.setOnClickListener {}
     }
     var textWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(
@@ -55,28 +56,28 @@ class ExportMnemonicActivity : NewBaseActivity<ExportMnemonicViewModel,ViewDataB
         }
     }
 
-    private fun exportMnemonic() {
-        viewModel.run {
-            exportMnemonic(pwdEt?.text.toString().trim()).observe(this@ExportMnemonicActivity,
-                Observer {
-                    if (it.status==200) {
-                        if (it.data.toString().equals("true")) {
-//                            UserConfig.singleton?.mnemonic?.let {
-//                                LaunchConfig.startExportMnemonicSuccessAc(
-//                                    this@ExportMnemonicActivity
-//                                )
-//                            }
-
-                        finish()
-                        } else {
-                            ToastUtils.showShort(getActivity(), getString(R.string.error_406))
-                        }
-                    }else{
-                        ErrorCode.showErrorMsg(getActivity(), it.status)
-                    }
-                })
-        }
-    }
+//    private fun exportMnemonic() {
+//        viewModel.run {
+//            exportMnemonic(pwdEt?.text.toString().trim()).observe(this@ExportMnemonicActivity,
+//                Observer {
+//                    if (it.status==200) {
+//                        if (it.data.toString().equals("true")) {
+////                            UserConfig.singleton?.mnemonic?.let {
+////                                LaunchConfig.startExportMnemonicSuccessAc(
+////                                    this@ExportMnemonicActivity
+////                                )
+////                            }
+//
+//                        finish()
+//                        } else {
+//                            ToastUtils.showShort(getActivity(), getString(R.string.error_406))
+//                        }
+//                    }else{
+//                        ErrorCode.showErrorMsg(getActivity(), it.status)
+//                    }
+//                })
+//        }
+//    }
     override fun initData() {
 
     }

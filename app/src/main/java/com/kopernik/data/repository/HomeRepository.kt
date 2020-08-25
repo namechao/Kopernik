@@ -6,6 +6,7 @@ import com.kopernik.data.network.HomeNetWork
 import com.kopernik.ui.login.bean.AccountBean
 import com.kopernik.ui.asset.entity.ExtractBean
 import com.kopernik.ui.login.bean.User
+import com.kopernik.ui.mine.entity.MineBean
 import com.kopernik.ui.my.bean.InviteFriendsEntity
 import com.kopernik.ui.my.bean.InviteFriendsItem
 import com.kopernik.ui.setting.entity.ContactBean
@@ -44,6 +45,12 @@ class HomeRepository private constructor(private val newWork: HomeNetWork):BaseM
 
     suspend fun addContact(map: Map<String, String>): BaseResult<Any> {
         return newWork.addContact(map)
+    }
+  suspend fun getMachineList(): BaseResult<MineBean> {
+        return newWork.getMachineList()
+    }
+  suspend fun getMachine( map:Map<String,String>): BaseResult<Any> {
+        return newWork.getMachine(map)
     }
 
     suspend fun getContacts(): BaseResult<ContactBean> {

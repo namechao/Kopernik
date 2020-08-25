@@ -4,6 +4,7 @@ import com.pcl.mvvm.app.base.BaseResult
 import com.kopernik.ui.login.bean.AccountBean
 import com.kopernik.ui.asset.entity.ExtractBean
 import com.kopernik.ui.login.bean.User
+import com.kopernik.ui.mine.entity.MineBean
 import com.kopernik.ui.my.bean.InviteFriendsEntity
 import com.kopernik.ui.my.bean.InviteFriendsItem
 import com.kopernik.ui.setting.entity.ContactBean
@@ -53,6 +54,12 @@ interface HomeService {
     //获取联系人列表
     @GET("register/getcontacts")
     suspend fun getContacts(): BaseResult<ContactBean>
+  //获取矿机列表
+    @GET("seckill/machineList")
+    suspend fun getMachineList(): BaseResult<MineBean>
+ //获取可用矿机
+    @GET("seckill/getMachine")
+    suspend fun getMachine(@QueryMap map:Map<String,String>): BaseResult<Any>
 
     //添加联系人
     @FormUrlEncoded

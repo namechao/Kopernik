@@ -16,7 +16,7 @@ import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.asset.adapter.UYTDepositWithdrawlAssetAdapter
 import com.kopernik.ui.asset.adapter.UYTTransferAssetAdapter
-import com.kopernik.ui.asset.entity.AssetBean
+
 import com.kopernik.ui.asset.entity.AssetDetailsItemBean
 import com.kopernik.ui.asset.entity.WithdrawEarningsBean
 import com.kopernik.ui.asset.viewModel.AssetDetailsViewModel
@@ -36,7 +36,6 @@ class UYTAssetActivity : NewFullScreenBaseActivity<AssetDetailsViewModel, ViewDa
     private var chainName: String = "UYT"
     private var chooseType = "ALL"
     private var adapter: UYTDepositWithdrawlAssetAdapter? = null
-    private var assetBean: AssetBean? = null
     private var pageNumber = 1
     private val pageSize = 10
     private var chainType = 1
@@ -69,16 +68,16 @@ class UYTAssetActivity : NewFullScreenBaseActivity<AssetDetailsViewModel, ViewDa
         smartRefreshLayout.autoRefresh()
         smartRefreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(@NonNull refreshLayout: RefreshLayout) {
-                getData()
+//                getData()
             }
 
             override fun onRefresh(@NonNull refreshLayout: RefreshLayout) {
                 pageNumber = 1
-                if (assetBean == null) {
-//                    getAssetAndListData()
-                } else {
-//                    getData()
-                }
+//                if (assetBean == null) {
+////                    getAssetAndListData()
+//                } else {
+////                    getData()
+//                }
             }
         })
 
@@ -100,17 +99,17 @@ class UYTAssetActivity : NewFullScreenBaseActivity<AssetDetailsViewModel, ViewDa
         //转账
         transfer.setOnClickListener {
             viewModel.run {
-                transferaccount(chainName).observe(this@UYTAssetActivity, Observer {
-                    if (it.status == 200) {
-                        LaunchConfig.startTransferAc(
-                            this@UYTAssetActivity,
-                            chainType,
-                            chainName
-                        )
-                    } else {
-                        ToastUtils.showShort(this@UYTAssetActivity, it.errorMsg)
-                    }
-                })
+//                transferaccount(chainName).observe(this@UYTAssetActivity, Observer {
+//                    if (it.status == 200) {
+//                        LaunchConfig.startTransferAc(
+//                            this@UYTAssetActivity,
+//                            chainType,
+//                            chainName
+//                        )
+//                    } else {
+//                        ToastUtils.showShort(this@UYTAssetActivity, it.errorMsg)
+//                    }
+//                })
             }
         }
 
@@ -160,39 +159,39 @@ class UYTAssetActivity : NewFullScreenBaseActivity<AssetDetailsViewModel, ViewDa
     //获取资产和下边记录列表
     private fun getAssetAndListData() {
         viewModel.run {
-           getAsset().observe(this@UYTAssetActivity, androidx.lifecycle.Observer {
-               if (it.status==200){
-                   assetBean = it.data
-                        val info =
-                            AssetDetailsItemBean(AssetDetailsItemBean.TYPE_INFO, assetBean)
-                        mainDatas.add(info)
-                        val head = AssetDetailsItemBean(
-                            AssetDetailsItemBean.TYPE_HEADER,
-                            resources.getString(R.string.all)
-                        )
-                        mainDatas.add(head)
-                        getData()
-               } else{
-                   ToastUtils.showShort(getActivity(),it.errorMsg)
-               }
-           })
-
-        }
+//           getAsset().observe(this@UYTAssetActivity, androidx.lifecycle.Observer {
+//               if (it.status==200){
+//                   assetBean = it.data
+//                        val info =
+//                            AssetDetailsItemBean(AssetDetailsItemBean.TYPE_INFO, assetBean)
+//                        mainDatas.add(info)
+//                        val head = AssetDetailsItemBean(
+//                            AssetDetailsItemBean.TYPE_HEADER,
+//                            resources.getString(R.string.all)
+//                        )
+//                        mainDatas.add(head)
+//                        getData()
+//               } else{
+//                   ToastUtils.showShort(getActivity(),it.errorMsg)
+//               }
+//           })
+//
+//        }
 
     }
-    private fun getData() {
-        viewModel.run {
-            var map = mapOf<String?, String?>(
-                "type" to chooseType,
-                "iconType" to chainName,
-                "pageNumber" to pageNumber.toString(),
-                "pageSize" to pageSize.toString()
-            )
-            getAssetDetails(map).observe(this@UYTAssetActivity, Observer {
-
-            })
-        }
-
+//    private fun getData() {
+//        viewModel.run {
+//            var map = mapOf<String?, String?>(
+//                "type" to chooseType,
+//                "iconType" to chainName,
+//                "pageNumber" to pageNumber.toString(),
+//                "pageSize" to pageSize.toString()
+//            )
+//            getAssetDetails(map).observe(this@UYTAssetActivity, Observer {
+//
+//            })
+//        }
+//
     }
 
 

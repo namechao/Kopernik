@@ -193,13 +193,7 @@ object LaunchConfig {
         intent.putExtra("assetTitle", assetTitle)
         context.startActivity(intent)
     }
-    fun startOtherAssetDetailsAc(context: Context, type: Int, assetTitle: String) {
-        val intent =
-            Intent(context, OtherAssetDetailsActivity::class.java)
-        intent.putExtra("type", type)
-        intent.putExtra("assetTitle", assetTitle)
-        context.startActivity(intent)
-    }
+
 
     fun startTransferAc(context: Context, type: Int, chainName: String) {
         val intent =
