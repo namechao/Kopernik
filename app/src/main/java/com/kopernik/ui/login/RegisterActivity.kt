@@ -182,7 +182,7 @@ override fun initData() {
          checkPhone(etInput.text.toString().trim(),verifyCode.text.toString().trim()).observe(this@RegisterActivity, Observer {
              if (it.status == 200) {
                  LaunchConfig.startRegisterSetUpPasswordActivity(this@RegisterActivity,
-                 "1",
+                 1,
                      etInput.text.toString().trim()
                  ,
                      etInviteCode.text.toString().trim()
@@ -215,7 +215,7 @@ override fun initData() {
              checkEMail(etInput.text.toString().trim(),verifyCode.text.toString().trim()).observe(this@RegisterActivity, Observer {
                  if (it.status == 200) {
                      LaunchConfig.startRegisterSetUpPasswordActivity(this@RegisterActivity,
-                         "2",
+                         2,
                          etInput.text.toString().trim()
                          ,
                          etInviteCode.text.toString().trim()

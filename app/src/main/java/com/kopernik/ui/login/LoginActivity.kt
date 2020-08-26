@@ -201,7 +201,7 @@ class LoginActivity : NewFullScreenBaseActivity<LoginViewModel, ViewDataBinding>
                 return@setOnClickListener
             }
                 viewModel.run {
-                    login(registerType.toString(),etInput.text.toString().trim(),MD5Utils.md5(etPassword.text.toString().trim())).observe(this@LoginActivity, Observer {
+                    login(registerType.toString(),etInput.text.toString().trim(),MD5Utils.md5(MD5Utils.md5(etPassword.text.toString().trim()))).observe(this@LoginActivity, Observer {
                         if (it.status == 200) {
                             UserConfig.singleton?.accountBean=it.data.user
                             LaunchConfig.startMainAc(this@LoginActivity)

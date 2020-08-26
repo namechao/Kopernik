@@ -36,7 +36,7 @@ class MyFragment : NewBaseFragment<NodeViewModel, ViewDataBinding>() {
         super.initView(savedInstanceState)
         UserConfig.singleton?.accountBean?.phone?.let {
             if (it.length>5){
-                tvPhoneNumber.text="${it.subSequence(0,3)} ****${it.subSequence(it.length-4,it.length)}"
+                tvPhoneNumber.text="${it.subSequence(0,3)}****${it.subSequence(it.length-4,it.length)}"
             }
 
         }

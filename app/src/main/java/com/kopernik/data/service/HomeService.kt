@@ -4,6 +4,8 @@ import com.kopernik.ui.home.Entity.HomeEntity
 import com.pcl.mvvm.app.base.BaseResult
 import com.kopernik.ui.login.bean.AccountBean
 import com.kopernik.ui.asset.entity.ExtractBean
+import com.kopernik.ui.home.Entity.GetUtkEntity
+import com.kopernik.ui.home.Entity.NoticeEntity
 import com.kopernik.ui.mine.entity.MineBean
 import com.kopernik.ui.mine.entity.OtherMineBean
 import com.kopernik.ui.my.bean.InviteFriendsEntity
@@ -58,6 +60,12 @@ interface HomeService {
     //获取首页数据
     @GET("home/home")
     suspend fun getHomeList(): BaseResult<HomeEntity>
+    //获取首页数据
+    @GET("home/getNotice")
+    suspend fun getNotice(): BaseResult<NoticeEntity>
+    //获取领取utk状态
+    @GET("seckill/getTime")
+    suspend fun getUtk(): BaseResult<GetUtkEntity>
 
   //获取矿机列表
     @GET("seckill/machineList")

@@ -396,6 +396,7 @@
     <string name="error_410">您已创建节点</string>
     <string name="error_411">节点名称已存在</string>
     <string name="error_412">挖矿算力不足，请先映射</string>
+    <string name="error_415">请勿重复提交</string>
     <string name="error_416">投票数量小于或手续费小于0</string>
     <string name="error_418">数量不能为空</string>
     <string name="error_419">手续费不能为空</string>
@@ -633,6 +634,8 @@
     <string name="mining_machine_type6">超级矿机</string>
     <string name="current_exchange_precent">当前兑换比例</string>
     <string name="purchase_success">购买成功</string>
+    <string name="recvice_error">当前不可以领取UKT</string>
+    <string name="recvice_time_tip">的领取时间为</string>
 
     <!--    生态相关-->
     <string name="ecology_tab_title">Kopernik  NETWORK生态应用场景</string>
@@ -711,6 +714,9 @@
     <string name="coin_rise_fall">涨跌幅</string>
     <string name="coin_name_b">24H量 0</string>
     <string name="mine_data_right">/ 流通总量</string>
+    <string name="home_info">恭喜</string>
+    <string name="home_info1">用户，刚刚领取了 </string>
+    <string name="home_info2">枚 </string>
     <!--    资产相关-->
     <string name="asset_total">我的总资产(CNY)</string>
     <string name="asset_utc_balance">UTC余额(CNY)</string>
@@ -735,6 +741,8 @@
     <string name="asset_receive_counts">领取数量</string>
     <string name="asset_transfer_counts">转账数量</string>
     <string name="asset_other_id">对方ID</string>
+    <string name="input_counts_result">请输入计算结果</string>
+    <string name="input_counts_result_error">计算结果不正确</string>
     <string name="asset_mine_m">矿机</string>
     <string name="asset_mine_output">产出量</string>
     <string name="asset_utk_transfer">UTK转账</string>

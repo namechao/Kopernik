@@ -6,6 +6,8 @@ import com.pcl.mvvm.app.base.BaseResult
 import com.kopernik.data.network.HomeNetWork
 import com.kopernik.ui.login.bean.AccountBean
 import com.kopernik.ui.asset.entity.ExtractBean
+import com.kopernik.ui.home.Entity.GetUtkEntity
+import com.kopernik.ui.home.Entity.NoticeEntity
 import com.kopernik.ui.mine.entity.MineBean
 import com.kopernik.ui.mine.entity.OtherMineBean
 import com.kopernik.ui.my.bean.InviteFriendsEntity
@@ -64,6 +66,12 @@ class HomeRepository private constructor(private val newWork: HomeNetWork):BaseM
     }
     suspend fun getHomeList(): BaseResult<HomeEntity> {
         return newWork.getHomeList()
+    }
+    suspend fun getNotice(): BaseResult<NoticeEntity> {
+        return newWork.getNotice()
+    }
+  suspend fun getUtk(): BaseResult<GetUtkEntity> {
+        return newWork.getUtk()
     }
 
     suspend fun delContact(id: Int): BaseResult<Any> {

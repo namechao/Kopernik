@@ -36,7 +36,7 @@ data class Mach(
     val price: String,
     val rate: String,
     val status: String,
-    val type: String,
+    val type: Int,
     val uid: String
 )
 

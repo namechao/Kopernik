@@ -19,6 +19,8 @@ class HomeNetWork {
     suspend fun buyMineMachine(map: Map<String, String>) = mService.buyMineMachine(map)
     suspend fun checkAppVersion() = mService.checkAppVersion()
     suspend fun getHomeList() = mService.getHomeList()
+    suspend fun getNotice() = mService.getNotice()
+    suspend fun getUtk() = mService.getUtk()
     suspend fun getContacts() = mService.getContacts()
     suspend fun getMachineList() = mService.getMachineList()
     suspend fun getMachine( map:Map<String,String>) = mService.getMachine(map)

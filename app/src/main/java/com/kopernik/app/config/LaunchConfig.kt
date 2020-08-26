@@ -87,7 +87,7 @@ object LaunchConfig {
     }
 
     fun startRegisterSetUpPasswordActivity(
-        context: Activity,type:String,acount:String,invitationCode:String
+        context: Activity,type:Int,acount:String,invitationCode:String
     ) {
         val intent = Intent(context, RegisterSetUpPasswordActivity::class.java)
         intent.putExtra("type",type)

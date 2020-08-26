@@ -66,6 +66,39 @@
             app:layout_constraintRight_toRightOf="parent"
            />
 
+        <TextView
+            android:id="@+id/tvCount"
+            android:layout_width="104dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/home_counts_bg"
+            android:gravity="center"
+            android:text="1+2=?"
+            android:textColor="@color/color_24193D"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/etResult"
+            app:layout_constraintStart_toStartOf="@+id/btn"
+            app:layout_constraintTop_toBottomOf="@+id/tvTiming" />
+
+        <EditText
+            android:id="@+id/etResult"
+            android:layout_width="91dp"
+            android:layout_height="@dimen/dp_40"
+            android:background="@drawable/google_code_left"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14"
+            android:inputType="number"
+            android:textCursorDrawable="@null"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCount"
+            app:layout_constraintEnd_toEndOf="@+id/btn"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toRightOf="@+id/tvCount"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvCount" />
         <Button
             android:id="@+id/btn"
             android:layout_width="match_parent"
@@ -80,7 +113,7 @@
             android:textStyle="bold"
             android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTiming"
+            app:layout_constraintTop_toBottomOf="@id/tvCount"
             app:layout_goneMarginTop="@dimen/dp_30"
             tools:layout_editor_absoluteX="15dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>

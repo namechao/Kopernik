@@ -108,7 +108,7 @@ class ForgetPasswordNextActivity : NewBaseActivity<ForgetPasswordViewModel, View
     //导入网络请求
     private fun register() {
         viewModel.run {
-            forgetPassword(type.toString(),account, MD5Utils.md5(etInput?.text.toString().trim())).observe(this@ForgetPasswordNextActivity, androidx.lifecycle.Observer {
+            forgetPassword(type.toString(),account, MD5Utils.md5(MD5Utils.md5(etInput?.text.toString().trim()))).observe(this@ForgetPasswordNextActivity, androidx.lifecycle.Observer {
                 if (it.status==200){
                     ToastUtils.showShort(this@ForgetPasswordNextActivity,this@ForgetPasswordNextActivity.getString(R.string.forget_password_success))
                     setResult(11)

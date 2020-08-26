@@ -118,7 +118,7 @@ class RegisterSetUpPasswordActivity :
     //导入网络请求
     private fun register() {
         viewModel.run {
-            createAccount(type.toString(),acount,invitationCode,MD5Utils.md5(etInput?.text.toString().trim())).observe(this@RegisterSetUpPasswordActivity, androidx.lifecycle.Observer {
+            createAccount(type.toString(),acount,invitationCode,MD5Utils.md5(MD5Utils.md5(etInput?.text.toString().trim()))).observe(this@RegisterSetUpPasswordActivity, androidx.lifecycle.Observer {
              if (it.status==200){
                  UserConfig.singleton?.accountBean=it.data.user
                  ToastUtils.showShort(this@RegisterSetUpPasswordActivity,this@RegisterSetUpPasswordActivity.getString(R.string.register_success))

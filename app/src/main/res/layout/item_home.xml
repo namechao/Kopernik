@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/coinRiseFall"
-        android:layout_width="wrap_content"
+        android:layout_width="72dp"
         android:layout_height="wrap_content"
         android:text="+0.531%"
         android:paddingTop="@dimen/dp_5"
@@ -78,6 +78,7 @@
         android:textStyle="bold"
         android:paddingLeft="@dimen/dp_11"
         android:paddingRight="@dimen/dp_11"
+        android:gravity="center"
         android:background="@drawable/coin_rise_bg"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
