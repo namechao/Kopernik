@@ -59,3 +59,27 @@ data class UytCaptial(
     val type: String,
     val uid: String
 )
+
+
+data class OtherMineBean(
+    val datas: List<Data>,
+    val pageNum: Int,
+    val pageSize: Int,
+    val pages: Int,
+    val total: Int
+)
+
+data class Data(
+    val amount: String,
+    val amountTotal: String,
+    val createTime: String,
+    val email: String,
+    val id: Int,
+    val phone: String,
+    val power: String,
+    val price: String,
+    val rate: String,
+    val status: String,
+    val type: Int,
+    val uid: String
+)

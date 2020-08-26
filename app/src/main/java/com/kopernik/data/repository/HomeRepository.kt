@@ -1,14 +1,14 @@
 package com.kopernik.data.repository
 
 import com.aleyn.mvvm.base.BaseModel
+import com.kopernik.ui.home.Entity.HomeEntity
 import com.pcl.mvvm.app.base.BaseResult
 import com.kopernik.data.network.HomeNetWork
 import com.kopernik.ui.login.bean.AccountBean
 import com.kopernik.ui.asset.entity.ExtractBean
-import com.kopernik.ui.login.bean.User
 import com.kopernik.ui.mine.entity.MineBean
+import com.kopernik.ui.mine.entity.OtherMineBean
 import com.kopernik.ui.my.bean.InviteFriendsEntity
-import com.kopernik.ui.my.bean.InviteFriendsItem
 import com.kopernik.ui.setting.entity.ContactBean
 import com.kopernik.ui.setting.entity.UpdateBean
 
@@ -46,15 +46,24 @@ class HomeRepository private constructor(private val newWork: HomeNetWork):BaseM
     suspend fun addContact(map: Map<String, String>): BaseResult<Any> {
         return newWork.addContact(map)
     }
+    suspend fun buyMineMachine(map: Map<String, String>): BaseResult<Any> {
+        return newWork.buyMineMachine(map)
+    }
   suspend fun getMachineList(): BaseResult<MineBean> {
         return newWork.getMachineList()
     }
-  suspend fun getMachine( map:Map<String,String>): BaseResult<Any> {
+  suspend fun getMachine( map:Map<String,String>): BaseResult<OtherMineBean> {
         return newWork.getMachine(map)
+    }
+    suspend fun checkTradePsw( map:Map<String,String>): BaseResult<Any> {
+        return newWork.checkTradePsw(map)
     }
 
     suspend fun getContacts(): BaseResult<ContactBean> {
         return newWork.getContacts()
+    }
+    suspend fun getHomeList(): BaseResult<HomeEntity> {
+        return newWork.getHomeList()
     }
 
     suspend fun delContact(id: Int): BaseResult<Any> {

@@ -6,18 +6,18 @@
     android:orientation="horizontal"
     android:background="@null">
 
-<TextView
-    android:id="@+id/coinName"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textColor="@color/white"
-    android:textSize="@dimen/sp_18"
-    android:layout_marginTop="@dimen/dp_20"
-    android:layout_marginLeft="@dimen/dp_15"
-    android:text="UTC"
-    android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/coinName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:text="UTC"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/coinName1"
         android:layout_width="wrap_content"
@@ -25,6 +25,7 @@
         app:layout_constraintLeft_toRightOf="@id/coinName"
         app:layout_constraintTop_toTopOf="@id/coinName"
         app:layout_constraintBottom_toBottomOf="@id/coinName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/coinName"
         android:textSize="@dimen/sp_14"
         android:text="/USDT"
         android:textColor="@color/white"/>
@@ -38,16 +39,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/coinName"
         android:textSize="@dimen/sp_14"
+        android:visibility="gone"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/coin_name_b"/>
     <TextView
         android:id="@+id/coinPrice"
-        app:layout_constraintTop_toTopOf="@id/coinName"
-        app:layout_constraintBottom_toBottomOf="@id/coinName"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/dp_25"
         android:textColor="@color/white"
         android:text="0.59"
         android:textSize="@dimen/sp_14"
@@ -55,10 +57,12 @@
         android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/coinPrice1"
-        app:layout_constraintTop_toTopOf="@id/coinNameB"
-        app:layout_constraintBottom_toBottomOf="@id/coinNameB"
+        app:layout_constraintTop_toBottomOf="@+id/coinPrice"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="@dimen/dp_25"
         android:textColor="@color/white"
         android:text="0.59"
         android:textSize="@dimen/sp_14"

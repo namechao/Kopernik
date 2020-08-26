@@ -632,6 +632,8 @@
     <string name="mining_machine_type5">云型矿机</string>
     <string name="mining_machine_type6">超级矿机</string>
     <string name="current_exchange_precent">当前兑换比例</string>
+    <string name="purchase_success">购买成功</string>
+
     <!--    生态相关-->
     <string name="ecology_tab_title">Kopernik  NETWORK生态应用场景</string>
     <string name="ecology_tab_title1_1">合成UTC</string>
@@ -708,6 +710,7 @@
     <string name="coin_price">最新价</string>
     <string name="coin_rise_fall">涨跌幅</string>
     <string name="coin_name_b">24H量 0</string>
+    <string name="mine_data_right">/ 流通总量</string>
     <!--    资产相关-->
     <string name="asset_total">我的总资产(CNY)</string>
     <string name="asset_utc_balance">UTC余额(CNY)</string>

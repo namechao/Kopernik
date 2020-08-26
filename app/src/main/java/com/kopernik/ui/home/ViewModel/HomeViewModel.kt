@@ -4,7 +4,8 @@ import com.aleyn.mvvm.base.BaseViewModel
 import com.aleyn.mvvm.event.SingleLiveEvent
 import com.kopernik.data.InjectorUtil
 
-import com.kopernik.data.entity.HomeEntity
+import com.kopernik.ui.home.Entity.HomeEntity
+import com.pcl.mvvm.app.base.BaseResult
 
 class HomeViewModel : BaseViewModel() {
 
@@ -12,17 +13,17 @@ class HomeViewModel : BaseViewModel() {
 
 
 
-    private val projectData = SingleLiveEvent<HomeEntity>()
+    private val homeEntity = SingleLiveEvent<BaseResult<HomeEntity>>()
 
 
     /**
      * @param page 页码
      * @param refresh 是否刷新
      */
-    fun getHomeList(): SingleLiveEvent<HomeEntity> {
+    fun getHomeList(): SingleLiveEvent<BaseResult<HomeEntity>> {
         launchGo({
-
-        })
-        return projectData
+            homeEntity.value=homeRepository.getHomeList()
+        },isShowDialog = false)
+        return homeEntity
     }
 }

@@ -1,12 +1,12 @@
 package com.kopernik.data.service
 
+import com.kopernik.ui.home.Entity.HomeEntity
 import com.pcl.mvvm.app.base.BaseResult
 import com.kopernik.ui.login.bean.AccountBean
 import com.kopernik.ui.asset.entity.ExtractBean
-import com.kopernik.ui.login.bean.User
 import com.kopernik.ui.mine.entity.MineBean
+import com.kopernik.ui.mine.entity.OtherMineBean
 import com.kopernik.ui.my.bean.InviteFriendsEntity
-import com.kopernik.ui.my.bean.InviteFriendsItem
 import com.kopernik.ui.setting.entity.ContactBean
 import com.kopernik.ui.setting.entity.UpdateBean
 import retrofit2.http.*
@@ -54,12 +54,25 @@ interface HomeService {
     //获取联系人列表
     @GET("register/getcontacts")
     suspend fun getContacts(): BaseResult<ContactBean>
+
+    //获取首页数据
+    @GET("home/home")
+    suspend fun getHomeList(): BaseResult<HomeEntity>
+
   //获取矿机列表
     @GET("seckill/machineList")
     suspend fun getMachineList(): BaseResult<MineBean>
  //获取可用矿机
     @GET("seckill/getMachine")
-    suspend fun getMachine(@QueryMap map:Map<String,String>): BaseResult<Any>
+    suspend fun getMachine(@QueryMap map:Map<String,String>): BaseResult<OtherMineBean>
+    //买矿机
+    @FormUrlEncoded
+    @POST("seckill/buy")
+    suspend fun buyMineMachine(@FieldMap map: Map<String, String>): BaseResult<Any>
+    //验证交易密码
+    @FormUrlEncoded
+    @POST("user/checkSalePwd")
+    suspend fun checkTradePsw(@FieldMap map: Map<String, String>): BaseResult<Any>
 
     //添加联系人
     @FormUrlEncoded

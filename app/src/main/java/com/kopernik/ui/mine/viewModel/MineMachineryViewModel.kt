@@ -6,12 +6,15 @@ import com.aleyn.mvvm.event.SingleLiveEvent
 import com.pcl.mvvm.app.base.BaseResult
 import com.kopernik.data.InjectorUtil
 import com.kopernik.ui.mine.entity.MineBean
+import com.kopernik.ui.mine.entity.OtherMineBean
 
 class MineMachineryViewModel : BaseViewModel() {
     private val homeRepository by lazy { InjectorUtil.getHomeRepository() }
 
     private val getMachineList = SingleLiveEvent<BaseResult<MineBean>>()
-    private val getMachine = SingleLiveEvent<BaseResult<Any>>()
+    private val getMachine1= SingleLiveEvent<BaseResult<OtherMineBean>>()
+    private val getMachine2 = SingleLiveEvent<BaseResult<OtherMineBean>>()
+    private val buyMineMachine = SingleLiveEvent<BaseResult<Any>>()
 
     fun getMachineList(): SingleLiveEvent<BaseResult<MineBean>> {
         launchGo({
@@ -20,10 +23,28 @@ class MineMachineryViewModel : BaseViewModel() {
         return getMachineList
     }
 
-    fun getMachine( map:Map<String,String>): SingleLiveEvent<BaseResult<Any>> {
+    fun getMachine1( map:Map<String,String>): SingleLiveEvent<BaseResult<OtherMineBean>> {
         launchGo({
-            getMachine.value = homeRepository.getMachine(map)
+            getMachine1.value = homeRepository.getMachine(map)
         },isShowDialog = false)
-        return getMachine
+        return getMachine1
+    }
+    fun getMachine2( map:Map<String,String>): SingleLiveEvent<BaseResult<OtherMineBean>> {
+        launchGo({
+            getMachine2.value = homeRepository.getMachine(map)
+        },isShowDialog = false)
+        return getMachine2
+    }
+    fun buyMineMachine( map:Map<String,String>): SingleLiveEvent<BaseResult<Any>> {
+        launchGo({
+            buyMineMachine.value = homeRepository.buyMineMachine(map)
+        },isShowDialog = true)
+        return buyMineMachine
+    }
+    fun checkTradePassword( map:Map<String,String>): SingleLiveEvent<BaseResult<Any>> {
+        launchGo({
+            buyMineMachine.value = homeRepository.changeTradePsw(map)
+        },isShowDialog = true)
+        return buyMineMachine
     }
 }

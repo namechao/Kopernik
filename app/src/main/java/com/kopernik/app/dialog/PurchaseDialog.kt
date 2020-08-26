@@ -12,9 +12,11 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import com.kopernik.R
-import com.kopernik.ui.asset.entity.*
+import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.ui.asset.util.OnClickFastListener
 import com.kopernik.app.utils.KeyboardUtils
+import com.kopernik.ui.mine.entity.PurchaseEntity
+import java.math.BigDecimal
 
 class PurchaseDialog : DialogFragment(),
     FingerprintDialog.AuthenticationCallback {
@@ -26,13 +28,15 @@ class PurchaseDialog : DialogFragment(),
     private var payUytCoins:TextView?=null
     private var balanceNotEnough:TextView?=null
     private var uytBalance:TextView?=null
+    private var purchaseEntity: PurchaseEntity?=null
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        purchaseEntity=arguments?.getParcelable("purchaseEntity")
         val dialog =
             Dialog(activity!!, R.style.AlertDialogStyle)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_purchase)
-        dialog.setCanceledOnTouchOutside(true)
+        dialog.setCanceledOnTouchOutside(false)
         val window = dialog.window
         window.setBackgroundDrawableResource(R.color.transparent)
         val lp = window.attributes
@@ -54,9 +58,22 @@ class PurchaseDialog : DialogFragment(),
         balanceNotEnough = dialog.findViewById(R.id.tv_balance_not_enough)
         uytBalance = dialog.findViewById(R.id.uyt_balance)
         passwordEt = dialog.findViewById(R.id.password_et)
+        okBtn = dialog.findViewById(R.id.confirm)
         passwordEt?.addTextChangedListener(passwordWatcher)
+        miningMachineType?.text=purchaseEntity?.mineMacName
+        miningMachinePrice?.text= BigDecimalUtils.roundDOWN(purchaseEntity?.mineMacPrice,2)+"USDT"
+        payUytCoins?.text=purchaseEntity?.consumeUyt
+        uytBalance?.text=resources.getString(R.string.uyt_balance)+": "+purchaseEntity?.uytBanlance
+//        if (BigDecimal(purchaseEntity?.consumeUyt).divide(BigDecimal(purchaseEntity?.uytBanlance))>BigDecimal(0)){
+//            balanceNotEnough?.visibility=View.GONE
+//            okBtn?.isEnabled=true
+//        }else{
+//            balanceNotEnough?.visibility=View.VISIBLE
+//            okBtn?.isEnabled=false
+//            okBtn?.setBackgroundColor(resources.getColor(R.color.btn_press,null))
+//        }
 
-        okBtn = dialog.findViewById(R.id.ok)
+
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
@@ -124,11 +141,12 @@ class PurchaseDialog : DialogFragment(),
     }
 
     companion object {
-        fun newInstance(type: Int): PurchaseDialog {
+        fun newInstance(type: Int, bean: Any?): PurchaseDialog {
             val fragment = PurchaseDialog()
             val bundle = Bundle()
             bundle.putInt("type", type)
             fragment.arguments = bundle
+            bundle.putParcelable("purchaseEntity", bean as Parcelable?)
             return fragment
         }
     }

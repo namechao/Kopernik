@@ -8,15 +8,16 @@ import android.view.animation.TranslateAnimation
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aleyn.mvvm.base.NoViewModel
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseFragment
 import com.kopernik.app.dialog.ReminderDialog
+import com.kopernik.app.network.http.ErrorCode
+import com.kopernik.ui.home.Entity.HomeEntity
 import com.kopernik.ui.home.ViewModel.HomeViewModel
 import com.kopernik.ui.home.adadpter.AutoPollAdapter
 import com.kopernik.ui.home.adadpter.HomeAdapter
-import com.kopernik.ui.home.viewholder.HomeViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -39,6 +40,7 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
         fun newInstance() = HomeFragment()
 
     }
+    var homeEntity: HomeEntity?=null
     override fun layoutId()= R.layout.fragment_home
     @RequiresApi(Build.VERSION_CODES.M)
     override fun initView(savedInstanceState: Bundle?) {
@@ -87,12 +89,7 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
             }
 
         }
-        //下方列表
-        recyclerView.layoutManager=LinearLayoutManager(activity)
-        var adapter= HomeAdapter()
-        recyclerView.adapter=adapter
-        var data= arrayListOf("saga","asfafaas","afafasgagaga","dfdadfafa","asdsagassasa","asgasgagaga")
-        adapter.setNewData(data)
+
         val translateAnimation = TranslateAnimation(0f, 0f, 80f, 50f)
         translateAnimation.duration = 1000
         translateAnimation.repeatCount = Animation.INFINITE
@@ -100,8 +97,35 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
         clGold.animation = translateAnimation //这里iv就是我们要执行动画的item，例如一个imageView
 
         translateAnimation.start()
+        initData()
     }
 
+    private fun initData() {
+        //下方列表
+        recyclerView.layoutManager=LinearLayoutManager(activity)
+        var adapter= HomeAdapter()
+        recyclerView.adapter=adapter
+        var data= arrayListOf("saga","asfafaas","afafasgagaga","dfdadfafa","asdsagassasa","asgasgagaga")
+        adapter.setNewData(data)
+        smartRefreshLayout.setOnRefreshListener {
+            getData()
+        }
+        smartRefreshLayout.autoRefresh()
+    }
+  fun  getData(){
+      viewModel.run {
+          getHomeList().observe(this@HomeFragment, Observer {
+              smartRefreshLayout.finishRefresh()
+            if (it.status==200){
+                homeEntity=it.data
+                updataUI(it.data)
+            }  else{
+                ErrorCode.showErrorMsg(activity,it.status)
+            }
+          })
+      }
+  }
+  fun updataUI(homeEntity: HomeEntity){
 
-
+  }
 }

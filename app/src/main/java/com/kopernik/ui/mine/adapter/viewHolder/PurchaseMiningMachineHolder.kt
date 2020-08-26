@@ -9,6 +9,70 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.kopernik.R
 
 class PurchaseMiningMachineHolder(view: View?) : BaseViewHolder(view) {
+    var ivMiningType: ImageView? = null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.iv_mining_type)
+            }
+            return field
+        }
+        private set
+    var tvMiningType: TextView? = null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.tv_mining_type)
+            }
+            return field
+        }
+        private set
+    var tvMiningPrice: TextView? = null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.tv_mining_price)
+            }
+            return field
+        }
+        private set
+    var tvMiningSpeed: TextView? = null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.tv_mining_speed)
+            }
+            return field
+        }
+        private set
+    var tvWaveCounts: TextView? = null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.tv_wave_counts)
+            }
+            return field
+        }
+        private set
+    var tvMningTime: TextView? = null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.tv_mining_time)
+            }
+            return field
+        }
+        private set
+    var tvMiningCounts: TextView? = null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.tv_mining_counts)
+            }
+            return field
+        }
+        private set
+    var tvUpdateCounts: TextView? = null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.tv_update_counts)
+            }
+            return field
+        }
+        private set
     var progressBar:ProgressBar?=null
       get() {
           if (field==null) field=itemView.findViewById(R.id.progressBar)

@@ -95,10 +95,10 @@
             android:textSize="@dimen/sp_12" />
 
         <ProgressBar
+            android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_marginTop="5dp"
             android:max="100"
-            android:progress="50"
             android:progressDrawable="@drawable/progress_bg"
             android:layout_width="85dp"
             android:layout_height="5dp"/>
@@ -107,6 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/dp_10"
+            android:layout_gravity="center"
             android:textColor="@color/color_FFCF32"
             android:text="18%"/>
     </LinearLayout>
