@@ -6,8 +6,7 @@ import com.kopernik.ui.login.bean.AccountBean
 import com.kopernik.ui.asset.entity.ExtractBean
 import com.kopernik.ui.home.Entity.GetUtkEntity
 import com.kopernik.ui.home.Entity.NoticeEntity
-import com.kopernik.ui.mine.entity.MineBean
-import com.kopernik.ui.mine.entity.OtherMineBean
+import com.kopernik.ui.mine.entity.*
 import com.kopernik.ui.my.bean.InviteFriendsEntity
 import com.kopernik.ui.setting.entity.ContactBean
 import com.kopernik.ui.setting.entity.UpdateBean
@@ -65,11 +64,23 @@ interface HomeService {
     suspend fun getNotice(): BaseResult<NoticeEntity>
     //获取领取utk状态
     @GET("seckill/getTime")
-    suspend fun getUtk(): BaseResult<GetUtkEntity>
-
+    suspend fun getUtkStatus(): BaseResult<GetUtkEntity>
+    //领取utk
+    @FormUrlEncoded
+    @POST("seckill/getUtk")
+    suspend fun getUtk(@FieldMap map: Map<String, String>): BaseResult<Any>
   //获取矿机列表
     @GET("seckill/machineList")
     suspend fun getMachineList(): BaseResult<MineBean>
+    //获取utdm收益
+    @GET("seckill/getUtdmTotal")
+    suspend fun getUtdmTotal(): BaseResult<Amounts>
+    //获取资产总值
+    @GET("asset/blance")
+    suspend fun getAssetBlance(): BaseResult<SynthetiseUtcEntity>
+    //兑换比例
+    @GET("asset/config")
+    suspend fun getAssetConfig(): BaseResult<AssetConfitEntity>
  //获取可用矿机
     @GET("seckill/getMachine")
     suspend fun getMachine(@QueryMap map:Map<String,String>): BaseResult<OtherMineBean>
@@ -77,6 +88,10 @@ interface HomeService {
     @FormUrlEncoded
     @POST("seckill/buy")
     suspend fun buyMineMachine(@FieldMap map: Map<String, String>): BaseResult<Any>
+    //合成
+    @FormUrlEncoded
+    @POST("asset/compose")
+    suspend fun compose(@FieldMap map: Map<String, String>): BaseResult<Any>
     //验证交易密码
     @FormUrlEncoded
     @POST("user/checkSalePwd")

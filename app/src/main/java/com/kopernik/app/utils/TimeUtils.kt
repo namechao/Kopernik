@@ -12,6 +12,9 @@ object TimeUtils {
     fun currentTimeLong(): Long {
         return System.currentTimeMillis() / 1000
     }
+    fun currentTimeMillisecond(): Long {
+        return System.currentTimeMillis()
+    }
 
     /**
      * 10 位

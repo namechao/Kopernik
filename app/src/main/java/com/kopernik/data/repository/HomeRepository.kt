@@ -8,8 +8,7 @@ import com.kopernik.ui.login.bean.AccountBean
 import com.kopernik.ui.asset.entity.ExtractBean
 import com.kopernik.ui.home.Entity.GetUtkEntity
 import com.kopernik.ui.home.Entity.NoticeEntity
-import com.kopernik.ui.mine.entity.MineBean
-import com.kopernik.ui.mine.entity.OtherMineBean
+import com.kopernik.ui.mine.entity.*
 import com.kopernik.ui.my.bean.InviteFriendsEntity
 import com.kopernik.ui.setting.entity.ContactBean
 import com.kopernik.ui.setting.entity.UpdateBean
@@ -51,11 +50,23 @@ class HomeRepository private constructor(private val newWork: HomeNetWork):BaseM
     suspend fun buyMineMachine(map: Map<String, String>): BaseResult<Any> {
         return newWork.buyMineMachine(map)
     }
-  suspend fun getMachineList(): BaseResult<MineBean> {
+    suspend fun getMachineList(): BaseResult<MineBean> {
         return newWork.getMachineList()
+    }
+    suspend fun getUtdmTotal(): BaseResult<Amounts> {
+        return newWork.getUtdmTotal()
+    }
+    suspend fun getAssetBlance(): BaseResult<SynthetiseUtcEntity> {
+        return newWork.getAssetBlance()
+    }
+    suspend fun getAssetConfig(): BaseResult<AssetConfitEntity> {
+        return newWork.getAssetConfig()
     }
   suspend fun getMachine( map:Map<String,String>): BaseResult<OtherMineBean> {
         return newWork.getMachine(map)
+    }
+    suspend fun compose( map:Map<String,String>): BaseResult<Any> {
+        return newWork.compose(map)
     }
     suspend fun checkTradePsw( map:Map<String,String>): BaseResult<Any> {
         return newWork.checkTradePsw(map)
@@ -70,10 +81,12 @@ class HomeRepository private constructor(private val newWork: HomeNetWork):BaseM
     suspend fun getNotice(): BaseResult<NoticeEntity> {
         return newWork.getNotice()
     }
-  suspend fun getUtk(): BaseResult<GetUtkEntity> {
-        return newWork.getUtk()
+  suspend fun getUtkStatus(): BaseResult<GetUtkEntity> {
+        return newWork.getUtkStatus()
     }
-
+    suspend fun getUtk(map: Map<String, String>): BaseResult<Any> {
+        return newWork.getUtk(map)
+    }
     suspend fun delContact(id: Int): BaseResult<Any> {
         return newWork.delContact(id)
     }

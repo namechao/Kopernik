@@ -17,7 +17,8 @@ class HomeViewModel : BaseViewModel() {
 
     private val homeEntity = SingleLiveEvent<BaseResult<HomeEntity>>()
     private val noticeEntity = SingleLiveEvent<BaseResult<NoticeEntity>>()
-    private val getUtk = SingleLiveEvent<BaseResult<GetUtkEntity>>()
+    private val getUtkStatus = SingleLiveEvent<BaseResult<GetUtkEntity>>()
+    private val getUtk = SingleLiveEvent<BaseResult<Any>>()
 
 
     /**
@@ -44,9 +45,15 @@ class HomeViewModel : BaseViewModel() {
      * @param page 页码
      * @param refresh 是否刷新
      */
-    fun getUtk(): SingleLiveEvent<BaseResult<GetUtkEntity>> {
+    fun getUtkStatus(): SingleLiveEvent<BaseResult<GetUtkEntity>> {
         launchGo({
-            getUtk.value=homeRepository.getUtk()
+            getUtkStatus.value=homeRepository.getUtkStatus()
+        },isShowDialog = false)
+        return getUtkStatus
+    }
+    fun getUtk(map: Map<String, String>): SingleLiveEvent<BaseResult<Any>> {
+        launchGo({
+            getUtk.value=homeRepository.getUtk(map)
         },isShowDialog = false)
         return getUtk
     }

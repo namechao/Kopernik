@@ -5,6 +5,9 @@ import com.pcl.mvvm.app.base.BaseResult
 import com.kopernik.data.network.AssetNetWork
 import com.kopernik.ui.Ecology.entity.TimeLineBean
 import com.kopernik.ui.asset.entity.*
+import com.kopernik.ui.mine.entity.AllConfigEntity
+import com.kopernik.ui.mine.entity.AssetConfitEntity
+import com.kopernik.ui.mine.entity.RateEntity
 
 class AssetRepository private constructor(private val newWork: AssetNetWork):BaseModel(){
 
@@ -28,6 +31,9 @@ class AssetRepository private constructor(private val newWork: AssetNetWork):Bas
 
     suspend fun getUnMapRecord(map: Map<String, String>): BaseResult<TimeLineBean> {
         return newWork.getUnMapRecord(map)
+    }
+    suspend fun composeRecord(map: Map<String, String>): BaseResult<UTCAssetEntity> {
+        return newWork.composeRecord(map)
     }
 
     suspend fun cancelWithdraw(url: String): BaseResult<Any> {
@@ -65,7 +71,12 @@ class AssetRepository private constructor(private val newWork: AssetNetWork):Bas
     suspend fun checkMapping(type: String, iconType: String): BaseResult<Any> {
         return newWork.checkMapping(type, iconType)
     }
-
+    suspend fun getAssetConfig(): BaseResult<AllConfigEntity> {
+        return newWork.getAssetConfig()
+    }
+    suspend fun getRate(): BaseResult<RateEntity> {
+        return newWork.getRate()
+    }
     companion object {
         private var INSTANCE: AssetRepository? = null
 

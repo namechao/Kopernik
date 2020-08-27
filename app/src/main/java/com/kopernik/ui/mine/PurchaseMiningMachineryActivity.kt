@@ -9,6 +9,7 @@ import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.dialog.PurchaseDialog
 import com.kopernik.app.network.http.ErrorCode
+import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.mine.adapter.OutTimeMiningMAdapter
 import com.kopernik.ui.mine.adapter.PurchaseMiningMAdapter
@@ -70,7 +71,7 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
                 var purchaseEntity=PurchaseEntity()
                 purchaseEntity.mineMacName= (adapter.data[position] as Machine).name
                 purchaseEntity.mineMacPrice= (adapter.data[position] as Machine).price
-//                purchaseEntity.consumeUyt= (adapter.data[position] as Machine)
+                purchaseEntity.consumeUyt= BigDecimalUtils.divide((adapter.data[position] as Machine).price,minebean?.uytPrice,8)
                 minebean?.uytCaptial?.amount?.let {
                     purchaseEntity.uytBanlance=it
                 }

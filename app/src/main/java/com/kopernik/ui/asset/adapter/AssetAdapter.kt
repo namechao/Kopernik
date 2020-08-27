@@ -16,7 +16,7 @@ class AssetAdapter(data:List<AssetItemEntity>) : BaseQuickAdapter<AssetItemEntit
     override fun convert(helper: AssetViewHolder?, item: AssetItemEntity?) {
         helper?.assetName?.text=item?.coinType
         item?.headRes?.let { helper?.assetHead?.setImageResource(it) }
-        helper?.assetCounts?.text=item?.coinCounts+" "+item?.coinType
+        helper?.assetCounts?.text=BigDecimalUtils.roundDOWN(item?.coinCounts,8)+" "+item?.coinType
         helper?.assetCny?.text="≈¥ "+BigDecimalUtils.roundDOWN(item?.coinCny,2)
     }
 

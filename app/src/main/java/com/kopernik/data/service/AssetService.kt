@@ -3,6 +3,9 @@ package com.kopernik.data.service
 import com.pcl.mvvm.app.base.BaseResult
 import com.kopernik.ui.Ecology.entity.TimeLineBean
 import com.kopernik.ui.asset.entity.*
+import com.kopernik.ui.mine.entity.AllConfigEntity
+import com.kopernik.ui.mine.entity.AssetConfitEntity
+import com.kopernik.ui.mine.entity.RateEntity
 import retrofit2.http.*
 
 /**
@@ -60,7 +63,15 @@ interface AssetService {
     //提币地址提交
     @GET("asset/saveWithdrawalAddress")
     suspend fun submitWithDrawlCoin(@QueryMap map: Map<String, String>): BaseResult<Any>
-
+    //提币地址提交
+    @GET("asset/composeRecord")
+    suspend fun  composeRecord(@QueryMap map: Map<String, String>): BaseResult<UTCAssetEntity>
+    //兑换比例
+    @GET("asset/config")
+    suspend fun getAssetConfig(): BaseResult<AllConfigEntity>
+    //手续费集中处理
+    @GET("asset/rate")
+    suspend fun getRate(): BaseResult<RateEntity>
     //检验映射按钮 或者取消映射按钮
     @GET("asset/getmapping")
     suspend fun checkMapping(

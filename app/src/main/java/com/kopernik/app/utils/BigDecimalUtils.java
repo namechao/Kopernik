@@ -333,7 +333,11 @@ public final class BigDecimalUtils {
             return b.divide(one, scale, BigDecimal.ROUND_DOWN).toPlainString();
         }
     }//
-
+    //取整
+    public static long getRound(final String v) {
+        BigDecimal bg = new BigDecimal(v == null ? "0" : v);
+        return bg.setScale(0,BigDecimal.ROUND_DOWN).longValue();
+    }//
     /**
      * 提供精确的小数位四舍五入处理
      * @param v     需要四舍五入的数字

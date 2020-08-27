@@ -28,14 +28,14 @@ import java.util.*
 class UTCSynthetiseProgerssDialog : DialogFragment(){
     private var progress=0
 
-    private var type = 0
+    private var counts = 0
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog =
             Dialog(activity!!)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_utc_synthetise_progress)
-        dialog.setCanceledOnTouchOutside(true)
+        dialog.setCanceledOnTouchOutside(false)
         val window = dialog.window
 //        window!!.setWindowAnimations(R.style.AnimBottom)
         window.setBackgroundDrawableResource(R.color.transparent)
@@ -46,7 +46,7 @@ class UTCSynthetiseProgerssDialog : DialogFragment(){
         //        lp.height =  getActivity().getWindowManager().getDefaultDisplay().getHeight() * 3 / 5;
         window.attributes = lp
         val bundle = arguments
-        type = bundle!!.getInt("type")
+        counts = bundle!!.getInt("counts")
         initView(dialog)
         return dialog
     }
@@ -70,7 +70,7 @@ class UTCSynthetiseProgerssDialog : DialogFragment(){
         rotationAnimation.duration=10000
         rotationAnimation.repeatCount=-1
         rotationAnimation.start()
-
+        tvGetCoin.text="${getString(R.string.utc_get_utc_counts)}$counts${getString(R.string.utc_per)}UTC"
        var animatorSet =  AnimatorSet();
         animatorSet.playTogether(
             ObjectAnimator.ofFloat(ivCoin,"scaleX",0f,1.3f,1f)
@@ -100,13 +100,13 @@ class UTCSynthetiseProgerssDialog : DialogFragment(){
               }
             }
 
-        },100,100)
+        },100,50)
     }
 
     //点击确定按钮回调到页面进行网络请求处理
     var clickFastListener: OnClickFastListener = object : OnClickFastListener() {
         override fun onFastClick(v: View) {
-            listener?.let { it.onRequest(type,"") }
+            listener?.let { it.onRequest("") }
             dismiss()
         }
     }
@@ -116,14 +116,14 @@ class UTCSynthetiseProgerssDialog : DialogFragment(){
         listener=requestListener
     }
     interface RequestListener {
-        fun onRequest(type:Int,params:String)
+        fun onRequest(params:String)
     }
 
     companion object {
-        fun newInstance(type: Int): UTCSynthetiseProgerssDialog {
+        fun newInstance(counts: Int): UTCSynthetiseProgerssDialog {
             val fragment = UTCSynthetiseProgerssDialog()
             val bundle = Bundle()
-            bundle.putInt("type", type)
+            bundle.putInt("counts", counts)
             fragment.arguments = bundle
             return fragment
         }

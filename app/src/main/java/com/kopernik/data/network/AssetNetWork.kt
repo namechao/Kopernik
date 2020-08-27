@@ -11,6 +11,7 @@ class AssetNetWork {
     suspend fun getUnMapRecord(map: Map<String, String>) = mService.getUnMapRecord(map)
 
     suspend fun submitWithDrawlCoin(map: Map<String, String>) = mService.submitWithDrawlCoin(map)
+    suspend fun composeRecord(map: Map<String, String>) = mService.composeRecord(map)
     suspend fun cancelWithdraw(url: String) = mService.cancelcash(url)
     suspend fun getGains(iconType: String) = mService.getGains(iconType)
     suspend fun saveGains() = mService.saveGains()
@@ -20,7 +21,8 @@ class AssetNetWork {
 //    suspend fun cashwithdrawal(iconType :String) = mService.cashwithdrawal(iconType )
 //    suspend fun transferaccount(iconType: String) = mService.transferaccount(iconType)
     suspend fun checkMapping(type: String, iconType: String) = mService.checkMapping(type, iconType)
-
+    suspend fun getAssetConfig() = mService.getAssetConfig()
+    suspend fun getRate() = mService.getRate()
     companion object {
         @Volatile
         private var netWork: AssetNetWork? = null

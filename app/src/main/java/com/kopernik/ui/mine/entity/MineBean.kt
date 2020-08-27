@@ -1,14 +1,11 @@
 package com.kopernik.ui.mine.entity
 
+
+
 data class MineBean(
     val nachineList: List<Machine>,
     val parentFlag: Boolean,
-    val stockCount1: String,
-    val stockCount2: String,
-    val stockCount3: String,
-    val stockCount4: String,
-    val stockCount5: String,
-    val stockCount6: String,
+    val uytPrice:String,
     val user: User,
     val uytCaptial: UytCaptial,
     val uytToUsdt: String
@@ -16,7 +13,7 @@ data class MineBean(
 
 data class Machine(
     val createTime: String,
-    val endTime: String,
+    val endTime: Long,
     val id: String,
     val inOrder: String,
     val name: String,
@@ -25,10 +22,10 @@ data class Machine(
     val rate: String,
     val rateMax: String,
     val rateMin: Double,
-    val startTime: String,
+    val startTime: Long,
     val status: String,
-    val stock: String,
-    val switchStatus: String,
+    val stock: Int,
+    val switchStatus: Int,
     val type: Int,
     val url: String
 )
@@ -83,3 +80,5 @@ data class Data(
     val type: Int,
     val uid: String
 )
+
+data class Amounts (var amount: String )

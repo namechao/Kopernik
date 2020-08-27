@@ -3,8 +3,11 @@ package com.kopernik.ui.mine
 import android.content.res.AssetManager
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import com.aleyn.mvvm.base.NoViewModel
 import com.kopernik.BuildConfig
 import com.kopernik.R
@@ -13,17 +16,27 @@ import com.kopernik.app.base.NewFullScreenBaseActivity
 import com.kopernik.app.dialog.UDMTDialog
 import com.kopernik.app.dialog.UTCDialog
 import com.kopernik.app.dialog.UTCSynthetiseProgerssDialog
+import com.kopernik.app.network.http.ErrorCode
+import com.kopernik.app.utils.BigDecimalUtils
+import com.kopernik.app.utils.ToastUtils
+import com.kopernik.ui.mine.entity.AssetConfitEntity
+import com.kopernik.ui.mine.entity.SynthetiseUtcEntity
+import com.kopernik.ui.mine.viewModel.MineViewModel
+import dev.utils.common.encrypt.MD5Utils
 
 import kotlinx.android.synthetic.main.activity_snythetise_utc.*
 import kotlinx.android.synthetic.main.activity_snythetise_utc.ivSound
 import kotlinx.android.synthetic.main.activity_snythetise_utc.lottieAnimationView
-import kotlinx.android.synthetic.main.activity_udmt_asset.*
-import kotlinx.android.synthetic.main.fragment_trade.*
 import java.io.IOException
+import java.math.BigDecimal
 
 
-class SynthetiseUTCActivity : NewFullScreenBaseActivity<NoViewModel,ViewDataBinding>() {
+class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBinding>() {
     var isOpenSound=false
+    var inputCounts=0
+    var maxCounts=0
+    var utcEntity: SynthetiseUtcEntity?=null
+    var assetEntity: AssetConfitEntity?=null
     override fun layoutId()=R.layout.activity_snythetise_utc
     var player = MediaPlayer()
     override fun initView(savedInstanceState: Bundle?) {
@@ -46,16 +59,36 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<NoViewModel,ViewDataBind
         }
         //合成utc
         ivSnythetise.setOnClickListener {
-            var dialog = UTCSynthetiseProgerssDialog.newInstance(1)
-            dialog!!.show(supportFragmentManager, "progress")
-//            ///兑换
-//                var dialog = UTCDialog.newInstance(1)
-//            dialog!!.setOnRequestListener(object : UTCDialog.RequestListener {
-//                    override fun onRequest(type: Int, params: String) {
-//
-//                    }
-//                })
-//            dialog!!.show(supportFragmentManager, "withdrawRecommed")
+            if(editText.text.toString().trim().isBlank()) {
+                ToastUtils.showShort(this,getString(R.string.utc_input_counts))
+                return@setOnClickListener
+            }
+            ///兑换
+                var dialog = UTCDialog.newInstance(1)
+            dialog!!.setOnRequestListener(object : UTCDialog.RequestListener {
+                    override fun onRequest(type: Int, params: String) {
+                      viewModel.run {
+                          var amountUtc=editText.text.toString().trim().toInt()
+                         var amountUtk=BigDecimalUtils.divide(amountUtc.toString(),assetEntity?.config?.utkCompose,8)
+                         var amountUtdm=BigDecimalUtils.divide(amountUtc.toString(),assetEntity?.config?.utdmCompose,8)
+                          var  map= mapOf(
+                              "amountUtc" to "$amountUtc",
+                              "amountUtk" to "$amountUtk",
+                              "amountUtdm" to "$amountUtdm",
+                              "rate" to "1",
+                              "pwd" to MD5Utils.md5(MD5Utils.md5(params)))
+                          compose(map).observe(this@SynthetiseUTCActivity, Observer {
+                              if (it.status==200){
+                                  var dialog = UTCSynthetiseProgerssDialog.newInstance(editText.text.toString().trim().toInt())
+                                  dialog!!.show(supportFragmentManager, "progress")
+                              }else{
+                                  ErrorCode.showErrorMsg(this@SynthetiseUTCActivity,it.status)
+                              }
+                          })
+                      }
+                    }
+                })
+            dialog!!.show(supportFragmentManager, "withdrawRecommed")
         }
         ivSound.setOnClickListener {
             if (!isOpenSound){
@@ -70,6 +103,37 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<NoViewModel,ViewDataBind
                 ivSound.setImageResource(R.mipmap.ic_close_sound)
             }
         }
+
+        smartRefreshLayout.setOnRefreshListener {
+            getData()
+        }
+        smartRefreshLayout.autoRefresh()
+    }
+    //获取数据
+    fun getData(){
+      viewModel.run { getAssetBlance().observe(this@SynthetiseUTCActivity, Observer {
+          smartRefreshLayout.finishRefresh()
+          if (it.status==200) {
+              utcEntity=it.data
+              tvUDMTCoin.text = ""+BigDecimalUtils.getRound(it.data?.utdm)
+              tvUTKtCoin.text = ""+ BigDecimalUtils.getRound(it.data?.utk)
+              getAssetConfig().observe(this@SynthetiseUTCActivity, Observer {
+                  if (it.status==200) {
+                      assetEntity=it.data
+                      var utdmToUtc=BigDecimalUtils.multiply(utcEntity?.utdm,assetEntity?.config?.utdmCompose)
+                      var utkToUtc =BigDecimalUtils.multiply(utcEntity?.utk,assetEntity?.config?.utkCompose)
+                      if (BigDecimal(utdmToUtc).subtract(BigDecimal(utkToUtc))>BigDecimal("0"))
+                            maxCounts=BigDecimalUtils.getRound(utkToUtc.toString()).toInt()
+                      else  maxCounts=BigDecimalUtils.getRound(utdmToUtc.toString()).toInt()
+
+                  }else{
+                      ErrorCode.showErrorMsg(this@SynthetiseUTCActivity,it.status)
+                  }
+              })
+          }else{
+              ErrorCode.showErrorMsg(this@SynthetiseUTCActivity,it.status)
+          }
+      }) }
     }
 
     override fun onResume() {
@@ -83,6 +147,51 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<NoViewModel,ViewDataBind
     }
 
     override fun initData() {
+        ivInputMinus.setOnClickListener {
+            inputCounts--
+            editText.setText(""+inputCounts)
+        }
+        ivInputAdd.setOnClickListener {
+            inputCounts++
+            if (inputCounts>maxCounts){
+                ToastUtils.showShort(this,getString(R.string.utc_max_counts))
+                return@setOnClickListener
+            }
+            editText.setText(""+inputCounts)
+        }
+        editText.addTextChangedListener(watcher)
+    }
 
+    var watcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(
+            s: CharSequence,
+            start: Int,
+            count: Int,
+            after: Int
+        ) {
+        }
+
+        override fun onTextChanged(
+            s: CharSequence,
+            start: Int,
+            before: Int,
+            count: Int
+        ) {
+        }
+
+        override fun afterTextChanged(s: Editable) {
+            editText.setSelection(editText.text.toString().length)
+         if (!editText.text.toString().trim().isBlank()&&editText.text.toString().trim().toInt()>maxCounts){
+             inputCounts=maxCounts
+             editText.setText(""+maxCounts)
+         }
+            if (!editText.text.toString().trim().isBlank()&&editText.text.toString().trim().toInt()<0){
+                inputCounts=0
+                editText.setText("0")
+            }
+            if (editText.text.toString().trim().isBlank()){
+                inputCounts=0
+            }
+        }
     }
 }

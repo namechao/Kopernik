@@ -5,10 +5,12 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.aleyn.mvvm.base.NoViewModel
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseFragment
 import com.kopernik.app.config.LaunchConfig
+import com.kopernik.ui.mine.viewModel.MineViewModel
 import kotlinx.android.synthetic.main.fragment_trade.*
 import java.io.IOException
 
@@ -18,7 +20,7 @@ import java.io.IOException
  * Use the [MineFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MineFragment : NewBaseFragment<NoViewModel, ViewDataBinding>() {
+class MineFragment : NewBaseFragment<MineViewModel, ViewDataBinding>() {
     var ishow=false
     var isOpenSound=false
     companion object{
@@ -65,6 +67,19 @@ class MineFragment : NewBaseFragment<NoViewModel, ViewDataBinding>() {
                 ivSound.setImageResource(R.mipmap.ic_close_sound)
             }
         }
+        smartRefreshLayout.setOnRefreshListener {
+            getData()
+        }
+        smartRefreshLayout.autoRefresh()
+    }
+    //获取收益数据
+    fun getData(){
+        viewModel.run {
+            viewModel.getUtdmTotal().observe(this@MineFragment, Observer {
+                smartRefreshLayout.finishRefresh()
+                income.text=it?.data?.amount
+            })
+        }
     }
 
     override fun onResume() {
@@ -93,6 +108,7 @@ class MineFragment : NewBaseFragment<NoViewModel, ViewDataBinding>() {
         if (hidden){
             lottieAnimationView.pauseAnimation()
         }else{
+            smartRefreshLayout.autoRefresh()
             lottieAnimationView.playAnimation();
         }
     }

@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/smartRefreshLayout"
     android:layout_width="match_parent"
     android:background="@color/colorAccent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <com.scwang.smartrefresh.header.MaterialHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
         android:layout_width="match_parent"
@@ -86,7 +92,7 @@
          android:textSize="@dimen/sp_12"
          android:layout_marginRight="@dimen/dp_15"
          android:textColor="@color/color_852C0F"
-         android:text="UDTM"
+         android:text="UTDM"
          app:layout_constraintRight_toRightOf="@+id/ivLeftBg"
          app:layout_constraintTop_toTopOf="@+id/ivLeftBg"
          app:layout_constraintVertical_chainStyle="packed"
@@ -147,6 +153,7 @@
 
 
     <ImageView
+        android:id="@+id/ivInputMinus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -157,6 +164,7 @@
         app:layout_constraintTop_toTopOf="@+id/editText" />
 
     <ImageView
+        android:id="@+id/ivInputAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -173,6 +181,7 @@
         android:layout_marginBottom="14dp"
         android:background="@mipmap/ic_mine_edit"
         android:gravity="center"
+        android:inputType="number"
         android:hint="@string/input_counts"
         android:paddingLeft="@dimen/dp_15"
         android:paddingTop="@dimen/dp_5"
@@ -195,5 +204,5 @@
         android:layout_marginBottom="29dp"
         android:text="@string/current_exchange_precent"/>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

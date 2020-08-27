@@ -35,7 +35,7 @@
                    android:paddingRight="@dimen/dp_14"
                    android:paddingBottom="@dimen/dp_5"
                    android:layout_marginLeft="@dimen/dp_35"
-                   android:text="153225"
+                   android:text="0"
                    android:textColor="@color/white"
                    android:textSize="@dimen/sp_12"
                    app:layout_constraintBottom_toBottomOf="@+id/textView2"

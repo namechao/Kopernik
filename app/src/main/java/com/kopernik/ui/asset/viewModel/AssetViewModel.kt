@@ -16,7 +16,7 @@ class AssetViewModel : BaseViewModel() {
     fun getAsset(): SingleLiveEvent<BaseResult<AssetEntity>> {
         launchGo({
             assetBean.value = homeRepository.getAsset()
-        }, {}, isShowDialog = false)
+        }, isShowDialog = false)
         return assetBean
     }
 

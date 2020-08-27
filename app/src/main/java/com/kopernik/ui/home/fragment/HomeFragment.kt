@@ -61,7 +61,7 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
 
         //悬浮按钮
         ivFloat.setOnClickListener {
-            getUtk()
+            getUtkStatus()
 
 
         }
@@ -74,9 +74,9 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
         translateAnimation.start()
         initData()
     }
-    fun getUtk(){
+    fun getUtkStatus(){
      viewModel.run {
-         getUtk().observe(this@HomeFragment, Observer {
+         getUtkStatus().observe(this@HomeFragment, Observer {
              if (it.status==200) {
                  // 1.需要uyt 2.需要utc  的数量 才允许 用户领取utk
                  // 2.switchReceive 代表当前是否可以领取 utk
@@ -91,10 +91,13 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
                  } else {
 //                 弹窗
                      activity?.let { it1 ->
-                         ReminderDialog(it1)
+                         ReminderDialog(it1,it.data)
                              .setCancelable(true)
-                             .setUtkEntity(it.data)
-                             .setMsg("1")
+                             .setOnRequestListener(object :ReminderDialog.RequestListener{
+                                 override fun onRequest() {
+                                     getUtk()
+                                 }
+                             })
                              .show()
                      }
                  }
@@ -103,6 +106,18 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
              }
          })
      }
+    }
+    private fun getUtk() {
+        var uid=""
+        UserConfig.singleton?.accountBean?.uid?.let {
+          uid=it
+        }
+        var map= mapOf("uid" to uid)
+        viewModel.getUtk(map).observe(this, Observer {
+            if (it.status==200)
+                ToastUtils.showShort(activity, getString(R.string.recvice_success))
+                 else ErrorCode.showErrorMsg(activity,it.status)
+        })
     }
     private fun initData() {
         //上方滚动

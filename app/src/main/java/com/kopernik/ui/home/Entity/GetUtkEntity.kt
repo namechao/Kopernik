@@ -4,13 +4,13 @@ data class GetUtkEntity(
     val config: Config,
     val flag: Int,
     val switchReceive: Int,
-    val time: Any
+    val time: String
 )
 
 data class Config(
     val end: Int,
-    val id: Int,
-    val onceCount: Int,
+    val id: String,
+    val onceCount: String,
     val onceTime: Int,
     val parentCount: Int,
     val personCount: Int,

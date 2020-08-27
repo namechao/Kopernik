@@ -65,15 +65,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginRight="@dimen/dp_11"
         android:textStyle="bold"
-        android:layout_width="wrap_content"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:textColor="@color/btn_enable_text_bg"
         android:textSize="@dimen/sp_12"
         android:background="@drawable/btn_enable_bg"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:paddingLeft="28dp"
-        android:paddingRight="28dp"
         android:text="@string/button_purchase"/>
     <View
         android:id="@+id/line"

@@ -94,10 +94,12 @@ class ForgetTradePasswordNextActivity : NewBaseActivity<ForgetTradePasswordViewM
     //导入网络请求
     private fun setTradePsw() {
         viewModel.run {
-            var map= mapOf("pwd" to etTradeInput.text.toString().trim() )
+            var map= mapOf("pwd" to MD5Utils.md5(MD5Utils.md5(etTradeInput.text.toString().trim())) )
             changeTradePsw(map).observe(this@ForgetTradePasswordNextActivity, androidx.lifecycle.Observer {
                 if (it.status==200){
-                    ToastUtils.showShort(this@ForgetTradePasswordNextActivity,this@ForgetTradePasswordNextActivity.getString(R.string.forget_trade_password_success))
+                    if (changeTradePasswordType==1)
+                    ToastUtils.showShort(this@ForgetTradePasswordNextActivity,this@ForgetTradePasswordNextActivity.getString(R.string.setting_trade_password_success))
+                    else ToastUtils.showShort(this@ForgetTradePasswordNextActivity,this@ForgetTradePasswordNextActivity.getString(R.string.forget_trade_password_success))
                     setResult(14)
                     finish()
                 }else{

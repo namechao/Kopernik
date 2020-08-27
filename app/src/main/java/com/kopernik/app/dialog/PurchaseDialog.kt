@@ -29,6 +29,7 @@ class PurchaseDialog : DialogFragment(),
     private var balanceNotEnough:TextView?=null
     private var uytBalance:TextView?=null
     private var purchaseEntity: PurchaseEntity?=null
+    private var isBalance=false
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         purchaseEntity=arguments?.getParcelable("purchaseEntity")
@@ -62,16 +63,18 @@ class PurchaseDialog : DialogFragment(),
         passwordEt?.addTextChangedListener(passwordWatcher)
         miningMachineType?.text=purchaseEntity?.mineMacName
         miningMachinePrice?.text= BigDecimalUtils.roundDOWN(purchaseEntity?.mineMacPrice,2)+"USDT"
-        payUytCoins?.text=purchaseEntity?.consumeUyt
+        payUytCoins?.text=purchaseEntity?.consumeUyt+"UYT"
         uytBalance?.text=resources.getString(R.string.uyt_balance)+": "+purchaseEntity?.uytBanlance
-//        if (BigDecimal(purchaseEntity?.consumeUyt).divide(BigDecimal(purchaseEntity?.uytBanlance))>BigDecimal(0)){
-//            balanceNotEnough?.visibility=View.GONE
-//            okBtn?.isEnabled=true
-//        }else{
-//            balanceNotEnough?.visibility=View.VISIBLE
-//            okBtn?.isEnabled=false
-//            okBtn?.setBackgroundColor(resources.getColor(R.color.btn_press,null))
-//        }
+        if ( BigDecimalUtils.substract(purchaseEntity?.consumeUyt,purchaseEntity?.uytBanlance) >BigDecimal(0)){
+            balanceNotEnough?.visibility=View.VISIBLE
+            okBtn?.isEnabled=false
+            isBalance=false
+            okBtn?.setTextColor(resources.getColor(R.color.color_5D5386,null))
+        }else{
+            balanceNotEnough?.visibility=View.GONE
+            isBalance=true
+            okBtn?.isEnabled=true
+        }
 
 
         //关闭弹窗
@@ -112,7 +115,7 @@ class PurchaseDialog : DialogFragment(),
 
         override fun afterTextChanged(s: Editable) {
 
-                if (passwordEt!!.text.toString().isNotEmpty()) {
+                if (passwordEt!!.text.toString().isNotEmpty()&&isBalance) {
                     enableBtn()
                 } else {
                     disableBtn()
