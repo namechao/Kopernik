@@ -1,5 +1,7 @@
 package com.kopernik.ui.mine.entity
 
+import java.io.Serializable
+
 data class SynthetiseUtcEntity(
     val utc: String,
     val utdm: String,
@@ -22,7 +24,7 @@ data class Config(
     val utkPrice: String,
     val utkPricePercentage: String,
     val uytExchange: String
-)
+):Serializable
 data class RateEntity(
     val rateList: List<Rate>
 )
@@ -32,12 +34,12 @@ data class Rate(
     val rate: String,
     val remark: String,
     val type: String
-)
-data class AllConfigEntity(
+):Serializable
+data class AllConfigEntity (
     val config: Config,
     val rateList: List<Rate>,
     val utc: String,
     val utdm: String,
     val utk: String,
     val uyt: String
-)
+):Serializable

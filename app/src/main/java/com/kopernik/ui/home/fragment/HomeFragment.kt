@@ -47,9 +47,11 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
         fun newInstance() = HomeFragment()
 
     }
+
+
     var homeEntity: HomeEntity?=null
     var adapter= HomeAdapter()
-    val autoPollAdapter=  AutoPollAdapter()
+
     var list= ArrayList<HomeCoinItem>()
     override fun layoutId()= R.layout.fragment_home
     @RequiresApi(Build.VERSION_CODES.M)
@@ -120,11 +122,7 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
         })
     }
     private fun initData() {
-        //上方滚动
-        noticeRecyclerView.layoutManager=LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        noticeRecyclerView.adapter = autoPollAdapter
-        //启动滚动
-        noticeRecyclerView.start()
+
         //下方列表
         recyclerView.layoutManager=LinearLayoutManager(activity)
         recyclerView.adapter=adapter
@@ -147,7 +145,15 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
       }
   }
   fun updataUI(){
-      autoPollAdapter.setNewData(homeEntity?.collectList)
+       homeEntity?.collectList?.let {
+          var autoPollAdapter= AutoPollAdapter(activity!!, it)
+          //上方滚动
+          noticeRecyclerView.layoutManager=LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+          noticeRecyclerView.adapter = autoPollAdapter
+          //启动滚动
+          noticeRecyclerView.start()
+      }
+
       //总通量
       tvUtdm.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utdmAmount,4)
       tvUtk.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utkAmount,4)

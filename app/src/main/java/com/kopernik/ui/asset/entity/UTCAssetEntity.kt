@@ -18,3 +18,20 @@ data class UtcComRecord(
     val utdmAmount: String,
     val utkAmount: String
 )
+data class ExchangeRecordEntity(
+    val datas: List<ExchangeRecord>,
+    val pageNum: Int,
+    val pageSize: Int,
+    val pages: Int,
+    val total: Int
+)
+
+data class ExchangeRecord(
+    val createTime: Long,
+    val id: Int,
+    val rate: String,
+    val remark: Any,
+    val uid: Int,
+    val utcAmount: String,
+    val uytAmount: String
+)

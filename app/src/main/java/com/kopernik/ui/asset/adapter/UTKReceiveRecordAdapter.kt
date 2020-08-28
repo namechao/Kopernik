@@ -5,14 +5,18 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.kopernik.R
 import com.kopernik.app.utils.TimeUtils
 import com.kopernik.ui.asset.adapter.viewHolder.UTCRecordHolder
+import com.kopernik.ui.asset.adapter.viewHolder.UTKRecordHolder
 import com.kopernik.ui.asset.entity.ExtractItem
+import com.kopernik.ui.asset.entity.ReceiveRecordEntity
+import com.kopernik.ui.asset.entity.UtkReceiveRecord
 
 
 class UTKReceiveRecordAdapter(
-    data: List<String>
-) :BaseQuickAdapter<String, UTCRecordHolder>(R.layout.item_receive_record,data){
-    override fun convert(helper: UTCRecordHolder?, item: String?) {
-
+    data: List<UtkReceiveRecord>
+) :BaseQuickAdapter<UtkReceiveRecord, UTKRecordHolder>(R.layout.item_receive_record,data){
+    override fun convert(helper: UTKRecordHolder?, item: UtkReceiveRecord?) {
+        helper?.assetRecevieTime?.text=TimeUtils.normalTimeStampToMinute(item?.createTime?.toString())
+        helper?.assetReceiveCounts?.text=item?.amount
     }
 
 

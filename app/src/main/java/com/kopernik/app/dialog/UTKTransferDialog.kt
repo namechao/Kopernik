@@ -15,9 +15,13 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import com.kopernik.R
 import com.kopernik.app.config.UserConfig
+import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.ui.asset.entity.*
 import com.kopernik.ui.asset.util.OnClickFastListener
 import com.kopernik.app.utils.KeyboardUtils
+import com.kopernik.app.utils.ToastUtils
+import com.kopernik.ui.mine.entity.AllConfigEntity
+import java.io.Serializable
 
 class UTKTransferDialog : DialogFragment(),
     FingerprintDialog.AuthenticationCallback {
@@ -27,8 +31,8 @@ class UTKTransferDialog : DialogFragment(),
     private var transferUidEt: EditText? = null
     private var okBtn: Button? = null
     private var type = 0
-
-
+    private var rate=""
+    private var bean: AllConfigEntity?= null
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog =
@@ -46,7 +50,9 @@ class UTKTransferDialog : DialogFragment(),
         //        lp.height =  getActivity().getWindowManager().getDefaultDisplay().getHeight() * 3 / 5;
         window.attributes = lp
         val bundle = arguments
-        type = bundle!!.getInt("type")
+        bundle?.getSerializable("bean")?.let {
+            bean =  it as  AllConfigEntity
+        }
 
         initView(dialog)
         return dialog
@@ -65,20 +71,30 @@ class UTKTransferDialog : DialogFragment(),
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
         }
-
-
-
+        if (bean?.rateList!=null) {
+            for (i in bean?.rateList!!){
+                if (i.type.contains("ROLL_OUT")) rate = BigDecimalUtils.roundDOWN(i.rate,8)
+            }
+        }
+        desc?.text=rate+"UTK"
         transferCountsEt?.addTextChangedListener(passwordWatcher)
         transferUidEt?.addTextChangedListener(passwordWatcher)
         passwordEt?.addTextChangedListener(passwordWatcher)
         okBtn?.setOnClickListener(clickFastListener)
+
     }
 
     //点击确定按钮回调到页面进行网络请求处理
     var clickFastListener: OnClickFastListener = object : OnClickFastListener() {
         override fun onFastClick(v: View) {
+            if (BigDecimalUtils.compare(transferCountsEt?.text.toString().trim(),bean?.utk))
+            {
+                ToastUtils.showShort(activity,getString(R.string.asset_transfer_counts_tip))
+                return
+            }
             KeyboardUtils.hideSoftKeyboard(passwordEt)
-            listener?.let { it.onRequest(type, passwordEt!!.text.toString().trim()) }
+            listener?.let { it.onRequest(transferCountsEt?.text.toString().trim(),transferUidEt?.text.toString().trim(),rate,passwordEt?.text.toString().trim()) }
+            dismiss()
         }
     }
 
@@ -129,14 +145,14 @@ class UTKTransferDialog : DialogFragment(),
     }
 
     interface RequestListener {
-        fun onRequest(type: Int, params: String)
+        fun onRequest(transferCounts: String, uid: String,rate:String,psw:String)
     }
 
     companion object {
-        fun newInstance(type: Int): UTKTransferDialog {
+        fun newInstance(bean: Any): UTKTransferDialog {
             val fragment = UTKTransferDialog()
             val bundle = Bundle()
-            bundle.putInt("type", type)
+            bundle.putSerializable("bean", bean as Serializable?)
             fragment.arguments = bundle
             return fragment
         }

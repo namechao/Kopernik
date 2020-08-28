@@ -17,6 +17,8 @@ import com.kopernik.R
 import com.kopernik.ui.asset.entity.*
 import com.kopernik.ui.asset.util.OnClickFastListener
 import com.kopernik.app.utils.KeyboardUtils
+import com.kopernik.ui.mine.entity.AllConfigEntity
+import java.io.Serializable
 
 class UDMTDialog : DialogFragment(),
     FingerprintDialog.AuthenticationCallback {
@@ -25,7 +27,7 @@ class UDMTDialog : DialogFragment(),
 
     private var desc: TextView? = null
 
-
+    private var bean: AllConfigEntity?= null
     private var passwordEt: EditText? = null
     private var exchangeCounts: EditText? = null
     private var okBtn: Button? = null
@@ -50,7 +52,9 @@ class UDMTDialog : DialogFragment(),
         //        lp.height =  getActivity().getWindowManager().getDefaultDisplay().getHeight() * 3 / 5;
         window.attributes = lp
         val bundle = arguments
-        type = bundle!!.getInt("type")
+        bundle?.getSerializable("bean")?.let {
+            bean =  it as  AllConfigEntity
+        }
         fingerprintDialog = FingerprintDialog.newInstance(2, null)
         fingerprintDialog?.setAuthenticationCallback(this)
 
@@ -137,10 +141,10 @@ class UDMTDialog : DialogFragment(),
     }
 
     companion object {
-        fun newInstance(type: Int): UDMTDialog {
+        fun newInstance(bean: Any): UDMTDialog {
             val fragment = UDMTDialog()
             val bundle = Bundle()
-            bundle.putInt("type", type)
+            bundle.putSerializable("bean", bean as Serializable?)
             fragment.arguments = bundle
             return fragment
         }

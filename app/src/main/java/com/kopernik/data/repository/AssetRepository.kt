@@ -35,6 +35,24 @@ class AssetRepository private constructor(private val newWork: AssetNetWork):Bas
     suspend fun composeRecord(map: Map<String, String>): BaseResult<UTCAssetEntity> {
         return newWork.composeRecord(map)
     }
+    suspend fun exchangeRecord(map: Map<String, String>): BaseResult<ExchangeRecordEntity> {
+        return newWork.exchangeRecord(map)
+    }
+    suspend fun transferRecord(map: Map<String, String>): BaseResult<TransferRecordEntity> {
+        return newWork.transferRecord(map)
+    }
+    suspend fun receiveRecord(map: Map<String, String>): BaseResult<ReceiveRecordEntity> {
+        return newWork.receiveRecord(map)
+    }
+    suspend fun gainsDetailRecord(map: Map<String, String>): BaseResult<UTDMAssetEntity> {
+        return newWork.gainsDetailRecord(map)
+    }
+    suspend fun exchange(map: Map<String, String>): BaseResult<Any> {
+        return newWork.exchange(map)
+    }
+    suspend fun transfer(map: Map<String, String>): BaseResult<Any> {
+        return newWork.transfer(map)
+    }
 
     suspend fun cancelWithdraw(url: String): BaseResult<Any> {
         return newWork.cancelWithdraw(url)

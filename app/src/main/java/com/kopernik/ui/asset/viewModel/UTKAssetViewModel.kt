@@ -9,7 +9,7 @@ import com.kopernik.ui.mine.entity.AllConfigEntity
 import com.kopernik.ui.mine.entity.AssetConfitEntity
 import com.kopernik.ui.mine.entity.RateEntity
 
-class UTCAssetViewModel : BaseViewModel() {
+class UTKAssetViewModel : BaseViewModel() {
     private val homeRepository by lazy { InjectorUtil.getAssetRepository() }
     private val getAssetConfig = SingleLiveEvent<BaseResult<AllConfigEntity>>()
     private val getAllConfig = SingleLiveEvent<BaseResult<AllConfigEntity>>()
@@ -26,29 +26,22 @@ class UTCAssetViewModel : BaseViewModel() {
         },isShowDialog = false)
         return getAssetConfig
     }
-    fun composeRecord(map: Map<String,String>): SingleLiveEvent<BaseResult<UTCAssetEntity>> {
-        launchGo({
-            composeRecord.value = homeRepository.composeRecord(map)
-        },isShowDialog = false)
-        return composeRecord
-    }
-    fun exchangeRecord(map: Map<String,String>): SingleLiveEvent<BaseResult<ExchangeRecordEntity>> {
-        launchGo({
-            exchangeRecord.value = homeRepository.exchangeRecord(map)
-        },isShowDialog = false)
-        return exchangeRecord
-    }
-    fun exchange(map: Map<String,String>): SingleLiveEvent<BaseResult<Any>> {
-        launchGo({
-            exchange.value = homeRepository.exchange(map)
-        },isShowDialog = false)
-        return exchange
-    }
     fun transfer(map: Map<String,String>): SingleLiveEvent<BaseResult<Any>> {
         launchGo({
             exchange.value = homeRepository.transfer(map)
         },isShowDialog = false)
         return exchange
     }
-
+    fun receiveRecord(map: Map<String,String>): SingleLiveEvent<BaseResult<ReceiveRecordEntity>> {
+        launchGo({
+            receiveRecord.value = homeRepository.receiveRecord(map)
+        },isShowDialog = false)
+        return receiveRecord
+    }
+    fun transferRecord(map: Map<String,String>): SingleLiveEvent<BaseResult<TransferRecordEntity>> {
+        launchGo({
+            transferRecord.value = homeRepository.transferRecord(map)
+        },isShowDialog = false)
+        return transferRecord
+    }
 }

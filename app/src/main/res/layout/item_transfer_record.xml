@@ -10,7 +10,7 @@
        android:layout_height="wrap_content"
        android:orientation="horizontal">
        <TextView
-           android:id="@+id/asset_synthesis_time"
+           android:id="@+id/asset_transfer_time"
            android:textColor="@color/color_AA9CCA"
            android:textSize="@dimen/sp_12"
            android:layout_width="wrap_content"
@@ -23,19 +23,7 @@
            />
 
        <TextView
-           android:id="@+id/asset_handling_fee"
-           android:textColor="@color/color_AA9CCA"
-           android:textSize="@dimen/sp_12"
-           android:layout_width="0dp"
-           android:layout_weight="1.5"
-           android:layout_height="wrap_content"
-           android:text="258.5478"
-           android:paddingTop="@dimen/dp_14"
-           android:paddingBottom="@dimen/sp_14"
-           android:gravity="center"
-           />
-       <TextView
-           android:id="@+id/asset_synthesis_counts"
+           android:id="@+id/asset_uid"
            android:textColor="@color/color_AA9CCA"
            android:textSize="@dimen/sp_12"
            android:layout_width="0dp"
@@ -44,9 +32,33 @@
            android:text="258.5478"
            android:paddingTop="@dimen/dp_14"
            android:paddingBottom="@dimen/sp_14"
-           android:layout_marginRight="@dimen/sp_14"
            android:gravity="center"
            />
+       <TextView
+           android:id="@+id/asset_transfer_counts"
+           android:textColor="@color/color_AA9CCA"
+           android:textSize="@dimen/sp_12"
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="wrap_content"
+           android:text="258.5478"
+           android:paddingTop="@dimen/dp_14"
+           android:paddingBottom="@dimen/sp_14"
+           android:gravity="center"
+           />
+       <TextView
+       android:id="@+id/asset_handling_fee"
+       android:textColor="@color/color_AA9CCA"
+       android:textSize="@dimen/sp_12"
+       android:layout_width="0dp"
+       android:layout_weight="1"
+       android:layout_height="wrap_content"
+       android:text="258.5478"
+       android:paddingTop="@dimen/dp_14"
+       android:paddingBottom="@dimen/sp_14"
+       android:layout_marginRight="@dimen/sp_14"
+       android:gravity="center"
+       />
    </LinearLayout>
     <View
         android:layout_width="match_parent"

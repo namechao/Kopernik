@@ -220,7 +220,7 @@
     <string name="tip_asset_map_success">映射成功</string>
     <string name="tip_asset_map_cancel_success">取消映射成功</string>
     <string name="tip_asset_withdraw_success">提现成功</string>
-    <string name="tip_asset_transfer_success">转账成功</string>
+
     <string name="tip_change_success">修改成功</string>
     <string name="tip_change_failed">修改失败</string>
     <string name="tip_export_success">导出成功</string>
@@ -646,6 +646,7 @@
    <string name="utc_input_counts">请输入要合成UTC的数量</string>
    <string name="utc_get_utc_counts">恭喜你获得</string>
    <string name="utc_per">个</string>
+   <string name="exchange_success">兑换成功</string>
     <!--    生态相关-->
     <string name="ecology_tab_title">Kopernik  NETWORK生态应用场景</string>
     <string name="ecology_tab_title1_1">合成UTC</string>
@@ -745,7 +746,7 @@
     <string name="asset_handling_fee">手续费（UYT）</string>
     <string name="asset_handling_fees">手续费</string>
     <string name="asset_synthesis_counts">合成数量</string>
-    <string name="asset_exchange_proportion">当前兑换比例  UTC : UTK = 1 : 1</string>
+    <string name="asset_exchange_proportion">当前兑换比例</string>
     <string name="asset_trade_psw">请输入交易密码</string>
     <string name="asset_confirm_exchange">确认兑换</string>
     <string name="asset_receive_counts">领取数量</string>
@@ -784,5 +785,7 @@
     <string name="uyt_transfer_counts">转账数量</string>
     <string name="my_setting">设置</string>
     <string name="cancel">取消</string>
+    <string name="asset_transfer_counts_tip">当前输入转账金额大于用户余额</string>
+   <string name="tip_asset_transfer_success">转账成功</string>
     <!-- 新项目文字资源-->
 </resources>

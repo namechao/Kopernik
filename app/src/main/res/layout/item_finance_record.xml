@@ -24,7 +24,7 @@
            />
 
        <TextView
-           android:id="@+id/asset_mine_m"
+           android:id="@+id/asset_mine_type"
            android:textColor="@color/color_AA9CCA"
            android:textSize="@dimen/sp_12"
            android:layout_width="0dp"

@@ -448,7 +448,7 @@ public final class BigDecimalUtils {
      */
     public static Boolean compare(final String v1, final String v2) {
         try {
-            return new BigDecimal(v1).compareTo(new BigDecimal(v2)) != -1;
+            return new BigDecimal(v1 == null ? "0" : v1).compareTo(new BigDecimal(v2 == null ? "0" : v2)) != -1;
         } catch (Exception e) {
             JCLogUtils.eTag(TAG, e, "compare");
         }

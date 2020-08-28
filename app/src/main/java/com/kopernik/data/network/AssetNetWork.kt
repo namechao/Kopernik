@@ -12,6 +12,12 @@ class AssetNetWork {
 
     suspend fun submitWithDrawlCoin(map: Map<String, String>) = mService.submitWithDrawlCoin(map)
     suspend fun composeRecord(map: Map<String, String>) = mService.composeRecord(map)
+    suspend fun exchangeRecord(map: Map<String, String>) = mService.exchangeRecord(map)
+    suspend fun transferRecord(map: Map<String, String>) = mService.transferRecord(map)
+    suspend fun receiveRecord(map: Map<String, String>) = mService.receiveRecord(map)
+    suspend fun gainsDetailRecord(map: Map<String, String>) = mService.gainsDetailRecord(map)
+    suspend fun exchange(map: Map<String, String>) = mService.exchange(map)
+    suspend fun transfer(map: Map<String, String>) = mService.transfer(map)
     suspend fun cancelWithdraw(url: String) = mService.cancelcash(url)
     suspend fun getGains(iconType: String) = mService.getGains(iconType)
     suspend fun saveGains() = mService.saveGains()

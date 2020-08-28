@@ -4,7 +4,6 @@ import com.pcl.mvvm.app.base.BaseResult
 import com.kopernik.ui.Ecology.entity.TimeLineBean
 import com.kopernik.ui.asset.entity.*
 import com.kopernik.ui.mine.entity.AllConfigEntity
-import com.kopernik.ui.mine.entity.AssetConfitEntity
 import com.kopernik.ui.mine.entity.RateEntity
 import retrofit2.http.*
 
@@ -63,12 +62,33 @@ interface AssetService {
     //提币地址提交
     @GET("asset/saveWithdrawalAddress")
     suspend fun submitWithDrawlCoin(@QueryMap map: Map<String, String>): BaseResult<Any>
-    //提币地址提交
+    //合成记录
     @GET("asset/composeRecord")
     suspend fun  composeRecord(@QueryMap map: Map<String, String>): BaseResult<UTCAssetEntity>
+    //合成记录
+    @GET("asset/exchangeRecord")
+    suspend fun  exchangeRecord(@QueryMap map: Map<String, String>): BaseResult<ExchangeRecordEntity>
+    //领取记录
+    @GET("asset/collectRecord")
+    suspend fun  receiveRecord(@QueryMap map: Map<String, String>): BaseResult<ReceiveRecordEntity>
+    //转账记录
+    @GET("asset/transferRecord")
+    suspend fun  transferRecord(@QueryMap map: Map<String, String>): BaseResult<TransferRecordEntity>
+    //utdm财务记录
+    @GET("asset/gainsDetailRecord")
+    suspend fun gainsDetailRecord(@QueryMap map: Map<String, String>): BaseResult<UTDMAssetEntity>
+    //合成
+    @POST("asset/exchange")
+    @FormUrlEncoded
+    suspend fun  exchange(@FieldMap map: Map<String, String>): BaseResult<Any>
+    //合成
+    @POST("asset/transfer")
+    @FormUrlEncoded
+    suspend fun  transfer(@FieldMap map: Map<String, String>): BaseResult<Any>
     //兑换比例
-    @GET("asset/config")
+    @GET("asset/getAll")
     suspend fun getAssetConfig(): BaseResult<AllConfigEntity>
+
     //手续费集中处理
     @GET("asset/rate")
     suspend fun getRate(): BaseResult<RateEntity>

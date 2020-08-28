@@ -11,12 +11,17 @@ import com.kopernik.R
 import com.kopernik.app.base.NewFullScreenBaseActivity
 import com.kopernik.app.dialog.ExchangeDialog
 import com.kopernik.app.network.http.ErrorCode
+import com.kopernik.app.utils.BigDecimalUtils
+import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.asset.adapter.UTCExchangeRecordAdapter
 import com.kopernik.ui.asset.adapter.UTCSynthesisRecordAdapter
+import com.kopernik.ui.asset.entity.ExchangeRecord
 import com.kopernik.ui.asset.entity.UtcComRecord
 import com.kopernik.ui.asset.viewModel.UTCAssetViewModel
+import com.kopernik.ui.mine.entity.AllConfigEntity
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
+import dev.utils.common.encrypt.MD5Utils
 import kotlinx.android.synthetic.main.activity_utc_asset.*
 import kotlinx.android.synthetic.main.activity_utc_asset.recyclerView
 import kotlinx.android.synthetic.main.activity_utc_asset.recyclerView1
@@ -27,6 +32,7 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
     private var machinngType=0
     private var pager=1
     private var pager1=1
+    private var allConfigEntity:AllConfigEntity?=null
     var adpter=UTCSynthesisRecordAdapter(arrayListOf())
     var adpter1=UTCExchangeRecordAdapter(arrayListOf())
 
@@ -48,22 +54,15 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
         recyclerView1.adapter=adpter1
         ///兑换
         exchange.setOnClickListener {
-            viewModel.run {
-              getAssetConfig().observe(this@UTCAssetActivity, Observer {
-                  if (it.status==200){
-                      var exchangeDialog = ExchangeDialog.newInstance(1)
-                      exchangeDialog!!.setOnRequestListener(object : ExchangeDialog.RequestListener {
-                          override fun onRequest(type: Int, params: String) {
-
-                          }
-                      })
-                      exchangeDialog!!.show(supportFragmentManager, "withdrawRecommed")
-                  }else{
-                      ErrorCode.showErrorMsg(this@UTCAssetActivity,it.status)
-                  }
-              })
+            if (allConfigEntity!=null){
+                var exchangeDialog = ExchangeDialog.newInstance(allConfigEntity!!)
+                exchangeDialog!!.setOnRequestListener(object : ExchangeDialog.RequestListener {
+                    override fun onRequest(exchangeCounts: String, params: String,rate:String) {
+                        exchangeCoin(exchangeCounts,params,rate,allConfigEntity!!)
+                    }
+                })
+                exchangeDialog!!.show(supportFragmentManager, "withdrawRecommed")
             }
-
         }
         smartRefreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(refreshLayout: RefreshLayout) {
@@ -74,17 +73,44 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
                 pager=1
                 pager1=1
                 getList()
+                getCurrentAsset()
             }
 
         })
         smartRefreshLayout.autoRefresh()
 
     }
+     private  fun  getCurrentAsset(){
+         viewModel.run {
+             getAssetConfig().observe(this@UTCAssetActivity, Observer {
+                 if (it.status==200){
+                     allConfigEntity=it.data
+                     assetTotal.text=BigDecimalUtils.roundDOWN(it.data.utc,2)
+                 }
+             })
+         }
+     }
+    private fun exchangeCoin(uytCounts: String, psw: String,rate:String, data: AllConfigEntity) {
+
+        viewModel.run {
+            var map= mapOf("amountUtc" to data.utc,"amountUyt" to uytCounts,"rate" to rate ,"pwd" to MD5Utils.md5(MD5Utils.md5(psw)))
+            exchange(map).observe(this@UTCAssetActivity, Observer {
+                if (it.status==200){
+                  ToastUtils.showShort(this@UTCAssetActivity,resources.getString(R.string.exchange_success))
+                }else{
+                    ErrorCode.showErrorMsg(this@UTCAssetActivity,it.status)
+                }
+            })
+        }
+
+    }
+
+
 
     fun getList(){
       viewModel.run {
           if (machinngType==0) {
-              var map = mapOf("" to "")
+              var map = mapOf("pageNumber" to pager.toString(),"pageSize" to "10")
               composeRecord(map).observe(this@UTCAssetActivity, Observer {
 
                   if (it.status==200){
@@ -120,7 +146,41 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
                   }
               })
           }else{
+              var map = mapOf("pageNumber" to pager1.toString(),"pageSize" to "10")
+              exchangeRecord(map).observe(this@UTCAssetActivity, Observer {
 
+                  if (it.status==200){
+                      val datas: List<ExchangeRecord>?=it.data.datas
+                      if (pager1 == 1) {
+                          if (datas == null || datas.isEmpty()) {
+                              smartRefreshLayout.setNoMoreData(true)
+                              return@Observer
+                          }
+                          if (datas.size > 9) {
+                              smartRefreshLayout.finishRefresh(300)
+                              pager1++
+                          } else {
+                              smartRefreshLayout.finishRefreshWithNoMoreData()
+                          }
+
+                          adpter1?.setNewData(datas)
+                      } else {
+                          if (datas != null) {
+                              if (datas.size < 10) {
+                                  smartRefreshLayout.finishLoadMoreWithNoMoreData()
+                              } else {
+                                  pager1++
+                                  smartRefreshLayout.finishLoadMore(true)
+                              }
+                          }
+                          if (datas != null) {
+                              adpter1?.addData(datas)
+                          }
+                      }
+                  }else{
+                      ErrorCode.showErrorMsg(getActivity(), it.status)
+                  }
+              })
           }
 
       }
