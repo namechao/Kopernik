@@ -7,9 +7,9 @@ data class NoticeEntity(
 data class Notice(
     val content: String,
     val createTime: Long,
-    val id: Int,
+    val id: String,
     val img: Any,
     val noticeAbstract: String,
     val title: String,
-    val url: Any
+    val url: String
 )

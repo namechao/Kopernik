@@ -51,7 +51,6 @@ import kotlinx.android.synthetic.main.activity_login.tvPhoneRegister
 import kotlinx.android.synthetic.main.activity_login.tvPhoneRegisterLine
 import kotlinx.android.synthetic.main.activity_login.tvSeekBar
 import kotlinx.android.synthetic.main.activity_login.tvVerifySu
-import kotlinx.android.synthetic.main.activity_register.*
 import java.util.ArrayList
 
 class LoginActivity : NewFullScreenBaseActivity<LoginViewModel, ViewDataBinding>() {

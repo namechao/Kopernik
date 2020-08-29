@@ -27,6 +27,9 @@ object Api {
         if (AppConfig.isDebug) "http://47.57.24.215:8086/#/app" else "https://kopernik.com/#/app"
     val trade =
         if (AppConfig.isDebug) "http://47.57.24.215:8086/#/deal" else "https://kopernik.com/#/deal"
+    val UserAgreementApi="http://123.57.8.136:8083/#/agreement"
+    val UserNoticeApi=" http://123.57.8.136:8083/#/note?id="
+    val InviteFriendsCodeApi="http://123.57.8.136:8083/#/register?inviteCode="
     //home
     val referendumList =  "register/referendumList" //公投列表
     val referendumDetails =

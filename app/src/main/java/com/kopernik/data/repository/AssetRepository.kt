@@ -78,6 +78,9 @@ class AssetRepository private constructor(private val newWork: AssetNetWork):Bas
     suspend fun saveGains(): BaseResult<Any> {
         return newWork.saveGains()
     }
+    suspend fun withDrawlCoin(): BaseResult<WithDrawlCoinEntity> {
+        return newWork.withDrawlCoin()
+    }
     suspend fun verifyPwd(pwd: String): BaseResult<Any> {
         return newWork.verifyPwd(pwd)
     }

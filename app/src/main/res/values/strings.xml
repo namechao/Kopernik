@@ -606,7 +606,7 @@
     <string name="synthesis_utc">合成UTC</string>
     <string name="synthesis_bt">合成</string>
     <string name="purchase_mm_tip">购买矿机挖矿</string>
-    <string name="purchase_mm_tip1">最多可达3倍收益回报</string>
+    <string name="purchase_mm_tip1">最多可达3.5倍收益回报</string>
     <string name="ic_mm_tip1">3倍总收益</string>
     <string name="ic_mm_tip2">100%挖矿效率</string>
     <string name="ic_mm_tip3">每日收益</string>
@@ -704,6 +704,7 @@
     <string name="re_login_setup_psw">请设置登录密码</string>
     <string name="re_login_confirm_psw">确认登录密码</string>
     <string name="user_protocol_title">UTC用户协议</string>
+    <string name="user_notice">公告</string>
     <string name="verify_phone_error">请输入正确手机号</string>
     <string name="verify_email_error">请输入正确邮箱</string>
     <string name="phone_not_empty">手机号不能为空</string>
@@ -732,6 +733,7 @@
     <string name="asset_total">我的总资产(CNY)</string>
     <string name="asset_utc_balance">UTC余额(CNY)</string>
     <string name="asset_utk_balance">UTK余额</string>
+    <string name="asset_uyt_balance">UYT余额</string>
     <string name="asset_exchange">兑换</string>
     <string name="asset_tansfer">转账</string>
     <string name="asset_synthesis_record">UTC合成记录</string>

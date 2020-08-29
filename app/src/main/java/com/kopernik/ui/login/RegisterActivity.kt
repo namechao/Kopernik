@@ -30,6 +30,22 @@ import com.kopernik.ui.login.adapter.ChoseAreaAdapter
 import com.kopernik.ui.login.bean.LoginCountryBean
 import com.kopernik.ui.login.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register.confirmBtn
+import kotlinx.android.synthetic.main.activity_register.etInput
+import kotlinx.android.synthetic.main.activity_register.icClear
+import kotlinx.android.synthetic.main.activity_register.ivPhoneHead
+import kotlinx.android.synthetic.main.activity_register.ivVerifySucess
+import kotlinx.android.synthetic.main.activity_register.llEmailRegister
+import kotlinx.android.synthetic.main.activity_register.llHeader
+import kotlinx.android.synthetic.main.activity_register.llPhoneRegister
+import kotlinx.android.synthetic.main.activity_register.sbProgress
+import kotlinx.android.synthetic.main.activity_register.tvEmailRegister
+import kotlinx.android.synthetic.main.activity_register.tvEmailRegisterLine
+import kotlinx.android.synthetic.main.activity_register.tvPhoneHead
+import kotlinx.android.synthetic.main.activity_register.tvPhoneRegister
+import kotlinx.android.synthetic.main.activity_register.tvPhoneRegisterLine
+import kotlinx.android.synthetic.main.activity_register.tvSeekBar
+import kotlinx.android.synthetic.main.activity_register.tvVerifySu
 import java.util.ArrayList
 
 
@@ -69,6 +85,10 @@ class RegisterActivity : NewFullScreenBaseActivity<RegisterViewModel, ViewDataBi
             }
 
         })
+        //协议
+        userProtocol.setOnClickListener {
+            LaunchConfig.startUserProtocolActivity(this)
+        }
         llHeader.setOnClickListener {
             showDialog()
         }

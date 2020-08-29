@@ -12,7 +12,7 @@ class MineViewModel : BaseViewModel() {
 
     private val getUtdmTotal = SingleLiveEvent<BaseResult<Amounts>>()
     private val getAssetBlance = SingleLiveEvent<BaseResult<SynthetiseUtcEntity>>()
-    private val getAssetConfig = SingleLiveEvent<BaseResult<AssetConfitEntity>>()
+    private val getAssetConfig = SingleLiveEvent<BaseResult<AllConfigEntity>>()
     private val compose = SingleLiveEvent<BaseResult<Any>>()
 
 
@@ -28,7 +28,7 @@ class MineViewModel : BaseViewModel() {
         },isShowDialog = false)
         return getAssetBlance
     }
-    fun getAssetConfig(): SingleLiveEvent<BaseResult<AssetConfitEntity>> {
+    fun getAssetConfig(): SingleLiveEvent<BaseResult<AllConfigEntity>> {
         launchGo({
             getAssetConfig.value = homeRepository.getAssetConfig()
         },isShowDialog = false)

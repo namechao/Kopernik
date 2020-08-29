@@ -6,55 +6,36 @@ import com.aleyn.mvvm.event.SingleLiveEvent
 import com.pcl.mvvm.app.base.BaseResult
 import com.kopernik.data.InjectorUtil
 import com.kopernik.ui.asset.entity.*
+import com.kopernik.ui.mine.entity.AllConfigEntity
 
-class AssetDetailsViewModel : BaseViewModel() {
+class UYTAssetViewModel : BaseViewModel() {
     private val homeRepository by lazy { InjectorUtil.getAssetRepository() }
-//    private val assetBean = MutableLiveData<BaseResult<AssetBean>>()
-    private val assetDetailsBean = MutableLiveData<BaseResult<AssetDetailsChildBean>>()
-//    private val deposit = SingleLiveEvent<BaseResult<AddressHash>>()
-//    private val availableAmount = SingleLiveEvent<BaseResult<AvailableAmount>>()
-//    private val transferAccount = SingleLiveEvent<BaseResult<TransferAccount>>()
+    private val withDrawlCoin = SingleLiveEvent<BaseResult<WithDrawlCoinEntity>>()
     private val data = SingleLiveEvent<BaseResult<Any>>()
     private val mapping = SingleLiveEvent<BaseResult<Any>>()
     private val unMapping = SingleLiveEvent<BaseResult<Any>>()
     private val getGains = SingleLiveEvent<BaseResult<ExtractBean>>()
-    private val saveGains = MutableLiveData<BaseResult<Any>>()
-//    fun getAsset(): SingleLiveEvent<BaseResult<AssetEntity>> {
-//        launchGo({
-//            assetBean.value = homeRepository.getAsset()
-//        }, {}, isShowDialog = false)
-//        return assetBean
-//    }
+    private val saveGains = SingleLiveEvent<BaseResult<Any>>()
+    private val getAssetConfig = SingleLiveEvent<BaseResult<AllConfigEntity>>()
 
-    fun getAssetDetails(map: Map<String?, String?>): MutableLiveData<BaseResult<AssetDetailsChildBean>> {
+    fun getAssetConfig(): SingleLiveEvent<BaseResult<AllConfigEntity>> {
         launchGo({
-//            assetDetailsBean.value = homeRepository.getAssetDetails(map)
-        })
-        return  assetDetailsBean
+            getAssetConfig.value = homeRepository.getAssetConfig()
+        },isShowDialog = false)
+        return getAssetConfig
     }
-//    fun deposit(iconType:String): SingleLiveEvent<BaseResult<AddressHash>> {
-//        launchGo({
-//            deposit.value = homeRepository.deposit(iconType)
-//        })
-//        return  deposit
-//    }
-//    fun cashwithdrawal(iconType:String): SingleLiveEvent<BaseResult<AvailableAmount>> {
-//        launchGo({
-//            availableAmount.value = homeRepository.cashwithdrawal(iconType)
-//        })
-//        return availableAmount
-//    }
-//
-//    fun transferaccount(iconType: String): SingleLiveEvent<BaseResult<TransferAccount>> {
-//        launchGo({
-//            transferAccount.value = homeRepository.transferaccount(iconType)
-//        })
-//        return transferAccount
-//    }
+
+    fun withDrawlCoin(): SingleLiveEvent<BaseResult<WithDrawlCoinEntity>> {
+        launchGo({
+            withDrawlCoin.value = homeRepository.withDrawlCoin()
+        })
+        return  withDrawlCoin
+    }
 
     fun mapping(type: String, iconType: String): SingleLiveEvent<BaseResult<Any>> {
         launchGo({
             mapping.value = homeRepository.checkMapping(type, iconType)
+
         })
         return mapping
     }

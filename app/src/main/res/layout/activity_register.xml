@@ -269,6 +269,7 @@
             android:textColor="@color/color_8284B6"
             android:text="@string/login_agreement_tip"/>
         <TextView
+            android:id="@+id/userProtocol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_7F80FD"

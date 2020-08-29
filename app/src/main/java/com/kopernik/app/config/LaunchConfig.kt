@@ -64,6 +64,12 @@ object LaunchConfig {
             Intent(context, InviteFriendsActivity::class.java)
         context.startActivity(intent)
     }
+    fun startNoticeActivity(context: Context,id: String?) {
+        val intent =
+            Intent(context, NoticeActivity::class.java)
+        intent.putExtra("id",id)
+        context.startActivity(intent)
+    }
    fun startGoogleVerifiedActivity(context: Context) {
         val intent =
             Intent(context, GoogleVerifiedActivity::class.java)
@@ -216,11 +222,13 @@ object LaunchConfig {
     }
     fun startDepositMoneyActivity(
         context: Context,
-        address: String?
+        address: String?,
+        memo: String?
     ) {
         val intent =
             Intent(context, DepositMoneyActivity::class.java)
         intent.putExtra("address", address)
+        intent.putExtra("memo", memo)
         context.startActivity(intent)
     }
 

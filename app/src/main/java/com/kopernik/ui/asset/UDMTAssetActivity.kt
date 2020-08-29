@@ -29,18 +29,18 @@ class UDMTAssetActivity : NewFullScreenBaseActivity<UDMTAssetViewModel, ViewData
         adpter.addHeaderView(LayoutInflater.from(this).inflate(R.layout.item_finance_record_head,null))
         recyclerView.adapter=adpter
         ///兑换
-        synthesisUtc.setOnClickListener {
-            allConfigEntity?.let {
-                var exchangeDialog = UDMTDialog.newInstance(it)
-                exchangeDialog!!.setOnRequestListener(object : UDMTDialog.RequestListener {
-                    override fun onRequest(type: Int, params: String) {
-
-                    }
-                })
-                exchangeDialog!!.show(supportFragmentManager, "withdrawRecommed")
-            }
-
-        }
+//        synthesisUtc.setOnClickListener {
+//            allConfigEntity?.let {
+//                var exchangeDialog = UDMTDialog.newInstance(it)
+//                exchangeDialog!!.setOnRequestListener(object : UDMTDialog.RequestListener {
+//                    override fun onRequest(type: Int, params: String) {
+//
+//                    }
+//                })
+//                exchangeDialog!!.show(supportFragmentManager, "withdrawRecommed")
+//            }
+//
+//        }
         smartRefreshLayout.setOnRefreshLoadMoreListener(object:OnRefreshLoadMoreListener{
             override fun onLoadMore(refreshLayout: RefreshLayout) {
                 getList()

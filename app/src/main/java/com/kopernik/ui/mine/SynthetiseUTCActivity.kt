@@ -19,8 +19,8 @@ import com.kopernik.app.dialog.UTCSynthetiseProgerssDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.app.utils.ToastUtils
+import com.kopernik.ui.mine.entity.AllConfigEntity
 import com.kopernik.ui.mine.entity.AssetConfitEntity
-import com.kopernik.ui.mine.entity.SynthetiseUtcEntity
 import com.kopernik.ui.mine.viewModel.MineViewModel
 import dev.utils.common.encrypt.MD5Utils
 
@@ -35,8 +35,7 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
     var isOpenSound=false
     var inputCounts=0
     var maxCounts=0
-    var utcEntity: SynthetiseUtcEntity?=null
-    var assetEntity: AssetConfitEntity?=null
+    var utcEntity: AllConfigEntity?=null
     override fun layoutId()=R.layout.activity_snythetise_utc
     var player = MediaPlayer()
     override fun initView(savedInstanceState: Bundle?) {
@@ -69,8 +68,8 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
                     override fun onRequest(type: Int, params: String) {
                       viewModel.run {
                           var amountUtc=editText.text.toString().trim().toInt()
-                         var amountUtk=BigDecimalUtils.divide(amountUtc.toString(),assetEntity?.config?.utkCompose,8)
-                         var amountUtdm=BigDecimalUtils.divide(amountUtc.toString(),assetEntity?.config?.utdmCompose,8)
+                         var amountUtk=BigDecimalUtils.divide(amountUtc.toString(),utcEntity?.config?.utkCompose,8)
+                         var amountUtdm=BigDecimalUtils.divide(amountUtc.toString(),utcEntity?.config?.utdmCompose,8)
                           var  map= mapOf(
                               "amountUtc" to "$amountUtc",
                               "amountUtk" to "$amountUtk",
@@ -80,6 +79,7 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
                           compose(map).observe(this@SynthetiseUTCActivity, Observer {
                               if (it.status==200){
                                   var dialog = UTCSynthetiseProgerssDialog.newInstance(editText.text.toString().trim().toInt())
+                                  smartRefreshLayout.autoRefresh()
                                   dialog!!.show(supportFragmentManager, "progress")
                               }else{
                                   ErrorCode.showErrorMsg(this@SynthetiseUTCActivity,it.status)
@@ -111,25 +111,19 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
     }
     //获取数据
     fun getData(){
-      viewModel.run { getAssetBlance().observe(this@SynthetiseUTCActivity, Observer {
+      viewModel.run {
+          getAssetConfig().observe(this@SynthetiseUTCActivity, Observer {
           smartRefreshLayout.finishRefresh()
           if (it.status==200) {
               utcEntity=it.data
               tvUDMTCoin.text = ""+BigDecimalUtils.getRound(it.data?.utdm)
               tvUTKtCoin.text = ""+ BigDecimalUtils.getRound(it.data?.utk)
-              getAssetConfig().observe(this@SynthetiseUTCActivity, Observer {
-                  if (it.status==200) {
-                      assetEntity=it.data
-                      var utdmToUtc=BigDecimalUtils.multiply(utcEntity?.utdm,assetEntity?.config?.utdmCompose)
-                      var utkToUtc =BigDecimalUtils.multiply(utcEntity?.utk,assetEntity?.config?.utkCompose)
-                      if (BigDecimal(utdmToUtc).subtract(BigDecimal(utkToUtc))>BigDecimal("0"))
-                            maxCounts=BigDecimalUtils.getRound(utkToUtc.toString()).toInt()
-                      else  maxCounts=BigDecimalUtils.getRound(utdmToUtc.toString()).toInt()
-
-                  }else{
-                      ErrorCode.showErrorMsg(this@SynthetiseUTCActivity,it.status)
-                  }
-              })
+              currentScale.text=resources.getString(R.string.current_exchange_precent)+"UTDM:UTK=${BigDecimalUtils.roundDOWN(utcEntity?.config?.utdmCompose,8)}:${BigDecimalUtils.roundDOWN(utcEntity?.config?.utkCompose,8)}"
+              var utdmToUtc=BigDecimalUtils.multiply(utcEntity?.utdm,it.data?.config?.utdmCompose)
+              var utkToUtc =BigDecimalUtils.multiply(utcEntity?.utk,it.data?.config?.utkCompose)
+              if (BigDecimal(utdmToUtc).subtract(BigDecimal(utkToUtc))>BigDecimal("0"))
+                  maxCounts=BigDecimalUtils.getRound(utkToUtc.toString()).toInt()
+              else  maxCounts=BigDecimalUtils.getRound(utdmToUtc.toString()).toInt()
           }else{
               ErrorCode.showErrorMsg(this@SynthetiseUTCActivity,it.status)
           }

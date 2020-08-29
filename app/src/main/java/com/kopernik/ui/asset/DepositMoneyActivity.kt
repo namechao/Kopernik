@@ -22,6 +22,7 @@ class DepositMoneyActivity : NewBaseActivity<NoViewModel,ViewDataBinding>() {
     override fun initView(savedInstanceState: Bundle?) {
         setTitle( resources.getString(R.string.title_asset_deposit))
         val address = intent.getStringExtra("address")
+        val memo = intent.getStringExtra("memo")
         if (StringUtils.isEmpty(address)) {
             ToastUtils.showShort(getActivity(), getString(R.string.address_is_empty))
             finish()
@@ -34,11 +35,11 @@ class DepositMoneyActivity : NewBaseActivity<NoViewModel,ViewDataBinding>() {
                         address
                     )
                 })
-            tvMemo.text=""
+            tvMemo.text=memo
             tvCopyMemo.setOnClickListener(View.OnClickListener {
                 APPHelper.copy(
                     this,
-                    address
+                    memo
                 )
             })
       QRCodeEncoderModel.EncodeQRCode(address)

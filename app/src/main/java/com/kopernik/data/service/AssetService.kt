@@ -46,6 +46,9 @@ interface AssetService {
     //提取收益
     @GET("register/saveGains")
     suspend fun saveGains(): BaseResult<Any>
+    //充币获取地址
+    @GET("/asset/recharge")
+    suspend fun withDrawlCoin(): BaseResult<WithDrawlCoinEntity>
 
     //验证密码
     @GET("register/checkPassword")

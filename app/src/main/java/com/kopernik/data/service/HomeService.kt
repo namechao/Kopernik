@@ -79,8 +79,8 @@ interface HomeService {
     @GET("asset/blance")
     suspend fun getAssetBlance(): BaseResult<SynthetiseUtcEntity>
     //兑换比例
-    @GET("asset/config")
-    suspend fun getAssetConfig(): BaseResult<AssetConfitEntity>
+    @GET("asset/getAll")
+    suspend fun getAssetConfig(): BaseResult<AllConfigEntity>
  //获取可用矿机
     @GET("seckill/getMachine")
     suspend fun getMachine(@QueryMap map:Map<String,String>): BaseResult<OtherMineBean>

@@ -22,6 +22,7 @@ import com.kopernik.app.config.UserConfig
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.APPHelper
 import com.kopernik.app.utils.ToastUtils
+import com.kopernik.data.api.Api
 import com.kopernik.ui.my.ViewModel.InviteFriendsViewModel
 import com.kopernik.ui.my.adapter.InviteFriendsAdapter
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView
@@ -71,7 +72,8 @@ class InviteFriendsActivity : NewFullScreenBaseActivity<InviteFriendsViewModel, 
         var clPoster=view.findViewById<ConstraintLayout>(R.id.clPoster)
 
         qrcodeIv.cornerRadius=50
-        disposable = QRCodeEncoderModel.EncodeQRCode("http://www.kopernik.work/Moblie/Login/register/uqdAxk")
+       var  invitationCode: String? = UserConfig.singleton?.accountBean?.invitationCode ?: return
+        disposable = QRCodeEncoderModel.EncodeQRCode(Api.InviteFriendsCodeApi+invitationCode)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { bitmap -> qrcodeIv.setImageBitmap(bitmap) }
         saveTo.setOnClickListener {

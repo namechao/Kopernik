@@ -1,6 +1,7 @@
 package com.kopernik.ui.asset
 
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.NonNull
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
@@ -10,40 +11,24 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.kopernik.R
 import com.kopernik.app.base.NewFullScreenBaseActivity
 import com.kopernik.app.config.LaunchConfig
-import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.WithdrawEarningsDialog
 import com.kopernik.app.network.http.ErrorCode
+import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.asset.adapter.UYTDepositWithdrawlAssetAdapter
 import com.kopernik.ui.asset.adapter.UYTTransferAssetAdapter
-
-import com.kopernik.ui.asset.entity.AssetDetailsItemBean
 import com.kopernik.ui.asset.entity.WithdrawEarningsBean
-import com.kopernik.ui.asset.viewModel.AssetDetailsViewModel
+import com.kopernik.ui.asset.viewModel.UYTAssetViewModel
+import com.kopernik.ui.mine.entity.AllConfigEntity
 import kotlinx.android.synthetic.main.activity_uyt_asset.*
+class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBinding>() {
 
-
-class UYTAssetActivity : NewFullScreenBaseActivity<AssetDetailsViewModel, ViewDataBinding>() {
-    companion object{
-
-         val UYT = 1
-         val BTC = 2
-         val ETH = 3
-         val USDT = 4
-         val HT = 5
-    }
-
-    private var chainName: String = "UYT"
-    private var chooseType = "ALL"
-    private var adapter: UYTDepositWithdrawlAssetAdapter? = null
-    private var pageNumber = 1
-    private val pageSize = 10
-    private var chainType = 1
-    private val mainDatas: MutableList<AssetDetailsItemBean> =
-        ArrayList<AssetDetailsItemBean>()
-
-
-
+    private var pager=1
+    private var pager1=1
+    private var allConfigEntity: AllConfigEntity?=null
+    private var machinngType=0
+    private var adapter= UYTDepositWithdrawlAssetAdapter(arrayListOf())
+    private var adapter1 = UYTTransferAssetAdapter(arrayListOf())
     override fun layoutId()=R.layout.activity_uyt_asset
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -51,43 +36,40 @@ class UYTAssetActivity : NewFullScreenBaseActivity<AssetDetailsViewModel, ViewDa
     }
     //初始化数据
     override fun initData() {
-        var list= arrayListOf("gadgg","asfagadga","asfafas","asagagasgadgdsfdsfasfa")
-        adapter = UYTDepositWithdrawlAssetAdapter(list)
-        adapter?.setOnItemChildClickListener { adapter, view, position ->
-
-        }
-
         recyclerView.layoutManager =  LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter
-        var adapter1 = UYTTransferAssetAdapter(list)
-        adapter?.setOnItemChildClickListener { adapter, view, position ->
-
-        }
         recyclerView1.layoutManager =  LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView1.adapter = adapter1
-        smartRefreshLayout.autoRefresh()
+
         smartRefreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(@NonNull refreshLayout: RefreshLayout) {
-//                getData()
+                getListData()
             }
 
             override fun onRefresh(@NonNull refreshLayout: RefreshLayout) {
-                pageNumber = 1
-//                if (assetBean == null) {
-////                    getAssetAndListData()
-//                } else {
-////                    getData()
-//                }
+                pager=1
+                pager1=1
+                getCurrentAsset()
+                getListData()
             }
         })
-
+        smartRefreshLayout.autoRefresh()
        //充币
         tvDepositCoin.setOnClickListener {
+           viewModel.run {
+               withDrawlCoin().observe(this@UYTAssetActivity, Observer {
+                   if (it.status==200) {
+                       LaunchConfig.startDepositMoneyActivity(
+                           this@UYTAssetActivity,
+                           it.data.acountHash,
+                           it.data.memo
+                       )
+                   }else{
+                       ErrorCode.showErrorMsg(this@UYTAssetActivity,it.status)
+                   }
+               })
+           }
 
-              LaunchConfig.startDepositMoneyActivity(
-                  this@UYTAssetActivity,
-                  ""
-              )
 
       }
         //提币
@@ -101,18 +83,25 @@ class UYTAssetActivity : NewFullScreenBaseActivity<AssetDetailsViewModel, ViewDa
             viewModel.run {
 //                transferaccount(chainName).observe(this@UYTAssetActivity, Observer {
 //                    if (it.status == 200) {
-//                        LaunchConfig.startTransferAc(
-//                            this@UYTAssetActivity,
-//                            chainType,
-//                            chainName
-//                        )
+                        LaunchConfig.startTransferAc(
+                            this@UYTAssetActivity,
+                            1,
+                            "chainName"
+                        )
 //                    } else {
 //                        ToastUtils.showShort(this@UYTAssetActivity, it.errorMsg)
 //                    }
 //                })
             }
         }
-
+        llTitle.setOnClickListener {
+            machinngType=0
+            onTabOnClick(true,false)
+        }
+        llTitle1.setOnClickListener {
+            machinngType=1
+            onTabOnClick(false,true)
+        }
     }
 
     //显示提取收益输入密码弹窗
@@ -154,10 +143,20 @@ class UYTAssetActivity : NewFullScreenBaseActivity<AssetDetailsViewModel, ViewDa
         })
 
     }
-
+    private  fun  getCurrentAsset(){
+        viewModel.run {
+            getAssetConfig().observe(this@UYTAssetActivity, Observer {
+                smartRefreshLayout.finishRefresh()
+                if (it.status==200){
+                    allConfigEntity=it.data
+                    assetTotal.text= BigDecimalUtils.roundDOWN(it.data.uyt,2)
+                }
+            })
+        }
+    }
 
     //获取资产和下边记录列表
-    private fun getAssetAndListData() {
+    private fun getListData() {
         viewModel.run {
 //           getAsset().observe(this@UYTAssetActivity, androidx.lifecycle.Observer {
 //               if (it.status==200){
@@ -193,6 +192,28 @@ class UYTAssetActivity : NewFullScreenBaseActivity<AssetDetailsViewModel, ViewDa
 //        }
 //
     }
+    //按钮点击
+    fun onTabOnClick(oneClick:Boolean,twoClick:Boolean){
+        smartRefreshLayout.autoRefresh()
+        if (oneClick){
+            uytTitle.setTextColor(resources.getColor(R.color.color_ffcf32))
+            uytTitleLine.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
+            recyclerView.visibility= View.VISIBLE
+        }else {
+            uytTitle.setTextColor(resources.getColor(R.color.white))
+            uytTitleLine.setBackgroundColor(resources.getColor(R.color.white))
+            recyclerView.visibility= View.GONE
+        }
+        if (twoClick){
+            uytTitle1.setTextColor(resources.getColor(R.color.color_ffcf32))
+            uytTitleLine1.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
+            recyclerView1.visibility= View.VISIBLE
+        }else {
+            uytTitle1.setTextColor(resources.getColor(R.color.white))
+            uytTitleLine1.setBackgroundColor(resources.getColor(R.color.white))
+            recyclerView1.visibility= View.GONE
+        }
 
+    }
 
 }

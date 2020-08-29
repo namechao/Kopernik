@@ -56,7 +56,6 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
     override fun layoutId()= R.layout.fragment_home
     @RequiresApi(Build.VERSION_CODES.M)
     override fun initView(savedInstanceState: Bundle?) {
-        getNotice()
         banner.setOnClickListener {
             LaunchConfig.startInviteFriendsActivity(activity!!)
         }
@@ -128,6 +127,7 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
         recyclerView.adapter=adapter
         smartRefreshLayout.setOnRefreshListener {
             getData()
+            getNotice()
         }
         smartRefreshLayout.autoRefresh()
     }
@@ -294,7 +294,10 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
                          content.text = i.content
                          vfNoticeScroll.addView(view)
                          view.setOnClickListener {
-                             LaunchConfig.startInviteFriendsActivity(activity!!)
+                             i.id?.let {
+                                 LaunchConfig.startNoticeActivity(activity!!,it)
+                             }
+
                          }
                      }
                      vfNoticeScroll.setFlipInterval(4000)

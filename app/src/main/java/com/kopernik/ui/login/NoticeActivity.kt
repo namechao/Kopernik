@@ -16,23 +16,26 @@ import com.kopernik.data.api.Api
 import kotlinx.android.synthetic.main.activity_user_protocol.*
 
 
-class UserProtocolActivity : NewBaseActivity<NoViewModel, ViewDataBinding>() {
+class NoticeActivity : NewBaseActivity<NoViewModel, ViewDataBinding>() {
   companion object{
       var MNEMONIC_EXTRA = "mnemonicStr"
   }
 
-
+     private var id=""
     override fun layoutId()=R.layout.activity_user_protocol
 
     override fun initView(savedInstanceState: Bundle?) {
-        setTitle(getString(R.string.user_protocol_title))
-      var webSetting= webview.settings
+        setTitle(getString(R.string.user_notice))
+         intent.getStringExtra("id")?.let {
+             id=it
+         }
+        var webSetting= webview.settings
         webSetting.javaScriptEnabled=true
         webSetting.domStorageEnabled = true;
         webview.webChromeClient =WebChromeClient()
         webview?.setBackgroundColor(Color.TRANSPARENT)
         webview.webViewClient = WebViewClient()
-        webview.loadUrl(Api.UserAgreementApi)
+        webview.loadUrl(Api.UserNoticeApi+id)
     }
 
     override fun initData() {

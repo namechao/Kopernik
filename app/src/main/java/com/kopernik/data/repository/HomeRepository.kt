@@ -59,7 +59,7 @@ class HomeRepository private constructor(private val newWork: HomeNetWork):BaseM
     suspend fun getAssetBlance(): BaseResult<SynthetiseUtcEntity> {
         return newWork.getAssetBlance()
     }
-    suspend fun getAssetConfig(): BaseResult<AssetConfitEntity> {
+    suspend fun getAssetConfig(): BaseResult<AllConfigEntity> {
         return newWork.getAssetConfig()
     }
   suspend fun getMachine( map:Map<String,String>): BaseResult<OtherMineBean> {
