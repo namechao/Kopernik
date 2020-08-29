@@ -46,6 +46,10 @@ interface HomeService {
     @FormUrlEncoded
     @POST("user/inviteFriends")
     suspend fun inviteFriends(@FieldMap map: Map<String, String>): BaseResult<InviteFriendsEntity>
+    //邀请好友
+    @FormUrlEncoded
+    @POST("user/inviteFriendsSecond")
+    suspend fun inviteFriendsSecond(@FieldMap map: Map<String, String>): BaseResult<InviteFriendsEntity>
 
     //修改交易密码
     @FormUrlEncoded

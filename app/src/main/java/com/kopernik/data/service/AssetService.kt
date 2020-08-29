@@ -62,21 +62,29 @@ interface AssetService {
     @GET("asset/waitingListRecord")
     suspend fun getTobeExtractedList(@QueryMap map: Map<String, String>): BaseResult<TobeExtractedBean>
 
-    //提币地址提交
-    @GET("asset/saveWithdrawalAddress")
-    suspend fun submitWithDrawlCoin(@QueryMap map: Map<String, String>): BaseResult<Any>
+    //提币
+    @POST("asset/cash")
+    @FormUrlEncoded
+    suspend fun submitWithDrawlCoin(@FieldMap map: Map<String, String>): BaseResult<Any>
     //合成记录
     @GET("asset/composeRecord")
     suspend fun  composeRecord(@QueryMap map: Map<String, String>): BaseResult<UTCAssetEntity>
-    //合成记录
+    //充提记录
+    @GET("asset/rechargeCashRecord")
+    suspend fun  rechargeCashRecord(@QueryMap map: Map<String, String>): BaseResult<UYTDepositWithdarwlAssetBean>
+    //转账记录
+    @GET("asset/transferRecord")
+    suspend fun  transferRecord(@QueryMap map: Map<String, String>): BaseResult<TransferRecordEntity>
+    //uyt转账记录
+    @GET("asset/transferRecord")
+    suspend fun  uytTransferRecord(@QueryMap map: Map<String, String>): BaseResult<UYTTransferEntity>
+    //兑换记录
     @GET("asset/exchangeRecord")
     suspend fun  exchangeRecord(@QueryMap map: Map<String, String>): BaseResult<ExchangeRecordEntity>
     //领取记录
     @GET("asset/collectRecord")
     suspend fun  receiveRecord(@QueryMap map: Map<String, String>): BaseResult<ReceiveRecordEntity>
-    //转账记录
-    @GET("asset/transferRecord")
-    suspend fun  transferRecord(@QueryMap map: Map<String, String>): BaseResult<TransferRecordEntity>
+
     //utdm财务记录
     @GET("asset/gainsDetailRecord")
     suspend fun gainsDetailRecord(@QueryMap map: Map<String, String>): BaseResult<UTDMAssetEntity>

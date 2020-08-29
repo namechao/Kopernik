@@ -39,6 +39,9 @@ class HomeRepository private constructor(private val newWork: HomeNetWork):BaseM
     suspend fun inviteFriends(map: Map<String, String>): BaseResult<InviteFriendsEntity> {
         return newWork.inviteFriends(map)
     }
+    suspend fun inviteFriendsSecond(map: Map<String, String>): BaseResult<InviteFriendsEntity> {
+        return newWork.inviteFriendsSecond(map)
+    }
 
     suspend fun changeTradePsw(map: Map<String, String>): BaseResult<Any> {
         return newWork.changeTradePsw(map)

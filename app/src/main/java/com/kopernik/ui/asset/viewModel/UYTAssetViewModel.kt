@@ -12,11 +12,9 @@ class UYTAssetViewModel : BaseViewModel() {
     private val homeRepository by lazy { InjectorUtil.getAssetRepository() }
     private val withDrawlCoin = SingleLiveEvent<BaseResult<WithDrawlCoinEntity>>()
     private val data = SingleLiveEvent<BaseResult<Any>>()
-    private val mapping = SingleLiveEvent<BaseResult<Any>>()
-    private val unMapping = SingleLiveEvent<BaseResult<Any>>()
-    private val getGains = SingleLiveEvent<BaseResult<ExtractBean>>()
-    private val saveGains = SingleLiveEvent<BaseResult<Any>>()
     private val getAssetConfig = SingleLiveEvent<BaseResult<AllConfigEntity>>()
+    private val transferRecord = SingleLiveEvent<BaseResult<UYTTransferEntity>>()
+    private val rechargeCashRecord = SingleLiveEvent<BaseResult<UYTDepositWithdarwlAssetBean>>()
 
     fun getAssetConfig(): SingleLiveEvent<BaseResult<AllConfigEntity>> {
         launchGo({
@@ -32,37 +30,18 @@ class UYTAssetViewModel : BaseViewModel() {
         return  withDrawlCoin
     }
 
-    fun mapping(type: String, iconType: String): SingleLiveEvent<BaseResult<Any>> {
-        launchGo({
-            mapping.value = homeRepository.checkMapping(type, iconType)
 
-        })
-        return mapping
-    }
-    fun unMapping(type: String, iconType: String): SingleLiveEvent<BaseResult<Any>> {
-        launchGo({
-            unMapping.value = homeRepository.checkMapping(type, iconType)
-        })
-        return unMapping
-    }
-    fun getGains(iconType: String): MutableLiveData<BaseResult<ExtractBean>> {
-        launchGo({
-            getGains.value = homeRepository.getGains(iconType)
-        }, {}, isShowDialog = true)
-        return getGains
-    }
 
-    fun saveGains(): MutableLiveData<BaseResult<Any>> {
+    fun rechargeCashRecord(map: Map<String,String>): SingleLiveEvent<BaseResult<UYTDepositWithdarwlAssetBean>> {
         launchGo({
-            saveGains.value = homeRepository.saveGains()
-        }, {}, isShowDialog = true)
-        return saveGains
+            rechargeCashRecord.value = homeRepository.rechargeCashRecord(map)
+        },isShowDialog = false)
+        return rechargeCashRecord
     }
-    //验证密码
-    fun verifyPsw(pwd: String): MutableLiveData<BaseResult<Any>> {
+    fun transferRecord(map: Map<String,String>): SingleLiveEvent<BaseResult<UYTTransferEntity>> {
         launchGo({
-            data.value = homeRepository.verifyPwd(pwd)
-        })
-        return data
+            transferRecord.value = homeRepository.uytTransferRecord(map)
+        },isShowDialog = false)
+        return transferRecord
     }
 }

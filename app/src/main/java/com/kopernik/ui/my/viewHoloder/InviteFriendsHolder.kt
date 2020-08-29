@@ -14,10 +14,26 @@ class InviteFriendsHolder(view:View) :BaseViewHolder(view){
          return field
      }
      private set
-    var inviteGrade:TextView?=null
+    var inviteMineMac:TextView?=null
         get() {
             if (field == null) {
-                field = itemView.findViewById(R.id.invite_grade)
+                field = itemView.findViewById(R.id.invite_mine_mac)
+            }
+            return field
+        }
+        private set
+    var inviteTeamMineMac:TextView?=null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.invite_team_mine_mac)
+            }
+            return field
+        }
+        private set
+    var inviteTeamAchievement:TextView?=null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.invite_team_achievement)
             }
             return field
         }

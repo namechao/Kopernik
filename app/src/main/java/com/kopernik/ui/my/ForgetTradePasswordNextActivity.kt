@@ -10,6 +10,8 @@ import androidx.databinding.ViewDataBinding
 import com.aleyn.mvvm.base.NoViewModel
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
+import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.config.UserConfig
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.my.ViewModel.ForgetTradePasswordViewModel
@@ -100,6 +102,8 @@ class ForgetTradePasswordNextActivity : NewBaseActivity<ForgetTradePasswordViewM
                     if (changeTradePasswordType==1)
                     ToastUtils.showShort(this@ForgetTradePasswordNextActivity,this@ForgetTradePasswordNextActivity.getString(R.string.setting_trade_password_success))
                     else ToastUtils.showShort(this@ForgetTradePasswordNextActivity,this@ForgetTradePasswordNextActivity.getString(R.string.forget_trade_password_success))
+                    UserConfig.singleton?.tradePassword=MD5Utils.md5(MD5Utils.md5(etTradeInput.text.toString().trim()))
+
                     setResult(14)
                     finish()
                 }else{

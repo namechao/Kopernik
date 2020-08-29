@@ -13,6 +13,7 @@ package com.kopernik.ui.my.bean
  * @UpdateRemark:   更新说明
  * @Version:        1.0
  */
+
 data class InviteFriendsEntity(
     val datas: List<InviteFriendsItem>,
     val pageNum: Int,
@@ -22,19 +23,23 @@ data class InviteFriendsEntity(
 )
 
 data class InviteFriendsItem(
+    val achievement: String,
     val createTime: String,
     val email: String,
     val ggPwd: String,
-    val id: String,
+    val id: Int,
     val idCard: String,
     val invitationCode: String,
     val level: Int,
     val loginPwd: String,
+    val machineLevel: Int,
+    val machineTotal: String,
     val memo: String,
     val name: String,
-    val parentUid: String,
+    val parentUid: Int,
     val phone: String,
     val salePwd: String,
     val token: String,
     val uid: String
 )
+

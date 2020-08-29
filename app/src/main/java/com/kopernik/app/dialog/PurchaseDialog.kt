@@ -91,6 +91,7 @@ class PurchaseDialog : DialogFragment(),
         override fun onFastClick(v: View) {
             KeyboardUtils.hideSoftKeyboard(passwordEt)
             listener?.let { it.onRequest(type,passwordEt!!.text.toString().trim()) }
+            dismiss()
         }
     }
 

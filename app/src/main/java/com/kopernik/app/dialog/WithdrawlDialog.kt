@@ -31,8 +31,7 @@ class WithdrawlDialog : DialogFragment(),
     private var passwordEt: EditText? = null
     private var googlCodeEt: EditText? = null
     private var okBtn: Button? = null
-    private var type = 0
-
+    private var bean:WithdrawCoinBean?=null
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog =
@@ -50,7 +49,9 @@ class WithdrawlDialog : DialogFragment(),
         //        lp.height =  getActivity().getWindowManager().getDefaultDisplay().getHeight() * 3 / 5;
         window.attributes = lp
         val bundle = arguments
-        type = bundle!!.getInt("type")
+         bundle?.getParcelable<WithdrawCoinBean>("bean")?.let{
+            bean=it
+        }
         initView(dialog)
         return dialog
     }
@@ -59,11 +60,14 @@ class WithdrawlDialog : DialogFragment(),
         desc = dialog.findViewById(R.id.tx_desc)
         desc1 = dialog.findViewById(R.id.tx_desc1)
         desc2 = dialog.findViewById(R.id.tx_desc2)
-        passwordEt = dialog.findViewById(R.id.password_et)
+        passwordEt = dialog.findViewById(R.id.etTradePsw)
         googlCodeEt = dialog.findViewById(R.id.etGoogleCode)
         passwordEt?.addTextChangedListener(passwordWatcher)
-        passwordEt?.addTextChangedListener(passwordWatcher)
         okBtn = dialog.findViewById(R.id.ok)
+        desc?.text=bean?.addressHash
+        desc1?.text=bean?.withdrawNumber
+        desc2?.text=bean?.mineFee
+
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
@@ -77,7 +81,8 @@ class WithdrawlDialog : DialogFragment(),
         override fun onFastClick(v: View) {
 
             KeyboardUtils.hideSoftKeyboard(passwordEt)
-            listener?.let { it.onRequest(type,passwordEt!!.text.toString().trim()) }
+            listener?.let { it.onRequest(passwordEt!!.text.toString().trim()) }
+            dismiss()
         }
     }
 
@@ -126,14 +131,14 @@ class WithdrawlDialog : DialogFragment(),
         listener=requestListener
     }
     interface RequestListener {
-        fun onRequest(type:Int,params:String)
+        fun onRequest(params:String)
     }
 
     companion object {
-        fun newInstance(type: Int): WithdrawlDialog {
+        fun newInstance(bean: WithdrawCoinBean): WithdrawlDialog {
             val fragment = WithdrawlDialog()
             val bundle = Bundle()
-            bundle.putInt("type", type)
+            bundle.putParcelable("bean", bean)
             fragment.arguments = bundle
             return fragment
         }

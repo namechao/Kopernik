@@ -9,12 +9,13 @@ data class UTDMAssetEntity(
 )
 
 data class UTDMRecord(
-    val amount: String,
+    val communityGains: String,
     val createTime: Long,
     val id: Int,
-    val rate: String,
-    val remark: String,
-    val uid: Int,
-    val utdmAmount: String,
-    val utkAmount: String
+    val levelGains: String,
+    val shareAllGains: String,
+    val shareGains: String,
+    val staticGains: String,
+    val totalGains: String,
+    val uid: Int
 )

@@ -13,11 +13,18 @@ class InviteFriendsViewModel : BaseViewModel() {
     private val homeRepository by lazy { InjectorUtil.getHomeRepository() }
 
     private val accountBean = SingleLiveEvent<BaseResult<InviteFriendsEntity>>()
+    private val inviteFriendsSecond = SingleLiveEvent<BaseResult<InviteFriendsEntity>>()
 
     fun inviteFriends(map: Map<String, String>): SingleLiveEvent<BaseResult<InviteFriendsEntity>> {
         launchGo({
             accountBean.value = homeRepository.inviteFriends(map)
         },isShowDialog = false)
         return accountBean
+    }
+    fun inviteFriendsSecond(map: Map<String, String>): SingleLiveEvent<BaseResult<InviteFriendsEntity>> {
+        launchGo({
+            inviteFriendsSecond.value = homeRepository.inviteFriendsSecond(map)
+        },isShowDialog = false)
+        return inviteFriendsSecond
     }
 }

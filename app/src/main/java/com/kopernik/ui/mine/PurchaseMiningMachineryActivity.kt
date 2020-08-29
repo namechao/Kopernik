@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
+import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.PurchaseDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.BigDecimalUtils
@@ -79,7 +80,7 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
                 var dialog = PurchaseDialog.newInstance(1,purchaseEntity)
                 dialog!!.setOnRequestListener(object : PurchaseDialog.RequestListener {
                     override fun onRequest(type: Int, params: String) {
-                        checkPassword((adapter.data[position] as Machine).id,(adapter.data[position] as Machine).type.toString(),params)
+                        checkPassword((adapter.data[position] as Machine).type.toString(),params)
                     }
                 })
                 dialog!!.show(supportFragmentManager, "withdrawRecommed")
@@ -87,12 +88,16 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
         }
         smartRefreshLayout.autoRefresh()
     }
-    fun  checkPassword(id: String, type:String, params: String){
+    fun  checkPassword( type:String, params: String){
         viewModel.run {
             var map= mapOf("pwd" to params)
             checkTradePassword(map).observe(this@PurchaseMiningMachineryActivity, Observer {
                 if (it.status==200){
-                    var map= mapOf("uid" to id ,"type" to type)
+                    var uid=""
+                    UserConfig.singleton?.accountBean?.uid?.let {
+                        uid=it
+                    }
+                    var map= mapOf("uid" to uid ,"type" to type)
                    buyMineMachine(map).observe(this@PurchaseMiningMachineryActivity, Observer {
                        if (it.status==200) ToastUtils.showShort(this@PurchaseMiningMachineryActivity,getString(R.string.purchase_success))else   ErrorCode.showErrorMsg(getActivity(), it.status)
                    })
@@ -125,7 +130,7 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
                         val datas: List<Data>?=it.data.datas
                         if (pager1 == 1) {
                             if (datas == null || datas.isEmpty()) {
-                                smartRefreshLayout.setNoMoreData(true)
+                                smartRefreshLayout.finishRefreshWithNoMoreData()
                                 return@Observer
                             }
                             if (datas.size > 9) {
@@ -160,7 +165,7 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
                         val datas: List<Data>?=it.data.datas
                         if (pager2 == 1) {
                             if (datas == null || datas.isEmpty()) {
-                                smartRefreshLayout.setNoMoreData(true)
+                                smartRefreshLayout.finishRefreshWithNoMoreData()
                                 return@Observer
                             }
                             if (datas.size > 9) {

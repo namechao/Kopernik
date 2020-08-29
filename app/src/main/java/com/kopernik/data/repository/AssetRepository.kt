@@ -35,11 +35,17 @@ class AssetRepository private constructor(private val newWork: AssetNetWork):Bas
     suspend fun composeRecord(map: Map<String, String>): BaseResult<UTCAssetEntity> {
         return newWork.composeRecord(map)
     }
+    suspend fun rechargeCashRecord(map: Map<String, String>): BaseResult<UYTDepositWithdarwlAssetBean> {
+        return newWork.rechargeCashRecord(map)
+    }
     suspend fun exchangeRecord(map: Map<String, String>): BaseResult<ExchangeRecordEntity> {
         return newWork.exchangeRecord(map)
     }
     suspend fun transferRecord(map: Map<String, String>): BaseResult<TransferRecordEntity> {
         return newWork.transferRecord(map)
+    }
+    suspend fun uytTransferRecord(map: Map<String, String>): BaseResult<UYTTransferEntity> {
+        return newWork.uytTransferRecord(map)
     }
     suspend fun receiveRecord(map: Map<String, String>): BaseResult<ReceiveRecordEntity> {
         return newWork.receiveRecord(map)

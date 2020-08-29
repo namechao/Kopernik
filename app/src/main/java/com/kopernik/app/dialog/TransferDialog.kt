@@ -14,7 +14,6 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import com.kopernik.R
-import com.kopernik.app.config.UserConfig
 import com.kopernik.ui.asset.entity.*
 import com.kopernik.ui.asset.util.OnClickFastListener
 import com.kopernik.app.utils.KeyboardUtils
@@ -28,8 +27,7 @@ class TransferDialog : DialogFragment(),
 
     private var passwordEt: EditText? = null
     private var okBtn: Button? = null
-    private var type = 0
-
+    private var bean:TransferCoinBean?=null
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog =
@@ -47,7 +45,9 @@ class TransferDialog : DialogFragment(),
         //        lp.height =  getActivity().getWindowManager().getDefaultDisplay().getHeight() * 3 / 5;
         window.attributes = lp
         val bundle = arguments
-        type = bundle!!.getInt("type")
+        bundle?.getParcelable<TransferCoinBean>("bean")?.let{
+            bean=it
+        }
 
         initView(dialog)
         return dialog
@@ -57,10 +57,12 @@ class TransferDialog : DialogFragment(),
         desc = dialog.findViewById(R.id.tx_desc)
         desc1 = dialog.findViewById(R.id.tx_desc1)
         desc2 = dialog.findViewById(R.id.tx_desc2)
-        passwordEt = dialog.findViewById(R.id.password_et)
-        passwordEt?.addTextChangedListener(passwordWatcher)
+        passwordEt = dialog.findViewById(R.id.etTradePsw)
         passwordEt?.addTextChangedListener(passwordWatcher)
         okBtn = dialog.findViewById(R.id.ok)
+        desc?.text=bean?.receiveId
+        desc1?.text=bean?.transferNumber
+        desc2?.text=bean?.handlerFee
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
@@ -73,7 +75,8 @@ class TransferDialog : DialogFragment(),
     var clickFastListener: OnClickFastListener = object : OnClickFastListener() {
         override fun onFastClick(v: View) {
             KeyboardUtils.hideSoftKeyboard(passwordEt)
-            listener?.let { it.onRequest(type, passwordEt!!.text.toString().trim()) }
+            listener?.let { it.onRequest( passwordEt!!.text.toString().trim()) }
+            dismiss()
         }
     }
 
@@ -126,14 +129,14 @@ class TransferDialog : DialogFragment(),
     }
 
     interface RequestListener {
-        fun onRequest(type: Int, params: String)
+        fun onRequest( params: String)
     }
 
     companion object {
-        fun newInstance(type: Int): TransferDialog {
+        fun newInstance(bean: TransferCoinBean): TransferDialog {
             val fragment = TransferDialog()
             val bundle = Bundle()
-            bundle.putInt("type", type)
+            bundle.putParcelable("bean", bean)
             fragment.arguments = bundle
             return fragment
         }

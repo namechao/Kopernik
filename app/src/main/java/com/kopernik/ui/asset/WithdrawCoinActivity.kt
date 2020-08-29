@@ -13,14 +13,16 @@ import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.dialog.ExchangeDialog
 import com.kopernik.app.dialog.WithdrawlDialog
 import com.kopernik.app.network.http.ErrorCode
+import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.asset.entity.WithdrawCoinBean
 import com.kopernik.ui.asset.viewModel.WithdrawCoinDetailsViewModel
+import com.kopernik.ui.mine.entity.AllConfigEntity
 import com.xuexiang.xqrcode.XQRCode
+import dev.utils.common.encrypt.MD5Utils
 import kotlinx.android.synthetic.main.activity_withdraw_coin.*
-import pub.devrel.easypermissions.AfterPermissionGranted
-import pub.devrel.easypermissions.EasyPermissions
-import pub.devrel.easypermissions.EasyPermissions.PermissionCallbacks
+import kotlinx.android.synthetic.main.activity_withdraw_coin.etRemark
+import kotlinx.android.synthetic.main.activity_withdraw_coin.okBtn
 import java.math.BigDecimal
 
 class WithdrawCoinActivity : NewBaseActivity<WithdrawCoinDetailsViewModel,ViewDataBinding>() {
@@ -28,53 +30,70 @@ companion object{
     private const val REQUEST_CODE = 1
     private const val REQUEST_CODE_QRCODE_PERMISSIONS = 2
 }
-
+    private var allConfigEntity:AllConfigEntity?=null
     private var balanaceOf: BigDecimal? = null
     private var fee: String? = null
     private var iconType:String=""
-    private var availableAmount:String=""
 
+    private var rate=""
     override fun layoutId()=R.layout.activity_withdraw_coin
     override fun initView(savedInstanceState: Bundle?) {
-        availableAmount = intent.getStringExtra("availableAmount")
         setTitle(getString(R.string.title_asset_withdrawl))
+        intent.getSerializableExtra("allConfigEntity")?.let {
+            allConfigEntity=it as AllConfigEntity
+        }
+        eTWithdrawlCoinCounts?.maxLines = 2
+        eTWithdrwalAddress?.addTextChangedListener(textWatcher)
+        eTWithdrawlCoinCounts?.addTextChangedListener(textWatcher1)
     }
 
     override fun initData() {
-        eTWithdrwalAddress!!.addTextChangedListener(textWatcher)
+        getConfigAsset()
         okBtn.setOnClickListener {
-//            if (remark!!.text.toString().length > 64) {
-//                ToastUtils.showShort(getActivity(), getString(R.string.remark_too_long))
-//                return@setOnClickListener
-//            }
-            showDialog()
+            if (etRemark!!.text.toString().length > 64) {
+                ToastUtils.showShort(getActivity(), getString(R.string.remark_too_long))
+                return@setOnClickListener
+            }
             //校验提现金额
-            if (balanaceOf?.compareTo(BigDecimal("0")) == 0) {
-                ToastUtils.showShort(getActivity(), getString(R.string.tip_alert_no_asset_transfer))
+            if (BigDecimal(allConfigEntity?.uyt).compareTo(BigDecimal("0")) == 0) {
+                ToastUtils.showShort(getActivity(), getString(R.string.tip_alert_no_asset_withdrawl))
                 return@setOnClickListener
             }
-            val addr = eTWithdrwalAddress!!.text.toString()
-            if (!addr.matches(Regex("^(1|3)[a-zA-Z\\d]{24,33}$"))) {
-                ToastUtils.showShort(getActivity(), getString(R.string.btc_addr_error))
+            //校验提现金额
+            if (BigDecimal(eTWithdrawlCoinCounts.text.toString().trim()) > BigDecimal(allConfigEntity?.uyt)) {
+                ToastUtils.showShort(getActivity(), getString(R.string.uyt_witdrawl_error))
                 return@setOnClickListener
             }
+            showDialog()
         }
 
 
     }
-
+    private  fun  getConfigAsset(){
+        viewModel.run {
+            getAssetConfig().observe(this@WithdrawCoinActivity, Observer {
+                if (it.status==200){
+                    allConfigEntity=it.data
+                }
+            })
+        }
+    }
     //显示提币弹窗
     private fun showDialog() {
+
+        if (allConfigEntity?.rateList!=null) {
+            for (i in allConfigEntity?.rateList!!){
+                if (i.type.contains("Cash")) rate =BigDecimalUtils.roundDOWN(i.rate,8)
+            }
+        }
         var wdBean = WithdrawCoinBean()
-        wdBean.mineFee = fee
-        wdBean.addressHash = eTWithdrwalAddress!!.text.toString()
-        wdBean.withdrawNumber = availableAmount
-        wdBean.withdrawNumberUnit = ""
-        wdBean.mineFeeUnit = ""
-        var dialog = WithdrawlDialog.newInstance(1)
+        wdBean.mineFee =rate
+        wdBean.addressHash = eTWithdrwalAddress!!.text.toString().trim()
+        wdBean.withdrawNumber = eTWithdrawlCoinCounts.text.toString().trim()
+        var dialog = WithdrawlDialog.newInstance(wdBean)
         dialog!!.setOnRequestListener(object : WithdrawlDialog.RequestListener {
-            override fun onRequest(type: Int, params: String) {
-                checkPsw(params, dialog)
+            override fun onRequest(params: String) {
+                submitWithDrawlCoin(params)
             }
         })
         dialog!!.show(supportFragmentManager, "withdrawRecommed")
@@ -82,30 +101,20 @@ companion object{
 
 
 
-    //检查密码是否正确
-    fun checkPsw(params: String, extractDialog: WithdrawlDialog) {
-        viewModel.verifyPsw(params).observe(this, Observer {
-            if (it.status == 200) {
-                submitWithDrawlCoin()
-                extractDialog!!.dismiss()
-            } else {
-                ErrorCode.showErrorMsg(getActivity(), it.status)
-            }
-        })
-    }
-
-    private fun submitWithDrawlCoin() {
+    private fun submitWithDrawlCoin(psw:String) {
         var map = mapOf(
-            "id" to "",
-            "address" to eTWithdrwalAddress.text.toString().trim(),
-            "memo" to etRemark.text.toString().trim()
+            "amount" to eTWithdrawlCoinCounts.text.toString().trim(),
+            "addressHash" to eTWithdrwalAddress.text.toString().trim(),
+            "rate" to rate,
+            "pwd" to MD5Utils.md5(MD5Utils.md5(psw)),
+            "remark" to etRemark.text.toString().trim()
         )
         viewModel.run {
             submitWithDrawlCoin(map).observe(this@WithdrawCoinActivity, Observer {
                 if (it.status == 200) {
                     ToastUtils.showShort(
                         this@WithdrawCoinActivity,
-                        getString(R.string.tip_node_register_success)
+                        getString(R.string.tip_asset_withdraw_success)
                     );
                 } else {
                     ErrorCode.showErrorMsg(getActivity(), it.status)
@@ -137,6 +146,8 @@ companion object{
 
 
 
+
+
     private var textWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(
             s: CharSequence,
@@ -155,11 +166,31 @@ companion object{
         }
 
         override fun afterTextChanged(s: Editable) {
-            okBtn.isEnabled = eTWithdrwalAddress!!.text.toString().isNotEmpty()
+            okBtn.isEnabled =
+                eTWithdrwalAddress!!.text.toString().isNotEmpty() && eTWithdrawlCoinCounts!!.text.toString().isNotEmpty()
         }
     }
+    private var textWatcher1: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(
+            s: CharSequence,
+            start: Int,
+            count: Int,
+            after: Int
+        ) {
+        }
 
+        override fun onTextChanged(
+            s: CharSequence,
+            start: Int,
+            before: Int,
+            count: Int
+        ) {
+        }
 
-
+        override fun afterTextChanged(s: Editable) {
+            okBtn.isEnabled =
+                eTWithdrwalAddress!!.text.toString().isNotEmpty() && eTWithdrawlCoinCounts!!.text.toString().isNotEmpty()
+        }
+    }
 
 }

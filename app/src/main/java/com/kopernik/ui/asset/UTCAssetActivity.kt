@@ -45,7 +45,9 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
             machinngType=1
             onTabOnClick(false,true)
         }
-
+        ivBack.setOnClickListener {
+            finish()
+        }
         recyclerView.layoutManager=LinearLayoutManager(this)
         adpter.addHeaderView(LayoutInflater.from(this).inflate(R.layout.item_synthesis_record_head,null))
         recyclerView.adapter=adpter
@@ -85,7 +87,7 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
              getAssetConfig().observe(this@UTCAssetActivity, Observer {
                  if (it.status==200){
                      allConfigEntity=it.data
-                     assetTotal.text=BigDecimalUtils.roundDOWN(it.data.utc,2)
+                     assetTotal.text=BigDecimalUtils.roundDOWN(it.data.utc,8)
                  }
              })
          }
@@ -117,7 +119,7 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
                       val datas: List<UtcComRecord>?=it.data.datas
                       if (pager == 1) {
                           if (datas == null || datas.isEmpty()) {
-                              smartRefreshLayout.setNoMoreData(true)
+                              smartRefreshLayout.finishRefreshWithNoMoreData()
                               return@Observer
                           }
                           if (datas.size > 9) {
@@ -153,7 +155,7 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
                       val datas: List<ExchangeRecord>?=it.data.datas
                       if (pager1 == 1) {
                           if (datas == null || datas.isEmpty()) {
-                              smartRefreshLayout.setNoMoreData(true)
+                              smartRefreshLayout.finishRefreshWithNoMoreData()
                               return@Observer
                           }
                           if (datas.size > 9) {

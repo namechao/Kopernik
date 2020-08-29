@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kopernik.R
 import com.kopernik.app.QRCode.QRCodeEncoderModel
 import com.kopernik.app.base.NewFullScreenBaseActivity
+import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.APPHelper
@@ -25,6 +26,7 @@ import com.kopernik.app.utils.ToastUtils
 import com.kopernik.data.api.Api
 import com.kopernik.ui.my.ViewModel.InviteFriendsViewModel
 import com.kopernik.ui.my.adapter.InviteFriendsAdapter
+import com.kopernik.ui.my.bean.InviteFriendsItem
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
@@ -44,11 +46,12 @@ class InviteFriendsActivity : NewFullScreenBaseActivity<InviteFriendsViewModel, 
     override fun layoutId()=R.layout.activity_invite_friends
     var adapter= InviteFriendsAdapter(arrayListOf())
     override fun initView(savedInstanceState: Bundle?) {
-        llGeneratePoster.setOnClickListener {
-
-        }
         //头部信息
         var view=LayoutInflater.from(this).inflate(R.layout.header_invite_layout,null)
+        adapter.setOnItemClickListener { adapter, view, position ->
+            val uid=(adapter.data[position] as InviteFriendsItem ).uid
+            LaunchConfig.startInviteFriendsSecondActivity(this,uid)
+        }
         adapter.addHeaderView(view)
         recyclerView.layoutManager=LinearLayoutManager(this)
         recyclerView.adapter=adapter
@@ -145,8 +148,7 @@ class InviteFriendsActivity : NewFullScreenBaseActivity<InviteFriendsViewModel, 
 
                   if (pagerNumber == 1) {
                       if (it.data == null || it.data.datas.isEmpty()) {
-                          smartRefreshLayout.finishRefresh(300)
-                          smartRefreshLayout.setNoMoreData(true)
+                          smartRefreshLayout.finishRefreshWithNoMoreData()
                           return@Observer
                       }
                       if (it.data.datas.size == 10) {

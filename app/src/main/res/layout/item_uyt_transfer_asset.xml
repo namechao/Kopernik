@@ -28,6 +28,7 @@
         android:layout_marginTop="15dp"
         app:sLeftViewMarginLeft="0dp"
         app:sLeftViewGravity="left_center"
+        app:sRightViewMarginLeft="@dimen/dp_10"
         app:sLeftTopTextString="@string/title_deal_hash"
         app:sLeftTopTextSize="@dimen/sp_12"
         app:sLeftTopTextColor="@color/color_AA9CCA"

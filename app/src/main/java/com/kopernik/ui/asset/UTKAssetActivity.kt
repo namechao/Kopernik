@@ -29,9 +29,12 @@ import com.kopernik.ui.mine.entity.AllConfigEntity
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import dev.utils.common.encrypt.MD5Utils
+import kotlinx.android.synthetic.main.activity_utc_asset.*
 import kotlinx.android.synthetic.main.activity_utk_asset.*
 import kotlinx.android.synthetic.main.activity_utk_asset.assetTotal
+import kotlinx.android.synthetic.main.activity_utk_asset.ivBack
 import kotlinx.android.synthetic.main.activity_utk_asset.llTitle
+import kotlinx.android.synthetic.main.activity_utk_asset.llTitle1
 import kotlinx.android.synthetic.main.activity_utk_asset.recyclerView
 import kotlinx.android.synthetic.main.activity_utk_asset.recyclerView1
 import kotlinx.android.synthetic.main.activity_utk_asset.smartRefreshLayout
@@ -45,6 +48,9 @@ class UTKAssetActivity : NewFullScreenBaseActivity<UTKAssetViewModel,ViewDataBin
     var adpter1= UTKTransferRecordAdapter(arrayListOf())
     override fun layoutId()=R.layout.activity_utk_asset
     override fun initView(savedInstanceState: Bundle?) {
+        ivBack.setOnClickListener {
+            finish()
+        }
         //两个列表初始化
         recyclerView.layoutManager= LinearLayoutManager(this)
         adpter.addHeaderView(LayoutInflater.from(this).inflate(R.layout.item_receive_record_head,null))
@@ -101,7 +107,7 @@ class UTKAssetActivity : NewFullScreenBaseActivity<UTKAssetViewModel,ViewDataBin
             getAssetConfig().observe(this@UTKAssetActivity, Observer {
                 if (it.status==200){
                     allConfigEntity=it.data
-                    assetTotal.text= BigDecimalUtils.roundDOWN(it.data. utk,2)
+                    assetTotal.text= BigDecimalUtils.roundDOWN(it.data. utk,8)
                 }
             })
         }
@@ -131,7 +137,7 @@ class UTKAssetActivity : NewFullScreenBaseActivity<UTKAssetViewModel,ViewDataBin
                         val datas: List<UtkReceiveRecord>?=it.data.datas
                         if (pager == 1) {
                             if (datas == null || datas.isEmpty()) {
-                                smartRefreshLayout.setNoMoreData(true)
+                                smartRefreshLayout.finishRefreshWithNoMoreData()
                                 return@Observer
                             }
                             if (datas.size > 9) {
@@ -167,7 +173,7 @@ class UTKAssetActivity : NewFullScreenBaseActivity<UTKAssetViewModel,ViewDataBin
                         val datas: List<UtkTransferRecord>?=it.data.datas
                         if (pager1 == 1) {
                             if (datas == null || datas.isEmpty()) {
-                                smartRefreshLayout.setNoMoreData(true)
+                                smartRefreshLayout.finishRefreshWithNoMoreData()
                                 return@Observer
                             }
                             if (datas.size > 9) {

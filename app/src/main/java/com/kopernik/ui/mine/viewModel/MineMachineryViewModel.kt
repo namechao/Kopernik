@@ -14,6 +14,7 @@ class MineMachineryViewModel : BaseViewModel() {
     private val getMachineList = SingleLiveEvent<BaseResult<MineBean>>()
     private val getMachine1= SingleLiveEvent<BaseResult<OtherMineBean>>()
     private val getMachine2 = SingleLiveEvent<BaseResult<OtherMineBean>>()
+    private val changeTradePsw = SingleLiveEvent<BaseResult<Any>>()
     private val buyMineMachine = SingleLiveEvent<BaseResult<Any>>()
 
     fun getMachineList(): SingleLiveEvent<BaseResult<MineBean>> {
@@ -43,8 +44,8 @@ class MineMachineryViewModel : BaseViewModel() {
     }
     fun checkTradePassword( map:Map<String,String>): SingleLiveEvent<BaseResult<Any>> {
         launchGo({
-            buyMineMachine.value = homeRepository.changeTradePsw(map)
+            changeTradePsw.value = homeRepository.changeTradePsw(map)
         },isShowDialog = true)
-        return buyMineMachine
+        return changeTradePsw
     }
 }

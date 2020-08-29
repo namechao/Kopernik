@@ -62,6 +62,16 @@ object TimeUtils {
      * @param timeStamp
      * @return
      */
+    fun getSpecialTime(timeStamp: String?): String {
+        if (timeStamp == null || timeStamp == "0" || timeStamp.isEmpty()) return "无"
+        val format = SimpleDateFormat("yy/MM/dd")
+        return format.format(Date(java.lang.Long.valueOf(timeStamp)))
+    }
+    /**
+     * 13 位
+     * @param timeStamp
+     * @return
+     */
     fun getHour(): String {
 
         val format = SimpleDateFormat("HH")

@@ -13,6 +13,8 @@ import com.kopernik.BuildConfig
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.base.NewFullScreenBaseActivity
+import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.UDMTDialog
 import com.kopernik.app.dialog.UTCDialog
 import com.kopernik.app.dialog.UTCSynthetiseProgerssDialog
@@ -39,6 +41,7 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
     override fun layoutId()=R.layout.activity_snythetise_utc
     var player = MediaPlayer()
     override fun initView(savedInstanceState: Bundle?) {
+        ivBack.setOnClickListener { finish() }
         lottieAnimationView.imageAssetsFolder = "synthetise";
         lottieAnimationView.setAnimation("synthetise.json");
 
@@ -61,6 +64,22 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
             if(editText.text.toString().trim().isBlank()) {
                 ToastUtils.showShort(this,getString(R.string.utc_input_counts))
                 return@setOnClickListener
+            }
+            if(editText.text.toString().trim()=="0") {
+                ToastUtils.showShort(this,getString(R.string.utc_input_syth_limit))
+                return@setOnClickListener
+            }
+            //已登录
+            if (UserConfig.singleton?.accountBean!=null){
+                if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
+                    if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                       LaunchConfig.startTradePasswordActivity(this, 1,1)
+                    }
+                }else{
+                    if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                        LaunchConfig.startTradePasswordActivity(this, 1,1)
+                    }
+                }
             }
             ///兑换
                 var dialog = UTCDialog.newInstance(1)

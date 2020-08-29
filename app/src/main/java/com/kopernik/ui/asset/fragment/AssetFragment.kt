@@ -55,11 +55,11 @@ class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
                if (it.status==200){
                    data.clear()
                    data.add(AssetItemEntity(R.mipmap.ic_utc,"UTC",it.data.utcAmount,it.data.utcCny))
-                   data.add(AssetItemEntity(R.mipmap.ic_utk,"UTK",it.data.utkAmount,it.data.utcCny))
-                   data.add(AssetItemEntity(R.mipmap.ic_utdm,"UTDM",it.data.utdmCny,it.data.utdmCny))
-                   data.add(AssetItemEntity(R.mipmap.ic_uyt,"UYT",it.data.uytAmount,it.data.utdmCny))
+                   data.add(AssetItemEntity(R.mipmap.ic_utk,"UTK",it.data.utkAmount,it.data.utkCny))
+                   data.add(AssetItemEntity(R.mipmap.ic_utdm,"UTDM",it.data.utdmAmount,it.data.utdmCny))
+                   data.add(AssetItemEntity(R.mipmap.ic_uyt,"UYT",it.data.uytAmount,it.data.uytCny))
                    adapter.setNewData(data)
-                   var totle= BigDecimalUtils.add(it.data.utcCny,it.data.utkCny).add(BigDecimalUtils.add(it.data.utdmCny,it.data.utdmCny)).toString()
+                   var totle= BigDecimalUtils.add(it.data.utcCny,it.data.utkCny).add(BigDecimalUtils.add(it.data.utdmCny,it.data.uytCny)).toString()
                    assetTotal.text="≈ ${BigDecimalUtils.roundDOWN(totle,2)}"
                }
            })

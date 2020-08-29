@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/colorAccent"
+    android:layout_height="match_parent"
+    android:id="@+id/smartRefreshLayout"
+    android:orientation="vertical">
+    <com.scwang.smartrefresh.header.MaterialHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/head_layout"/>
+    <LinearLayout
+        android:id="@+id/listTitle"
+        android:layout_marginTop="43dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_AA9CCA"
+            android:gravity="center"
+            android:textSize="@dimen/sp_14"
+            android:text="UID"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_AA9CCA"
+            android:textSize="@dimen/sp_14"
+            android:gravity="center"
+            android:text="@string/my_invite_mine_mac"
+            />
+        <TextView
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_AA9CCA"
+            android:textSize="@dimen/sp_14"
+            android:gravity="center"
+            android:text="@string/my_invite_team_mine_mac"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_AA9CCA"
+            android:textSize="@dimen/sp_14"
+            android:gravity="center"
+            android:text="@string/my_invite_team_achievement"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_AA9CCA"
+            android:textSize="@dimen/sp_14"
+            android:gravity="center"
+            android:text="@string/my_invite_time"
+            />
+
+
+    </LinearLayout>
+    <View
+        android:id="@+id/line1"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/color_332852"/>
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
+</LinearLayout>
+
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

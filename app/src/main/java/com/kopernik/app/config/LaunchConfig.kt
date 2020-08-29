@@ -11,6 +11,7 @@ import com.kopernik.ui.login.*
 import com.kopernik.ui.asset.*
 import com.kopernik.ui.mine.PurchaseMiningMachineryActivity
 import com.kopernik.ui.mine.SynthetiseUTCActivity
+import com.kopernik.ui.mine.entity.AllConfigEntity
 import com.kopernik.ui.my.*
 import com.kopernik.ui.setting.*
 
@@ -201,11 +202,10 @@ object LaunchConfig {
     }
 
 
-    fun startTransferAc(context: Context, type: Int, chainName: String) {
+    fun startTransferAc(context: Context,  allConfigEntity: AllConfigEntity?) {
         val intent =
             Intent(context, TransferActivity::class.java)
-        intent.putExtra("chainType", type)
-        intent.putExtra("chainName", chainName)
+        intent.putExtra("allConfigEntity", allConfigEntity)
         context.startActivity(intent)
     }
 
@@ -232,11 +232,10 @@ object LaunchConfig {
         context.startActivity(intent)
     }
 
-    fun startWithdrawCoinAc(context: Context, availableAmount: String) {
+    fun startWithdrawCoinAc(context: Context, allConfigEntity: AllConfigEntity?) {
         val intent =
             Intent(context, WithdrawCoinActivity::class.java)
-
-        intent.putExtra("availableAmount", availableAmount)
+        intent.putExtra("allConfigEntity",allConfigEntity)
         context.startActivity(intent)
     }
 
@@ -377,6 +376,12 @@ object LaunchConfig {
             Intent(context, AboutUsActivity::class.java)
         context.startActivity(intent)
     }
+    fun startInviteFriendsSecondActivity(context: Context,uid:String) {
+        val intent =
+            Intent(context, InviteFriendsSecondActivity::class.java)
+        intent.putExtra("uid",uid)
+        context.startActivity(intent)
+    }
     fun startSynthetiseUTCActivity(context: Context) {
         val intent =
             Intent(context, SynthetiseUTCActivity::class.java)
@@ -399,7 +404,7 @@ object LaunchConfig {
     }
     fun startUDMTAssetActivity(context: Context) {
         val intent =
-            Intent(context, UDMTAssetActivity::class.java)
+            Intent(context, UTDMAssetActivity::class.java)
         context.startActivity(intent)
     }
     fun startUYTAssetActivity(context: Context) {

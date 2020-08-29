@@ -62,8 +62,11 @@ class UserConfig {
             MMKV.defaultMMKV().encode(TAG_RELOAD_HOME_WEB, b)
         }
 
-    var isReloadTradWeb: Boolean
-        get() = MMKV.defaultMMKV().decodeBool(TAG_RELOAD_TRAD_WEB, true)
+    var tradePassword: String?
+        get() {
+            var psw=MMKV.defaultMMKV().decodeString(TAG_RELOAD_TRAD_WEB, "")
+            if (psw.isNullOrBlank()) return accountBean?.salePwd else return psw
+        }
         set(b) {
             MMKV.defaultMMKV().encode(TAG_RELOAD_TRAD_WEB, b)
         }

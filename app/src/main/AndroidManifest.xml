@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.kopernik">
     <!-- x5声明的权限 -->
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
@@ -21,7 +22,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.my.RealNameAuthenticationActivity"  android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.asset.UDMTAssetActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.UTDMAssetActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.UTKAssetActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.UTCAssetActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.AssetTransformActivty"   android:screenOrientation="portrait"/>
@@ -59,6 +60,7 @@
         <activity android:name=".ui.my.ForgetTradePasswordActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.my.GoogleVerifiedActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.my.InviteFriendsActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.my.InviteFriendsSecondActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.my.GoogleVerifyFirstStepActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.my.GoogleVerifySecondStepActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.my.GoogleVerifyActivity"   android:screenOrientation="portrait"/>
@@ -69,12 +71,10 @@
         <activity android:name=".ui.asset.DepositCoinActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.CrossChainTxActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.UYTAssetActivity"   android:screenOrientation="portrait"/>
-        <activity android:name=".ui.asset.OtherAssetDetailsActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.DepositMoneyActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.TransferActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.login.RegisterActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.login.UserProtocolActivity"   android:screenOrientation="portrait"/>
-        <activity android:name=".ui.login.ForgetPasswordNextActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.login.ForgetPasswordNextActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.login.LoginActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.login.NoticeActivity"   android:screenOrientation="portrait"/>
@@ -101,7 +101,8 @@
         <service
             android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
             android:label="dexopt"
-            android:process=":dexopt" /> <!-- 适配全面屏 -->
+            android:process=":dexopt"
+            tools:ignore="MissingClass" /> <!-- 适配全面屏 -->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" /> <!-- 适配华为（huawei）刘海屏 -->

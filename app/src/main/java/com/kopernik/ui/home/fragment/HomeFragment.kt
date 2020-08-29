@@ -33,7 +33,7 @@ import kotlinx.android.synthetic.main.fragment_my.*
  * @ProjectName:    UYT
  * @Package:        com.kopernik.ui.home.fragment
  * @ClassName:      HomeFragment
- * @Description:     java类作用描述
+ * @Description:     ja5va类作用描述
  * @Author:         zhanglichao
  * @CreateDate:     2020/7/8 2:35 PM
  * @UpdateUser:     更新者
