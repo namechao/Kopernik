@@ -49,8 +49,7 @@ abstract class BaseWebViewActivity<T:BaseViewModel,U:ViewDataBinding> : NewBaseA
                     e.printStackTrace()
                 }
             })
-        mBridgeWebView?.registerHandler("gotoLogin",
-            BridgeHandler { data, function -> LaunchConfig.startChooseAccountAc(this) })
+
         mBridgeWebView?.registerHandler("gotoReferendumListActivity",
             BridgeHandler { data, function -> LaunchConfig.startReferendumListAc(this) })
         mBridgeWebView?.registerHandler("gotoReferendumDetailsActivity",

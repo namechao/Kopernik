@@ -155,38 +155,38 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
       }
 
       //总通量
-      tvUtdm.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utdmAmount,4)
-      tvUtk.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utkAmount,4)
-      tvUtc.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utcAmount,4)
-      tvUyt.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.uytAmount,4)
+      tvUtdm.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utdmAmount,2)
+      tvUtk.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utkAmount,2)
+      tvUtc.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utcAmount,2)
+      tvUyt.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.uytAmount,2)
       allCoinCounts
-          .text= BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utdmAmount,6)
+          .text= BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utdmAmount,2)
       list.clear()
       list.add( HomeCoinItem("UTC","/USDT",
           BigDecimalUtils.roundDOWN( homeEntity?.priceConfig?.utcPrice!!,4),
-        "¥ ${BigDecimalUtils.multiply(homeEntity?.priceConfig?.utcPrice,homeEntity?.price?.cnyPrice,2)}",
+        "¥ ${BigDecimalUtils.multiply(homeEntity?.priceConfig?.utcPrice,homeEntity?.price?.cnyPrice,4)}",
           homeEntity?.priceConfig?.utcPricePercentage!!))
       list.add( HomeCoinItem("UTK","/USDT",
           BigDecimalUtils.roundDOWN( homeEntity?.priceConfig?.utkPrice!!,4),
-          "¥ ${BigDecimalUtils.multiply(homeEntity?.priceConfig?.utkPrice,homeEntity?.price?.cnyPrice,2)}",
+          "¥ ${BigDecimalUtils.multiply(homeEntity?.priceConfig?.utkPrice,homeEntity?.price?.cnyPrice,4)}",
           homeEntity?.priceConfig?.utkPricePercentage!!))
       list.add( HomeCoinItem("BTC","/USDT",
           BigDecimalUtils.roundDOWN( homeEntity?.price?.btcPrice!!,4),
-          "¥ ${BigDecimalUtils.multiply(homeEntity?.price?.btcPrice,homeEntity?.price?.cnyPrice,2)}",
+          "¥ ${BigDecimalUtils.multiply(homeEntity?.price?.btcPrice,homeEntity?.price?.cnyPrice,4)}",
           homeEntity?.price?.btcPricePercentage!!))
       list.add( HomeCoinItem("ETH","/USDT",
           BigDecimalUtils.roundDOWN(  homeEntity?.price?.ethPrice!!,4),
-          "¥ ${BigDecimalUtils.multiply(homeEntity?.price?.ethPrice,homeEntity?.price?.cnyPrice,2)}",
+          "¥ ${BigDecimalUtils.multiply(homeEntity?.price?.ethPrice,homeEntity?.price?.cnyPrice,4)}",
           homeEntity?.price?.ethPricePercentage!!))
       list.add( HomeCoinItem("UYT","/BTC",
-          BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.btcDollarPrice!!,4),
-          "¥ ${ BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.btcRmbrPrice!!,2)}",homeEntity?.priceTradingPair?.btcPercentage!!))
+          BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.btcDollarPrice!!,1),
+          "¥ ${ BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.btcRmbrPrice!!,1)}",homeEntity?.priceTradingPair?.btcPercentage!!))
       list.add( HomeCoinItem("UYT","/ETH",
           BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.ethDollarPrice!!,4),
-          "¥ ${BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.ethRmbrPrice!!,2)}",homeEntity?.priceTradingPair?.ethPercentage!!))
+          "¥ ${BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.ethRmbrPrice!!,4)}",homeEntity?.priceTradingPair?.ethPercentage!!))
       list.add( HomeCoinItem("UYT","/USDT",
           BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.usdtDollarPrice!!,4),
-          "¥ ${BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.usdtRmbrPrice!!,2)}",homeEntity?.priceTradingPair?.usdtPercentage!!))
+          "¥ ${BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.usdtRmbrPrice!!,4)}",homeEntity?.priceTradingPair?.usdtPercentage!!))
       adapter.setNewData(list)
 //      //金币图标
       if (homeEntity?.machList!=null) {

@@ -146,7 +146,7 @@
         android:textSize="15sp"
         android:maxLines="1"
         android:ellipsize="end"
-        android:inputType="number"
+        android:inputType="numberPassword"
         android:textColor="@color/title_black"
         android:textColorHint="@color/color_665F93"
         android:background="@drawable/signature_edit_bg"

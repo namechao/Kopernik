@@ -10,6 +10,7 @@ import com.aleyn.mvvm.base.NoViewModel
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseFragment
 import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.ui.mine.viewModel.MineViewModel
 import kotlinx.android.synthetic.main.fragment_trade.*
 import java.io.IOException
@@ -77,7 +78,7 @@ class MineFragment : NewBaseFragment<MineViewModel, ViewDataBinding>() {
         viewModel.run {
             viewModel.getUtdmTotal().observe(this@MineFragment, Observer {
                 smartRefreshLayout.finishRefresh()
-                income.text=it?.data?.amount
+                income.text=BigDecimalUtils.roundDOWN(it?.data?.amount,2)
             })
         }
     }

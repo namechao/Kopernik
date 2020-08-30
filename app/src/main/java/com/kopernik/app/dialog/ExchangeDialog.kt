@@ -75,21 +75,21 @@ class ExchangeDialog : DialogFragment(),
         okBtn = dialog.findViewById(R.id.ok)
         exchangeCounts?.isEnabled=false
 
-        exchangeProportion?.text=getString(R.string.asset_exchange_proportion)+"UTC:UYT=${BigDecimalUtils.roundDOWN(bean?.config?.utcExchange,8)}:${BigDecimalUtils.roundDOWN(bean?.config?.uytExchange,8)}"
+        exchangeProportion?.text=getString(R.string.asset_exchange_proportion)+"UTC:UYT=${BigDecimalUtils.getRound(bean?.config?.utcExchange)}:${BigDecimalUtils.getRound(bean?.config?.uytExchange)}"
         if (bean?.rateList!=null) {
             for (i in bean?.rateList!!){
-              if (i.type.contains("Exchange")) rate =BigDecimalUtils.roundDOWN(i.rate,8)
+              if (i.type.contains("Exchange")) rate =BigDecimalUtils.roundDOWN(i.rate,2)
             }
         }
         desc?.text=rate+"UTC"
-         uytCounts=BigDecimalUtils.divide(BigDecimalUtils.multiply(bean?.utc,bean?.config?.uytExchange).toString(),bean?.config?.utcExchange,8)
+         uytCounts=BigDecimalUtils.divide(BigDecimalUtils.multiply(bean?.utc,bean?.config?.uytExchange).toString(),bean?.config?.utcExchange,2)
         exchangeCounts?.setText("UYT数量：$uytCounts")
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
         }
 
-
+        KeyboardUtils.showKeyboard(passwordEt)
         okBtn?.setOnClickListener(clickFastListener)
     }
 

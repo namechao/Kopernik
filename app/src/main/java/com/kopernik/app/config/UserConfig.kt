@@ -18,6 +18,7 @@ class UserConfig {
     private val TAG_USE_FINGERPRINT = "use_fingerprint"
     private val TAG_NOTICE = "use_notice"
     private val TAG_ALL_ACCOUNT = "all_account"
+    private val TAG_PASSWORD = "password"
     private val TAG_MNEMONIC = "mnemonic"
     private val systemLocal = Locale.SIMPLIFIED_CHINESE
     var masterUrl: String?
@@ -82,6 +83,11 @@ class UserConfig {
         get() = MMKV.defaultMMKV().decodeString(TAG_ALL_ACCOUNT, "")
         set(data) {
             MMKV.defaultMMKV().encode(TAG_ALL_ACCOUNT, data)
+        }
+    var password: String?
+        get() = MMKV.defaultMMKV().decodeString(TAG_PASSWORD, "")
+        set(data) {
+            MMKV.defaultMMKV().encode(TAG_PASSWORD, data)
         }
 
     var accountBean:User?

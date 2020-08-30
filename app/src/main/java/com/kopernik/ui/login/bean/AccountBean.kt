@@ -26,7 +26,7 @@ data class User(
     val id: String,
     val idCard: String,
     val invitationCode: String,
-    val level: String,
+    val level: Int,
     val loginPwd: String,
     val memo: String,
     val name: String,

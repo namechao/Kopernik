@@ -24,7 +24,7 @@ object LaunchConfig {
           context.startActivity(intent)
     }
     //进选择账户
-    fun startChooseAccountAc(context: Context) {
+    fun startLoginActivity(context: Context) {
         val intent =
             Intent(context, LoginActivity::class.java)
         context.startActivity(intent)
@@ -392,24 +392,28 @@ object LaunchConfig {
             Intent(context, PurchaseMiningMachineryActivity::class.java)
         context.startActivity(intent)
     }
-    fun startUTCAssetActivity(context: Context) {
+    fun startUTCAssetActivity(context: Context,asset:String?) {
         val intent =
             Intent(context, UTCAssetActivity::class.java)
+        intent.putExtra("asset",asset)
         context.startActivity(intent)
     }
-    fun startUTKAssetActivity(context: Context) {
+    fun startUTKAssetActivity(context: Context,asset:String?) {
         val intent =
             Intent(context, UTKAssetActivity::class.java)
+        intent.putExtra("asset",asset)
         context.startActivity(intent)
     }
-    fun startUDMTAssetActivity(context: Context) {
+    fun startUDMTAssetActivity(context: Context,asset:String?) {
         val intent =
             Intent(context, UTDMAssetActivity::class.java)
+        intent.putExtra("asset",asset)
         context.startActivity(intent)
     }
-    fun startUYTAssetActivity(context: Context) {
+    fun startUYTAssetActivity(context: Context,asset:String?) {
         val intent =
             Intent(context, UYTAssetActivity::class.java)
+        intent.putExtra("asset",asset)
         context.startActivity(intent)
     }
     fun startWebViewAc(
@@ -436,11 +440,7 @@ object LaunchConfig {
         ac.startActivityForResult(intent, requestCode)
     }
 
-    fun startSwitchAccountAc(context: Context) {
-        val intent =
-            Intent(context, SwitchAccountActivity::class.java)
-        context.startActivity(intent)
-    }
+
 
     fun startReferendumListAc(context: Context) {
         val intent =

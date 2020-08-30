@@ -63,6 +63,7 @@ class PurchaseMiningMAdapter(
                         var countDownTimer = object : CountDownTimer(countDownTime, 1000) {
                             override fun onFinish() {
                                 helper?.tvPurchase?.isEnabled=true
+                                helper?.tvPurchase?.text=mContext.getText(R.string.button_purchase)
                             }
 
                             override fun onTick(millisUntilFinished: Long) {

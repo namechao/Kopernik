@@ -3,6 +3,7 @@ package com.kopernik.app.network
 import com.aleyn.mvvm.network.interceptor.Level
 import com.aleyn.mvvm.network.interceptor.LoggingInterceptor
 import com.kopernik.app.config.AppConfig
+import com.kopernik.app.network.http.CommonParametersIntercepter
 import com.kopernik.data.api.Api
 import com.kopernik.app.network.http.EncodeInterceptor
 import com.kopernik.app.network.http.TrustAllCerts

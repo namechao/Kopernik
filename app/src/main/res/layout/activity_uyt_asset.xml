@@ -186,7 +186,8 @@
                     android:id="@+id/uytTitleLine1"
                     android:layout_width="@dimen/dp_60"
                     android:layout_height="2dp"
-                    android:background="@color/white"/>
+                    android:visibility="gone"
+                    android:background="@color/color_ffcf32"/>
             </LinearLayout>
         </LinearLayout>
         <View

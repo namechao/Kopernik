@@ -13,6 +13,8 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import android.webkit.WebView
+import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
@@ -52,6 +54,7 @@ import com.kopernik.ui.setting.viewModel.CheckAppVersionViewModel
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_my.*
 import me.majiajie.pagerbottomtabstrip.NavigationController
 import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener
 import pub.devrel.easypermissions.AfterPermissionGranted
@@ -120,7 +123,6 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
             override fun onRepeat(index: Int) {
             }
         })
-
 
     }
 
@@ -192,84 +194,7 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
             mEventBus.post(LocalEvent(LocalEvent.switchNodeFragment, 0))
         }
         else if (event.status_type.equals(LocalEvent.reLogin)) {
-            //删除指纹解锁
-//            if (UserConfig.singleton?.isUseFingerprint!!) {
-//                FingerprintHelper.getInstance().init(getActivity())
-//                FingerprintHelper.getInstance().closeAuthenticate()
-//                UserConfig.singleton?.isUseFingerprint=false
-//            }
-//            if (reLoginDialog == null) {
-//                val allAccountListStr: String? = UserConfig.singleton?.allAccount
-//                var accountListBean: AccountListBean? = null
-//                if (allAccountListStr != null && !allAccountListStr.isEmpty()) {
-//                    accountListBean = Gson().fromJson<AccountListBean>(
-//                        allAccountListStr,
-//                        AccountListBean::class.java
-//                    )
-//                    var delAccountBean: AccountBean? = null
-//                    var delBehaviorAccountBean: AccountBean? = null
-//                    for (bean in accountListBean.accounts!!) {
-//                        if (bean.loginAcountHash
-//                                .equals(UserConfig.singleton!!.accountBean?.loginAcountHash!!)
-//                        ) {
-//                            delAccountBean = bean
-//                            break
-//                        }
-//                    }
-//                    for (bean in accountListBean.behaviorAccounts!!) {
-//                        if (bean.loginAcountHash
-//                                .equals(UserConfig.singleton!!.accountBean?.loginAcountHash)
-//                        ) {
-//                            delBehaviorAccountBean = bean
-//                            break
-//                        }
-//                    }
-//                    accountListBean.accounts?.remove(delAccountBean)
-//                    accountListBean.behaviorAccounts?.remove(delBehaviorAccountBean)
-//                    UserConfig.singleton?.allAccount=Gson().toJson(accountListBean)
-//                }
-//                reLoginDialog = UYTQuitAlertDialog(this)
-//                    .setCancelable(false)
-//                    .setTitle(getActivity()!!.getString(R.string.account_abnormal))
-//                    .setMsg(
-//                        java.lang.String.format(
-//                            getActivity()!!.getString(R.string.account_abnormal_hint),
-//                            UserConfig.singleton?.accountBean?.loginlabel
-//                        )
-//                    )
-//                    .setButton1(
-//                        getActivity()!!.getString(R.string.import_or_created_account),
-//                        View.OnClickListener {
-//                            val intent = intent
-//                            finish()
-//                            startActivity(intent)
-//                            LaunchConfig.startChooseAccountAc(this)
-//                        }
-//                        )
-//                if (accountListBean != null && accountListBean.accounts?.size!! > 0) {
-//                    reLoginDialog
-//                        ?.setButton2(getActivity()!!.getString(R.string.switch_account),
-//                        View.OnClickListener {
-//                            val intent = intent
-//                            finish()
-//                            startActivity(intent)
-//                            LaunchConfig.startSwitchAccountAc(getActivity()!!)
-//                        }
-//                            )
-//                        ?.setSkip(getActivity()!!.getString(R.string.user_jump),
-//                        View.OnClickListener {
-//                            val intent = intent
-//                            finish()
-//                            startActivity(intent)
-//                        })
-//                }
-//                UserConfig.singleton?.accountString="skip"
-//                UserConfig.singleton?.clear()
-//                mEventBus.post(LocalEvent<Any>(LocalEvent.reloadAsset))
-//                reLoginDialog?.show()
-//            } else {
-//                if (!reLoginDialog?.isShowing!!) reLoginDialog?.show()
-//            }
+
         }
     }
 
@@ -310,49 +235,10 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
         ClassicsFooter.REFRESH_FOOTER_FAILED = getString(R.string.me_footer_failed)
         ClassicsFooter.REFRESH_FOOTER_NOTHING = getString(R.string.me_footer_nothing)
     }
-    private fun forciblyUpdate() {
-        val httpHeaders = HttpHeaders()
-        httpHeaders.put("apptype", "android")
-        AllenVersionChecker
-            .getInstance()
-            .requestVersion()
-            .setHttpHeaders(httpHeaders)
-            .setRequestUrl(Api.checkUpdate)
-            .request(object : RequestVersionListener {
-                @Nullable
-               override fun onRequestVersionSuccess(result: String?): UIData? {
-                        val updateBean: UpdateBean2 =
-                            Gson().fromJson<UpdateBean2>(result, UpdateBean2::class.java)
-                        val deployBean: UpdateBean2.DataBean.DeployBean? =
-                            updateBean?.data?.deploy
-                        return if (deployBean?.versionCode!! > BuildConfig.VERSION_CODE) {
-                            UIData
-                                .create()
-                                .setDownloadUrl(deployBean.url)
-                                .setTitle(deployBean.versionName)
-                                .setContent(deployBean.versionDesc)
-                        } else null
-                }
-
-               override fun onRequestVersionFailure(message: String?) {
-                    DBLog.error(message!!)
-                }
-            })
-            .setForceUpdateListener(object : ForceUpdateListener {
-               override fun onShouldForceUpdate() {
-                    ToastUtils.showShort(getActivity(), getString(R.string.must_update))
-                }
-            })
-            .setShowNotification(true)
-            .setCustomVersionDialogListener(createUpdateDialog(2))
-            .setShowDownloadingDialog(false)
-            .setForceRedownload(false)
-            .executeMission(this)
-    }
-
     private fun showUpdateDialog() {
         val httpHeaders = HttpHeaders()
         httpHeaders.put("apptype", "android")
+        httpHeaders.put("token", UserConfig.singleton?.accountBean?.token)
         AllenVersionChecker
             .getInstance()
             .requestVersion()
@@ -360,7 +246,43 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
             .setRequestUrl(Api.checkUpdate)
             .request(object : RequestVersionListener {
                 @Nullable
-              override  fun onRequestVersionSuccess(result: String?): UIData? {
+                override  fun onRequestVersionSuccess(result: String?): UIData? {
+                    val updateBean: UpdateBean2 =
+                        Gson().fromJson<UpdateBean2>(result, UpdateBean2::class.java)
+                    val deployBean: UpdateBean2.DataBean.DeployBean? =
+                        updateBean?.data?.deploy
+                    if (updateBean.status!=200) return null
+                    return if (deployBean?.versionCode!! > BuildConfig.VERSION_CODE) {
+                        UIData
+                            .create()
+                            .setDownloadUrl(deployBean.url)
+                            .setTitle(deployBean.versionName)
+                            .setContent(deployBean.versionDesc)
+                    } else null
+                }
+
+                override  fun onRequestVersionFailure(message: String?) {
+                    DBLog.error(message!!)
+                }
+            })
+            .setShowNotification(true)
+            .setCustomVersionDialogListener(createUpdateDialog(1))
+            .setShowDownloadingDialog(false)
+            .setForceRedownload(true)
+            .executeMission(this)
+    }
+    private fun forciblyUpdate() {
+        val httpHeaders = HttpHeaders()
+        httpHeaders.put("apptype", "android")
+        httpHeaders.put("token", UserConfig.singleton?.accountBean?.token)
+        AllenVersionChecker
+            .getInstance()
+            .requestVersion()
+            .setHttpHeaders(httpHeaders)
+            .setRequestUrl(Api.checkUpdate)
+            .request(object : RequestVersionListener {
+                @Nullable
+                override fun onRequestVersionSuccess(result: String?): UIData? {
                     val updateBean: UpdateBean2 =
                         Gson().fromJson<UpdateBean2>(result, UpdateBean2::class.java)
                     val deployBean: UpdateBean2.DataBean.DeployBean? =
@@ -374,17 +296,17 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
                     } else null
                 }
 
-              override  fun onRequestVersionFailure(message: String?) {
+                override fun onRequestVersionFailure(message: String?) {
                     DBLog.error(message!!)
                 }
             })
+            .setForceUpdateListener { ToastUtils.showShort(this, getString(R.string.must_update)) }
             .setShowNotification(true)
-            .setCustomVersionDialogListener(createUpdateDialog(1))
+            .setCustomVersionDialogListener(createUpdateDialog(2))
             .setShowDownloadingDialog(false)
-            .setForceRedownload(true)
-            .executeMission(this)
+            .setForceRedownload(false)
+            .executeMission(this!!)
     }
-
     private fun createUpdateDialog(type: Int): CustomVersionDialogListener {
         return CustomVersionDialogListener { context, versionBundle ->
             val baseDialog = Dialog(context, R.style.UpdateDialog)
@@ -392,11 +314,12 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
             baseDialog.setCanceledOnTouchOutside(false)
             val textView =
                 baseDialog.findViewById<TextView>(R.id.tv_msg)
+            var container= baseDialog.findViewById<LinearLayout>(R.id.container)
             val version =
                 baseDialog.findViewById<TextView>(R.id.tv_version)
             val content: String = versionBundle.content.replace("\\n", " \n")
             textView.text = content
-            version.setText(versionBundle.getTitle())
+            version.text = versionBundle.title
             if (type == 2) {
                 baseDialog.findViewById<View>(R.id.versionchecklib_version_dialog_cancel).visibility =
                     View.GONE
@@ -412,28 +335,21 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
                 }
 
             })
+            val windowManager = context
+                .getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            var display = windowManager.defaultDisplay
+            // 调整dialog背景大小
+            container.layoutParams = FrameLayout.LayoutParams(
+                (display.width * 0.8).toInt(),
+                FrameLayout.LayoutParams.WRAP_CONTENT
+            )
             baseDialog
         }
     }
 
-    // TODO: 2019/9/8 改为 4
-    private fun initAccountListForVersionCode3() {
-//        if (UserConfig.singleton?.getAccount() != null &&
-//            UserConfig.singleton?.allAccount==null && BuildConfig.VERSION_CODE < 5
-//        ) {
-//            val gson = Gson()
-//            val accountListBean = AccountListBean()
-//            val accounts: MutableList<AccountBean> =
-//                java.util.ArrayList()
-//            accounts.add( UserConfig.singleton?.getAccount()!!)
-//            accountListBean.accounts=accounts
-//            accountListBean.behaviorAccounts=accounts
-//            UserConfig.singleton?.allAccount=gson.toJson(accountListBean)
-//        }
-    }
 
     private fun requestUpdateInfo() {
-        viewModel.checkAppVersion().observe(this, Observer {
+        viewModel.checkVersion().observe(this, androidx.lifecycle.Observer {
             if (it.data != null) {
                 if (it.data.deploy
                         ?.versionCode!! > BuildConfig.VERSION_CODE
@@ -445,30 +361,27 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
                         //强制升级
                         forciblyUpdate()
                     }
-                } else if (it.data.notice != null) {
-                    if (UserConfig.singleton
-                            ?.noticeId !== it.data.notice?.id
-                    ) {
-                        UserConfig.singleton
-                            ?.noticeId=it.data.notice?.id!!
-                        UYTAlertDialog2(this)
-                            .setCancelable(false)
-                            .setTitle(this.getString(R.string.notice))
-                            .setMsg(""+it.data.notice?.content)
-                            .setButton(getActivity()!!.getString(R.string.confirm), null)
-                            .show()
-                    }
                 }
+//                else if (it.data.notice != null) {
+//                    if (UserConfig.singleton
+//                            ?.noticeId !== it.data.notice?.id
+//                    ) {
+//                        UserConfig.singleton
+//                            ?.noticeId=it.data.notice?.id!!
+//                        UYTAlertDialog2(activity!!)
+//                            .setCancelable(false)
+//                            .setTitle(this.getString(R.string.notice))
+//                            .setMsg(""+it.data.notice?.content)
+//                            .setButton(getString(R.string.confirm), null)
+//                            .show()
+//                    }
+//                }
             }
-
-
         })
-
     }
      //对低版本手机进行账户处理
     override fun onResume() {
         super.onResume()
-        initAccountListForVersionCode3()
         KeyboardUtils.mustHideSoftKeyboard(this)
     }
 }

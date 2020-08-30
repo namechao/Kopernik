@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -27,7 +31,6 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginLeft="15dp"
-
             android:src="@mipmap/logo"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +42,6 @@
             android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/sp_18"
-            android:layout_marginTop="@dimen/dp_8"
             android:layout_marginLeft="@dimen/dp_20"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="@+id/imageView2" />
@@ -53,6 +55,14 @@
             android:textSize="@dimen/sp_14"
             app:layout_constraintStart_toStartOf="@+id/tvPhoneNumber"
             app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
+        <ImageView
+            android:id="@+id/ivVip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_vip1"
+            android:layout_marginTop="@dimen/dp_4"
+            app:layout_constraintStart_toStartOf="@+id/tvId"
+            app:layout_constraintTop_toBottomOf="@+id/tvId" />
        <ImageView
            android:layout_width="10dp"
            android:layout_height="24dp"
@@ -75,6 +85,7 @@
         android:layout_marginRight="@dimen/dp_16"
         android:src="@mipmap/icon_setting"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.allen.library.SuperTextView
         android:id="@+id/realNameAuth"
         android:layout_width="match_parent"
@@ -88,6 +99,7 @@
         app:sLeftIconMarginLeft="@dimen/dp_20"
         app:sRightTextString="中文"
         app:sRightTextSize="12dp"
+        android:visibility="gone"
         app:sRightTextColor="@color/color_FFCF32"
         app:sRightIconRes="@mipmap/ic_arrow_small"
         app:sRightIconWidth="10dp"
@@ -100,7 +112,8 @@
         app:sBackgroundDrawableRes="@color/color_3324193D"
         app:sBottomDividerLineMarginLeft="@dimen/dp_15"
         app:sBottomDividerLineMarginRight="@dimen/dp_15"
-        app:sUseRipple="true"></com.allen.library.SuperTextView>
+        app:sUseRipple="true" />
+
     <com.allen.library.SuperTextView
         android:id="@+id/googleAuthen"
         android:layout_width="match_parent"
@@ -126,7 +139,8 @@
         app:sBackgroundDrawableRes="@color/color_3324193D"
         app:sBottomDividerLineMarginLeft="@dimen/dp_15"
         app:sBottomDividerLineMarginRight="@dimen/dp_15"
-        app:sUseRipple="true"></com.allen.library.SuperTextView>
+        app:sUseRipple="true" />
+
     <com.allen.library.SuperTextView
         android:id="@+id/changeLoginPsw"
         android:layout_width="match_parent"
@@ -150,32 +164,34 @@
         app:sBackgroundDrawableRes="@color/color_3324193D"
         app:sBottomDividerLineMarginLeft="@dimen/dp_15"
         app:sBottomDividerLineMarginRight="@dimen/dp_15"
-        app:sUseRipple="true"></com.allen.library.SuperTextView>
-    <com.allen.library.SuperTextView
-        android:id="@+id/tradePsw"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:sLeftTextColor="@color/white"
-        app:sLeftTextSize="15dp"
-        app:sLeftTextString="@string/trade_password"
-        app:sLeftViewMarginLeft="@dimen/dp_20"
-        app:sLeftIconRes="@mipmap/ic_trad_password"
-        app:sLeftIconMarginLeft="@dimen/dp_20"
-        app:sRightTextString="中文"
-        app:sRightTextSize="12dp"
-        app:sRightTextColor="@color/color_FFCF32"
-        app:sRightIconRes="@mipmap/ic_arrow_small"
-        app:sRightIconWidth="10dp"
-        app:sRightIconHeight="10dp"
-        app:sRightIconMarginRight="@dimen/dp_20"
-        app:sDividerLineType="bottom"
-        app:sDividerLineColor="@color/color_332852"
-        app:sDividerLineHeight="1dp"
-        app:sShapeSelectorPressedColor="@color/security_btn_press"
-        app:sBackgroundDrawableRes="@color/color_3324193D"
-        app:sBottomDividerLineMarginLeft="@dimen/dp_15"
-        app:sBottomDividerLineMarginRight="@dimen/dp_15"
-        app:sUseRipple="true"></com.allen.library.SuperTextView>
+        app:sUseRipple="true" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/tradePsw"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:sLeftTextColor="@color/white"
+            app:sLeftTextSize="15dp"
+            app:sLeftTextString="@string/trade_password"
+            app:sLeftViewMarginLeft="@dimen/dp_20"
+            app:sLeftIconRes="@mipmap/ic_trad_password"
+            app:sLeftIconMarginLeft="@dimen/dp_20"
+            app:sRightTextString="中文"
+            app:sRightTextSize="12dp"
+            app:sRightTextColor="@color/color_FFCF32"
+            app:sRightIconRes="@mipmap/ic_arrow_small"
+            app:sRightIconWidth="10dp"
+            app:sRightIconHeight="10dp"
+            app:sRightIconMarginRight="@dimen/dp_20"
+            app:sDividerLineType="bottom"
+            app:sDividerLineColor="@color/color_332852"
+            app:sDividerLineHeight="1dp"
+            app:sShapeSelectorPressedColor="@color/security_btn_press"
+            app:sBackgroundDrawableRes="@color/color_3324193D"
+            app:sBottomDividerLineMarginLeft="@dimen/dp_15"
+            app:sBottomDividerLineMarginRight="@dimen/dp_15"
+            app:sUseRipple="true" />
+
     <com.allen.library.SuperTextView
         android:id="@+id/inviteFriends"
         android:layout_width="match_parent"
@@ -199,7 +215,8 @@
         app:sBackgroundDrawableRes="@color/color_3324193D"
         app:sBottomDividerLineMarginLeft="@dimen/dp_15"
         app:sBottomDividerLineMarginRight="@dimen/dp_15"
-        app:sUseRipple="true"></com.allen.library.SuperTextView>
+        app:sUseRipple="true" />
+
     <com.allen.library.SuperTextView
         android:id="@+id/aboutUs"
         android:layout_width="match_parent"
@@ -223,18 +240,18 @@
         app:sBackgroundDrawableRes="@color/color_3324193D"
         app:sBottomDividerLineMarginLeft="@dimen/dp_15"
         app:sBottomDividerLineMarginRight="@dimen/dp_15"
-        app:sUseRipple="true"></com.allen.library.SuperTextView>
+        app:sUseRipple="true" />
     <com.allen.library.SuperTextView
-        android:id="@+id/languageSpt"
+        android:id="@+id/contactSpt"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:sLeftTextColor="@color/white"
         app:sLeftTextSize="15dp"
-        app:sLeftTextString="@string/verson_code"
+        app:sLeftTextString="@string/contact_us"
         app:sLeftViewMarginLeft="@dimen/dp_20"
-        app:sLeftIconRes="@mipmap/ic_version"
+        app:sLeftIconRes="@mipmap/ic_contact_us"
         app:sLeftIconMarginLeft="@dimen/dp_20"
-        app:sRightTextString="中文"
+        app:sRightTextString="kopernik.net@gmail.com"
         app:sRightTextSize="12dp"
         app:sRightTextColor="@color/color_FFCF32"
         app:sRightIconRes="@mipmap/ic_arrow_small"
@@ -248,7 +265,72 @@
         app:sBackgroundDrawableRes="@color/color_3324193D"
         app:sBottomDividerLineMarginLeft="@dimen/dp_15"
         app:sBottomDividerLineMarginRight="@dimen/dp_15"
-        app:sUseRipple="true"></com.allen.library.SuperTextView>
+        app:sUseRipple="true" />
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.allen.library.SuperTextView
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/versionSpt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:sLeftTextColor="@color/white"
+        app:sLeftTextSize="15dp"
+        app:sLeftTextString="@string/verson_code"
+        app:sLeftViewMarginLeft="@dimen/dp_20"
+        app:sLeftIconRes="@mipmap/ic_version"
+        app:sLeftIconMarginLeft="@dimen/dp_20"
+        app:sRightTextString=""
+        app:sRightTextSize="12dp"
+        app:sRightTextColor="@color/color_AA9CCA"
+        app:sRightIconWidth="10dp"
+        app:sRightIconHeight="10dp"
+        app:sCenterTextString=""
+        app:sCenterTextColor="@color/color_FFCF32"
+        app:sCenterTextSize="@dimen/sp_12"
+        app:sCenterViewGravity="right_center"
+        app:sRightIconMarginRight="@dimen/dp_20"
+        app:sDividerLineType="bottom"
+        app:sDividerLineColor="@color/color_332852"
+        app:sDividerLineHeight="1dp"
+        app:sShapeSelectorPressedColor="@color/security_btn_press"
+        app:sBackgroundDrawableRes="@color/color_3324193D"
+        app:sBottomDividerLineMarginLeft="@dimen/dp_15"
+        app:sBottomDividerLineMarginRight="@dimen/dp_15"
+        app:sUseRipple="true" >
+    </com.allen.library.SuperTextView>
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="@dimen/dp_20"
+        android:textColor="@color/color_AA9CCA"
+        android:textSize="@dimen/sp_12"
+        android:text=""/>
+    <TextView
+        android:id="@+id/tvVersionTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginRight="@dimen/dp_10"
+        android:textColor="@color/color_FFCF32"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintRight_toLeftOf="@+id/tvVersion"
+        android:text=""/>
+    <View
+        android:id="@+id/circleView"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_marginRight="70dp"
+        android:background="@drawable/circle_bg"
+         app:layout_constraintLeft_toRightOf="@+id/tvVersionTip"
+        app:layout_constraintTop_toTopOf="@+id/tvVersionTip"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
  <Button
     android:id="@+id/exitLogin"
     android:text="@string/exit_login"
@@ -266,3 +348,4 @@
     android:layout_marginTop="30dp"
     android:gravity="center" />
 </LinearLayout>
+</androidx.core.widget.NestedScrollView>

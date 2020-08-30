@@ -196,7 +196,8 @@
                             android:id="@+id/tv_runtime_mining_line"
                             android:layout_width="@dimen/dp_60"
                             android:layout_height="2dp"
-                            android:background="@color/white"/>
+                            android:visibility="gone"
+                            android:background="@color/color_ffcf32"/>
                     </LinearLayout>
                     <View
                         android:layout_gravity="center"
@@ -225,7 +226,8 @@
                             android:id="@+id/tv_outtime_mining_line"
                             android:layout_width="@dimen/dp_60"
                             android:layout_height="2dp"
-                            android:background="@color/white"/>
+                            android:visibility="gone"
+                            android:background="@color/color_ffcf32"/>
                     </LinearLayout>
                 </LinearLayout>
                 <View

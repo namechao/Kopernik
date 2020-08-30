@@ -44,7 +44,9 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
         ivBack.setOnClickListener { finish() }
         lottieAnimationView.imageAssetsFolder = "synthetise";
         lottieAnimationView.setAnimation("synthetise.json");
-
+        ivInputMinus.isEnabled=false
+        ivInputAdd.isEnabled=false
+        ivSnythetise.isEnabled=false
         val assetManager: AssetManager = resources.assets
         try {
             val fileDescriptor =
@@ -69,15 +71,17 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
                 ToastUtils.showShort(this,getString(R.string.utc_input_syth_limit))
                 return@setOnClickListener
             }
-            //已登录
+            //判断是否设置交易密码
             if (UserConfig.singleton?.accountBean!=null){
                 if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
                     if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
                        LaunchConfig.startTradePasswordActivity(this, 1,1)
+                        return@setOnClickListener
                     }
                 }else{
                     if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
                         LaunchConfig.startTradePasswordActivity(this, 1,1)
+                        return@setOnClickListener
                     }
                 }
             }
@@ -134,15 +138,19 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
           getAssetConfig().observe(this@SynthetiseUTCActivity, Observer {
           smartRefreshLayout.finishRefresh()
           if (it.status==200) {
+              ivInputMinus.isEnabled=true
+              ivInputAdd.isEnabled=true
+              ivSnythetise.isEnabled=true
               utcEntity=it.data
               tvUDMTCoin.text = ""+BigDecimalUtils.getRound(it.data?.utdm)
               tvUTKtCoin.text = ""+ BigDecimalUtils.getRound(it.data?.utk)
-              currentScale.text=resources.getString(R.string.current_exchange_precent)+"UTDM:UTK=${BigDecimalUtils.roundDOWN(utcEntity?.config?.utdmCompose,8)}:${BigDecimalUtils.roundDOWN(utcEntity?.config?.utkCompose,8)}"
+              currentScale.text=resources.getString(R.string.current_exchange_precent)+"UTDM:UTK=${BigDecimalUtils.getRound(utcEntity?.config?.utdmCompose)}:${BigDecimalUtils.getRound(utcEntity?.config?.utkCompose)}"
               var utdmToUtc=BigDecimalUtils.multiply(utcEntity?.utdm,it.data?.config?.utdmCompose)
               var utkToUtc =BigDecimalUtils.multiply(utcEntity?.utk,it.data?.config?.utkCompose)
               if (BigDecimal(utdmToUtc).subtract(BigDecimal(utkToUtc))>BigDecimal("0"))
                   maxCounts=BigDecimalUtils.getRound(utkToUtc.toString()).toInt()
               else  maxCounts=BigDecimalUtils.getRound(utdmToUtc.toString()).toInt()
+              editText.setText(""+maxCounts)
           }else{
               ErrorCode.showErrorMsg(this@SynthetiseUTCActivity,it.status)
           }

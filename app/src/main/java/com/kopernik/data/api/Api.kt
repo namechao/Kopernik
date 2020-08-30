@@ -59,7 +59,7 @@ object Api {
     val checkAccountNode =
         "register/checknodeaccount" //检查节点是否退选
     val updateAccountNode =  "register/updatenodehash" //更新节点信息
-    val checkUpdate =  baseUrl +"register/deploy" //版本更新
+    val checkUpdate =  baseUrl +"user/deploy" //版本更新
     val checkPw =  "register/checkPassword" //检查密码
     val checkMnemonic =  "register/checkuser" //判断助记词是否存在
 

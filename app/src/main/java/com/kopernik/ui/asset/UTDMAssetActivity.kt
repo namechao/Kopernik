@@ -16,6 +16,11 @@ import com.kopernik.ui.mine.entity.AllConfigEntity
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.android.synthetic.main.activity_udmt_asset.*
+import kotlinx.android.synthetic.main.activity_udmt_asset.assetTotal
+import kotlinx.android.synthetic.main.activity_udmt_asset.ivBack
+import kotlinx.android.synthetic.main.activity_udmt_asset.recyclerView
+import kotlinx.android.synthetic.main.activity_udmt_asset.smartRefreshLayout
+import kotlinx.android.synthetic.main.activity_utc_asset.*
 
 
 class UTDMAssetActivity : NewFullScreenBaseActivity<UDMTAssetViewModel, ViewDataBinding>() {
@@ -26,6 +31,9 @@ class UTDMAssetActivity : NewFullScreenBaseActivity<UDMTAssetViewModel, ViewData
     override fun initView(savedInstanceState: Bundle?) {
         ivBack.setOnClickListener {
             finish()
+        }
+        intent.getStringExtra("asset")?.let {
+            assetTotal.text=BigDecimalUtils.roundDOWN(it,2)
         }
         recyclerView.layoutManager= LinearLayoutManager(this)
         adpter.addHeaderView(LayoutInflater.from(this).inflate(R.layout.item_finance_record_head,null))
@@ -62,7 +70,7 @@ class UTDMAssetActivity : NewFullScreenBaseActivity<UDMTAssetViewModel, ViewData
             getAssetConfig().observe(this@UTDMAssetActivity, Observer {
                 if (it.status==200){
                     allConfigEntity=it.data
-                    assetTotal.text= BigDecimalUtils.roundDOWN(it.data.utdm,8)
+                    assetTotal.text= BigDecimalUtils.roundDOWN(it.data.utdm,2)
                 }
             })
         }

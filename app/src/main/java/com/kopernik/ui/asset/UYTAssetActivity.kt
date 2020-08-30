@@ -19,8 +19,10 @@ import com.kopernik.ui.asset.entity.DepositWithdarwlRecord
 import com.kopernik.ui.asset.entity.UYTTransferRecord
 import com.kopernik.ui.asset.viewModel.UYTAssetViewModel
 import com.kopernik.ui.mine.entity.AllConfigEntity
+import kotlinx.android.synthetic.main.activity_utc_asset.*
 import kotlinx.android.synthetic.main.activity_uyt_asset.*
 import kotlinx.android.synthetic.main.activity_uyt_asset.assetTotal
+import kotlinx.android.synthetic.main.activity_uyt_asset.ivBack
 import kotlinx.android.synthetic.main.activity_uyt_asset.llTitle
 import kotlinx.android.synthetic.main.activity_uyt_asset.llTitle1
 import kotlinx.android.synthetic.main.activity_uyt_asset.recyclerView
@@ -39,6 +41,9 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
     override fun layoutId()=R.layout.activity_uyt_asset
 
     override fun initView(savedInstanceState: Bundle?) {
+        intent.getStringExtra("asset")?.let {
+            assetTotal.text=BigDecimalUtils.roundDOWN(it,2)
+        }
         ivBack.setOnClickListener {
             finish()
         }
@@ -115,7 +120,7 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
             getAssetConfig().observe(this@UYTAssetActivity, Observer {
                 if (it.status==200){
                     allConfigEntity=it.data
-                    assetTotal.text= BigDecimalUtils.roundDOWN(it.data.uyt,8)
+                    assetTotal.text= BigDecimalUtils.roundDOWN(it.data.uyt,2)
                 }
             })
         }
@@ -207,20 +212,20 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
         smartRefreshLayout.autoRefresh()
         if (oneClick){
             uytTitle.setTextColor(resources.getColor(R.color.color_ffcf32))
-            uytTitleLine.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
+            uytTitleLine.visibility= View.VISIBLE
             recyclerView.visibility= View.VISIBLE
         }else {
             uytTitle.setTextColor(resources.getColor(R.color.white))
-            uytTitleLine.setBackgroundColor(resources.getColor(R.color.white))
+            uytTitleLine.visibility= View.GONE
             recyclerView.visibility= View.GONE
         }
         if (twoClick){
             uytTitle1.setTextColor(resources.getColor(R.color.color_ffcf32))
-            uytTitleLine1.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
+            uytTitleLine1.visibility= View.VISIBLE
             recyclerView1.visibility= View.VISIBLE
         }else {
             uytTitle1.setTextColor(resources.getColor(R.color.white))
-            uytTitleLine1.setBackgroundColor(resources.getColor(R.color.white))
+            uytTitleLine1.visibility= View.GONE
             recyclerView1.visibility= View.GONE
         }
 

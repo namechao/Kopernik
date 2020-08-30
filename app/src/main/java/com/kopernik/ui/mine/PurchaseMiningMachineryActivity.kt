@@ -1,12 +1,14 @@
 package com.kopernik.ui.mine
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
+import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.PurchaseDialog
 import com.kopernik.app.network.http.ErrorCode
@@ -26,6 +28,7 @@ import kotlinx.android.synthetic.main.activity_purchase_mining_machinery.*
 import kotlinx.android.synthetic.main.activity_purchase_mining_machinery.llTab
 import kotlinx.android.synthetic.main.activity_purchase_mining_machinery.recyclerView
 import kotlinx.android.synthetic.main.activity_purchase_mining_machinery.smartRefreshLayout
+import kotlin.math.log
 
 
 class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,ViewDataBinding>() {
@@ -35,6 +38,7 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
     private var machinngType=0
     private var pager1=1
     private var pager2=1
+    var type=""
     var adapter= PurchaseMiningMAdapter(arrayListOf())
     var adpter1= RuntimeMiningMAdapter(arrayListOf())
     var adpter2= OutTimeMiningMAdapter(arrayListOf())
@@ -67,8 +71,34 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
 
         })
         //购买按钮
-        adapter?.setOnItemChildClickListener { adapter, view, position -> 
+        adapter.setOnItemChildClickListener { adapter, view, position ->
             if (view.id==R.id.tv_purchase){
+                //判断是否设置交易密码
+                if (UserConfig.singleton?.accountBean!=null){
+                    if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
+                        if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                            LaunchConfig.startTradePasswordActivity(this, 1,1)
+                            return@setOnItemChildClickListener
+                        }
+                    }else{
+                        if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                            LaunchConfig.startTradePasswordActivity(this, 1,1)
+                            return@setOnItemChildClickListener
+                        }
+                    }
+                }
+               //flag true代表可以买 fasle 购买矿机和数量以达到最大
+               if (minebean!=null &&minebean?.flag!=null && !minebean?.flag!!){
+                   ToastUtils.showShort(this,getString(R.string.purchase_total_limit))
+                  return@setOnItemChildClickListener
+
+               }
+                //parentFlag true代表可以买 fasle  矿机到8个提示文案：此社群矿机已达上限
+                if (minebean!=null&&minebean?.parentFlag!=null&& !minebean?.parentFlag!!){
+                    ToastUtils.showShort(this,getString(R.string.purchase_team_total_limit))
+                    return@setOnItemChildClickListener
+                }
+                //购买重组数据
                 var purchaseEntity=PurchaseEntity()
                 purchaseEntity.mineMacName= (adapter.data[position] as Machine).name
                 purchaseEntity.mineMacPrice= (adapter.data[position] as Machine).price
@@ -76,11 +106,12 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
                 minebean?.uytCaptial?.amount?.let {
                     purchaseEntity.uytBanlance=it
                 }
-
+                //购买弹窗
                 var dialog = PurchaseDialog.newInstance(1,purchaseEntity)
                 dialog!!.setOnRequestListener(object : PurchaseDialog.RequestListener {
-                    override fun onRequest(type: Int, params: String) {
-                        checkPassword((adapter.data[position] as Machine).type.toString(),params)
+                    override fun onRequest(params: String) {
+                        type= (adapter.data[position] as Machine).type.toString()
+                        checkPassword(params)
                     }
                 })
                 dialog!!.show(supportFragmentManager, "withdrawRecommed")
@@ -88,25 +119,36 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
         }
         smartRefreshLayout.autoRefresh()
     }
-    fun  checkPassword( type:String, params: String){
+    fun  checkPassword(params: String){
         viewModel.run {
             var map= mapOf("pwd" to params)
             checkTradePassword(map).observe(this@PurchaseMiningMachineryActivity, Observer {
                 if (it.status==200){
-                    var uid=""
-                    UserConfig.singleton?.accountBean?.uid?.let {
-                        uid=it
-                    }
-                    var map= mapOf("uid" to uid ,"type" to type)
-                   buyMineMachine(map).observe(this@PurchaseMiningMachineryActivity, Observer {
-                       if (it.status==200) ToastUtils.showShort(this@PurchaseMiningMachineryActivity,getString(R.string.purchase_success))else   ErrorCode.showErrorMsg(getActivity(), it.status)
-                   })
+                 purchaseMineMac()
                 }else{
                     ErrorCode.showErrorMsg(getActivity(), it.status)
                 }
             })
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        smartRefreshLayout.autoRefresh()
+    }
+    private fun purchaseMineMac() {
+        viewModel.run {
+        var uid=""
+        UserConfig.singleton?.accountBean?.uid?.let {
+            uid=it
+        }
+        var map= mapOf("uid" to uid ,"type" to type)
+        buyMineMachine(map).observe(this@PurchaseMiningMachineryActivity, Observer {
+            if (it.status==200) ToastUtils.showShort(this@PurchaseMiningMachineryActivity,getString(R.string.purchase_success))else   ErrorCode.showErrorMsg(getActivity(), it.status)
+        })
+        }
+    }
+
     //获取矿机列表
     fun getList(){
         viewModel.run {
@@ -213,30 +255,30 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
            smartRefreshLayout.autoRefresh()
                 if (oneClick){
                     tv_purchase.setTextColor(resources.getColor(R.color.color_ffcf32))
-                    tv_purchase_line.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
+                    tv_purchase_line.visibility=View.VISIBLE
                     recyclerView.visibility=View.VISIBLE
                 }else {
                     tv_purchase.setTextColor(resources.getColor(R.color.white))
-                    tv_purchase_line.setBackgroundColor(resources.getColor(R.color.white))
+                    tv_purchase_line.visibility=View.GONE
                     recyclerView.visibility=View.GONE
                 }
              if (twoClick){
                     tv_runtime_mining.setTextColor(resources.getColor(R.color.color_ffcf32))
-                    tv_runtime_mining_line.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
+                    tv_runtime_mining_line.visibility=View.VISIBLE
                     recyclerView1.visibility=View.VISIBLE
                  }else {
                     tv_runtime_mining.setTextColor(resources.getColor(R.color.white))
-                    tv_runtime_mining_line.setBackgroundColor(resources.getColor(R.color.white))
+                   tv_runtime_mining_line.visibility=View.GONE
                     recyclerView1.visibility=View.GONE
                  }
              if (threeClick){
                 tv_outtime_mining.setTextColor(resources.getColor(R.color.color_ffcf32))
-                tv_outtime_mining_line.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
+                tv_outtime_mining_line.visibility=View.VISIBLE
                 recyclerView2.visibility=View.VISIBLE
             }else {
                  tv_outtime_mining.setTextColor(resources.getColor(R.color.white))
-                 tv_outtime_mining_line.setBackgroundColor(resources.getColor(R.color.white))
-                recyclerView2.visibility=View.GONE
+                 recyclerView2.visibility=View.GONE
+                 tv_outtime_mining_line.visibility=View.GONE
             }
 
        }

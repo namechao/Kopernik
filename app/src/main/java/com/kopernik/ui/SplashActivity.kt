@@ -41,7 +41,7 @@ class SplashActivity : NewFullScreenBaseActivity<NoViewModel, ViewDataBinding>()
             finish()
         }else {
             if (loginStatus == -1) {
-                LaunchConfig.startChooseAccountAc(this)
+                LaunchConfig.startLoginActivity(this)
                 finish()
             } else {
                 LaunchConfig.startMainAc(this)

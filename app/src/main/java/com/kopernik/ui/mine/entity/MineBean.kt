@@ -5,6 +5,7 @@ package com.kopernik.ui.mine.entity
 data class MineBean(
     val nachineList: List<Machine>,
     val parentFlag: Boolean,
+    val flag: Boolean,
     val uytPrice:String,
     val user: User,
     val uytCaptial: UytCaptial,

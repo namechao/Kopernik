@@ -37,6 +37,9 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
     var adpter1=UTCExchangeRecordAdapter(arrayListOf())
 
     override fun initView(savedInstanceState: Bundle?) {
+        intent.getStringExtra("asset")?.let {
+            assetTotal.text=BigDecimalUtils.roundDOWN(it,2)
+        }
         llTitle.setOnClickListener {
             machinngType=0
           onTabOnClick(true,false)
@@ -87,7 +90,7 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
              getAssetConfig().observe(this@UTCAssetActivity, Observer {
                  if (it.status==200){
                      allConfigEntity=it.data
-                     assetTotal.text=BigDecimalUtils.roundDOWN(it.data.utc,8)
+                     assetTotal.text=BigDecimalUtils.roundDOWN(it.data.utc,2)
                  }
              })
          }
@@ -194,20 +197,20 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
         smartRefreshLayout.autoRefresh()
         if (oneClick){
             utcTitle.setTextColor(resources.getColor(R.color.color_ffcf32))
-            utcTitleLine.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
+            utcTitleLine.visibility=View.VISIBLE
             recyclerView.visibility=View.VISIBLE
         }else {
             utcTitle.setTextColor(resources.getColor(R.color.white))
-            utcTitleLine.setBackgroundColor(resources.getColor(R.color.white))
+            utcTitleLine.visibility=View.GONE
             recyclerView.visibility=View.GONE
         }
         if (twoClick){
             utcTitle1.setTextColor(resources.getColor(R.color.color_ffcf32))
-            utcTitleLine1.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
+            utcTitleLine1.visibility=View.VISIBLE
             recyclerView1.visibility=View.VISIBLE
         }else {
             utcTitle1.setTextColor(resources.getColor(R.color.white))
-            utcTitleLine1.setBackgroundColor(resources.getColor(R.color.white))
+            utcTitleLine1.visibility=View.GONE
             recyclerView1.visibility=View.GONE
         }
 

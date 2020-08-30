@@ -52,6 +52,16 @@ object TimeUtils {
      * @param timeStamp
      * @return
      */
+    fun normalTimeStampMonthDay(timeStamp: String?): String {
+        if (timeStamp == null || timeStamp == "0" || timeStamp.isEmpty()) return "无"
+        val format = SimpleDateFormat("MM/dd HH:mm")
+        return format.format(Date(java.lang.Long.valueOf(timeStamp)))
+    }
+    /**
+     * 13 位
+     * @param timeStamp
+     * @return
+     */
     fun TimeStampYearToData(timeStamp: String?): String {
         if (timeStamp == null || timeStamp == "0" || timeStamp.isEmpty()) return "无"
         val format = SimpleDateFormat("yyyy.MM.dd")

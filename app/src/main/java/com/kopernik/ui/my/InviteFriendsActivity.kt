@@ -1,15 +1,18 @@
 package com.kopernik.ui.my
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.ViewDataBinding
@@ -85,7 +88,7 @@ class InviteFriendsActivity : NewFullScreenBaseActivity<InviteFriendsViewModel, 
             mHandler.postDelayed(Runnable {
                 // 要在运行在子线程中
                 val bmp: Bitmap = clPoster.getDrawingCache() // 获取图片
-                savePicture(bmp, "poster.jpg") // 保存图片
+                saveBmp2Gallery(this,bmp, "poster.jpg") // 保存图片
                 clPoster.destroyDrawingCache() // 保存过后释放资源
                 dialog.dismiss()
             }, 100)
@@ -126,6 +129,51 @@ class InviteFriendsActivity : NewFullScreenBaseActivity<InviteFriendsViewModel, 
         }
 
         ToastUtils.showShort(this,getString(R.string.save_to_picture_success))
+    }
+    fun saveBmp2Gallery(context: Context, bmp: Bitmap, picName: String) {
+//        saveImageToGallery(bmp,picName);
+        var fileName: String? = null
+        //系统相册目录
+        val galleryPath = (Environment.getExternalStorageDirectory()
+            .toString() + File.separator + Environment.DIRECTORY_DCIM
+                + File.separator + "Camera" + File.separator)
+        //                + File.separator + "yingtan" + File.separator;
+
+//        String photoName = System.currentTimeMillis() + ".jpg";
+        // 声明文件对象
+        var file: File? = null
+        // 声明输出流
+        var outStream: FileOutputStream? = null
+        try {
+            // 如果有目标文件，直接获得文件对象，否则创建一个以filename为名称的文件
+            file = File(galleryPath, "$picName.jpg")
+            //            file = new File(galleryPath, photoName);
+            // 获得文件相对路径
+            fileName = file.toString()
+            // 获得输出流，如果文件中有内容，追加内容
+            outStream = FileOutputStream(fileName)
+            bmp.compress(Bitmap.CompressFormat.JPEG, 90, outStream)
+        } catch (e: Exception) {
+            e.stackTrace
+        } finally {
+            try {
+                outStream?.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+        try {
+//            MediaStore.Images.Media.insertImage(context.getContentResolver(),file.getAbsolutePath(),fileName,null);
+            MediaStore.Images.Media.insertImage(context.contentResolver, bmp, fileName, null)
+            val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
+            val uri: Uri = Uri.fromFile(file)
+            intent.data = uri
+            context.sendBroadcast(intent)
+            ToastUtils.showShort(this,getString(R.string.save_to_picture_success))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            ToastUtils.showShort(context, "图片保存失败")
+        }
     }
 
     override fun initData() {

@@ -1,29 +1,24 @@
 package com.kopernik.ui.setting.entity
 
 class UpdateBean2 {
-    /**
-     * status : 200
-     * data : {"deploy":{"id":14,"versionName":"v2.0.0","versionCode":11,"versionDesc":"nisafhas \\n fs  fsaf \\n","type":1,"source":"android","updateTime":null,"url":""}}
-     */
+
     var status = 0
     var data: DataBean? = null
 
     class DataBean {
-        /**
-         * deploy : {"id":14,"versionName":"v2.0.0","versionCode":11,"versionDesc":"nisafhas \\n fs  fsaf \\n","type":1,"source":"android","updateTime":null,"url":""}
-         */
+
         var deploy: DeployBean? = null
 
         class DeployBean {
             /**
-             * id : 14
-             * versionName : v2.0.0
-             * versionCode : 11
-             * versionDesc : nisafhas \n fs  fsaf \n
-             * type : 1
-             * source : android
-             * updateTime : null
-             * url :
+            "id": 26,
+            "versionName": "V1.2.1",
+            "versionCode": 23,
+            "versionDesc": "•【体验升级】优化细节，提升跨链体验。",
+            "type": 1,
+            "source": "android",
+            "updateTime": 1593228497000,
+            "url": "http://uyt-oss.oss-cn-hongkong.aliyuncs.com/app/uyt.apk"
              */
             var id = 0
             var versionName: String? = null

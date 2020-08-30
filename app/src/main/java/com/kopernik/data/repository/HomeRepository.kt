@@ -10,6 +10,7 @@ import com.kopernik.ui.home.Entity.GetUtkEntity
 import com.kopernik.ui.home.Entity.NoticeEntity
 import com.kopernik.ui.mine.entity.*
 import com.kopernik.ui.my.bean.InviteFriendsEntity
+import com.kopernik.ui.my.bean.VersionEntity
 import com.kopernik.ui.setting.entity.ContactBean
 import com.kopernik.ui.setting.entity.UpdateBean
 
@@ -95,6 +96,9 @@ class HomeRepository private constructor(private val newWork: HomeNetWork):BaseM
     }
     suspend fun realNameAuth(name: String,idCard:String): BaseResult<Any> {
         return newWork.realNameAuth(name,idCard)
+    }
+    suspend fun checkVersion(): BaseResult<VersionEntity> {
+        return newWork.checkVersion()
     }
     suspend fun checkAppVersion(): BaseResult<UpdateBean> {
         return newWork.checkAppVersion()

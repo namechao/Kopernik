@@ -73,7 +73,7 @@ class UTKTransferDialog : DialogFragment(),
         }
         if (bean?.rateList!=null) {
             for (i in bean?.rateList!!){
-                if (i.type.contains("ROLL_OUT")) rate = BigDecimalUtils.roundDOWN(i.rate,8)
+                if (i.type.contains("ROLL_OUT")) rate = BigDecimalUtils.roundDOWN(i.rate,2)
             }
         }
         desc?.text=rate+"UTK"
@@ -81,7 +81,7 @@ class UTKTransferDialog : DialogFragment(),
         transferUidEt?.addTextChangedListener(passwordWatcher)
         passwordEt?.addTextChangedListener(passwordWatcher)
         okBtn?.setOnClickListener(clickFastListener)
-
+        KeyboardUtils.showKeyboard(transferCountsEt)
     }
 
     //点击确定按钮回调到页面进行网络请求处理

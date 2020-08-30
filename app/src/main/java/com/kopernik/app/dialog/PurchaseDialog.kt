@@ -76,13 +76,11 @@ class PurchaseDialog : DialogFragment(),
             okBtn?.isEnabled=true
         }
 
-
+        KeyboardUtils.showKeyboard(passwordEt)
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
         }
-
-
         okBtn?.setOnClickListener(clickFastListener)
     }
 
@@ -90,7 +88,7 @@ class PurchaseDialog : DialogFragment(),
     var clickFastListener: OnClickFastListener = object : OnClickFastListener() {
         override fun onFastClick(v: View) {
             KeyboardUtils.hideSoftKeyboard(passwordEt)
-            listener?.let { it.onRequest(type,passwordEt!!.text.toString().trim()) }
+            listener?.let { it.onRequest(passwordEt!!.text.toString().trim()) }
             dismiss()
         }
     }
@@ -141,7 +139,7 @@ class PurchaseDialog : DialogFragment(),
         listener=requestListener
     }
     interface RequestListener {
-        fun onRequest(type:Int,params:String)
+        fun onRequest(params:String)
     }
 
     companion object {

@@ -16,10 +16,10 @@ class UDMTFinanceRecordsAdapter(
     data: List<UTDMRecord>
 ) :BaseQuickAdapter<UTDMRecord, UTDMRecordHolder>(R.layout.item_finance_record,data){
     override fun convert(helper: UTDMRecordHolder?, item: UTDMRecord?) {
-        helper?.assetUdmtTime?.text=TimeUtils.normalTimeStampToMinute(item?.createTime?.toString())
+        helper?.assetUdmtTime?.text=TimeUtils.normalTimeStampMonthDay(item?.createTime?.toString())
         var total=BigDecimalUtils.roundDOWN(BigDecimal(item?.staticGains).
         add(BigDecimal(item?.shareGains).add(BigDecimal(item?.shareAllGains).
-        add(BigDecimal(item?.communityGains).add(BigDecimal(item?.levelGains))))).toString(),8)
+        add(BigDecimal(item?.communityGains).add(BigDecimal(item?.levelGains))))).toString(),2)
         helper?.assetMineOutput?.text=total
     }
 

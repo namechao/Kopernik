@@ -63,8 +63,7 @@ abstract class BaseWebViewFragment<T : BaseViewModel, U : ViewDataBinding>() : B
                     e.printStackTrace()
                 }
             })
-        mBridgeWebView?.registerHandler("gotoLogin",
-            BridgeHandler { data, function -> LaunchConfig.startChooseAccountAc(activity!!) })
+
         mBridgeWebView?.registerHandler("gotoReferendumListActivity",
             BridgeHandler { data, function -> LaunchConfig.startReferendumListAc(activity!!) })
         mBridgeWebView?.registerHandler("gotoReferendumDetailsActivity",

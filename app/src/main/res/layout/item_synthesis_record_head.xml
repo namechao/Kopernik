@@ -13,12 +13,13 @@
    <TextView
         android:textColor="@color/color_AA9CCA"
         android:textSize="@dimen/sp_14"
-        android:layout_width="0dp"
-        android:layout_weight="1.2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/asset_synthesis_time"
         android:paddingTop="@dimen/dp_14"
         android:paddingBottom="@dimen/sp_14"
+       android:paddingLeft="@dimen/dp_20"
+       android:paddingRight="@dimen/dp_25"
         android:gravity="center"
        />
     <TextView
@@ -30,6 +31,8 @@
         android:text="@string/asset_utdm_consume"
         android:paddingTop="@dimen/dp_14"
         android:paddingBottom="@dimen/sp_14"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:gravity="center"
         />
     <TextView
@@ -47,8 +50,8 @@
         android:textColor="@color/color_AA9CCA"
         android:textSize="@dimen/sp_14"
         android:layout_width="0dp"
-        android:layout_weight="1.5"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="@string/asset_handling_fee"
         android:paddingTop="@dimen/dp_14"
         android:paddingBottom="@dimen/sp_14"
@@ -57,13 +60,13 @@
     <TextView
         android:textColor="@color/color_AA9CCA"
         android:textSize="@dimen/sp_14"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/asset_synthesis_counts"
         android:paddingTop="@dimen/dp_14"
         android:paddingBottom="@dimen/sp_14"
-        android:layout_marginRight="@dimen/dp_15"
+        android:paddingRight="@dimen/dp_15"
+        android:layout_marginLeft="@dimen/dp_5"
         android:gravity="center"
         />
 </LinearLayout>

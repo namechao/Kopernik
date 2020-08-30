@@ -10,17 +10,18 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal">
+
       <TextView
-          android:textColor="@color/color_AA9CCA"
-          android:textSize="@dimen/sp_14"
           android:layout_width="0dp"
-          android:layout_weight="1.5"
           android:layout_height="wrap_content"
-          android:text="@string/asset_synthesis_time"
+          android:layout_weight="1.2"
+          android:gravity="center"
           android:paddingTop="@dimen/dp_14"
           android:paddingBottom="@dimen/sp_14"
-          android:gravity="center"
-          />
+          android:text="@string/asset_synthesis_time"
+          android:textColor="@color/color_AA9CCA"
+          android:textSize="@dimen/sp_14" />
+
       <TextView
           android:textColor="@color/color_AA9CCA"
           android:textSize="@dimen/sp_14"
@@ -54,7 +55,7 @@
           android:paddingTop="@dimen/dp_14"
           android:paddingBottom="@dimen/sp_14"
           android:gravity="center"
-          android:layout_marginRight="@dimen/dp_15"
+          android:layout_marginRight="@dimen/dp_20"
           />
   </LinearLayout>
     <View

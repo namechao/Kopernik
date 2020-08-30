@@ -4,8 +4,10 @@ import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.pm.PackageManager
 import com.kopernik.R
 import java.util.*
+
 
 object APPHelper {
     fun dp2px(context: Context, dipValue: Float): Int {
@@ -35,5 +37,40 @@ object APPHelper {
             }
         }
         return false
+    }
+
+    /**
+     * 获取当前本地apk的版本号
+     *
+     * @param context
+     * @return
+     */
+    fun getVersionCode(context: Context): Int {
+        var versionCode = 0
+        try {
+            // 获取apk版本号
+            versionCode =
+                context.packageManager.getPackageInfo(context.packageName, 0).versionCode
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
+        return versionCode
+    }
+
+    /**
+     * 获取版本号名称
+     *
+     * @param context
+     * @return
+     */
+    fun getVerName(context: Context): String? {
+        var verName: String? = ""
+        try {
+            verName =
+                context.packageManager.getPackageInfo(context.packageName, 0).versionName
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
+        return verName
     }
 }

@@ -17,7 +17,7 @@
                  android:textColor="@color/color_AA9CCA"
                  android:gravity="center"
                  android:textSize="@dimen/sp_14"
-                 android:text="UID"
+                 android:text=""
                  />
              <TextView
                  android:id="@+id/invite_mine_mac"
@@ -27,7 +27,7 @@
                  android:textColor="@color/color_AA9CCA"
                  android:textSize="@dimen/sp_14"
                  android:gravity="center"
-                 android:text="@string/my_invite_mine_mac"
+                 android:text=""
                  />
              <TextView
                  android:id="@+id/invite_team_mine_mac"
@@ -37,7 +37,7 @@
                  android:textColor="@color/color_AA9CCA"
                  android:textSize="@dimen/sp_14"
                  android:gravity="center"
-                 android:text="@string/my_invite_team_mine_mac"
+                 android:text=""
                  />
              <TextView
                  android:id="@+id/invite_team_achievement"
@@ -47,7 +47,7 @@
                  android:textColor="@color/color_AA9CCA"
                  android:textSize="@dimen/sp_14"
                  android:gravity="center"
-                 android:text="@string/my_invite_team_achievement"
+                 android:text=""
                  />
              <TextView
                  android:id="@+id/invite_time"
@@ -57,7 +57,7 @@
                  android:textColor="@color/color_AA9CCA"
                  android:textSize="@dimen/sp_14"
                  android:gravity="center"
-                 android:text="@string/my_invite_time"
+                 android:text=""
                  />
      </LinearLayout>
 

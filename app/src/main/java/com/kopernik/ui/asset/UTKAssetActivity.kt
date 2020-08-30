@@ -51,6 +51,9 @@ class UTKAssetActivity : NewFullScreenBaseActivity<UTKAssetViewModel,ViewDataBin
         ivBack.setOnClickListener {
             finish()
         }
+        intent.getStringExtra("asset")?.let {
+            assetTotal.text=BigDecimalUtils.roundDOWN(it,2)
+        }
         //两个列表初始化
         recyclerView.layoutManager= LinearLayoutManager(this)
         adpter.addHeaderView(LayoutInflater.from(this).inflate(R.layout.item_receive_record_head,null))
@@ -107,7 +110,7 @@ class UTKAssetActivity : NewFullScreenBaseActivity<UTKAssetViewModel,ViewDataBin
             getAssetConfig().observe(this@UTKAssetActivity, Observer {
                 if (it.status==200){
                     allConfigEntity=it.data
-                    assetTotal.text= BigDecimalUtils.roundDOWN(it.data. utk,8)
+                    assetTotal.text= BigDecimalUtils.roundDOWN(it.data. utk,2)
                 }
             })
         }
@@ -212,20 +215,20 @@ class UTKAssetActivity : NewFullScreenBaseActivity<UTKAssetViewModel,ViewDataBin
         smartRefreshLayout.autoRefresh()
         if (oneClick){
             utkTitle.setTextColor(resources.getColor(R.color.color_ffcf32))
-            utkTitleLine.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
+            utkTitleLine.visibility= View.VISIBLE
             recyclerView.visibility= View.VISIBLE
         }else {
             utkTitle.setTextColor(resources.getColor(R.color.white))
-            utkTitleLine.setBackgroundColor(resources.getColor(R.color.white))
+            utkTitleLine.visibility= View.GONE
             recyclerView.visibility= View.GONE
         }
         if (twoClick){
             utkTitle1.setTextColor(resources.getColor(R.color.color_ffcf32))
-            utkTitleLine1.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
+            utkTitleLine1.visibility= View.VISIBLE
             recyclerView1.visibility= View.VISIBLE
         }else {
             utkTitle1.setTextColor(resources.getColor(R.color.white))
-            utkTitleLine1.setBackgroundColor(resources.getColor(R.color.white))
+            utkTitleLine1.visibility= View.GONE
             recyclerView1.visibility= View.GONE
         }
 

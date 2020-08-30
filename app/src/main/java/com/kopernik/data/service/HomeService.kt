@@ -8,6 +8,7 @@ import com.kopernik.ui.home.Entity.GetUtkEntity
 import com.kopernik.ui.home.Entity.NoticeEntity
 import com.kopernik.ui.mine.entity.*
 import com.kopernik.ui.my.bean.InviteFriendsEntity
+import com.kopernik.ui.my.bean.VersionEntity
 import com.kopernik.ui.setting.entity.ContactBean
 import com.kopernik.ui.setting.entity.UpdateBean
 import retrofit2.http.*
@@ -114,6 +115,9 @@ interface HomeService {
     @FormUrlEncoded
     @POST("user/certification")
     suspend fun realNameAuth(@Field("name") name: String,@Field("idCard") idCard: String): BaseResult<Any>
+    //检查版本
+    @GET("user/deploy")
+    suspend fun checkVersion(): BaseResult<VersionEntity>
     //验证密码
     @GET("register/deploy")
     suspend fun checkAppVersion(): BaseResult<UpdateBean>
