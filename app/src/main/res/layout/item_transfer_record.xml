@@ -27,7 +27,7 @@
            android:textColor="@color/color_AA9CCA"
            android:textSize="@dimen/sp_12"
            android:layout_width="0dp"
-           android:layout_weight="1"
+           android:layout_weight="1.2"
            android:layout_height="wrap_content"
            android:text="258.5478"
            android:paddingTop="@dimen/dp_14"

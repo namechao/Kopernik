@@ -82,7 +82,7 @@ class ExchangeDialog : DialogFragment(),
             }
         }
         desc?.text=rate+"UTC"
-         uytCounts=BigDecimalUtils.divide(BigDecimalUtils.multiply(bean?.utc,bean?.config?.uytExchange).toString(),bean?.config?.utcExchange,2)
+         uytCounts=BigDecimalUtils.divide(BigDecimalUtils.multiply(bean?.utc,bean?.config?.utcPrice).toString(),bean?.uytPrice,2)
         exchangeCounts?.setText("UYT数量：$uytCounts")
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {

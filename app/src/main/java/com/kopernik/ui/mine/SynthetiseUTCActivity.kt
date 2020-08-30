@@ -91,8 +91,8 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
                     override fun onRequest(type: Int, params: String) {
                       viewModel.run {
                           var amountUtc=editText.text.toString().trim().toInt()
-                         var amountUtk=BigDecimalUtils.divide(amountUtc.toString(),utcEntity?.config?.utkCompose,8)
-                         var amountUtdm=BigDecimalUtils.divide(amountUtc.toString(),utcEntity?.config?.utdmCompose,8)
+                         var amountUtdm=BigDecimalUtils.multiply(amountUtc.toString(),utcEntity?.config?.utcPrice,8)
+                          var amountUtk=BigDecimalUtils.multiply(BigDecimalUtils.multiply(amountUtdm.toString(),utcEntity?.config?.utkCompose,8),utcEntity?.config?.utdmCompose,8)
                           var  map= mapOf(
                               "amountUtc" to "$amountUtc",
                               "amountUtk" to "$amountUtk",
@@ -145,11 +145,15 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
               tvUDMTCoin.text = ""+BigDecimalUtils.getRound(it.data?.utdm)
               tvUTKtCoin.text = ""+ BigDecimalUtils.getRound(it.data?.utk)
               currentScale.text=resources.getString(R.string.current_exchange_precent)+"UTDM:UTK=${BigDecimalUtils.getRound(utcEntity?.config?.utdmCompose)}:${BigDecimalUtils.getRound(utcEntity?.config?.utkCompose)}"
-              var utdmToUtc=BigDecimalUtils.multiply(utcEntity?.utdm,it.data?.config?.utdmCompose)
-              var utkToUtc =BigDecimalUtils.multiply(utcEntity?.utk,it.data?.config?.utkCompose)
-              if (BigDecimal(utdmToUtc).subtract(BigDecimal(utkToUtc))>BigDecimal("0"))
-                  maxCounts=BigDecimalUtils.getRound(utkToUtc.toString()).toInt()
-              else  maxCounts=BigDecimalUtils.getRound(utdmToUtc.toString()).toInt()
+              var utdmToUtc=BigDecimalUtils.divide(utcEntity?.utdm,it.data?.config.utcPrice,8)
+              var utkCounts =BigDecimalUtils.divide(BigDecimalUtils.multiply(utdmToUtc.toString(),it.data?.config?.utkCompose,8),it.data.config.utdmCompose,8)
+              if (BigDecimal(utkCounts).subtract(BigDecimal(it.data.utk))<BigDecimal("0"))
+                  maxCounts=BigDecimalUtils.getRound(utdmToUtc).toInt()
+              else {
+                  var utdmcounts=BigDecimalUtils.divide(BigDecimalUtils.multiply(it.data.utk,it.data?.config?.utdmCompose,8),it.data.config.utkCompose,8)
+                  var utcMaxCounts=BigDecimalUtils.divide(utdmcounts,it.data?.config.utcPrice,8)
+                  maxCounts=BigDecimalUtils.getRound(utcMaxCounts).toInt()
+              }
               editText.setText(""+maxCounts)
           }else{
               ErrorCode.showErrorMsg(this@SynthetiseUTCActivity,it.status)

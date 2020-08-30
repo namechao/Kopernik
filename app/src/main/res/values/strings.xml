@@ -637,8 +637,20 @@
     <string name="ecology_tab_title1_2">全球健康骑行基金会 - 骑游世界</string>
     <string name="ecology_tab_title1_3">缅甸大其力旅游度假村</string>
     <string name="ecology_tab_title1_4">七星海</string>
+    <string name="ecology_game_tab_title1">Triple KILL</string>
+    <string name="ecology_game_tab_title2">Alterverse</string>
+    <string name="ecology_game_tab_title3">Brave Frontier Heroes</string>
+    <string name="ecology_game_tab_content1">
+    什么叫Triple Kill，就是无论你投资多少、无论何时投资，只要有足够的玩家进入，就一定能得到至少三倍的收益，也就是“收益三杀”。
+    </string>
+    <string name="ecology_game_tab_content2">
+     Alterverse是一款第一人称的冒险游戏，玩家需要与太空中的 Disrupter Battleships 战舰战斗。玩家可以进行单人突袭或者组队合作模式，此外还有冒险模式和战斗模式可供选择。
+    </string>
+    <string name="ecology_game_tab_content3">
+     目前，区块链游戏领域里还没有多少主流品牌，但《Brave Frontier Heroes》迈出了第一步。这是一款十分成功的免费手机角色扮演游戏。
+    </string>
     <string name="ecology_tab_content1">
-      TKN.COM由100%透明的系统组成，是区块链行业中\n最快的游戏Dapp。
+     TKN.COM由100%透明的系统组成，是区块链行业中最快的游戏Dapp。
     </string>
     <string name="ecology_tab_content2">
      全球健康骑行基金会是基于健康公益而设立，其宗旨在\n帮助更多的人，建立健康低碳出行的生活方式。
@@ -759,7 +771,7 @@
     <string name="copy_address">复制地址</string>
     <string name="copy_memo">复制memo</string>
     <string name="desposit_address">UYT提币地址</string>
-    <string name="memo_tip">请务必复制Memo，否则充值无法到账</string>
+    <string name="memo_tip">充币时,请务必(UYT钱包转账备注里填写)复制Memo，否则充币无法到账</string>
     <string name="withdraw_num">提币数量</string>
     <string name="hint_note">备注(64个字符以内)</string>
     <string name="withdrawl_tip">UYT提币提示</string>

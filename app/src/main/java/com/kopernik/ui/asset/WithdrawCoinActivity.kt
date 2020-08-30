@@ -10,6 +10,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
+import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.ExchangeDialog
 import com.kopernik.app.dialog.WithdrawlDialog
 import com.kopernik.app.network.http.ErrorCode
@@ -63,6 +65,20 @@ companion object{
             if (BigDecimal(eTWithdrawlCoinCounts.text.toString().trim()) > BigDecimal(allConfigEntity?.uyt)) {
                 ToastUtils.showShort(getActivity(), getString(R.string.uyt_witdrawl_error))
                 return@setOnClickListener
+            }
+            //判断是否设置交易密码
+            if (UserConfig.singleton?.accountBean!=null){
+                if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
+                    if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                        LaunchConfig.startTradePasswordActivity(this, 1,1)
+                        return@setOnClickListener
+                    }
+                }else{
+                    if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                        LaunchConfig.startTradePasswordActivity(this, 1,1)
+                        return@setOnClickListener
+                    }
+                }
             }
             showDialog()
         }

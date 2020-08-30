@@ -146,12 +146,15 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
   }
   fun updataUI(){
        homeEntity?.collectList?.let {
-          var autoPollAdapter= AutoPollAdapter(activity!!, it)
-          //上方滚动
-          noticeRecyclerView.layoutManager=LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-          noticeRecyclerView.adapter = autoPollAdapter
-          //启动滚动
-          noticeRecyclerView.start()
+           if (it.size>0) {
+               var autoPollAdapter = AutoPollAdapter(activity!!,it)
+               //上方滚动
+               noticeRecyclerView.layoutManager =
+                   LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+               noticeRecyclerView.adapter = autoPollAdapter
+               //启动滚动
+               noticeRecyclerView.start()
+           }
       }
 
       //总通量
@@ -178,12 +181,12 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
           BigDecimalUtils.roundDOWN(  homeEntity?.price?.ethPrice!!,4),
           "¥ ${BigDecimalUtils.multiply(homeEntity?.price?.ethPrice,homeEntity?.price?.cnyPrice,4)}",
           homeEntity?.price?.ethPricePercentage!!))
-      list.add( HomeCoinItem("UYT","/BTC",
-          BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.btcDollarPrice!!,1),
-          "¥ ${ BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.btcRmbrPrice!!,1)}",homeEntity?.priceTradingPair?.btcPercentage!!))
-      list.add( HomeCoinItem("UYT","/ETH",
-          BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.ethDollarPrice!!,4),
-          "¥ ${BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.ethRmbrPrice!!,4)}",homeEntity?.priceTradingPair?.ethPercentage!!))
+//      list.add( HomeCoinItem("UYT","/BTC",
+//          BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.btcDollarPrice!!,1),
+//          "¥ ${ BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.btcRmbrPrice!!,1)}",homeEntity?.priceTradingPair?.btcPercentage!!))
+//      list.add( HomeCoinItem("UYT","/ETH",
+//          BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.ethDollarPrice!!,4),
+//          "¥ ${BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.ethRmbrPrice!!,4)}",homeEntity?.priceTradingPair?.ethPercentage!!))
       list.add( HomeCoinItem("UYT","/USDT",
           BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.usdtDollarPrice!!,4),
           "¥ ${BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.usdtRmbrPrice!!,4)}",homeEntity?.priceTradingPair?.usdtPercentage!!))
@@ -291,7 +294,7 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
                      for (i in it?.data?.notice) {
                          val view: View = layoutInflater.inflate(R.layout.item_notice, null)
                          var content = view.findViewById<TextView>(R.id.content)
-                         content.text = i.content
+                         content.text = i.title
                          vfNoticeScroll.addView(view)
                          view.setOnClickListener {
                              i.id?.let {

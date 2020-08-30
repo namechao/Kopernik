@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aleyn.mvvm.base.NoViewModel
 import com.kopernik.R
 import com.kopernik.app.base.NewFullScreenBaseActivity
+import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.ExchangeDialog
 import com.kopernik.app.dialog.UTKTransferDialog
 import com.kopernik.app.network.http.ErrorCode
@@ -62,6 +64,20 @@ class UTKAssetActivity : NewFullScreenBaseActivity<UTKAssetViewModel,ViewDataBin
         adpter1.addHeaderView(LayoutInflater.from(this).inflate(R.layout.item_transfer_record_head,null))
         recyclerView1.adapter=adpter1
         transfer.setOnClickListener {
+            //判断是否设置交易密码
+            if (UserConfig.singleton?.accountBean!=null){
+                if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
+                    if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                        LaunchConfig.startTradePasswordActivity(this, 1,1)
+                        return@setOnClickListener
+                    }
+                }else{
+                    if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                        LaunchConfig.startTradePasswordActivity(this, 1,1)
+                        return@setOnClickListener
+                    }
+                }
+            }
             if (allConfigEntity!=null) {
                 var dialog = UTKTransferDialog.newInstance(allConfigEntity!!)
                 dialog!!.setOnRequestListener(object : UTKTransferDialog.RequestListener {

@@ -9,6 +9,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
+import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.TransferDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.BigDecimalUtils
@@ -61,6 +63,20 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
                 ) {
                     ToastUtils.showShort(getActivity(), getString(R.string.uyt_transfer_error))
                     return@setOnClickListener
+                }
+                //判断是否设置交易密码
+                if (UserConfig.singleton?.accountBean!=null){
+                    if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
+                        if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                            LaunchConfig.startTradePasswordActivity(this, 1,1)
+                            return@setOnClickListener
+                        }
+                    }else{
+                        if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                            LaunchConfig.startTradePasswordActivity(this, 1,1)
+                            return@setOnClickListener
+                        }
+                    }
                 }
                 showDialog()
             }

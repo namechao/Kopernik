@@ -86,7 +86,7 @@ class MyFragment : NewBaseFragment<MyViewModel, ViewDataBinding>() {
             realNameAuth.setRightString(getString(R.string.had_verified))
         }
         //交易密码
-        if (UserConfig.singleton?.accountBean?.salePwd.isNullOrEmpty()){
+        if (UserConfig.singleton?.password.isNullOrEmpty()){
             tradePsw.setRightString(getString(R.string.no_setting))
         }else{
             tradePsw.setRightString(getString(R.string.had_settting))
@@ -176,6 +176,16 @@ class MyFragment : NewBaseFragment<MyViewModel, ViewDataBinding>() {
         tvVersionTip.visibility=View.GONE
         circleView.visibility=View.GONE
         requestUpdateInfo()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //交易密码
+        if (UserConfig.singleton?.password.isNullOrEmpty()){
+            tradePsw.setRightString(getString(R.string.no_setting))
+        }else{
+            tradePsw.setRightString(getString(R.string.had_settting))
+        }
     }
 
     override fun onEvent(event: LocalEvent<Any>) {

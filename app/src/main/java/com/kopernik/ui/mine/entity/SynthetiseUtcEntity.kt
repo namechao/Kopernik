@@ -41,5 +41,6 @@ data class AllConfigEntity (
     val utc: String,
     val utdm: String,
     val utk: String,
-    val uyt: String
+    val uyt: String,
+    val uytPrice: String
 ):Serializable
