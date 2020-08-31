@@ -16,4 +16,5 @@ class EncodeInterceptor : Interceptor {
                 .build()
         return chain.proceed(request)
     }
+
 }

@@ -28,7 +28,7 @@ class MyApplication :BaseApplication(){
         instance=this
         LocalManageUtil.setApplicationLanguage(this)
         LogUtils.getConfig().run {
-            isLogSwitch= AppConfig.isDebug
+            isLogSwitch= AppConfig.logEnable
             setSingleTagSwitch(true)
         }
         MMKV.initialize(this)

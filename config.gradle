@@ -6,8 +6,8 @@ ext {
             applicationId    : "com.kopernik",
             minSdkVersion    : 23,
             targetSdkVersion : 28,
-            versionCode      : 1,
-            versionName      : "2.0",
+            versionCode      : 2,
+            versionName      : "2.0.1",
     ]
     //version配置
     versions = [

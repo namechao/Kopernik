@@ -318,13 +318,14 @@ class MyFragment : NewBaseFragment<MyViewModel, ViewDataBinding>() {
     private fun requestUpdateInfo() {
         viewModel.checkVersion().observe(this, androidx.lifecycle.Observer {
             if (it.data != null) {
-                if (it.data.deploy
-                        ?.versionCode!! > BuildConfig.VERSION_CODE
-                ) {
-                    tvVersionTip.visibility=View.VISIBLE
-                    tvVersionTip.text=getString(R.string.check_new_version)
-                    versionSpt.isEnabled=true
-                    circleView.visibility=View.VISIBLE
+                if(it.data.deploy!=null) {
+                    if (it.data.deploy
+                            ?.versionCode!! > BuildConfig.VERSION_CODE
+                    ) {
+                        tvVersionTip.visibility = View.VISIBLE
+                        tvVersionTip.text = getString(R.string.check_new_version)
+                        versionSpt.isEnabled = true
+                        circleView.visibility = View.VISIBLE
 //                    if (it.data.deploy?.type == 1) {
 //                        //提示升级
 //                        showUpdateDialog()
@@ -332,6 +333,19 @@ class MyFragment : NewBaseFragment<MyViewModel, ViewDataBinding>() {
 //                        //强制升级
 //                        forciblyUpdate()
 //                    }
+                    }
+                }
+                if (it.data.user!=null){
+                    it.data.user?.level?.let{ ib->
+                        when(ib){
+                            0-> ivVip.setImageResource(0)
+                            1-> ivVip.setImageResource(R.mipmap.ic_vip1)
+                            2-> ivVip.setImageResource(R.mipmap.ic_vip2)
+                            3-> ivVip.setImageResource(R.mipmap.ic_vip3)
+                            4-> ivVip.setImageResource(R.mipmap.ic_vip4)
+                        }
+                    }
+
                 }
 //                else if (it.data.notice != null) {
 //                    if (UserConfig.singleton

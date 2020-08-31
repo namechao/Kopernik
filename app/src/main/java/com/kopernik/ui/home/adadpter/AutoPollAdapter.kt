@@ -24,7 +24,7 @@ class AutoPollAdapter(
         val item = mData[position % mData.size]
         item?.let {
             var  telephone=""
-            if (it.phone.length>5){
+            if (it.phone!=null&&it.phone.length>5){
                 telephone="${it.phone.subSequence(0,3)}****${it.phone.subSequence(it.phone.length-4,it.phone.length)}"
             }
             holder?.content?.text="${mContext.getString(R.string.home_info)} ${telephone} ${mContext.getString(R.string.home_info1)}  ${item.amount} ${mContext.getString(R.string.home_info2)}UTK"

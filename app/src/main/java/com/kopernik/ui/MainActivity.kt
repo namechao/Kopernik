@@ -350,7 +350,7 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
 
     private fun requestUpdateInfo() {
         viewModel.checkVersion().observe(this, androidx.lifecycle.Observer {
-            if (it.data != null) {
+            if (it.data != null&&it.data.deploy!=null) {
                 if (it.data.deploy
                         ?.versionCode!! > BuildConfig.VERSION_CODE
                 ) {

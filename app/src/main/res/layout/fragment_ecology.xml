@@ -29,6 +29,7 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         android:layout_marginTop="45dp"
+        android:gravity="center"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

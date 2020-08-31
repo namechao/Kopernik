@@ -61,9 +61,9 @@ class ReminderDialog(private val context: Context,  private var getUtkEntity:Get
         var hour = TimeUtils.currentTimeMillisecond()
         if (getUtkEntity?.time == null) {//1.上次没有领取 直接领取
             tvTiming?.text = "00:00:00"
-        }else if (getUtkEntity?.config?.onceTime!=null&&hour - getUtkEntity?.time!!.toLong() > getUtkEntity?.config?.onceTime!! * 60 * 60) {//2.大于间隔时间
+        }else if (getUtkEntity?.config?.onceTime!=null&&hour - getUtkEntity?.time!!.toLong() > getUtkEntity?.config?.onceTime!! * 60 * 1000) {//2.大于间隔时间
             tvTiming?.text = "00:00:00"
-        }else if (getUtkEntity?.config?.onceTime!=null&&hour - getUtkEntity?.time!!.toLong() < getUtkEntity?.config?.onceTime!! * 60 * 60){//倒计时
+        }else if (getUtkEntity?.config?.onceTime!=null&&hour - getUtkEntity?.time!!.toLong() < getUtkEntity?.config?.onceTime!! * 60 * 1000){//倒计时
            var countDownTime=getUtkEntity?.config?.onceTime!! * 60 *1000-(hour - getUtkEntity?.time!!.toLong())
             countDownTimer=object :CountDownTimer(countDownTime,1000){
                 override fun onFinish() {
