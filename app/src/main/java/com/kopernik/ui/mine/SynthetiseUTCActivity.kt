@@ -38,6 +38,7 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
     var inputCounts=0
     var maxCounts=0
     var utcEntity: AllConfigEntity?=null
+    private var rate=""
     override fun layoutId()=R.layout.activity_snythetise_utc
     var player = MediaPlayer()
     override fun initView(savedInstanceState: Bundle?) {
@@ -80,7 +81,7 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
                     }
                 }else{
                     if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
-                        LaunchConfig.startTradePasswordActivity(this, 1,1)
+                        LaunchConfig.startTradePasswordActivity(this, 2,1)
                         return@setOnClickListener
                     }
                 }
@@ -91,13 +92,13 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
                     override fun onRequest(type: Int, params: String) {
                       viewModel.run {
                           var amountUtc=editText.text.toString().trim().toInt()
-                         var amountUtdm=BigDecimalUtils.multiply(amountUtc.toString(),utcEntity?.config?.utcPrice,8)
+                          var amountUtdm=BigDecimalUtils.multiply(amountUtc.toString(),utcEntity?.config?.utcPrice,8)
                           var amountUtk=BigDecimalUtils.multiply(BigDecimalUtils.multiply(amountUtdm.toString(),utcEntity?.config?.utkCompose,8),utcEntity?.config?.utdmCompose,8)
                           var  map= mapOf(
                               "amountUtc" to "$amountUtc",
                               "amountUtk" to "$amountUtk",
                               "amountUtdm" to "$amountUtdm",
-                              "rate" to "1",
+                              "rate" to rate,
                               "pwd" to MD5Utils.md5(MD5Utils.md5(params)))
                           compose(map).observe(this@SynthetiseUTCActivity, Observer {
                               if (it.status==200){
@@ -138,6 +139,7 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
           getAssetConfig().observe(this@SynthetiseUTCActivity, Observer {
           smartRefreshLayout.finishRefresh()
           if (it.status==200) {
+              try {
               ivInputMinus.isEnabled=true
               ivInputAdd.isEnabled=true
               ivSnythetise.isEnabled=true
@@ -154,8 +156,16 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
                   var utcMaxCounts=BigDecimalUtils.divide(utdmcounts,it.data?.config.utcPrice,8)
                   maxCounts=BigDecimalUtils.getRound(utcMaxCounts).toInt()
               }
+              if (it.data?.rateList!=null) {
+                  for (i in it.data?.rateList!!){
+                      if (i.type.contains("Compose")) rate = BigDecimalUtils.roundDOWN(i.rate,8)
+                  }
+              }
               inputCounts=maxCounts
               editText.setText(""+maxCounts)
+              }catch (e:Exception){
+                  e.stackTrace
+              }
           }else{
               ErrorCode.showErrorMsg(this@SynthetiseUTCActivity,it.status)
           }

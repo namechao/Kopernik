@@ -73,7 +73,7 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
                         }
                     }else{
                         if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
-                            LaunchConfig.startTradePasswordActivity(this, 1,1)
+                            LaunchConfig.startTradePasswordActivity(this, 2,1)
                             return@setOnClickListener
                         }
                     }

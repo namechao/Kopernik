@@ -83,7 +83,7 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
                         }
                     }else{
                         if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
-                            LaunchConfig.startTradePasswordActivity(this, 1,1)
+                            LaunchConfig.startTradePasswordActivity(this, 2,1)
                             return@setOnItemChildClickListener
                         }
                     }

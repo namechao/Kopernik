@@ -127,6 +127,7 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
         recyclerView.adapter=adapter
         smartRefreshLayout.setOnRefreshListener {
             getData()
+
             getNotice()
         }
         smartRefreshLayout.autoRefresh()
@@ -137,7 +138,12 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
               smartRefreshLayout.finishRefresh()
             if (it.status==200){
                 homeEntity=it.data
-                updataUI()
+                try {
+                    updataUI()
+                }catch (e :Exception){
+                    e.stackTrace
+                }
+
             }  else{
                 ErrorCode.showErrorMsg(activity,it.status)
             }
@@ -290,22 +296,27 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
     fun getNotice(){
         viewModel.run {
             getNotice().observe(this@HomeFragment, Observer {
-                 if (it?.data?.notice != null &&it?.data?.notice?.size>0) {
-                     for (i in it?.data?.notice) {
-                         val view: View = layoutInflater.inflate(R.layout.item_notice, null)
-                         var content = view.findViewById<TextView>(R.id.content)
-                         content.text = i.title
-                         vfNoticeScroll.addView(view)
-                         view.setOnClickListener {
-                             i.id?.let {
-                                 LaunchConfig.startNoticeActivity(activity!!,it)
-                             }
+                try {
 
-                         }
-                     }
-                     vfNoticeScroll.setFlipInterval(4000)
-                     vfNoticeScroll.startFlipping()
-                 }
+                    if (it?.data?.notice != null && it?.data?.notice?.size > 0) {
+                        for (i in it?.data?.notice) {
+                            val view: View = layoutInflater.inflate(R.layout.item_notice, null)
+                            var content = view.findViewById<TextView>(R.id.content)
+                            content.text = i.title
+                            vfNoticeScroll.addView(view)
+                            view.setOnClickListener {
+                                i.id?.let {
+                                    LaunchConfig.startNoticeActivity(activity!!, it)
+                                }
+
+                            }
+                        }
+                        vfNoticeScroll.setFlipInterval(4000)
+                        vfNoticeScroll.startFlipping()
+                    }
+                }catch (e:Exception){
+                    e.stackTrace
+                }
             })
         }
     }

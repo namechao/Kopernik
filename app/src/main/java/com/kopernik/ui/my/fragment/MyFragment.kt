@@ -127,9 +127,9 @@ class MyFragment : NewBaseFragment<MyViewModel, ViewDataBinding>() {
 
                 }else{
                     if (UserConfig.singleton?.accountBean?.salePwd.isNullOrEmpty()){
-                    activity?.let { LaunchConfig.startTradePasswordActivity(it, 1,1) }
+                    activity?.let { LaunchConfig.startTradePasswordActivity(it, 2,1) }
                     }else{
-                        activity?.let { LaunchConfig.startTradePasswordActivity(it, 1,2) }
+                        activity?.let { LaunchConfig.startTradePasswordActivity(it, 2,2) }
                     }
                 }
             }
