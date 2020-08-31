@@ -63,19 +63,20 @@ class PurchaseDialog : DialogFragment(),
         passwordEt?.addTextChangedListener(passwordWatcher)
         miningMachineType?.text=purchaseEntity?.mineMacName
         miningMachinePrice?.text= BigDecimalUtils.roundDOWN(purchaseEntity?.mineMacPrice,2)+"USDT"
-        payUytCoins?.text=purchaseEntity?.consumeUyt+"UYT"
-        uytBalance?.text=resources.getString(R.string.uyt_balance)+": "+purchaseEntity?.uytBanlance
-        if ( BigDecimalUtils.substract(purchaseEntity?.consumeUyt,purchaseEntity?.uytBanlance) >BigDecimal(0)){
-            balanceNotEnough?.visibility=View.VISIBLE
+        payUytCoins?.text=BigDecimalUtils.roundDOWN(purchaseEntity?.consumeUyt,2)+"UYT"
+        uytBalance?.text=resources.getString(R.string.uyt_balance)+": "+BigDecimalUtils.roundDOWN(purchaseEntity?.uytBanlance,2)
+        if ( BigDecimalUtils.substract(purchaseEntity?.consumeUyt,purchaseEntity?.uytBanlance) <BigDecimal(0)&&passwordEt!!.text.toString().isNotEmpty()){
+            isBalance=true
+            okBtn?.isEnabled=true
+        }else{
             okBtn?.isEnabled=false
             isBalance=false
             okBtn?.setTextColor(resources.getColor(R.color.color_5D5386,null))
-        }else{
-            balanceNotEnough?.visibility=View.GONE
-            isBalance=true
-            okBtn?.isEnabled=true
-        }
 
+        }
+         if ( BigDecimalUtils.substract(purchaseEntity?.consumeUyt,purchaseEntity?.uytBanlance) <BigDecimal(0))
+             balanceNotEnough?.visibility=View.GONE
+             else   balanceNotEnough?.visibility=View.VISIBLE
         KeyboardUtils.showKeyboard(passwordEt)
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
@@ -114,20 +115,15 @@ class PurchaseDialog : DialogFragment(),
 
         override fun afterTextChanged(s: Editable) {
 
-                if (passwordEt!!.text.toString().isNotEmpty()&&isBalance) {
-                    enableBtn()
-                } else {
-                    disableBtn()
-                }
+
+            if (passwordEt!!.text.toString().isNotEmpty()) {
+                okBtn?.isEnabled = true
+                activity?.getColor(R.color.color_20222F)?.let { okBtn?.setTextColor(it) }
+            } else {
+                activity?.getColor(R.color.color_5D5386)?.let { okBtn?.setTextColor(it) }
+                okBtn?.isEnabled = false
+            }
         }
-    }
-
-    private fun disableBtn() {
-        okBtn!!.isEnabled = false
-    }
-
-    private fun enableBtn() {
-        okBtn!!.isEnabled = true
     }
 
 

@@ -16,6 +16,7 @@ class HomeNetWork {
     suspend fun inviteFriends(map: Map<String, String>) = mService.inviteFriends(map)
     suspend fun inviteFriendsSecond(map: Map<String, String>) = mService.inviteFriendsSecond(map)
     suspend fun changeTradePsw(map: Map<String, String>) = mService.changeTradePsw(map)
+    suspend fun checkSalePwd(map: Map<String, String>) = mService.checkSalePwd(map)
     suspend fun addContact(map: Map<String, String>) = mService.addContact(map)
     suspend fun buyMineMachine(map: Map<String, String>) = mService.buyMineMachine(map)
     suspend fun checkAppVersion() = mService.checkAppVersion()

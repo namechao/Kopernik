@@ -47,6 +47,9 @@ class HomeRepository private constructor(private val newWork: HomeNetWork):BaseM
     suspend fun changeTradePsw(map: Map<String, String>): BaseResult<Any> {
         return newWork.changeTradePsw(map)
     }
+    suspend fun checkSalePwd(map: Map<String, String>): BaseResult<Any> {
+        return newWork.checkSalePwd(map)
+    }
 
     suspend fun addContact(map: Map<String, String>): BaseResult<Any> {
         return newWork.addContact(map)

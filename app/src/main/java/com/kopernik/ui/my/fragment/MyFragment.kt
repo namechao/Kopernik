@@ -86,7 +86,7 @@ class MyFragment : NewBaseFragment<MyViewModel, ViewDataBinding>() {
             realNameAuth.setRightString(getString(R.string.had_verified))
         }
         //交易密码
-        if (UserConfig.singleton?.password.isNullOrEmpty()){
+        if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
             tradePsw.setRightString(getString(R.string.no_setting))
         }else{
             tradePsw.setRightString(getString(R.string.had_settting))
@@ -181,7 +181,7 @@ class MyFragment : NewBaseFragment<MyViewModel, ViewDataBinding>() {
     override fun onResume() {
         super.onResume()
         //交易密码
-        if (UserConfig.singleton?.password.isNullOrEmpty()){
+        if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
             tradePsw.setRightString(getString(R.string.no_setting))
         }else{
             tradePsw.setRightString(getString(R.string.had_settting))

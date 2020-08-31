@@ -44,7 +44,7 @@ class MineMachineryViewModel : BaseViewModel() {
     }
     fun checkTradePassword( map:Map<String,String>): SingleLiveEvent<BaseResult<Any>> {
         launchGo({
-            changeTradePsw.value = homeRepository.changeTradePsw(map)
+            changeTradePsw.value = homeRepository.checkSalePwd(map)
         },isShowDialog = true)
         return changeTradePsw
     }

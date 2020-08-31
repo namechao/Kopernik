@@ -146,6 +146,7 @@
         android:layout_marginTop="@dimen/dp_7"
         android:text="@string/balance_not_enough"
         />
+
         <Button
             android:id="@+id/confirm"
             android:layout_width="match_parent"
@@ -155,14 +156,16 @@
             android:layout_marginRight="@dimen/dp_18"
             android:layout_marginBottom="@dimen/dp_20"
             android:background="@drawable/receive_utk_btn"
-            android:text="@string/tv_get_it"
-            android:textColor="@color/color_20222F"
-            android:textStyle="bold"
+            android:enabled="false"
+            android:text="@string/tv_get_purchase"
+            android:textColor="@color/color_5D5386"
             android:textSize="15dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTiming"
             app:layout_goneMarginTop="@dimen/dp_30"
             tools:layout_editor_absoluteX="15dp" />
+
         <TextView
             android:id="@+id/uyt_balance"
             android:layout_width="match_parent"

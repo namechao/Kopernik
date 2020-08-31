@@ -56,7 +56,10 @@ interface HomeService {
     @FormUrlEncoded
     @POST("user/saveSalePwd")
     suspend fun changeTradePsw(@FieldMap map: Map<String, String>): BaseResult<Any>
-
+    //修改交易密码
+    @FormUrlEncoded
+    @POST("user/checkSalePwd")
+    suspend fun checkSalePwd(@FieldMap map: Map<String, String>): BaseResult<Any>
     //获取联系人列表
     @GET("register/getcontacts")
     suspend fun getContacts(): BaseResult<ContactBean>

@@ -24,6 +24,7 @@ import com.kopernik.ui.mine.entity.PurchaseEntity
 import com.kopernik.ui.mine.viewModel.MineMachineryViewModel
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
+import dev.utils.common.encrypt.MD5Utils
 import kotlinx.android.synthetic.main.activity_purchase_mining_machinery.*
 import kotlinx.android.synthetic.main.activity_purchase_mining_machinery.llTab
 import kotlinx.android.synthetic.main.activity_purchase_mining_machinery.recyclerView
@@ -121,7 +122,7 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
     }
     fun  checkPassword(params: String){
         viewModel.run {
-            var map= mapOf("pwd" to params)
+            var map= mapOf("pwd" to MD5Utils.md5(MD5Utils.md5(params)))
             checkTradePassword(map).observe(this@PurchaseMiningMachineryActivity, Observer {
                 if (it.status==200){
                  purchaseMineMac()
