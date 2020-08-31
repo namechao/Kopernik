@@ -16,9 +16,6 @@ import com.kopernik.app.config.AppConfig
  * @Version:        1.0
  */
 object Api {
-    //http://xut.com:83  预上线测试  https://xut.com正式 172.25.187.54:8083
-//    val baseUrl =
-//        if (AppConfig.isDebug) "http://47.57.24.215:8089/mobile/v1/" else "https://uyt.com/mobile/v1/"
     val baseUrl =
         if (AppConfig.isDebug) "http://123.57.8.136:80/" else "https://kopernik.network/"
     val appSearch =

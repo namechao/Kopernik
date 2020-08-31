@@ -5,13 +5,13 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         release {
-            storeFile file('F:\\AndroidProject\\Project\\Kopernik\\kopernik.keystore')
+            storeFile file('/Users/zhanglichao/AndroidProject/Kopernik/kopernik.keystore')
             storePassword '123456'
             keyAlias 'kopernik'
             keyPassword '123456'
         }
         debug {
-            storeFile file('F:\\AndroidProject\\Project\\Kopernik\\kopernik.keystore')
+            storeFile file('/Users/zhanglichao/AndroidProject/Kopernik/kopernik.keystore')
             storePassword '123456'
             keyAlias 'kopernik'
             keyPassword '123456'
@@ -28,6 +28,7 @@ android {
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         flavorDimensions "default"
+        signingConfig signingConfigs.release
     }
     dataBinding {
         enabled true
@@ -69,7 +70,7 @@ android {
         }
         it.outputs.each {
             if (buildType == "release") {
-                fileName = "uyt_${flavorName}_${defaultConfig.versionName}_${createTime}-${buildType}.apk"
+                fileName = "kopernik_${flavorName}_${defaultConfig.versionName}_${createTime}-${buildType}.apk"
                 println "文件名：-----------------${fileName}"
                 it.outputFileName = fileName
             }
