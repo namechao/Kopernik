@@ -12,6 +12,7 @@ import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
+import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.my.ViewModel.ForgetTradePasswordViewModel
@@ -107,7 +108,7 @@ class ForgetTradePasswordNextActivity : NewBaseActivity<ForgetTradePasswordViewM
                     setResult(14)
                     finish()
                 }else{
-                    ToastUtils.showShort(this@ForgetTradePasswordNextActivity,it.errorMsg)
+                    ErrorCode.showErrorMsg(this@ForgetTradePasswordNextActivity,it.status)
                 }
             })
         }

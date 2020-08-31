@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aleyn.mvvm.base.BaseFragment
 import com.kopernik.R
 import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.ui.asset.adapter.AssetAdapter
 import com.kopernik.ui.asset.entity.AssetEntity
@@ -68,6 +69,8 @@ class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
                    adapter.setNewData(data)
                    var totle= BigDecimalUtils.add(it.data.utcCny,it.data.utkCny).add(BigDecimalUtils.add(it.data.utdmCny,it.data.uytCny)).toString()
                    assetTotal.text="≈ ${BigDecimalUtils.roundDOWN(totle,2)}"
+               }else{
+                   ErrorCode.showErrorMsg(activity,it.status)
                }
            })
        }

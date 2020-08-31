@@ -11,6 +11,7 @@ import com.aleyn.mvvm.base.NoViewModel
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.UserConfig
+import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.viewmodel.ForgetPasswordViewModel
@@ -114,7 +115,7 @@ class ForgetPasswordNextActivity : NewBaseActivity<ForgetPasswordViewModel, View
                     setResult(11)
                     finish()
                 }else{
-                    ToastUtils.showShort(this@ForgetPasswordNextActivity,it.errorMsg)
+                    ErrorCode.showErrorMsg(this@ForgetPasswordNextActivity,it.status)
                 }
             })
         }

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.adapter.ChoseAreaAdapter
 import com.kopernik.ui.login.bean.LoginCountryBean
@@ -92,7 +93,7 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
                         if (it.status == 200) {
                             timer.start()
                         } else {
-                            ToastUtils.showShort(this@ForgetPasswordActivity, it.errorMsg)
+                            ErrorCode.showErrorMsg(this@ForgetPasswordActivity, it.status)
                         }
                     }
                 }
@@ -114,7 +115,7 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
                         if (it.status == 200) {
                             timer.start()
                         } else {
-                            ToastUtils.showShort(this@ForgetPasswordActivity, it.errorMsg)
+                            ErrorCode.showErrorMsg(this@ForgetPasswordActivity, it.status)
                         }
                     }
                 }
@@ -154,7 +155,7 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
                                 etInput.text.toString().trim()
                             )
                         } else {
-                            ToastUtils.showShort(this@ForgetPasswordActivity, it.errorMsg)
+                            ErrorCode.showErrorMsg(this@ForgetPasswordActivity, it.status)
                         }
                     })
                 }
@@ -186,7 +187,7 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
                                 etInput.text.toString().trim()
                             )
                         } else {
-                            ToastUtils.showShort(this@ForgetPasswordActivity, it.errorMsg)
+                            ErrorCode.showErrorMsg(this@ForgetPasswordActivity, it.status)
                         }
                     })
                 }

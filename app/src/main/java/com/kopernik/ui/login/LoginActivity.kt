@@ -26,6 +26,7 @@ import com.kopernik.app.base.NewFullScreenBaseActivity
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.ChoseAreaCodeDialog
+import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.adapter.ChoseAreaAdapter
@@ -206,7 +207,7 @@ class LoginActivity : NewFullScreenBaseActivity<LoginViewModel, ViewDataBinding>
                             LaunchConfig.startMainAc(this@LoginActivity)
                             finish()
                         } else {
-                            ToastUtils.showShort(this@LoginActivity, it.errorMsg)
+                            ErrorCode.showErrorMsg(this@LoginActivity, it.status)
                         }
                     })
                 }

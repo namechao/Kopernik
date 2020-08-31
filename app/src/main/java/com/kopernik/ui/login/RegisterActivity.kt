@@ -25,6 +25,7 @@ import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.base.NewFullScreenBaseActivity
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.dialog.ChoseAreaCodeDialog
+import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.adapter.ChoseAreaAdapter
 import com.kopernik.ui.login.bean.LoginCountryBean
@@ -214,7 +215,7 @@ override fun initData() {
                      etInviteCode.text.toString().trim()
                  )
              } else {
-                 ToastUtils.showShort(this@RegisterActivity, it.errorMsg)
+                 ErrorCode.showErrorMsg(this@RegisterActivity, it.status)
              }
          })
         }
@@ -247,7 +248,7 @@ override fun initData() {
                          etInviteCode.text.toString().trim()
                      )
                  } else {
-                     ToastUtils.showShort(this@RegisterActivity, it.errorMsg)
+                     ErrorCode.showErrorMsg(this@RegisterActivity, it.status)
                  }
              })
          }

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.adapter.ChoseAreaAdapter
 import com.kopernik.ui.login.bean.LoginCountryBean
@@ -86,7 +87,7 @@ class ForgetTradePasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataB
                         if (it.status == 200) {
                             timer.start()
                         } else {
-                            ToastUtils.showShort(this@ForgetTradePasswordActivity, it.errorMsg)
+                            ErrorCode.showErrorMsg(this@ForgetTradePasswordActivity, it.status)
                         }
                     }
                 }
@@ -105,7 +106,7 @@ class ForgetTradePasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataB
                         if (it.status == 200) {
                             timer.start()
                         } else {
-                            ToastUtils.showShort(this@ForgetTradePasswordActivity, it.errorMsg)
+                            ErrorCode.showErrorMsg(this@ForgetTradePasswordActivity, it.status)
                         }
                     }
                 }
@@ -140,7 +141,7 @@ class ForgetTradePasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataB
                                 changeTradePasswordType
                             )
                         } else {
-                            ToastUtils.showShort(this@ForgetTradePasswordActivity, it.errorMsg)
+                            ErrorCode.showErrorMsg(this@ForgetTradePasswordActivity, it.status)
                         }
                     })
                 }
@@ -170,7 +171,7 @@ class ForgetTradePasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataB
                                 changeTradePasswordType
                             )
                         } else {
-                            ToastUtils.showShort(this@ForgetTradePasswordActivity, it.errorMsg)
+                            ErrorCode.showErrorMsg(this@ForgetTradePasswordActivity, it.status)
                         }
                     })
                 }
