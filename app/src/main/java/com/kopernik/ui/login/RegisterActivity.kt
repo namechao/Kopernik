@@ -97,7 +97,10 @@ class RegisterActivity : NewFullScreenBaseActivity<RegisterViewModel, ViewDataBi
 
             //手机登录
             if (registerType==1) {
-                if (etInput.text.toString().trim().isNullOrEmpty()) ToastUtils.showShort(this, resources.getString(R.string.phone_not_empty))
+                if (etInput.text.toString().trim().isNullOrEmpty()) {
+                    ToastUtils.showShort(this, resources.getString(R.string.phone_not_empty))
+                     return@setOnClickListener
+                }
                 if (!etInput.text.toString()
                         .trim().matches(
                         Regex("1[0-9]{10}"))
@@ -115,7 +118,10 @@ class RegisterActivity : NewFullScreenBaseActivity<RegisterViewModel, ViewDataBi
                     }
                 }
             }else{//邮箱获取验证码
-                if (etInput.text.toString().trim().isNullOrEmpty()) ToastUtils.showShort(this, resources.getString(R.string.email_not_empty))
+                if (etInput.text.toString().trim().isNullOrEmpty()) {
+                    ToastUtils.showShort(this, resources.getString(R.string.email_not_empty))
+                    return@setOnClickListener
+                }
                 if (!etInput.text.toString()
                         .trim().matches(
                             Regex("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}"))

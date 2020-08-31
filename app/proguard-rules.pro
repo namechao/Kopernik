@@ -29,3 +29,5 @@
 -keep class com.tencent.tbs.** {
     *;
 }
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}

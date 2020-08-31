@@ -47,14 +47,14 @@ android {
     productFlavors {
         dev {
             applicationId 'com.kopernik.dev'
-            resValue "string", "app_name", "kopernik_dev"
+            resValue "string", "app_name", "Kopernik_dev"
             manifestPlaceholders = [APPLICATION_ID: applicationId]
             buildConfigField "boolean", "IS_JUST_TEST", "false"
             versionName = "dev" + rootProject.ext.android.versionName
         }
         online {
             applicationId 'com.kopernik'
-            resValue "string", "app_name", "kopernik"
+            resValue "string", "app_name", "Kopernik"
             manifestPlaceholders = [APPLICATION_ID: applicationId]
             buildConfigField "boolean", "IS_JUST_TEST", "false"
             versionName = "V" + rootProject.ext.android.versionName
@@ -66,7 +66,7 @@ android {
         def fileName
         def createTime = new Date().format("YYYY-MM-dd", TimeZone.getTimeZone("GMT+08:00"))
         if (buildType == "release") {
-            it.getPackageApplicationProvider().get().outputDirectory = new File("/apks/kopernik")
+            it.getPackageApplicationProvider().get().outputDirectory = new File("")
         }
         it.outputs.each {
             if (buildType == "release") {
@@ -133,6 +133,7 @@ dependencies {
     //evenbus
     implementation rootProject.ext.dependencies['eventbus']
     implementation rootProject.ext.dependencies['lottie']
+    implementation rootProject.ext.dependencies['bugly']
     annotationProcessor rootProject.ext.dependencies['qmuiteam:arch-compiler']
 
 }

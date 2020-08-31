@@ -7,6 +7,8 @@ import com.blankj.utilcode.util.LogUtils
 import com.tencent.mmkv.MMKV
 import com.kopernik.app.config.AppConfig
 import com.kopernik.app.utils.LocalManageUtil
+import com.tencent.bugly.crashreport.CrashReport
+
 
 /**
  *   @auther : zhanglichao
@@ -30,6 +32,7 @@ class MyApplication :BaseApplication(){
             setSingleTagSwitch(true)
         }
         MMKV.initialize(this)
+        CrashReport.initCrashReport(getApplicationContext(), "45b5432dde", false);
 //        initX5()
     }
 

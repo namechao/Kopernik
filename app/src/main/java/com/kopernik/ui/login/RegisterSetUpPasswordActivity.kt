@@ -12,6 +12,7 @@ import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
+import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.viewmodel.RegisterSetUpPasswordViewModel
@@ -124,7 +125,7 @@ class RegisterSetUpPasswordActivity :
                  ToastUtils.showShort(this@RegisterSetUpPasswordActivity,this@RegisterSetUpPasswordActivity.getString(R.string.register_success))
                  LaunchConfig.startMainAc(this@RegisterSetUpPasswordActivity)
              }else{
-                 ToastUtils.showShort(this@RegisterSetUpPasswordActivity,it.status.toString())
+                 ErrorCode.showErrorMsg(this@RegisterSetUpPasswordActivity,it.status)
              }
             })
         }

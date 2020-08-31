@@ -154,6 +154,7 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
                   var utcMaxCounts=BigDecimalUtils.divide(utdmcounts,it.data?.config.utcPrice,8)
                   maxCounts=BigDecimalUtils.getRound(utcMaxCounts).toInt()
               }
+              inputCounts=maxCounts
               editText.setText(""+maxCounts)
           }else{
               ErrorCode.showErrorMsg(this@SynthetiseUTCActivity,it.status)

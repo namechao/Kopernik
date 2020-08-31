@@ -99,6 +99,7 @@ ext {
             'eventbus'                  : 'org.greenrobot:eventbus:3.1.1',
             'versionchecklib'           : 'com.allenliu.versionchecklib:library:2.2.0',
             'lottie'           : 'com.airbnb.android:lottie:3.4.0',
+            'bugly'           : 'com.tencent.bugly:crashreport:latest.release',
     ]
     androidxs = androidx.values()
     network = retrofit.values()
