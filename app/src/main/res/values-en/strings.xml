@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_400">Account does not exist</string>
+    <string name="error_400">Your account has been logged in on another terminal, please log in again</string>
     <string name="error_401">Account already exists</string>
     <string name="error_402">Recommended node account does not exist </string>
     <string name="error_403">Sending failed, please try again later</string>

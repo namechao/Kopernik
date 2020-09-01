@@ -1,7 +1,9 @@
 package com.kopernik.app
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
+import android.os.Bundle
 import com.aleyn.mvvm.base.BaseApplication
 import com.blankj.utilcode.util.LogUtils
 import com.tencent.mmkv.MMKV
@@ -19,21 +21,48 @@ class MyApplication :BaseApplication(){
     companion object{
         private lateinit var instance:MyApplication
         fun instance()= instance
+
     }
 
     var mAttachBaseContext: Context? = null
-
+    var currentActivity: Activity? = null //应用内最新打开的Activity
     override fun onCreate() {
         super.onCreate()
         instance=this
         LocalManageUtil.setApplicationLanguage(this)
         LogUtils.getConfig().run {
             isLogSwitch= AppConfig.logEnable
-            setSingleTagSwitch(true)
+            setSingleTagSwitch(false)
         }
         MMKV.initialize(this)
         CrashReport.initCrashReport(getApplicationContext(), "45b5432dde", false);
 //        initX5()
+        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
+            override fun onActivityPaused(activity: Activity?) {
+            }
+
+            override fun onActivityResumed(activity: Activity?) {
+                currentActivity = activity
+            }
+
+            override fun onActivityStarted(activity: Activity?) {
+            }
+
+            override fun onActivityDestroyed(activity: Activity?) {
+                if (currentActivity?.javaClass?.name.equals(activity?.javaClass?.name)) {
+                    currentActivity = null
+                }
+            }
+
+            override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {
+            }
+
+            override fun onActivityStopped(activity: Activity?) {
+            }
+
+            override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
+            }
+        })
     }
 
     override fun attachBaseContext(base: Context) {

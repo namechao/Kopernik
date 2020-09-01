@@ -40,5 +40,6 @@ class LocalEvent<T> {
         const val referendumVote = "referendumVote"
         const val inviteIntegral = "inviteIntegral"
         const val applySkin = "applySkin"
+        const val exitLogin = "exitLogin"
     }
 }

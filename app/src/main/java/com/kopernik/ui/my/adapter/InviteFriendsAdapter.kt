@@ -5,6 +5,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.kopernik.R
 import com.kopernik.ui.asset.adapter.viewHolder.UYTAssetViewHolder
 import com.kopernik.app.utils.APPHelper
+import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.TimeUtils
 import com.kopernik.ui.login.bean.User
@@ -39,7 +40,7 @@ class InviteFriendsAdapter(
             }
         }
         item?.machineTotal?.let {  holder.inviteTeamMineMac?.text=it+mContext.getString(R.string.mining_machine_unit)}
-        item?.achievement?.let {  holder.inviteTeamAchievement?.text="${it} USDT"}
+        item?.achievement?.let {  holder.inviteTeamAchievement?.text="${BigDecimalUtils.roundDOWN(it,2)} USDT"}
         item?.createTime?.let {  holder.inviteTime?.text=""+TimeUtils.getSpecialTime(it)}
 
 

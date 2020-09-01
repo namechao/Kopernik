@@ -781,7 +781,7 @@
    <string name="transfer_in">转入</string>
    <string name="transfer_out">转出</string>
 
-    <string name="error_400">账户不存在</string>
+    <string name="error_400">您的账号已在其他终端登录,请重新登录</string>
     <string name="error_401">账户已存在</string>
     <string name="error_402">邀请码不存在</string>
     <string name="error_403">发送失败，请稍后重试</string>

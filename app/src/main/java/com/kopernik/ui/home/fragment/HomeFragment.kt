@@ -209,6 +209,9 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
                           )}****${it.subSequence(it.length - 4, it.length)}"
                       }
                   }
+                  homeEntity?.machList!![0].email?.let {
+                          tvPhone.text = it
+                  }
                   when ( homeEntity?.machList!![0].type) {
                       1 -> {
                           tvMineType?.text = getString(R.string.mining_machine_type1)
@@ -238,6 +241,9 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
                           )}****${it.subSequence(it.length - 4, it.length)}"
                       }
                   }
+                  homeEntity?.machList!![1].email?.let {
+                      tvPhone.text = it
+                  }
                   when ( homeEntity?.machList!![1].type) {
                       1 -> {
                           tvMineType1?.text = getString(R.string.mining_machine_type1)
@@ -266,6 +272,9 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
                               3
                           )}****${it.subSequence(it.length - 4, it.length)}"
                       }
+                  }
+                  homeEntity?.machList!![2].email?.let {
+                      tvPhone.text = it
                   }
                   when ( homeEntity?.machList!![2].type) {
                       1 -> {

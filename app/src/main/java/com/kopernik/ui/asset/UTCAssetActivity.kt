@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kopernik.R
 import com.kopernik.app.base.NewFullScreenBaseActivity
+import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.ExchangeDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.BigDecimalUtils
@@ -59,6 +61,20 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
         recyclerView1.adapter=adpter1
         ///兑换
         exchange.setOnClickListener {
+            //判断是否设置交易密码
+            if (UserConfig.singleton?.accountBean!=null){
+                if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
+                    if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                        LaunchConfig.startTradePasswordActivity(this, 1,1)
+                        return@setOnClickListener
+                    }
+                }else{
+                    if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                        LaunchConfig.startTradePasswordActivity(this, 2,1)
+                        return@setOnClickListener
+                    }
+                }
+            }
             if (allConfigEntity!=null){
                 var exchangeDialog = ExchangeDialog.newInstance(allConfigEntity!!)
                 exchangeDialog!!.setOnRequestListener(object : ExchangeDialog.RequestListener {

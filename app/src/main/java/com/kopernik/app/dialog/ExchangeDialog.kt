@@ -75,13 +75,17 @@ class ExchangeDialog : DialogFragment(),
         okBtn = dialog.findViewById(R.id.ok)
         exchangeCounts?.isEnabled=false
 
-        exchangeProportion?.text=getString(R.string.asset_exchange_proportion)+"UTC:UYT=${BigDecimalUtils.getRound(bean?.config?.utcExchange)}:${BigDecimalUtils.getRound(bean?.config?.uytExchange)}"
+        var utcTouyt= BigDecimalUtils.divide(bean?.config?.utcPrice,bean?.uytPrice,2)
+
+        exchangeProportion?.text=getString(R.string.asset_exchange_proportion)+"UTC:UYT= 1：${utcTouyt}"
         if (bean?.rateList!=null) {
             for (i in bean?.rateList!!){
               if (i.type.contains("Exchange")) rate =BigDecimalUtils.roundDOWN(i.rate,2)
             }
         }
-        desc?.text=rate+"UTC"
+
+
+        desc?.text=rate+"UYT"
          uytCounts=BigDecimalUtils.divide(BigDecimalUtils.multiply(bean?.utc,bean?.config?.utcPrice).toString(),bean?.uytPrice,2)
         exchangeCounts?.setText("UYT数量：$uytCounts")
         //关闭弹窗

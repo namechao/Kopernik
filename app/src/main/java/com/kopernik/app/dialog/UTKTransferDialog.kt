@@ -76,7 +76,7 @@ class UTKTransferDialog : DialogFragment(),
                 if (i.type.contains("ROLL_OUT")) rate = BigDecimalUtils.roundDOWN(i.rate,2)
             }
         }
-        desc?.text=rate+"UTK"
+        desc?.text=rate+"UYT"
         transferCountsEt?.addTextChangedListener(passwordWatcher)
         transferUidEt?.addTextChangedListener(passwordWatcher)
         passwordEt?.addTextChangedListener(passwordWatcher)

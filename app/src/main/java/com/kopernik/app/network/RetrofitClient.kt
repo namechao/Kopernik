@@ -1,5 +1,6 @@
 package com.kopernik.app.network
 
+import SingleLoginInterceptor
 import com.aleyn.mvvm.network.interceptor.Level
 import com.aleyn.mvvm.network.interceptor.LoggingInterceptor
 import com.kopernik.app.config.AppConfig
@@ -57,7 +58,7 @@ class RetrofitClient {
         return OkHttpClient.Builder()
             .connectTimeout(20L, TimeUnit.SECONDS)
             .addNetworkInterceptor(LoggingInterceptor().apply {
-                isDebug = AppConfig.isDebug
+                isDebug = AppConfig.logEnable
                 level = Level.BASIC
                 type = Platform.INFO
                 requestTag = "Request"
@@ -67,6 +68,7 @@ class RetrofitClient {
             .sslSocketFactory(createSSLSocketFactory(),TrustAllCerts())
             .addInterceptor(EncodeInterceptor())
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(SingleLoginInterceptor())
             .writeTimeout(20L, TimeUnit.SECONDS)
             .connectionPool(ConnectionPool(8, 15, TimeUnit.SECONDS))
             .build()

@@ -141,10 +141,10 @@ class ReminderDialog(private val context: Context,  private var getUtkEntity:Get
 
             if (etResult!!.text.toString().isNotEmpty()) {
                 mBtn?.isEnabled = true
-                mBtn?.setTextColor(context.getColor(R.color.color_20222F))
+                context?.let { mBtn?.setTextColor(it.getColor(R.color.color_20222F))}
 
             } else {
-                mBtn?.setTextColor(context.getColor(R.color.color_5D5386))
+                context?.let { mBtn?.setTextColor(it.getColor(R.color.color_5D5386))}
                 mBtn?.isEnabled = false
             }
         }
