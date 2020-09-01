@@ -91,9 +91,10 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
             dialog!!.setOnRequestListener(object : UTCDialog.RequestListener {
                     override fun onRequest(type: Int, params: String) {
                       viewModel.run {
+//                          通过utdm比utk  就可以算出数量关系
                           var amountUtc=editText.text.toString().trim().toInt()
                           var amountUtdm=BigDecimalUtils.multiply(amountUtc.toString(),utcEntity?.config?.utcPrice,8)
-                          var amountUtk=BigDecimalUtils.multiply(BigDecimalUtils.multiply(amountUtdm.toString(),utcEntity?.config?.utkCompose,8),utcEntity?.config?.utdmCompose,8)
+                          var amountUtk=BigDecimalUtils.divide(BigDecimalUtils.multiply(amountUtdm.toString(),utcEntity?.config?.utkCompose,8),utcEntity?.config?.utdmCompose,8)
                           var  map= mapOf(
                               "amountUtc" to "$amountUtc",
                               "amountUtk" to "$amountUtk",
@@ -147,6 +148,7 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
               tvUDMTCoin.text = ""+BigDecimalUtils.getRound(it.data?.utdm)
               tvUTKtCoin.text = ""+ BigDecimalUtils.getRound(it.data?.utk)
               currentScale.text=resources.getString(R.string.current_exchange_precent)+"UTDM:UTK=${BigDecimalUtils.getRound(utcEntity?.config?.utdmCompose)}:${BigDecimalUtils.getRound(utcEntity?.config?.utkCompose)}"
+             //先算utdm能合成的utc的数量 然后通过utdm：utk比例计算消耗的ukt数量数量 如果utk币账户余额少则可以购买多的话在根据utk数量反推udmt数量
               var utdmToUtc=BigDecimalUtils.divide(utcEntity?.utdm,it.data?.config.utcPrice,8)
               var utkCounts =BigDecimalUtils.divide(BigDecimalUtils.multiply(utdmToUtc.toString(),it.data?.config?.utkCompose,8),it.data.config.utdmCompose,8)
               if (BigDecimal(utkCounts).subtract(BigDecimal(it.data.utk))<BigDecimal("0"))

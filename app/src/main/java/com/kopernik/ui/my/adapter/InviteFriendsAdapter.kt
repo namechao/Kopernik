@@ -19,7 +19,7 @@ class InviteFriendsAdapter(
     @SuppressLint("SetTextI18n")
     override fun convert(holder: InviteFriendsHolder, item: InviteFriendsItem?) {
         holder.inviteUid?.text=""+item?.uid
-        when(item?.machineLevel){
+        when(item?.type){
             1->{
                 holder.inviteMineMac?.text=mContext.getString(R.string.mining_machine_type1)
             }
@@ -39,11 +39,9 @@ class InviteFriendsAdapter(
                 holder.inviteMineMac?.text=mContext.getString(R.string.mining_machine_type6)
             }
         }
-        item?.machineTotal?.let {  holder.inviteTeamMineMac?.text=it+mContext.getString(R.string.mining_machine_unit)}
-        item?.achievement?.let {  holder.inviteTeamAchievement?.text="${BigDecimalUtils.roundDOWN(it,2)} USDT"}
+        item?.totalOfficialCount?.let {  holder.inviteTeamMineMac?.text=it+mContext.getString(R.string.mining_machine_unit)}
+        item?.totalGains?.let {  holder.inviteTeamAchievement?.text="${BigDecimalUtils.roundDOWN(it,2)} USDT"}
         item?.createTime?.let {  holder.inviteTime?.text=""+TimeUtils.getSpecialTime(it)}
-
-
 
     }
 

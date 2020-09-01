@@ -23,23 +23,9 @@ data class InviteFriendsEntity(
 )
 
 data class InviteFriendsItem(
-    val achievement: String,
     val createTime: String,
-    val email: String,
-    val ggPwd: String,
-    val id: Int,
-    val idCard: String,
-    val invitationCode: String,
-    val level: Int,
-    val loginPwd: String,
-    val machineLevel: Int,
-    val machineTotal: String,
-    val memo: String,
-    val name: String,
-    val parentUid: Int,
-    val phone: String,
-    val salePwd: String,
-    val token: String,
+    val totalGains: String,
+    val totalOfficialCount: String,
+    val type: Int,
     val uid: String
 )
-
