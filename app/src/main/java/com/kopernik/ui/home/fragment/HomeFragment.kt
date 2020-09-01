@@ -264,7 +264,7 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
                           tvMineType1?.text = getString(R.string.mining_machine_type6)
                       }
                   }
-              }else if (i==3){
+              }else if (i==2){
                   homeEntity?.machList!![2].phone?.let {
                       if (it.length > 5) {
                           tvPhone2.text = "${it.subSequence(
