@@ -214,7 +214,7 @@
         android:textSize="@dimen/sp_12"
         android:textColor="@color/color_665F93"
         android:layout_marginBottom="29dp"
-        android:text="@string/current_exchange_precent"/>
+        android:text=""/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

@@ -122,9 +122,9 @@ class LoginActivity : NewFullScreenBaseActivity<LoginViewModel, ViewDataBinding>
         llPhoneRegister.setOnClickListener {
             registerType=1
             tvPhoneRegister.setTextColor(resources.getColor(R.color.color_ffcf32))
-            tvPhoneRegisterLine.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
+            tvPhoneRegisterLine.visibility=View.VISIBLE
             tvEmailRegister.setTextColor(resources.getColor(R.color.white))
-            tvEmailRegisterLine.setBackgroundColor(resources.getColor(R.color.white))
+            tvEmailRegisterLine.visibility=View.GONE
             etInput.hint=resources.getString(R.string.login_input_phone_hint)
             etInput.inputType= InputType.TYPE_CLASS_PHONE
             llHeader.visibility= View.VISIBLE
@@ -134,9 +134,9 @@ class LoginActivity : NewFullScreenBaseActivity<LoginViewModel, ViewDataBinding>
         llEmailRegister.setOnClickListener {
             registerType=2
             tvPhoneRegister.setTextColor(resources.getColor(R.color.white))
-            tvPhoneRegisterLine.setBackgroundColor(resources.getColor(R.color.white))
+            tvPhoneRegisterLine.visibility=View.GONE
             tvEmailRegister.setTextColor(resources.getColor(R.color.color_ffcf32))
-            tvEmailRegisterLine.setBackgroundColor(resources.getColor(R.color.color_ffcf32))
+            tvEmailRegisterLine.visibility=View.VISIBLE
             etInput.hint=resources.getString(R.string.login_input_email_hint)
             etInput.inputType= InputType.TYPE_CLASS_TEXT
             etInput.setText("")

@@ -132,7 +132,7 @@
     <string name="mining_machine_type5">Cloud mining machine</string>
     <string name="mining_machine_type6">Super miner</string>
     <string name="mining_machine_unit">station</string>
-    <string name="current_exchange_precent">Current exchange ratio</string>
+    <string name="current_exchange_precent">UTDM needs to be consumed to synthesize UTC</string>
     <string name="purchase_success">Successful purchase</string>
     <string name="recvice_error">UTK is currently not available</string>
     <string name="recvice_time_tip">The collection time is</string>

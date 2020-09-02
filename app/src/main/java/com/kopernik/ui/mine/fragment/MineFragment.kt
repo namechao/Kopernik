@@ -95,7 +95,7 @@ class MineFragment : NewBaseFragment<MineViewModel, ViewDataBinding>() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-
+        lottieAnimationView.cancelAnimation()
     }
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)

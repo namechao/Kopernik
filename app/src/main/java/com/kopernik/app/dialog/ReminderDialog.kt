@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import com.kopernik.R
 import com.kopernik.app.utils.TimeUtils
 import com.kopernik.app.utils.ToastUtils
@@ -141,10 +142,11 @@ class ReminderDialog(private val context: Context,  private var getUtkEntity:Get
 
             if (etResult!!.text.toString().isNotEmpty()) {
                 mBtn?.isEnabled = true
-                context?.let { mBtn?.setTextColor(it.getColor(R.color.color_20222F))}
+
+                context?.let { mBtn?.setTextColor(ContextCompat.getColor(it,R.color.color_20222F))}
 
             } else {
-                context?.let { mBtn?.setTextColor(it.getColor(R.color.color_5D5386))}
+                context?.let { mBtn?.setTextColor(ContextCompat.getColor(it,R.color.color_5D5386))}
                 mBtn?.isEnabled = false
             }
         }

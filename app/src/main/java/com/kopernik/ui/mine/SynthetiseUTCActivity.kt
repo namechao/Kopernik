@@ -147,7 +147,7 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
               utcEntity=it.data
               tvUDMTCoin.text = ""+BigDecimalUtils.getRound(it.data?.utdm)
               tvUTKtCoin.text = ""+ BigDecimalUtils.getRound(it.data?.utk)
-              currentScale.text=resources.getString(R.string.current_exchange_precent)+"UTDM:UTK=${BigDecimalUtils.getRound(utcEntity?.config?.utdmCompose)}:${BigDecimalUtils.getRound(utcEntity?.config?.utkCompose)}"
+              currentScale.text="${BigDecimalUtils.getRound(utcEntity?.config?.utdmCompose)}${resources.getString(R.string.current_exchange_precent)}${BigDecimalUtils.getRound(utcEntity?.config?.utkCompose)}${resources.getString(R.string.utc_per)}UTK"
              //先算utdm能合成的utc的数量 然后通过utdm：utk比例计算消耗的ukt数量数量 如果utk币账户余额少则可以购买多的话在根据utk数量反推udmt数量
               var utdmToUtc=BigDecimalUtils.divide(utcEntity?.utdm,it.data?.config.utcPrice,8)
               var utkCounts =BigDecimalUtils.divide(BigDecimalUtils.multiply(utdmToUtc.toString(),it.data?.config?.utkCompose,8),it.data.config.utdmCompose,8)

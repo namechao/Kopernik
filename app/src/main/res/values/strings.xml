@@ -590,7 +590,7 @@
     <string name="mining_machine_type5">云型矿机</string>
     <string name="mining_machine_type6">超级矿机</string>
     <string name="mining_machine_unit">台</string>
-    <string name="current_exchange_precent">当前兑换比例</string>
+    <string name="current_exchange_precent">个UTDM合成UTC需消耗</string>
     <string name="purchase_success">购买成功</string>
     <string name="recvice_error">当前不可以领取UKT</string>
     <string name="recvice_time_tip">的领取时间为</string>
