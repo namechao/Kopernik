@@ -5,24 +5,18 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
-import com.aleyn.mvvm.base.NoViewModel
-import com.kopernik.BuildConfig
 import com.kopernik.R
-import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.base.NewFullScreenBaseActivity
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
-import com.kopernik.app.dialog.UDMTDialog
 import com.kopernik.app.dialog.UTCDialog
 import com.kopernik.app.dialog.UTCSynthetiseProgerssDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.mine.entity.AllConfigEntity
-import com.kopernik.ui.mine.entity.AssetConfitEntity
 import com.kopernik.ui.mine.viewModel.MineViewModel
 import dev.utils.common.encrypt.MD5Utils
 
@@ -149,22 +143,16 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
               tvUTKtCoin.text = ""+ BigDecimalUtils.getRound(it.data?.utk)
               currentScale.text="${BigDecimalUtils.getRound(utcEntity?.config?.utdmCompose)}${resources.getString(R.string.current_exchange_precent)}${BigDecimalUtils.getRound(utcEntity?.config?.utkCompose)}${resources.getString(R.string.utc_per)}UTK"
              //先算utdm能合成的utc的数量 然后通过utdm：utk比例计算消耗的ukt数量数量 如果utk币账户余额少则可以购买多的话在根据utk数量反推udmt数量
-              var utdmToUtc=BigDecimalUtils.divide(utcEntity?.utdm,it.data?.config.utcPrice,8)
-              var utkCounts =BigDecimalUtils.divide(BigDecimalUtils.multiply(utdmToUtc.toString(),it.data?.config?.utkCompose,8),it.data.config.utdmCompose,8)
-              if (BigDecimal(utkCounts).subtract(BigDecimal(it.data.utk))<BigDecimal("0"))
-                  maxCounts=BigDecimalUtils.getRound(utdmToUtc).toInt()
-              else {
-                  var utdmcounts=BigDecimalUtils.divide(BigDecimalUtils.multiply(it.data.utk,it.data?.config?.utdmCompose,8),it.data.config.utkCompose,8)
-                  var utcMaxCounts=BigDecimalUtils.divide(utdmcounts,it.data?.config.utcPrice,8)
-                  maxCounts=BigDecimalUtils.getRound(utcMaxCounts).toInt()
-              }
+                  it?.data?.composeAmount?.let {
+                      maxCounts=BigDecimalUtils.getRound(it).toInt()
+                  }
+
               if (it.data?.rateList!=null) {
                   for (i in it.data?.rateList!!){
                       if (i.type.contains("Compose")) rate = BigDecimalUtils.roundDOWN(i.rate,8)
                   }
               }
-              inputCounts=maxCounts
-              editText.setText(""+maxCounts)
+              editText.setText("0")
               }catch (e:Exception){
                   e.stackTrace
               }

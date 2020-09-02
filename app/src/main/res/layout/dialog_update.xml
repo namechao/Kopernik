@@ -83,13 +83,11 @@
             android:id="@+id/mProgress"
             style="@style/version_update_progressbar"
             android:layout_width="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="18dp"
             android:layout_marginTop="14dp"
-            android:layout_marginRight="18dp"
-            android:visibility=""
-            app:layout_constraintTop_toBottomOf="@id/tv_updata_content"
-            app:progress_text_visibility="invisible" />
+            android:layout_marginStart="@dimen/dp_9"
+            android:layout_marginEnd="@dimen/dp_9"
+            android:visibility="gone" />
+
         <Button
             android:layout_marginTop="10dp"
             android:id="@+id/versionchecklib_version_dialog_commit"
@@ -103,7 +101,7 @@
             android:id="@+id/versionchecklib_version_dialog_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_10"
             android:textColor="#D9D9D9"
             android:layout_gravity="center"
             android:text="@string/after"

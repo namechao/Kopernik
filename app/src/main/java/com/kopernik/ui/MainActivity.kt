@@ -25,21 +25,10 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import com.allenliu.versionchecklib.core.http.HttpHeaders
-import com.allenliu.versionchecklib.v2.AllenVersionChecker
-import com.allenliu.versionchecklib.v2.builder.UIData
-import com.allenliu.versionchecklib.v2.callback.CustomVersionDialogListener
-import com.allenliu.versionchecklib.v2.callback.ForceUpdateListener
-import com.allenliu.versionchecklib.v2.callback.RequestVersionListener
-import com.blankj.utilcode.util.SPUtils
-import com.google.gson.Gson
 import com.gyf.immersionbar.ImmersionBar
+import com.kopernik.BuildConfig
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
-import com.kopernik.app.config.LaunchConfig
-import com.kopernik.app.config.UserConfig
-import com.kopernik.app.dialog.UYTAlertDialog2
 import com.kopernik.app.dialog.UYTQuitAlertDialog
 import com.kopernik.app.events.LocalEvent
 import com.kopernik.app.utils.DBLog
@@ -60,7 +49,6 @@ import com.kopernik.ui.setting.entity.UpdateBean2
 import com.kopernik.ui.setting.viewModel.CheckAppVersionViewModel
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
-import dev.utils.BuildConfig
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_my.*
 import me.majiajie.pagerbottomtabstrip.NavigationController
@@ -87,7 +75,6 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
     var navCtl: NavigationController? =null
     private var mWebview: WebView?=null
     private var mSavePath: String? = null
-    private  var url: String=""
     private var cancelUpdate = false
     private var reLoginDialog: UYTQuitAlertDialog? = null
     private var versionEntity: VersionEntity?=null
@@ -264,15 +251,24 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
             var container= baseDialog.findViewById<LinearLayout>(R.id.container)
             val version =
                 baseDialog.findViewById<TextView>(R.id.tv_version)
+            numberProgressBar=baseDialog.findViewById(R.id.mProgress)
+            numberProgressBar?.visibility=View.GONE
             val content: String ?= versionEntity?.deploy?.versionDesc?.replace("\\n", " \n")
             textView.text = content
             version.text = versionEntity?.deploy?.versionName
+        var cancle= baseDialog.findViewById<View>(R.id.versionchecklib_version_dialog_cancel)
             if (type == 2) {
-                baseDialog.findViewById<View>(R.id.versionchecklib_version_dialog_cancel).visibility =
+                cancle.visibility =
                     View.GONE
             }
-//          numberProgressBar
-            baseDialog.findViewById<Button>(R.id.versionchecklib_version_dialog_commit).setOnClickListener {
+        cancle.setOnClickListener {
+            baseDialog.dismiss()
+        }
+           var confrim= baseDialog.findViewById<Button>(R.id.versionchecklib_version_dialog_commit)
+           confrim.setOnClickListener {
+               confrim.visibility=View.GONE
+               numberProgressBar?.visibility=View.VISIBLE
+               if (versionEntity!=null&&versionEntity?.deploy!=null&&versionEntity?.deploy?.url!=null)
                 downloadApk()
             }
             baseDialog.setOnKeyListener( object :DialogInterface.OnKeyListener{
@@ -301,18 +297,19 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
 
     private fun requestUpdateInfo() {
         viewModel.checkVersion().observe(this, androidx.lifecycle.Observer {
-            if (it.data != null&&it.data.deploy!=null) {
-                versionEntity=it.data
-                if (it.data.deploy
-                        ?.versionCode!! > BuildConfig.VERSION_CODE
-                ) {
-                    if (it.data.deploy?.type == 1) {
-
-                        //提示升级
-                        createUpdateDialog(1)
-                    } else if (it.data.deploy?.type == 2) {
-                        //强制升级
-                        createUpdateDialog(2)
+            if (it.status==200) {
+                if (it.data != null && it.data.deploy != null) {
+                    versionEntity = it.data
+                    if (it.data.deploy
+                            ?.versionCode!! > BuildConfig.VERSION_CODE
+                    ) {
+                        if (it.data.deploy?.type == 1) {
+                            //提示升级
+                            createUpdateDialog(1)
+                        } else if (it.data.deploy?.type == 2) {
+                            //强制升级
+                            createUpdateDialog(2)
+                        }
                     }
                 }
             }
@@ -394,8 +391,7 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
                         // 更新进度
                         runOnUiThread {
                             // 进度条更新进度
-//                            tv_updata_percent?.text = "升级中 ${progress}%···"
-                            numberProgressBar?.setProgress(progress)
+                            numberProgressBar?.let { it. progress = progress}
                         }
 
                         if (numread <= 0) {

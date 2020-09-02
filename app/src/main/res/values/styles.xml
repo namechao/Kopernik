@@ -101,9 +101,8 @@
         <item name="android:radius">5dp</item>
         <item name="progress_max">100</item>
         <item name="progress_current">0</item>
-
-        <item name="progress_unreached_color">@color/colorAccent</item>
-        <item name="progress_reached_color">@color/white</item>
+        <item name="progress_unreached_color">#F4F4F4</item>
+        <item name="progress_reached_color">#4F78FD</item>
         <item name="progress_text_size">16sp</item>
 
 
