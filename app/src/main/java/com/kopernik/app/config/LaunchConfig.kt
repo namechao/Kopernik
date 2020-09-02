@@ -141,12 +141,6 @@ object LaunchConfig {
         context.startActivity(intent)
     }
 
-    fun startMyVoteAc(context: Context) {
-        val intent =
-            Intent(context, MyVoteActivity::class.java)
-        context.startActivity(intent)
-    }
-
     fun startVoteBetAc(
         context: Context,
         type: Int,

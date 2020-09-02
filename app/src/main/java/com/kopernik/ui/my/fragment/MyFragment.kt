@@ -13,15 +13,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.allenliu.versionchecklib.core.http.HttpHeaders
 import com.allenliu.versionchecklib.v2.AllenVersionChecker
 import com.allenliu.versionchecklib.v2.builder.UIData
 import com.allenliu.versionchecklib.v2.callback.CustomVersionDialogListener
-import com.allenliu.versionchecklib.v2.callback.ForceUpdateListener
 import com.allenliu.versionchecklib.v2.callback.RequestVersionListener
 import com.google.gson.Gson
 import com.kopernik.BuildConfig
@@ -30,22 +25,16 @@ import com.kopernik.app.base.NewBaseFragment
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.ExitAlertDialog
-import com.kopernik.app.dialog.UYTAlertDialog2
 import com.kopernik.app.events.LocalEvent
-import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.APPHelper
 import com.kopernik.app.utils.DBLog
-import com.kopernik.ui.Ecology.fragment.NodeListFragment
-import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.data.api.Api
-import com.kopernik.ui.Ecology.viewModel.NodeViewModel
-import com.kopernik.ui.MainActivity
 import com.kopernik.ui.login.LoginActivity
 import com.kopernik.ui.my.ViewModel.MyViewModel
 import com.kopernik.ui.setting.entity.UpdateBean2
 import kotlinx.android.synthetic.main.fragment_my.*
-import java.util.*
+
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 

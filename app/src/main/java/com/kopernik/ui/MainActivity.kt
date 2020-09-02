@@ -5,19 +5,24 @@ import android.annotation.TargetApi
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import android.webkit.WebView
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
+import androidx.core.content.FileProvider
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -27,9 +32,9 @@ import com.allenliu.versionchecklib.v2.builder.UIData
 import com.allenliu.versionchecklib.v2.callback.CustomVersionDialogListener
 import com.allenliu.versionchecklib.v2.callback.ForceUpdateListener
 import com.allenliu.versionchecklib.v2.callback.RequestVersionListener
+import com.blankj.utilcode.util.SPUtils
 import com.google.gson.Gson
 import com.gyf.immersionbar.ImmersionBar
-import com.kopernik.BuildConfig
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
@@ -41,6 +46,7 @@ import com.kopernik.app.utils.DBLog
 import com.kopernik.app.utils.KeyboardUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.app.utils.fingerprint.FingerprintHelper
+import com.kopernik.app.widget.NumberProgressBar
 import com.kopernik.data.api.Api
 import com.kopernik.ui.login.bean.AccountBean
 import com.kopernik.ui.login.bean.AccountListBean
@@ -48,11 +54,13 @@ import com.kopernik.ui.asset.fragment.AssetFragment
 import com.kopernik.ui.Ecology.fragment.EcologyFragment
 import com.kopernik.ui.home.fragment.HomeFragment
 import com.kopernik.ui.mine.fragment.MineFragment
+import com.kopernik.ui.my.bean.VersionEntity
 import com.kopernik.ui.my.fragment.MyFragment
 import com.kopernik.ui.setting.entity.UpdateBean2
 import com.kopernik.ui.setting.viewModel.CheckAppVersionViewModel
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import dev.utils.BuildConfig
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_my.*
 import me.majiajie.pagerbottomtabstrip.NavigationController
@@ -60,6 +68,12 @@ import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.EasyPermissions.PermissionCallbacks
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.MalformedURLException
+import java.net.URL
 
 @Suppress("DEPRECATION")
 class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>() , PermissionCallbacks {
@@ -72,8 +86,12 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
     private val myFragment= MyFragment.newInstance()
     var navCtl: NavigationController? =null
     private var mWebview: WebView?=null
-
+    private var mSavePath: String? = null
+    private  var url: String=""
+    private var cancelUpdate = false
     private var reLoginDialog: UYTQuitAlertDialog? = null
+    private var versionEntity: VersionEntity?=null
+    private var numberProgressBar: NumberProgressBar?=null
     companion object{
         const val REQUEST_CODE_QRCODE_PERMISSIONS = 1
     }
@@ -235,81 +253,10 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
         ClassicsFooter.REFRESH_FOOTER_FAILED = getString(R.string.me_footer_failed)
         ClassicsFooter.REFRESH_FOOTER_NOTHING = getString(R.string.me_footer_nothing)
     }
-    private fun showUpdateDialog() {
-        val httpHeaders = HttpHeaders()
-        httpHeaders.put("apptype", "android")
-        httpHeaders.put("token", UserConfig.singleton?.accountBean?.token)
-        AllenVersionChecker
-            .getInstance()
-            .requestVersion()
-            .setHttpHeaders(httpHeaders)
-            .setRequestUrl(Api.checkUpdate)
-            .request(object : RequestVersionListener {
-                @Nullable
-                override  fun onRequestVersionSuccess(result: String?): UIData? {
-                    val updateBean: UpdateBean2 =
-                        Gson().fromJson<UpdateBean2>(result, UpdateBean2::class.java)
-                    val deployBean: UpdateBean2.DataBean.DeployBean? =
-                        updateBean?.data?.deploy
-                    if (updateBean.status!=200) return null
-                    return if (deployBean?.versionCode!! > BuildConfig.VERSION_CODE) {
-                        UIData
-                            .create()
-                            .setDownloadUrl(deployBean.url)
-                            .setTitle(deployBean.versionName)
-                            .setContent(deployBean.versionDesc)
-                    } else null
-                }
 
-                override  fun onRequestVersionFailure(message: String?) {
-                    DBLog.error(message!!)
-                }
-            })
-            .setShowNotification(true)
-            .setCustomVersionDialogListener(createUpdateDialog(1))
-            .setShowDownloadingDialog(false)
-            .setForceRedownload(true)
-            .executeMission(this)
-    }
-    private fun forciblyUpdate() {
-        val httpHeaders = HttpHeaders()
-        httpHeaders.put("apptype", "android")
-        httpHeaders.put("token", UserConfig.singleton?.accountBean?.token)
-        AllenVersionChecker
-            .getInstance()
-            .requestVersion()
-            .setHttpHeaders(httpHeaders)
-            .setRequestUrl(Api.checkUpdate)
-            .request(object : RequestVersionListener {
-                @Nullable
-                override fun onRequestVersionSuccess(result: String?): UIData? {
-                    val updateBean: UpdateBean2 =
-                        Gson().fromJson<UpdateBean2>(result, UpdateBean2::class.java)
-                    val deployBean: UpdateBean2.DataBean.DeployBean? =
-                        updateBean?.data?.deploy
-                    return if (deployBean?.versionCode!! > BuildConfig.VERSION_CODE) {
-                        UIData
-                            .create()
-                            .setDownloadUrl(deployBean.url)
-                            .setTitle(deployBean.versionName)
-                            .setContent(deployBean.versionDesc)
-                    } else null
-                }
 
-                override fun onRequestVersionFailure(message: String?) {
-                    DBLog.error(message!!)
-                }
-            })
-            .setForceUpdateListener { ToastUtils.showShort(this, getString(R.string.must_update)) }
-            .setShowNotification(true)
-            .setCustomVersionDialogListener(createUpdateDialog(2))
-            .setShowDownloadingDialog(false)
-            .setForceRedownload(false)
-            .executeMission(this!!)
-    }
-    private fun createUpdateDialog(type: Int): CustomVersionDialogListener {
-        return CustomVersionDialogListener { context, versionBundle ->
-            val baseDialog = Dialog(context, R.style.UpdateDialog)
+    private fun createUpdateDialog(type: Int) {
+            val baseDialog = Dialog(this, R.style.UpdateDialog)
             baseDialog.setContentView(R.layout.dialog_update)
             baseDialog.setCanceledOnTouchOutside(false)
             val textView =
@@ -317,12 +264,16 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
             var container= baseDialog.findViewById<LinearLayout>(R.id.container)
             val version =
                 baseDialog.findViewById<TextView>(R.id.tv_version)
-            val content: String = versionBundle.content.replace("\\n", " \n")
+            val content: String ?= versionEntity?.deploy?.versionDesc?.replace("\\n", " \n")
             textView.text = content
-            version.text = versionBundle.title
+            version.text = versionEntity?.deploy?.versionName
             if (type == 2) {
                 baseDialog.findViewById<View>(R.id.versionchecklib_version_dialog_cancel).visibility =
                     View.GONE
+            }
+//          numberProgressBar
+            baseDialog.findViewById<Button>(R.id.versionchecklib_version_dialog_commit).setOnClickListener {
+                downloadApk()
             }
             baseDialog.setOnKeyListener( object :DialogInterface.OnKeyListener{
                 override fun onKey(
@@ -335,7 +286,7 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
                 }
 
             })
-            val windowManager = context
+            val windowManager = this
                 .getSystemService(Context.WINDOW_SERVICE) as WindowManager
             var display = windowManager.defaultDisplay
             // 调整dialog背景大小
@@ -343,42 +294,133 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
                 (display.width * 0.8).toInt(),
                 FrameLayout.LayoutParams.WRAP_CONTENT
             )
-            baseDialog
-        }
+            baseDialog.show()
+
     }
 
 
     private fun requestUpdateInfo() {
         viewModel.checkVersion().observe(this, androidx.lifecycle.Observer {
             if (it.data != null&&it.data.deploy!=null) {
+                versionEntity=it.data
                 if (it.data.deploy
                         ?.versionCode!! > BuildConfig.VERSION_CODE
                 ) {
                     if (it.data.deploy?.type == 1) {
+
                         //提示升级
-                        showUpdateDialog()
+                        createUpdateDialog(1)
                     } else if (it.data.deploy?.type == 2) {
                         //强制升级
-                        forciblyUpdate()
+                        createUpdateDialog(2)
                     }
                 }
-//                else if (it.data.notice != null) {
-//                    if (UserConfig.singleton
-//                            ?.noticeId !== it.data.notice?.id
-//                    ) {
-//                        UserConfig.singleton
-//                            ?.noticeId=it.data.notice?.id!!
-//                        UYTAlertDialog2(activity!!)
-//                            .setCancelable(false)
-//                            .setTitle(this.getString(R.string.notice))
-//                            .setMsg(""+it.data.notice?.content)
-//                            .setButton(getString(R.string.confirm), null)
-//                            .show()
-//                    }
-//                }
             }
         })
     }
+
+
+    /**
+     * 安装 apk 文件
+     *
+     * @param apkFile
+     */
+    fun installApk(apkFile: File) {
+        val installApkIntent = Intent()
+        installApkIntent.action = Intent.ACTION_VIEW
+        installApkIntent.addCategory(Intent.CATEGORY_DEFAULT)
+        installApkIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            installApkIntent.setDataAndType(FileProvider.getUriForFile(applicationContext, "com.kopernik.file_provider", apkFile), "application/vnd.android.package-archive")
+            installApkIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        } else {
+            installApkIntent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive")
+        }
+
+        if (packageManager.queryIntentActivities(installApkIntent, 0).size > 0) {
+            startActivity(installApkIntent)
+        }
+
+    }
+
+    /**
+     * 下载apk文件
+     */
+    private fun downloadApk() {
+        // 启动新线程下载软件
+        downloadApkThread().start()
+    }
+
+    /**
+     * 下载文件线程
+     */
+    private inner class downloadApkThread : Thread() {
+        override fun run() {
+            try {
+                // 判断SD卡是否存在，并且是否具有读写权限
+                if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
+                    // 获得存储卡的路径
+                    val sdpath = Environment.getExternalStorageDirectory().toString() + "/"
+                    mSavePath = sdpath + "download"
+                    val file = File(mSavePath)
+                    // 判断文件目录是否存在
+                    if (!file.exists()) {
+                        file.mkdir()
+                    }
+                    val apkFile = File(mSavePath, "kopernik.apk")
+
+                    //                    String cachePath = getExternalFilesDir("upgrade_apk") + File.separator + getPackageName() + ".apk";
+                    //                    caacheFile = new File(cachePath);
+
+                    val url = URL(versionEntity?.deploy?.url)
+                    // 创建连接
+                    val conn = url.openConnection() as HttpURLConnection
+                    conn.connect()
+                    // 获取文件大小
+                    val length = conn.contentLength
+                    // 创建输入流
+                    val `is` = conn.inputStream
+                    val fos = FileOutputStream(apkFile)
+                    var count = 0
+                    // 缓存
+                    val buf = ByteArray(1024)
+                    // 写入到文件中
+                    do {
+                        val numread = `is`.read(buf)
+                        count += numread
+                        // 计算进度条位置
+                        val progress = (count.toFloat() / length * 100).toInt()
+                        // 更新进度
+                        runOnUiThread {
+                            // 进度条更新进度
+//                            tv_updata_percent?.text = "升级中 ${progress}%···"
+                            numberProgressBar?.setProgress(progress)
+                        }
+
+                        if (numread <= 0) {
+                            // 下载完成
+                            installApk(File(mSavePath, "kopernik.apk"))
+                            break
+                        }
+                        // 写入文件
+                        fos.write(buf, 0, numread)
+                    } while (!cancelUpdate)// 点击取消就停止下载.
+                    fos.close()
+                    `is`.close()
+                }
+            } catch (e: MalformedURLException) {
+                e.printStackTrace()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+
+        }
+    }
+
+
+
+
      //对低版本手机进行账户处理
     override fun onResume() {
         super.onResume()

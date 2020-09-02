@@ -79,6 +79,17 @@
             android:textColor="@color/text_gray"
             android:textSize="12sp" />
 
+        <com.kopernik.app.widget.NumberProgressBar
+            android:id="@+id/mProgress"
+            style="@style/version_update_progressbar"
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="18dp"
+            android:visibility=""
+            app:layout_constraintTop_toBottomOf="@id/tv_updata_content"
+            app:progress_text_visibility="invisible" />
         <Button
             android:layout_marginTop="10dp"
             android:id="@+id/versionchecklib_version_dialog_commit"
