@@ -29,7 +29,6 @@ class PurchaseDialog : DialogFragment(),
     private var balanceNotEnough:TextView?=null
     private var uytBalance:TextView?=null
     private var purchaseEntity: PurchaseEntity?=null
-    private var isBalance=false
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         purchaseEntity=arguments?.getParcelable("purchaseEntity")
@@ -65,15 +64,6 @@ class PurchaseDialog : DialogFragment(),
         miningMachinePrice?.text= BigDecimalUtils.roundDOWN(purchaseEntity?.mineMacPrice,2)+"USDT"
         payUytCoins?.text=BigDecimalUtils.roundDOWN(purchaseEntity?.consumeUyt,2)+"UYT"
         uytBalance?.text=resources.getString(R.string.uyt_balance)+": "+BigDecimalUtils.roundDOWN(purchaseEntity?.uytBanlance,2)
-        if ( BigDecimalUtils.substract(purchaseEntity?.consumeUyt,purchaseEntity?.uytBanlance) <BigDecimal(0)&&passwordEt!!.text.toString().isNotEmpty()){
-            isBalance=true
-            okBtn?.isEnabled=true
-        }else{
-            okBtn?.isEnabled=false
-            isBalance=false
-            okBtn?.setTextColor(resources.getColor(R.color.color_5D5386,null))
-
-        }
          if ( BigDecimalUtils.substract(purchaseEntity?.consumeUyt,purchaseEntity?.uytBanlance) <BigDecimal(0))
              balanceNotEnough?.visibility=View.GONE
              else   balanceNotEnough?.visibility=View.VISIBLE
@@ -116,7 +106,7 @@ class PurchaseDialog : DialogFragment(),
         override fun afterTextChanged(s: Editable) {
 
 
-            if (passwordEt!!.text.toString().isNotEmpty()) {
+            if (passwordEt!!.text.toString().isNotEmpty()&&BigDecimalUtils.substract(purchaseEntity?.consumeUyt,purchaseEntity?.uytBanlance) <BigDecimal(0)) {
                 okBtn?.isEnabled = true
                 activity?.getColor(R.color.color_20222F)?.let { okBtn?.setTextColor(it) }
             } else {
