@@ -106,8 +106,8 @@
     <string name="income">Cumulative income(UTDM)</string>
     <string name="synthesis_utc">Synthetic UTC</string>
     <string name="synthesis_bt">synthesis</string>
-    <string name="purchase_mm_tip">Buy a mining machine for mining</string>
-    <string name="purchase_mm_tip1">Up to 3.5 times return</string>
+    <string name="purchase_mm_tip">Line up to buy miners</string>
+    <string name="purchase_mm_tip1">Prepare enough chips in advance to make it easy to snap up when it opens!</string>
     <string name="ic_mm_tip1">Up to 3.5 times total revenue</string>
     <string name="ic_mm_tip2">100% mining efficiency</string>
     <string name="ic_mm_tip3">Daily income</string>
@@ -282,7 +282,7 @@
     <string name="copy_address">Copy address</string>
     <string name="copy_memo">Copy memo</string>
     <string name="desposit_address">UYT withdrawal address</string>
-    <string name="memo_tip">Be sure to copy Memo, otherwise the recharge will not be credited</string>
+    <string name="memo_tip">Reminder: Please fill in memo in the UYT transfer [Remarks], otherwise the account cannot be received!d</string>
     <string name="withdraw_num">Number of withdrawals</string>
     <string name="hint_note">Remarks (within 64 characters)</string>
     <string name="withdrawl_tip">UYT Withdrawal tips</string>

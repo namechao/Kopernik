@@ -84,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:textSize="14dp"
+                android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="@color/color_FFCF32"
                 android:text="@string/memo_tip" />
