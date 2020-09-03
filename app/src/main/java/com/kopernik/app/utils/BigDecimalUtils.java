@@ -315,6 +315,20 @@ public final class BigDecimalUtils {
         }
         return null;
     }
+    public static String divideDown(final String v1, final String v2, final int scale) {
+        try {
+            BigDecimal b1 = new BigDecimal(v1);
+            BigDecimal b2 = new BigDecimal(v2);
+            if (scale <= 0) {
+                return b1.divide(b2).intValue() + "";
+            } else {
+                return b1.divide(b2, scale, BigDecimal.ROUND_DOWN).toPlainString();
+            }
+        } catch (Exception e) {
+            JCLogUtils.eTag(TAG, e, "divide");
+        }
+        return null;
+    }
 
 ///BTC:8位   ETH：8位    USDT 6位    UYT 4位    CNY  2位     百分比的数据：2位  
     //UYT 委托数量 4位

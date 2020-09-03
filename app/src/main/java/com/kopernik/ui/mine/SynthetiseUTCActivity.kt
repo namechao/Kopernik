@@ -152,7 +152,8 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
                       if (i.type.contains("Compose")) rate = BigDecimalUtils.roundDOWN(i.rate,8)
                   }
               }
-              editText.setText("0")
+              inputCounts=maxCounts
+              editText.setText(""+maxCounts)
               }catch (e:Exception){
                   e.stackTrace
               }

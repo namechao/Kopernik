@@ -146,7 +146,8 @@
     <string name="recycle_input_verify">Please enter verification</string>
     <string name="utc_max_counts">The maximum number of synthesizers has been reached</string>
     <string name="utc_input_counts">Please enter the quantity to synthesize UTC</string>
-    <string name="utc_input_syth_limit">Can’t synthesize if the balance is insufficient</string>
+    <string name="utc_exchange_hint">Please enter the quantity</string>
+    <string name="utc_input_syth_limit">The synthesis quantity cannot be zero</string>
     <string name="utc_get_utc_counts">Congratulations on getting</string>
     <string name="utc_per">A</string>
     <string name="exchange_success">Successful redemption</string>

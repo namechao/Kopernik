@@ -604,7 +604,8 @@
    <string name="recycle_input_verify">请输入验证</string>
    <string name="utc_max_counts">已达到最大达可合成数量</string>
    <string name="utc_input_counts">请输入要合成UTC的数量</string>
-   <string name="utc_input_syth_limit">余额不足暂不能合成</string>
+   <string name="utc_exchange_hint">请输入数量</string>
+   <string name="utc_input_syth_limit">合成数量不能为零哦！</string>
    <string name="utc_get_utc_counts">恭喜你获得</string>
    <string name="utc_per">个</string>
    <string name="exchange_success">兑换成功</string>

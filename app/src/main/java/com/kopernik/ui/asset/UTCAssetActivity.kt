@@ -78,8 +78,8 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
             if (allConfigEntity!=null){
                 var exchangeDialog = ExchangeDialog.newInstance(allConfigEntity!!)
                 exchangeDialog!!.setOnRequestListener(object : ExchangeDialog.RequestListener {
-                    override fun onRequest(exchangeCounts: String, params: String,rate:String) {
-                        exchangeCoin(exchangeCounts,params,rate,allConfigEntity!!)
+                    override fun onRequest(utccounts:String,exchangeCounts: String, params: String,rate:String) {
+                        exchangeCoin(utccounts,exchangeCounts,params,rate)
                     }
                 })
                 exchangeDialog!!.show(supportFragmentManager, "withdrawRecommed")
@@ -111,10 +111,10 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
              })
          }
      }
-    private fun exchangeCoin(uytCounts: String, psw: String,rate:String, data: AllConfigEntity) {
+    private fun exchangeCoin(utccounts:String,uytCounts: String, psw: String,rate:String) {
 
         viewModel.run {
-            var map= mapOf("amountUtc" to data.utc,"amountUyt" to uytCounts,"rate" to rate ,"pwd" to MD5Utils.md5(MD5Utils.md5(psw)))
+            var map= mapOf("amountUtc" to utccounts,"amountUyt" to uytCounts,"rate" to rate ,"pwd" to MD5Utils.md5(MD5Utils.md5(psw)))
             exchange(map).observe(this@UTCAssetActivity, Observer {
                 if (it.status==200){
                   ToastUtils.showShort(this@UTCAssetActivity,resources.getString(R.string.exchange_success))

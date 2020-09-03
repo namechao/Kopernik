@@ -19,6 +19,7 @@ import com.kopernik.ui.asset.entity.*
 import com.kopernik.ui.asset.util.OnClickFastListener
 import com.kopernik.app.utils.KeyboardUtils
 import com.kopernik.ui.mine.entity.AllConfigEntity
+import kotlinx.android.synthetic.main.activity_snythetise_utc.*
 import java.io.Serializable
 
 class ExchangeDialog : DialogFragment(),
@@ -36,7 +37,7 @@ class ExchangeDialog : DialogFragment(),
     private var bean: AllConfigEntity ?= null
     private var useFingerprint = false
     private var fingerprintDialog: FingerprintDialog? = null
-    private var uytCounts=""
+    private var uytCounts=0
     private var rate=""
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -72,10 +73,9 @@ class ExchangeDialog : DialogFragment(),
         exchangeCounts = dialog.findViewById(R.id.exchange_counts)
         exchangeProportion = dialog.findViewById(R.id.tv_exchange_proportion)
         passwordEt?.addTextChangedListener(passwordWatcher)
+        exchangeCounts?.addTextChangedListener(uytCountsWatcher)
         okBtn = dialog.findViewById(R.id.ok)
-        exchangeCounts?.isEnabled=false
-
-        var utcTouyt= BigDecimalUtils.divide(bean?.config?.utcPrice,bean?.uytPrice,2)
+        var utcTouyt= BigDecimalUtils.divideDown(bean?.config?.utcPrice,bean?.uytPrice,2)
 
         exchangeProportion?.text=getString(R.string.asset_exchange_proportion)+"UTC:UYT= 1：${utcTouyt}"
         if (bean?.rateList!=null) {
@@ -86,14 +86,13 @@ class ExchangeDialog : DialogFragment(),
 
 
         desc?.text=rate+"UYT"
-         uytCounts=BigDecimalUtils.divide(BigDecimalUtils.multiply(bean?.utc,bean?.config?.utcPrice).toString(),bean?.uytPrice,2)
-        exchangeCounts?.setText("UYT数量：$uytCounts")
+         uytCounts=BigDecimalUtils.getRound(BigDecimalUtils.divideDown(BigDecimalUtils.multiply(bean?.utc,bean?.config?.utcPrice).toString(),bean?.uytPrice,2))?.toInt()
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
         }
 
-        KeyboardUtils.showKeyboard(passwordEt)
+        KeyboardUtils.showKeyboard(exchangeCounts)
         okBtn?.setOnClickListener(clickFastListener)
     }
 
@@ -107,11 +106,35 @@ class ExchangeDialog : DialogFragment(),
             KeyboardUtils.hideSoftKeyboard(passwordEt)
             listener?.let {
                 dismiss()
-                it.onRequest(uytCounts,passwordEt!!.text.toString().trim(),rate) }
+                var utcCounts=BigDecimalUtils.divide( BigDecimalUtils.multiply(bean?.uytPrice,exchangeCounts?.text.toString().trim()).toString(),bean?.config?.utcPrice,8)
+                it.onRequest(utcCounts,exchangeCounts?.text.toString().trim(),passwordEt!!.text.toString().trim(),rate) }
         }
     }
 
 
+    var uytCountsWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(
+            s: CharSequence,
+            start: Int,
+            count: Int,
+            after: Int
+        ) {
+        }
+
+        override fun onTextChanged(
+            s: CharSequence,
+            start: Int,
+            before: Int,
+            count: Int
+        ) {
+        }
+
+        override fun afterTextChanged(s: Editable) {
+            okBtn?.isEnabled=passwordEt?.text.toString().trim().isNotEmpty()&&!exchangeCounts?.text?.toString()?.trim().isNullOrEmpty()
+            exchangeCounts?.setSelection(exchangeCounts?.text.toString().length)
+            if (!exchangeCounts?.text.toString().trim().isBlank()&&exchangeCounts?.text.toString().trim().toInt()>uytCounts) exchangeCounts?.setText(""+uytCounts)
+        }
+    }
 
     var passwordWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(
@@ -131,23 +154,11 @@ class ExchangeDialog : DialogFragment(),
         }
 
         override fun afterTextChanged(s: Editable) {
-            if (!useFingerprint) {
-                if (passwordEt!!.text.toString().isNotEmpty()) {
-                    enableBtn()
-                } else {
-                    disableBtn()
-                }
-            }
+            okBtn?.isEnabled= passwordEt?.text.toString().trim().isNotEmpty() && !exchangeCounts?.text?.toString()?.trim().isNullOrEmpty()
         }
     }
 
-    private fun disableBtn() {
-        okBtn!!.isEnabled = false
-    }
 
-    private fun enableBtn() {
-        okBtn!!.isEnabled = true
-    }
 
 
     override fun onAuthenticationSucceeded(purpose: Int, value: String) {
@@ -158,7 +169,7 @@ class ExchangeDialog : DialogFragment(),
         listener=requestListener
     }
     interface RequestListener {
-        fun onRequest(exchangeCounts:String,params:String,rate:String)
+        fun onRequest(utccounts:String,exchangeCounts:String,params:String,rate:String)
     }
 
     companion object {
