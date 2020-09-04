@@ -121,6 +121,9 @@ interface HomeService {
     //检查版本
     @GET("user/deploy")
     suspend fun checkVersion(): BaseResult<VersionEntity>
+    //检查版本
+    @GET("user/loginOut")
+    suspend fun loginOut(): BaseResult<Any>
     //验证密码
     @GET("register/deploy")
     suspend fun checkAppVersion(): BaseResult<UpdateBean>

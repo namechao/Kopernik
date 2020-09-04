@@ -103,6 +103,9 @@ class HomeRepository private constructor(private val newWork: HomeNetWork):BaseM
     suspend fun checkVersion(): BaseResult<VersionEntity> {
         return newWork.checkVersion()
     }
+    suspend fun loginOut(): BaseResult<Any> {
+        return newWork.loginOut()
+    }
     suspend fun checkAppVersion(): BaseResult<UpdateBean> {
         return newWork.checkAppVersion()
     }

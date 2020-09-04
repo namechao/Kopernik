@@ -18,6 +18,7 @@ import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.core.content.FileProvider
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import com.allenliu.versionchecklib.core.http.HttpHeaders
 import com.allenliu.versionchecklib.v2.AllenVersionChecker
 import com.allenliu.versionchecklib.v2.builder.UIData
@@ -31,6 +32,7 @@ import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.ExitAlertDialog
 import com.kopernik.app.events.LocalEvent
+import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.APPHelper
 import com.kopernik.app.utils.DBLog
 import com.kopernik.app.utils.ToastUtils
@@ -158,13 +160,22 @@ class MyFragment : NewBaseFragment<MyViewModel, ViewDataBinding>() {
             ExitAlertDialog(activity!!)
                 .setCancelable(false)
                 .setPositiveButton(View.OnClickListener {
-                    UserConfig.singleton?.accountString=null
-                    UserConfig.singleton?.tradePassword=null
-                    val intent =
-                        Intent(context, LoginActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
-                    activity?.finish()
+                    viewModel.run {
+                        loginOut().observe(this@MyFragment, Observer {
+                            if(it.status==200){
+                                UserConfig.singleton?.accountString=null
+                                UserConfig.singleton?.tradePassword=null
+                                val intent =
+                                    Intent(context, LoginActivity::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                startActivity(intent)
+                                activity?.finish()
+                            }else {
+                                ErrorCode.showErrorMsg(activity,it.status)
+                            }
+                        })
+                    }
+
                 })
                 .show()
 

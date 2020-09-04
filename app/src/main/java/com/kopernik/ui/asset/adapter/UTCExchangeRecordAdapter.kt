@@ -17,7 +17,7 @@ class UTCExchangeRecordAdapter(
         helper?.synthesisTime?.text=TimeUtils.normalTimeStampMonthDay(item?.createTime?.toString())
         helper?.utcConsume?.text= BigDecimalUtils.getRound(item?.utcAmount).toString()
         helper?.handlingfee?.text=BigDecimalUtils.roundDOWN(item?.rate,2)
-        helper?.synthesisCounts?.text=BigDecimalUtils.getRound(item?.uytAmount).toString()
+        helper?.synthesisCounts?.text=BigDecimalUtils.roundDOWN(item?.uytAmount,2)
     }
 
 
