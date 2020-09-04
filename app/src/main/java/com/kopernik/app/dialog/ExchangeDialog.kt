@@ -154,7 +154,7 @@ class ExchangeDialog : DialogFragment(),
         }
 
         override fun afterTextChanged(s: Editable) {
-            okBtn?.isEnabled= passwordEt?.text.toString().trim().isNotEmpty() && !exchangeCounts?.text?.toString()?.trim().isNullOrEmpty()
+            okBtn?.isEnabled= passwordEt?.text.toString().trim().isNotEmpty() && !exchangeCounts?.text?.toString()?.trim().isNullOrEmpty()&&exchangeCounts?.text?.toString()?.trim()!="0"
         }
     }
 
