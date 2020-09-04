@@ -13,4 +13,4 @@ package com.kopernik.ui.home.Entity
  * @UpdateRemark:   更新说明
  * @Version:        1.0
  */
-data  class HomeCoinItem(val coinName:String,var coinName1:String,var coinPrice:String, var coinPrice1:String, var coinRiseFall:String)
+data  class HomeCoinItem(val coinName:String?,var coinName1:String?,var coinPrice:String?, var coinPrice1:String?, var coinRiseFall:String?)

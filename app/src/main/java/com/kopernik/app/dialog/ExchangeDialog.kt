@@ -31,13 +31,14 @@ class ExchangeDialog : DialogFragment(),
 
 
     private var passwordEt: EditText? = null
-    private var exchangeCounts: EditText? = null
+    private var etUtcCounts: EditText? = null
+    private var etUytCounts: EditText? = null
     private var exchangeProportion: TextView? = null
     private var okBtn: Button? = null
     private var bean: AllConfigEntity ?= null
     private var useFingerprint = false
     private var fingerprintDialog: FingerprintDialog? = null
-    private var uytCounts=0
+    private var maxUtcCounts=0
     private var rate=""
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -70,13 +71,14 @@ class ExchangeDialog : DialogFragment(),
         desc = dialog.findViewById(R.id.tx_desc)
         passwordEt = dialog.findViewById(R.id.password_et)
         passwordEt?.addTextChangedListener(passwordWatcher)
-        exchangeCounts = dialog.findViewById(R.id.exchange_counts)
+        etUtcCounts = dialog.findViewById(R.id.exchange_counts)
         exchangeProportion = dialog.findViewById(R.id.tv_exchange_proportion)
+        etUytCounts = dialog.findViewById(R.id.exchange_uyt_counts)
         passwordEt?.addTextChangedListener(passwordWatcher)
-        exchangeCounts?.addTextChangedListener(uytCountsWatcher)
+        etUtcCounts?.addTextChangedListener(uytCountsWatcher)
         okBtn = dialog.findViewById(R.id.ok)
         var utcTouyt= BigDecimalUtils.divideDown(bean?.config?.utcPrice,bean?.uytPrice,2)
-
+        etUytCounts?.isEnabled=false
         exchangeProportion?.text=getString(R.string.asset_exchange_proportion)+"UTC:UYT= 1：${utcTouyt}"
         if (bean?.rateList!=null) {
             for (i in bean?.rateList!!){
@@ -86,13 +88,13 @@ class ExchangeDialog : DialogFragment(),
 
 
         desc?.text=rate+"UYT"
-         uytCounts=BigDecimalUtils.getRound(BigDecimalUtils.divideDown(BigDecimalUtils.multiply(bean?.utc,bean?.config?.utcPrice).toString(),bean?.uytPrice,2))?.toInt()
+        maxUtcCounts=BigDecimalUtils.getRound(bean?.utc)?.toInt()
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
         }
 
-        KeyboardUtils.showKeyboard(exchangeCounts)
+        KeyboardUtils.showKeyboard(etUtcCounts)
         okBtn?.setOnClickListener(clickFastListener)
     }
 
@@ -106,8 +108,8 @@ class ExchangeDialog : DialogFragment(),
             KeyboardUtils.hideSoftKeyboard(passwordEt)
             listener?.let {
                 dismiss()
-                var utcCounts=BigDecimalUtils.divide( BigDecimalUtils.multiply(bean?.uytPrice,exchangeCounts?.text.toString().trim()).toString(),bean?.config?.utcPrice,8)
-                it.onRequest(utcCounts,exchangeCounts?.text.toString().trim(),passwordEt!!.text.toString().trim(),rate) }
+                var uytCounts=BigDecimalUtils.divideDown( BigDecimalUtils.multiply(bean?.config?.utcPrice,etUtcCounts?.text.toString().trim()).toString(),bean?.uytPrice,8)
+                it.onRequest(etUtcCounts?.text.toString().trim(),uytCounts,passwordEt!!.text.toString().trim(),rate) }
         }
     }
 
@@ -130,9 +132,13 @@ class ExchangeDialog : DialogFragment(),
         }
 
         override fun afterTextChanged(s: Editable) {
-            okBtn?.isEnabled=passwordEt?.text.toString().trim().isNotEmpty()&&!exchangeCounts?.text?.toString()?.trim().isNullOrEmpty()
-            exchangeCounts?.setSelection(exchangeCounts?.text.toString().length)
-            if (!exchangeCounts?.text.toString().trim().isBlank()&&exchangeCounts?.text.toString().trim().toInt()>uytCounts) exchangeCounts?.setText(""+uytCounts)
+            okBtn?.isEnabled=passwordEt?.text.toString().trim().isNotEmpty()&&!etUtcCounts?.text?.toString()?.trim().isNullOrEmpty()
+            etUtcCounts?.setSelection(etUtcCounts?.text.toString().length)
+            if (!etUtcCounts?.text.toString().trim().isBlank()&&etUtcCounts?.text.toString().trim().toInt()>maxUtcCounts) etUtcCounts?.setText(""+maxUtcCounts)
+            if (!etUtcCounts?.text.toString().trim().isBlank())
+                etUytCounts?.setText(""+BigDecimalUtils.divideDown( BigDecimalUtils.multiply(bean?.config?.utcPrice,etUtcCounts?.text.toString().trim()).toString(),bean?.uytPrice,2))
+                else   etUytCounts?.setText("")
+
         }
     }
 
@@ -154,7 +160,7 @@ class ExchangeDialog : DialogFragment(),
         }
 
         override fun afterTextChanged(s: Editable) {
-            okBtn?.isEnabled= passwordEt?.text.toString().trim().isNotEmpty() && !exchangeCounts?.text?.toString()?.trim().isNullOrEmpty()&&exchangeCounts?.text?.toString()?.trim()!="0"
+            okBtn?.isEnabled= passwordEt?.text.toString().trim().isNotEmpty() && !etUtcCounts?.text?.toString()?.trim().isNullOrEmpty()&&etUtcCounts?.text?.toString()?.trim()!="0"
         }
     }
 
@@ -169,7 +175,7 @@ class ExchangeDialog : DialogFragment(),
         listener=requestListener
     }
     interface RequestListener {
-        fun onRequest(utccounts:String,exchangeCounts:String,params:String,rate:String)
+        fun onRequest(utcCounts:String,uytCounts:String,params:String,rate:String)
     }
 
     companion object {

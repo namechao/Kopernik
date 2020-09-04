@@ -604,7 +604,8 @@
    <string name="recycle_input_verify">请输入验证</string>
    <string name="utc_max_counts">已达到最大达可合成数量</string>
    <string name="utc_input_counts">请输入要合成UTC的数量</string>
-   <string name="utc_exchange_hint">请输入数量</string>
+   <string name="utc_exchange_hint">请输入UTC数量</string>
+   <string name="utc_exchange_uyt_hint">待兑换UYT数量</string>
    <string name="utc_input_syth_limit">合成数量不能为零哦！</string>
    <string name="utc_get_utc_counts">恭喜你获得</string>
    <string name="utc_per">个</string>
@@ -800,6 +801,7 @@
     <string name="error_416">很遗憾，未到领取时间</string>
     <string name="error_417">请先设置交易密码</string>
     <string name="error_418">此手机号未注册</string>
+    <string name="error_420">当前网络登录账号数量已达上限，请切换其它网络登录！</string>
     <string name="error_500"> 页面错误 </string>
     <string name="error_600">未知错误</string>
     <string name="can_not_transfer_to_self">不能给自己转账</string>

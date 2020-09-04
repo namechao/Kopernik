@@ -18,6 +18,7 @@
     <string name="error_416">Unfortunately, it’s not time to pick up</string>
     <string name="error_417">Please set transaction password first</string>
     <string name="error_418">This phone number is not registered</string>
+    <string name="error_420">The current network login account number has reached the upper limit, please switch to another network login!</string>
     <string name="error_500">Page error</string>
     <string name="error_600">unknown mistake</string>
     <string name="can_not_transfer_to_self">Can not transfer money to myself</string>
@@ -146,7 +147,8 @@
     <string name="recycle_input_verify">Please enter verification</string>
     <string name="utc_max_counts">The maximum number of synthesizers has been reached</string>
     <string name="utc_input_counts">Please enter the quantity to synthesize UTC</string>
-    <string name="utc_exchange_hint">Please enter the quantity</string>
+    <string name="utc_exchange_hint">Please enter UTC quantity</string>
+    <string name="utc_exchange_uyt_hint">Number of UYT to be redeemed</string>
     <string name="utc_input_syth_limit">The synthesis quantity cannot be zero</string>
     <string name="utc_get_utc_counts">Congratulations on getting</string>
     <string name="utc_per">A</string>

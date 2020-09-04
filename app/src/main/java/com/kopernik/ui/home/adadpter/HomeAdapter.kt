@@ -12,12 +12,27 @@ class HomeAdapter():BaseQuickAdapter<HomeCoinItem,HomeViewHolder>(R.layout.item_
         helper?.coinPrice?.text=item?.coinPrice
         helper?.coinPrice1?.text=item?.coinPrice1
         helper?.coinRiseFall?.text=item?.coinRiseFall
+         if (item?.coinName=="UYT"){
+             if (item?.coinRiseFall!=null){
+                    if (item?.coinRiseFall!!.contains("-")) {
+                         helper?.coinRiseFall?.setBackgroundResource(R.drawable.coin_fall_bg)
+                        helper?.coinRiseFall?.text="${item?.coinRiseFall}%"
+                     } else  {
+                     helper?.coinRiseFall?.setBackgroundResource(R.drawable.coin_rise_bg)
+                     helper?.coinRiseFall?.text="+${item?.coinRiseFall}%"
+                 }
+             }
+
+         }
         if (item?.coinRiseFall!=null) {
-            if (item?.coinRiseFall.startsWith("+")) {
+            if (item?.coinRiseFall!!.contains("+")) {
                 helper?.coinRiseFall?.setBackgroundResource(R.drawable.coin_rise_bg)
-            } else if (item?.coinRiseFall.startsWith("-")) {
+            } else if (item?.coinRiseFall!!.contains("-")) {
                 helper?.coinRiseFall?.setBackgroundResource(R.drawable.coin_fall_bg)
             }
+        }else{
+            helper?.coinRiseFall?.text="+0.00%"
+            helper?.coinRiseFall?.setBackgroundResource(R.drawable.coin_rise_bg)
         }
     }
 }

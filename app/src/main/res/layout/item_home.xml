@@ -76,8 +76,6 @@
         android:paddingTop="@dimen/dp_5"
         android:paddingBottom="5dp"
         android:textStyle="bold"
-        android:paddingLeft="@dimen/dp_11"
-        android:paddingRight="@dimen/dp_11"
         android:gravity="center"
         android:background="@drawable/coin_rise_bg"
         app:layout_constraintRight_toRightOf="parent"

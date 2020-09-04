@@ -172,21 +172,21 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
           .text= BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utdmAmount,2)
       list.clear()
       list.add( HomeCoinItem("UTC","/USDT",
-          BigDecimalUtils.roundDOWN( homeEntity?.priceConfig?.utcPrice!!,4),
+          BigDecimalUtils.roundDOWN( homeEntity?.priceConfig?.utcPrice,4),
         "¥ ${BigDecimalUtils.multiply(homeEntity?.priceConfig?.utcPrice,homeEntity?.price?.cnyPrice,4)}",
-          homeEntity?.priceConfig?.utcPricePercentage!!))
+          homeEntity?.priceConfig?.utcPricePercentage))
       list.add( HomeCoinItem("UTK","/USDT",
-          BigDecimalUtils.roundDOWN( homeEntity?.priceConfig?.utkPrice!!,4),
+          BigDecimalUtils.roundDOWN( homeEntity?.priceConfig?.utkPrice,4),
           "¥ ${BigDecimalUtils.multiply(homeEntity?.priceConfig?.utkPrice,homeEntity?.price?.cnyPrice,4)}",
-          homeEntity?.priceConfig?.utkPricePercentage!!))
+          homeEntity?.priceConfig?.utkPricePercentage))
       list.add( HomeCoinItem("BTC","/USDT",
           BigDecimalUtils.roundDOWN( homeEntity?.price?.btcPrice!!,4),
           "¥ ${BigDecimalUtils.multiply(homeEntity?.price?.btcPrice,homeEntity?.price?.cnyPrice,4)}",
-          homeEntity?.price?.btcPricePercentage!!))
+          homeEntity?.price?.btcPricePercentage))
       list.add( HomeCoinItem("ETH","/USDT",
           BigDecimalUtils.roundDOWN(  homeEntity?.price?.ethPrice!!,4),
           "¥ ${BigDecimalUtils.multiply(homeEntity?.price?.ethPrice,homeEntity?.price?.cnyPrice,4)}",
-          homeEntity?.price?.ethPricePercentage!!))
+          homeEntity?.price?.ethPricePercentage))
 //      list.add( HomeCoinItem("UYT","/BTC",
 //          BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.btcDollarPrice!!,1),
 //          "¥ ${ BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.btcRmbrPrice!!,1)}",homeEntity?.priceTradingPair?.btcPercentage!!))
@@ -194,8 +194,8 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
 //          BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.ethDollarPrice!!,4),
 //          "¥ ${BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.ethRmbrPrice!!,4)}",homeEntity?.priceTradingPair?.ethPercentage!!))
       list.add( HomeCoinItem("UYT","/USDT",
-          BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.usdtDollarPrice!!,4),
-          "¥ ${BigDecimalUtils.roundDOWN(  homeEntity?.priceTradingPair?.usdtRmbrPrice!!,4)}",homeEntity?.priceTradingPair?.usdtPercentage!!))
+          BigDecimalUtils.roundDOWN(  homeEntity?.price?.uytPirce,4),
+          "¥ ${BigDecimalUtils.multiply( homeEntity?.price?.uytPirce!!,homeEntity?.price?.cnyPrice,4)}",homeEntity?.price?.uytPircePercentage))
       adapter.setNewData(list)
 //      //金币图标
       if (homeEntity?.machList!=null) {

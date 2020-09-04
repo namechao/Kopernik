@@ -40,7 +40,7 @@ class ForgetPasswordNextActivity : NewBaseActivity<ForgetPasswordViewModel, View
             account =it
         }
         if (changePasswordType==1) {
-            setTitle(resources.getString(R.string.setup_login_password))
+            setTitle(resources.getString(R.string.login_forget_psw))
         }else{
             setTitle(resources.getString(R.string.login_change_password))
         }

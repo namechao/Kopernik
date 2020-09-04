@@ -78,8 +78,8 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
             if (allConfigEntity!=null){
                 var exchangeDialog = ExchangeDialog.newInstance(allConfigEntity!!)
                 exchangeDialog!!.setOnRequestListener(object : ExchangeDialog.RequestListener {
-                    override fun onRequest(utccounts:String,exchangeCounts: String, params: String,rate:String) {
-                        exchangeCoin(utccounts,exchangeCounts,params,rate)
+                    override fun onRequest(utcCounts:String,uytCounts: String, params: String,rate:String) {
+                        exchangeCoin(utcCounts,uytCounts,params,rate)
                     }
                 })
                 exchangeDialog!!.show(supportFragmentManager, "withdrawRecommed")

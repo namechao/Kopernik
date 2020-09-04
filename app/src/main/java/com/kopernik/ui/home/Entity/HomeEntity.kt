@@ -50,6 +50,7 @@ data class Price(
     val htPricePercentage: String,
     val usdtPrice: String,
     val usdtPricePercentage: String,
+    val uytPircePercentage:String,
     val uytPirce: String
 )
 
@@ -65,6 +66,7 @@ data class PriceConfig(
     val utkPrice: String,
     val utkPricePercentage: String,
     val uytExchange: String
+
 )
 
 data class PriceTradingPair(
