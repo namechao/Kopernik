@@ -14,13 +14,14 @@ class RegisterSetUpPasswordViewModel : BaseViewModel() {
 
     fun createAccount(
         type: String, acount: String,
-        invitationCode: String,pwd:String): SingleLiveEvent<BaseResult<AccountBean>> {
+        invitationCode: String,pwd:String,ipAddress:String): SingleLiveEvent<BaseResult<AccountBean>> {
         launchGo({
             var map = mapOf(
                 "type" to type,
                 "acount" to acount,
                 "invitationCode" to invitationCode,
-                "pwd" to pwd
+                "pwd" to pwd,
+                "ipAddress" to ipAddress
             )
             accountBean.value = homeRepository.createAccount(map)
         })

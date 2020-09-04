@@ -12,12 +12,13 @@ class LoginViewModel :BaseViewModel(){
     private val accountBean = SingleLiveEvent<BaseResult<AccountBean>>()
 
     fun login(
-        type: String, acount: String, pwd:String): SingleLiveEvent<BaseResult<AccountBean>> {
+        type: String, acount: String, pwd:String,ipAddress:String): SingleLiveEvent<BaseResult<AccountBean>> {
         launchGo({
             var map = mapOf(
                 "type" to type,
                 "acount" to acount,
-                "pwd" to pwd
+                "pwd" to pwd,
+                "ipAddress" to ipAddress
             )
             accountBean.value = homeRepository.login(map)
         })

@@ -16,6 +16,7 @@ import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.viewmodel.RegisterSetUpPasswordViewModel
+import dev.utils.app.NetWorkUtils
 import dev.utils.common.encrypt.MD5Utils
 import kotlinx.android.synthetic.main.activity_forget_password_next.*
 import kotlinx.android.synthetic.main.activity_set_up_password.*
@@ -119,7 +120,8 @@ class RegisterSetUpPasswordActivity :
     //导入网络请求
     private fun register() {
         viewModel.run {
-            createAccount(type.toString(),acount,invitationCode,MD5Utils.md5(MD5Utils.md5(etInput?.text.toString().trim()))).observe(this@RegisterSetUpPasswordActivity, androidx.lifecycle.Observer {
+            var ipAddress= NetWorkUtils.getIPAddress(true)
+            createAccount(type.toString(),acount,invitationCode,MD5Utils.md5(MD5Utils.md5(etInput?.text.toString().trim())),ipAddress).observe(this@RegisterSetUpPasswordActivity, androidx.lifecycle.Observer {
              if (it.status==200){
                  UserConfig.singleton?.accountBean=it.data.user
                  ToastUtils.showShort(this@RegisterSetUpPasswordActivity,this@RegisterSetUpPasswordActivity.getString(R.string.register_success))

@@ -32,6 +32,7 @@ import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.adapter.ChoseAreaAdapter
 import com.kopernik.ui.login.bean.LoginCountryBean
 import com.kopernik.ui.login.viewmodel.LoginViewModel
+import dev.utils.app.NetWorkUtils
 import dev.utils.common.encrypt.MD5Utils
 import kotlinx.android.synthetic.main.activity_asset_transform.*
 import kotlinx.android.synthetic.main.activity_login.*
@@ -201,7 +202,8 @@ class LoginActivity : NewFullScreenBaseActivity<LoginViewModel, ViewDataBinding>
                 return@setOnClickListener
             }
                 viewModel.run {
-                    login(registerType.toString(),etInput.text.toString().trim(),MD5Utils.md5(MD5Utils.md5(etPassword.text.toString().trim()))).observe(this@LoginActivity, Observer {
+                   var ipAddress= NetWorkUtils.getServerAddressByWifi()
+                    login(registerType.toString(),etInput.text.toString().trim(),MD5Utils.md5(MD5Utils.md5(etPassword.text.toString().trim())),ipAddress).observe(this@LoginActivity, Observer {
                         if (it.status == 200) {
                             UserConfig.singleton?.accountBean=it.data.user
                             LaunchConfig.startMainAc(this@LoginActivity)
