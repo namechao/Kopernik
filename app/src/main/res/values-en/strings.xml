@@ -21,6 +21,7 @@
     <string name="error_420">The current network login account number has reached the upper limit, please switch to another network login!</string>
     <string name="error_500">Page error</string>
     <string name="error_600">unknown mistake</string>
+    <string name="error_exit">Logout failed, please try again later</string>
     <string name="can_not_transfer_to_self">Can not transfer money to myself</string>
     <string name="input_can_not_zero">The input quantity cannot be 0</string>
 

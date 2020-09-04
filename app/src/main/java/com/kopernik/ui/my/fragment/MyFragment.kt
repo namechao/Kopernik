@@ -171,7 +171,7 @@ class MyFragment : NewBaseFragment<MyViewModel, ViewDataBinding>() {
                                 startActivity(intent)
                                 activity?.finish()
                             }else {
-                                ErrorCode.showErrorMsg(activity,it.status)
+                                ToastUtils.showShort(activity,getString(R.string.error_exit))
                             }
                         })
                     }

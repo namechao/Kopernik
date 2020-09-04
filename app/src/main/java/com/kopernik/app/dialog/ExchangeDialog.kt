@@ -132,7 +132,7 @@ class ExchangeDialog : DialogFragment(),
         }
 
         override fun afterTextChanged(s: Editable) {
-            okBtn?.isEnabled=passwordEt?.text.toString().trim().isNotEmpty()&&!etUtcCounts?.text?.toString()?.trim().isNullOrEmpty()
+            okBtn?.isEnabled=passwordEt?.text.toString().trim().isNotEmpty()&&!etUtcCounts?.text?.toString()?.trim().isNullOrEmpty()&&etUtcCounts?.text?.toString()?.trim()?.toInt()!=0
             etUtcCounts?.setSelection(etUtcCounts?.text.toString().length)
             if (!etUtcCounts?.text.toString().trim().isBlank()&&etUtcCounts?.text.toString().trim().toInt()>maxUtcCounts) etUtcCounts?.setText(""+maxUtcCounts)
             if (!etUtcCounts?.text.toString().trim().isBlank())
@@ -160,7 +160,7 @@ class ExchangeDialog : DialogFragment(),
         }
 
         override fun afterTextChanged(s: Editable) {
-            okBtn?.isEnabled= passwordEt?.text.toString().trim().isNotEmpty() && !etUtcCounts?.text?.toString()?.trim().isNullOrEmpty()&&etUtcCounts?.text?.toString()?.trim()!="0"
+            okBtn?.isEnabled= passwordEt?.text.toString().trim().isNotEmpty() && !etUtcCounts?.text?.toString()?.trim().isNullOrEmpty()&&etUtcCounts?.text?.toString()?.trim()?.toInt()!=0
         }
     }
 
