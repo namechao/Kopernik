@@ -21,6 +21,7 @@ import com.kopernik.app.utils.KeyboardUtils
 import com.kopernik.ui.mine.entity.AllConfigEntity
 import kotlinx.android.synthetic.main.activity_snythetise_utc.*
 import java.io.Serializable
+import java.math.BigDecimal
 
 class ExchangeDialog : DialogFragment(),
     FingerprintDialog.AuthenticationCallback {
@@ -38,7 +39,7 @@ class ExchangeDialog : DialogFragment(),
     private var bean: AllConfigEntity ?= null
     private var useFingerprint = false
     private var fingerprintDialog: FingerprintDialog? = null
-    private var maxUtcCounts=0
+    private var maxUtcCounts="0"
     private var rate=""
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -88,7 +89,7 @@ class ExchangeDialog : DialogFragment(),
 
 
         desc?.text=rate+"UYT"
-        maxUtcCounts=BigDecimalUtils.getRound(bean?.utc)?.toInt()
+        maxUtcCounts=BigDecimalUtils.roundDOWN(bean?.utc,2)
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
@@ -124,17 +125,39 @@ class ExchangeDialog : DialogFragment(),
         }
 
         override fun onTextChanged(
-            s: CharSequence,
+            text: CharSequence,
             start: Int,
             before: Int,
             count: Int
         ) {
+           var  s=text
+            if (s.toString().contains(".")) {
+                if (s.length - 1 - s.toString().indexOf(".") > 2) {
+                    s = s.toString().subSequence(0,
+                        s.toString().indexOf(".") + 3);
+                    etUtcCounts?.setText(s);
+                    etUtcCounts?.setSelection(s.length);
+                }
+            }
+            if (s.toString().trim().substring(0).equals(".")) {
+                s = "0" + s;
+                etUtcCounts?.setText(s);
+                etUtcCounts?.setSelection(2);
+            }
+            if (s.toString().startsWith("0")
+                && s.toString().trim().length > 1) {
+                if (!s.toString().substring(1, 2).equals(".")) {
+                    etUtcCounts?.setText(s.subSequence(0, 1));
+                    etUtcCounts?.setSelection(1);
+                    return;
+                }
+            }
         }
 
         override fun afterTextChanged(s: Editable) {
-            okBtn?.isEnabled=passwordEt?.text.toString().trim().isNotEmpty()&&!etUtcCounts?.text?.toString()?.trim().isNullOrEmpty()&&etUtcCounts?.text?.toString()?.trim()?.toInt()!=0
+            okBtn?.isEnabled=passwordEt?.text.toString().trim().isNotEmpty()&&!etUtcCounts?.text?.toString()?.trim().isNullOrEmpty()&&etUtcCounts?.text?.toString()?.trim()!="0"&&etUtcCounts?.text?.toString()?.trim()!="0."&&etUtcCounts?.text?.toString()?.trim()!="0.0"&&etUtcCounts?.text?.toString()?.trim()!="0.00"
             etUtcCounts?.setSelection(etUtcCounts?.text.toString().length)
-            if (!etUtcCounts?.text.toString().trim().isBlank()&&etUtcCounts?.text.toString().trim().toInt()>maxUtcCounts) etUtcCounts?.setText(""+maxUtcCounts)
+            if (!etUtcCounts?.text.toString().trim().isBlank()&&BigDecimal(etUtcCounts?.text.toString().trim())-BigDecimal(maxUtcCounts)> BigDecimal("0")) etUtcCounts?.setText(""+maxUtcCounts)
             if (!etUtcCounts?.text.toString().trim().isBlank())
                 etUytCounts?.setText(""+BigDecimalUtils.divideDown( BigDecimalUtils.multiply(bean?.config?.utcPrice,etUtcCounts?.text.toString().trim()).toString(),bean?.uytPrice,2))
                 else   etUytCounts?.setText("")
@@ -160,7 +183,7 @@ class ExchangeDialog : DialogFragment(),
         }
 
         override fun afterTextChanged(s: Editable) {
-            okBtn?.isEnabled= passwordEt?.text.toString().trim().isNotEmpty() && !etUtcCounts?.text?.toString()?.trim().isNullOrEmpty()&&etUtcCounts?.text?.toString()?.trim()?.toInt()!=0
+            okBtn?.isEnabled= passwordEt?.text.toString().trim().isNotEmpty() && !etUtcCounts?.text?.toString()?.trim().isNullOrEmpty()&&etUtcCounts?.text?.toString()?.trim()!="0"&&etUtcCounts?.text?.toString()?.trim()!="0."&&etUtcCounts?.text?.toString()?.trim()!="0.0"&&etUtcCounts?.text?.toString()?.trim()!="0.00"
         }
     }
 

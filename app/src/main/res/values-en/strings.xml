@@ -108,8 +108,8 @@
     <string name="income">Cumulative income(UTDM)</string>
     <string name="synthesis_utc">Synthetic UTC</string>
     <string name="synthesis_bt">synthesis</string>
-    <string name="purchase_mm_tip">Line up to buy miners</string>
-    <string name="purchase_mm_tip1">Prepare enough chips in advance to make it easy to snap up when it opens!</string>
+    <string name="purchase_mm_tip">Reserve miners in advance</string>
+    <string name="purchase_mm_tip1">Start the journey of computing power mining!</string>
     <string name="ic_mm_tip1">Up to 3.5 times total revenue</string>
     <string name="ic_mm_tip2">100% mining efficiency</string>
     <string name="ic_mm_tip3">Daily income</string>

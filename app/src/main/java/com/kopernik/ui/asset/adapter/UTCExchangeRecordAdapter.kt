@@ -15,7 +15,7 @@ class UTCExchangeRecordAdapter(
 ) :BaseQuickAdapter<ExchangeRecord, UTCRecordHolder>(R.layout.item_exchange_record,data){
     override fun convert(helper: UTCRecordHolder?, item: ExchangeRecord?) {
         helper?.synthesisTime?.text=TimeUtils.normalTimeStampMonthDay(item?.createTime?.toString())
-        helper?.utcConsume?.text= BigDecimalUtils.getRound(item?.utcAmount).toString()
+        helper?.utcConsume?.text= BigDecimalUtils.roundDOWN(item?.utcAmount,2).toString()
         helper?.handlingfee?.text=BigDecimalUtils.roundDOWN(item?.rate,2)
         helper?.synthesisCounts?.text=BigDecimalUtils.roundDOWN(item?.uytAmount,2)
     }

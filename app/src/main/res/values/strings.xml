@@ -564,8 +564,8 @@
     <string name="income">累计收益(UTDM)</string>
     <string name="synthesis_utc">合成UTC</string>
     <string name="synthesis_bt">合成</string>
-    <string name="purchase_mm_tip">排队购买矿机</string>
-    <string name="purchase_mm_tip1">提前备足筹码 便于开放时抢购！</string>
+    <string name="purchase_mm_tip">提前预约矿机</string>
+    <string name="purchase_mm_tip1">开启算力挖矿之旅！</string>
     <string name="ic_mm_tip1">最多3.5倍总收益</string>
     <string name="ic_mm_tip2">100%挖矿效率</string>
     <string name="ic_mm_tip3">每日收益</string>

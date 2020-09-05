@@ -37,7 +37,7 @@ class SplashActivity : NewFullScreenBaseActivity<NoViewModel, ViewDataBinding>()
      */
     private fun toNext(loginStatus: Int) {
         var check= ApplicationCheck(this)
-        if (check.check() or check.checkPkg()) {
+        if (check.check() or check.checkPkg() or check.checkFileDir(this) or check.checkProxy()) {
             finish()
         }else {
             if (loginStatus == -1) {
