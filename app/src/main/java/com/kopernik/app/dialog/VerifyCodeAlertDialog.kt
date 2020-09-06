@@ -17,6 +17,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import com.allen.library.SuperButton
 import com.kopernik.R
+import com.kopernik.app.network.RetrofitClient
 import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.app.utils.KeyboardUtils
 import com.kopernik.data.api.Api
@@ -141,7 +142,7 @@ class VerifyCodeAlertDialog(private val context: Context,var phone:String) {
      var bitmap: Bitmap? = null
      override fun doInBackground(vararg params: String?): Bitmap? {
        try {
-           val okHttpClient = OkHttpClient() //建立客户端
+           val okHttpClient = RetrofitClient.getInstance().getOkHttpClient() //建立客户端
            val request= Request.Builder().url("${Api.baseUrl}user/getImageCode?phone=${phone}").build() //封装请求
            val responseBody = okHttpClient.newCall(request).execute().body()
            val inputStream = responseBody?.byteStream()
@@ -155,7 +156,10 @@ class VerifyCodeAlertDialog(private val context: Context,var phone:String) {
 
      override fun onPostExecute(result: Bitmap?) {
          super.onPostExecute(result)
-         ivImageCode?.setImageBitmap(result)
+         result?.let {
+             ivImageCode?.setImageBitmap(it)
+         }
+
      }
  }
 

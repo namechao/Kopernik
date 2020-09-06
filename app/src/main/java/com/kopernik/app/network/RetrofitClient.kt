@@ -49,7 +49,7 @@ class RetrofitClient {
                  .client(getOkHttpClient())
                  .build()
     }
-    private fun getOkHttpClient(): OkHttpClient {
+    open fun getOkHttpClient(): OkHttpClient {
         //log相关
         //log相关
         val loggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
