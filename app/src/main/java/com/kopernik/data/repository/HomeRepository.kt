@@ -13,16 +13,21 @@ import com.kopernik.ui.my.bean.InviteFriendsEntity
 import com.kopernik.ui.my.bean.VersionEntity
 import com.kopernik.ui.setting.entity.ContactBean
 import com.kopernik.ui.setting.entity.UpdateBean
+import okhttp3.ResponseBody
+import retrofit2.Call
 
 class HomeRepository private constructor(private val newWork: HomeNetWork):BaseModel(){
-    suspend fun sendCode(phone:String):BaseResult<Any>{
-        return newWork.sendCode(phone)
+    suspend fun sendCode(phone:String,imageCode:String):BaseResult<Any>{
+        return newWork.sendCode(phone,imageCode)
     }
     suspend fun sendEmailCode(phone:String):BaseResult<Any>{
         return newWork.sendEmailCode(phone)
     }
     suspend fun checkPhone(phone:String,verifyCode:String):BaseResult<Any>{
         return newWork.checkPhone(phone,verifyCode)
+    }
+    suspend fun getImageCode(phone:String): Call<ResponseBody> {
+        return newWork.getImageCode(phone)
     }
     suspend fun checkEMail(email:String,verifyCode:String):BaseResult<Any>{
         return newWork.checkEMail(email,verifyCode)

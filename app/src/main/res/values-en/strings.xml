@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_400">Your account has been logged in on another terminal, please log in again</string>
+    <string name="error_400">Your account has been logged out of the current terminal, please log in again</string>
     <string name="error_401">Account already exists</string>
     <string name="error_402">Recommended node account does not exist </string>
     <string name="error_403">Sending failed, please try again later</string>
@@ -11,6 +11,7 @@
     <string name="error_408">The modified phone number already exists, please change the phone number</string>
     <string name="error_409">The modified mailbox already exists, please change the mailbox</string>
     <string name="error_410">The verification failed, please check the name and ID number carefully</string>
+    <string name="error_411">Recipient does not exist</string>
     <string name="error_412">Insufficient handling fee</string>
     <string name="error_413">Insufficient balance</string>
     <string name="error_414">Sold out</string>
@@ -19,6 +20,8 @@
     <string name="error_417">Please set transaction password first</string>
     <string name="error_418">This phone number is not registered</string>
     <string name="error_420">The current network login account number has reached the upper limit, please switch to another network login!</string>
+    <string name="error_421">Image verification code is incorrect</string>
+    <string name="error_422">Page error</string>
     <string name="error_500">Page error</string>
     <string name="error_600">unknown mistake</string>
     <string name="error_exit">Logout failed, please try again later</string>
@@ -309,6 +312,7 @@
     <string name="tip_alert_no_asset_withdrawl">There is no withdrawal balance temporarily</string>
     <string name="tip_alert_no_asset_transfer">There is currently no transferable balance</string>
     <string name="tip_asset_withdraw_success">Successful withdrawal</string>
+    <string name="tip_asset_withdraw_failed">Withdrawal failed</string>
     <string name="success">success</string>
     <string name="pending">Pending</string>
     <string name="transfer_in">Transfer in</string>

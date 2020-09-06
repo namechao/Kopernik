@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@drawable/verfiy_code_alert_bg"
+    app:layout_constraintCircleRadius="10dp"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_22"
+        android:layout_marginBottom="@dimen/dp_22"
+        android:gravity="center"
+        android:text="@string/re_input_code"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/ivImageCode"
+                android:layout_width="104dp"
+                android:layout_height="@dimen/dp_40" />
+            <EditText
+                android:id="@+id/etResult"
+                android:layout_width="91dp"
+                android:layout_height="40dp"
+                android:background="@drawable/google_code_left"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:hint="@string/recycle_input_verify"
+                android:textColorHint="@color/color_665F93"
+                android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:textCursorDrawable="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/tvCount"
+                app:layout_constraintEnd_toEndOf="@+id/btn"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@+id/tvCount"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvCount" />
+
+        </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@color/color_392F55" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.allen.library.SuperButton
+            android:id="@+id/btn_neg"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/close"
+            android:textColor="@color/color_007AFF"
+            android:textSize="16sp"
+            app:sCornersBottomLeftRadius="15dp"
+            app:sSelectorNormalColor="@color/color_24193D"
+            app:sSelectorPressedColor="@color/color_24193D"
+            app:sUseSelector="true" />
+
+        <ImageView
+            android:id="@+id/img_line"
+            android:layout_width="1dp"
+            android:layout_height="43dp"
+            android:background="@color/color_392F55" />
+
+        <com.allen.library.SuperButton
+            android:id="@+id/btn_pos"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:sCornersBottomRightRadius="@dimen/dp_15"
+            android:textColor="@color/color_F6CA00"
+            android:textSize="16sp"
+            app:sSelectorNormalColor="@color/color_24193D"
+            app:sSelectorPressedColor="@color/color_24193D"
+            app:sUseSelector="true"
+            android:enabled="false"
+            android:text="@string/confirm"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

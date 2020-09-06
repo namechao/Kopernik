@@ -6,6 +6,8 @@ import com.aleyn.mvvm.event.SingleLiveEvent
 import com.pcl.mvvm.app.base.BaseResult
 import com.kopernik.data.InjectorUtil
 import com.kopernik.ui.login.bean.AccountBean
+import okhttp3.ResponseBody
+import retrofit2.Call
 
 class RegisterViewModel :BaseViewModel(){
     private val homeRepository by lazy { InjectorUtil.getHomeRepository() }
@@ -14,10 +16,11 @@ class RegisterViewModel :BaseViewModel(){
     private val emailCode = SingleLiveEvent<BaseResult<Any>>()
     private val checkPhoneCode = SingleLiveEvent<BaseResult<Any>>()
     private val checkEmailCode = SingleLiveEvent<BaseResult<Any>>()
+    private val getImageCode = SingleLiveEvent<Call<ResponseBody>>()
 
-    fun sendCode(sendCode:String): SingleLiveEvent<BaseResult<Any>> {
+    fun sendCode(sendCode:String,imageCode:String): SingleLiveEvent<BaseResult<Any>> {
         launchGo({
-            phoneCode.value = homeRepository.sendCode(sendCode)
+            phoneCode.value = homeRepository.sendCode(sendCode,imageCode)
         })
         return phoneCode
     }
@@ -32,6 +35,12 @@ class RegisterViewModel :BaseViewModel(){
             checkPhoneCode.value = homeRepository.checkPhone(phone,verifyCode)
         })
         return checkPhoneCode
+    }
+    fun getImageCode(phone: String): SingleLiveEvent<Call<ResponseBody>> {
+        launchGo({
+            getImageCode.value = homeRepository.getImageCode(phone)
+        })
+        return getImageCode
     }
     fun checkEMail(email: String, verifyCode:String): SingleLiveEvent<BaseResult<Any>> {
         launchGo({

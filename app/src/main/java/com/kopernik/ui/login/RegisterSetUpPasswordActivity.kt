@@ -34,6 +34,7 @@ class RegisterSetUpPasswordActivity :
     private var type=-1
     private var acount=""
     private var invitationCode=""
+    private var verifyCode=""
     private var openEye=false
     private var openEye1=false
     override fun layoutId() = R.layout.activity_set_up_password
@@ -47,6 +48,9 @@ class RegisterSetUpPasswordActivity :
         }
         intent.getStringExtra("invitationCode")?.let {
             invitationCode =it
+        }
+        intent.getStringExtra("verifyCode")?.let {
+            verifyCode =it
         }
         
         etInput?.hint =
@@ -121,7 +125,7 @@ class RegisterSetUpPasswordActivity :
     private fun register() {
         viewModel.run {
             var ipAddress= NetWorkUtils.getIPAddress(true)
-            createAccount(type.toString(),acount,invitationCode,MD5Utils.md5(MD5Utils.md5(etInput?.text.toString().trim())),ipAddress).observe(this@RegisterSetUpPasswordActivity, androidx.lifecycle.Observer {
+            createAccount(type.toString(),acount,invitationCode,MD5Utils.md5(MD5Utils.md5(etInput?.text.toString().trim())),ipAddress,verifyCode).observe(this@RegisterSetUpPasswordActivity, androidx.lifecycle.Observer {
              if (it.status==200){
                  UserConfig.singleton?.accountBean=it.data.user
                  ToastUtils.showShort(this@RegisterSetUpPasswordActivity,this@RegisterSetUpPasswordActivity.getString(R.string.register_success))

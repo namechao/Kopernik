@@ -6,10 +6,11 @@ import com.kopernik.data.service.HomeService
 class HomeNetWork {
     private val mService by lazy { RetrofitClient.getInstance().create(HomeService::class.java) }
 
-    suspend fun sendCode(phone: String) = mService.sendCode(phone)
+    suspend fun sendCode(phone: String,imageCode:String) = mService.sendCode(phone,imageCode)
     suspend fun sendEmailCode(phone: String) = mService.sendEmailCode(phone)
     suspend fun checkPhone(phone: String, verifyCode:String) = mService.checkPhone(phone,verifyCode)
     suspend fun checkEMail(email: String, verifyCode:String) = mService.checkEMail(email,verifyCode)
+    suspend fun getImageCode(phone: String) = mService.getImageCode(phone)
     suspend fun createAccount(map: Map<String, String>) = mService.createAccount(map)
     suspend fun forgetPassword(map: Map<String, String>) = mService.forgetPassword(map)
     suspend fun login(map: Map<String, String>) = mService.login(map)

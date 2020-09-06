@@ -94,12 +94,13 @@ object LaunchConfig {
     }
 
     fun startRegisterSetUpPasswordActivity(
-        context: Activity,type:Int,acount:String,invitationCode:String
+        context: Activity,type:Int,acount:String,invitationCode:String,verifyCode:String
     ) {
         val intent = Intent(context, RegisterSetUpPasswordActivity::class.java)
         intent.putExtra("type",type)
         intent.putExtra("acount",acount)
         intent.putExtra("invitationCode",invitationCode)
+        intent.putExtra("verifyCode",verifyCode)
         context.startActivityForResult(intent,12)
     }
 

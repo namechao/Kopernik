@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.dialog.VerifyCodeAlertDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.adapter.ChoseAreaAdapter
@@ -29,6 +30,7 @@ import kotlinx.android.synthetic.main.activity_forget_password.ivPhoneHead
 import kotlinx.android.synthetic.main.activity_forget_password.llHeader
 import kotlinx.android.synthetic.main.activity_forget_password.tvCode
 import kotlinx.android.synthetic.main.activity_forget_password.tvPhoneHead
+import kotlinx.android.synthetic.main.activity_register.*
 import java.util.ArrayList
 
 class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBinding>() {
@@ -88,15 +90,25 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
                     ToastUtils.showShort(this, resources.getString(R.string.verify_phone_error))
                     return@setOnClickListener
                 }
-                viewModel.run {
-                    sendCode(etInput.text.toString().trim()).observeForever {
-                        if (it.status == 200) {
-                            timer.start()
-                        } else {
-                            ErrorCode.showErrorMsg(this@ForgetPasswordActivity, it.status)
+                VerifyCodeAlertDialog(this@ForgetPasswordActivity,etInput.text.toString().trim())
+                    .setCancelable(false)
+                    .setPositiveButton(object : VerifyCodeAlertDialog.RequestListener{
+                        override fun onRequest(imageVerifyCode: String) {
+                            viewModel.run {
+                                sendCode(etInput.text.toString().trim(),imageVerifyCode).observe(this@ForgetPasswordActivity,
+                                    Observer {
+                                            if (it.status == 200) {
+                                                timer.start()
+                                            } else {
+                                                ErrorCode.showErrorMsg(this@ForgetPasswordActivity, it.status)
+                                            }
+                                    })
+                            }
                         }
-                    }
-                }
+
+                    })
+                    .show()
+
             }else{//邮箱获取验证码
                 if (etInput.text.toString().trim().isNullOrEmpty()) {
                     ToastUtils.showShort(this, resources.getString(R.string.email_not_empty))

@@ -16,12 +16,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.dialog.VerifyCodeAlertDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.adapter.ChoseAreaAdapter
 import com.kopernik.ui.login.bean.LoginCountryBean
 import com.kopernik.ui.login.viewmodel.RegisterViewModel
+import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_trade_password.*
+import kotlinx.android.synthetic.main.activity_trade_password.confirmBtn
+import kotlinx.android.synthetic.main.activity_trade_password.etInput
+import kotlinx.android.synthetic.main.activity_trade_password.icClear
+import kotlinx.android.synthetic.main.activity_trade_password.ivPhoneHead
+import kotlinx.android.synthetic.main.activity_trade_password.llHeader
+import kotlinx.android.synthetic.main.activity_trade_password.tvCode
+import kotlinx.android.synthetic.main.activity_trade_password.tvPhoneHead
 import java.util.ArrayList
 
 class ForgetTradePasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBinding>() {
@@ -82,15 +91,26 @@ class ForgetTradePasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataB
                     ToastUtils.showShort(this, resources.getString(R.string.verify_phone_error))
                     return@setOnClickListener
                 }
-                viewModel.run {
-                    sendCode(etInput.text.toString().trim()).observeForever {
-                        if (it.status == 200) {
-                            timer.start()
-                        } else {
-                            ErrorCode.showErrorMsg(this@ForgetTradePasswordActivity, it.status)
+                VerifyCodeAlertDialog(this@ForgetTradePasswordActivity,etInput.text.toString().trim())
+                    .setCancelable(false)
+                    .setPositiveButton(object : VerifyCodeAlertDialog.RequestListener{
+                        override fun onRequest(imageVerifyCode: String) {
+                            viewModel.run {
+                                sendCode(etInput.text.toString().trim(),imageVerifyCode).observe(this@ForgetTradePasswordActivity,
+                                    Observer {
+                                            if (it.status == 200) {
+                                                timer.start()
+                                            } else {
+                                                ErrorCode.showErrorMsg(this@ForgetTradePasswordActivity, it.status)
+                                            }
+
+                                    })
+                            }
                         }
-                    }
-                }
+
+                    })
+                    .show()
+
             }else{//邮箱获取验证码
                 if (etInput.text.toString().trim().isNullOrEmpty()) ToastUtils.showShort(this, resources.getString(R.string.email_not_empty))
                 if (!etInput.text.toString()

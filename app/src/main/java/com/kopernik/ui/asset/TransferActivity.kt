@@ -125,6 +125,7 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
             transfer(map).observe(this@TransferActivity, Observer {
                 if (it.status==200){
                     ToastUtils.showShort(this@TransferActivity,resources.getString(R.string.tip_asset_transfer_success))
+                    this@TransferActivity.finish()
                 }else{
                     ErrorCode.showErrorMsg(this@TransferActivity,it.status)
                 }

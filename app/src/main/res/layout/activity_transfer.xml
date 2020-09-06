@@ -123,7 +123,7 @@
                 android:maxLines="1"
                 android:textCursorDrawable="@null"
                 android:ellipsize="end"
-                android:inputType="number"
+                android:inputType="text"
                 android:textColor="@color/title_black"
                 android:textColorHint="@color/color_AA9CCA"
                 android:background="@drawable/signature_edit_bg"

@@ -1,11 +1,14 @@
 package com.kopernik.ui.login
 
 
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.InputType
 import android.text.InputType.TYPE_CLASS_TEXT
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +27,11 @@ import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.base.NewFullScreenBaseActivity
 import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.ChoseAreaCodeDialog
+import com.kopernik.app.dialog.ExchangeDialog
+import com.kopernik.app.dialog.ExitAlertDialog
+import com.kopernik.app.dialog.VerifyCodeAlertDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.adapter.ChoseAreaAdapter
@@ -47,6 +54,10 @@ import kotlinx.android.synthetic.main.activity_register.tvPhoneRegister
 import kotlinx.android.synthetic.main.activity_register.tvPhoneRegisterLine
 import kotlinx.android.synthetic.main.activity_register.tvSeekBar
 import kotlinx.android.synthetic.main.activity_register.tvVerifySu
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.ArrayList
 
 
@@ -109,15 +120,27 @@ class RegisterActivity : NewFullScreenBaseActivity<RegisterViewModel, ViewDataBi
                     ToastUtils.showShort(this, resources.getString(R.string.verify_phone_error))
                     return@setOnClickListener
                 }
-                viewModel.run {
-                    sendCode(etInput.text.toString().trim()).observeForever {
-                        if (it.status == 200) {
-                            timer.start()
-                        } else {
-                            ToastUtils.showShort(this@RegisterActivity, it.errorMsg)
+                VerifyCodeAlertDialog(this@RegisterActivity,etInput.text.toString().trim())
+                    .setCancelable(false)
+                    .setPositiveButton(object :VerifyCodeAlertDialog.RequestListener{
+                        override fun onRequest(imageVerifyCode: String) {
+                            viewModel.run {
+                       sendCode(etInput.text.toString().trim(),imageVerifyCode).observe(this@RegisterActivity,
+                           Observer {
+                                   if (it.status == 200) {
+                                       timer.start()
+                                   } else {
+                                       ToastUtils.showShort(this@RegisterActivity, it.errorMsg)
+                                   }
+                           })
+                      }
+
                         }
-                    }
-                }
+
+                    })
+                    .show()
+
+
             }else{//邮箱获取验证码
                 if (etInput.text.toString().trim().isNullOrEmpty()) {
                     ToastUtils.showShort(this, resources.getString(R.string.email_not_empty))
@@ -212,7 +235,8 @@ override fun initData() {
                  1,
                      etInput.text.toString().trim()
                  ,
-                     etInviteCode.text.toString().trim()
+                     etInviteCode.text.toString().trim(),
+                     verifyCode.text.toString().trim()
                  )
              } else {
                  ErrorCode.showErrorMsg(this@RegisterActivity, it.status)
@@ -245,7 +269,8 @@ override fun initData() {
                          2,
                          etInput.text.toString().trim()
                          ,
-                         etInviteCode.text.toString().trim()
+                         etInviteCode.text.toString().trim(),
+                         verifyCode.text.toString().trim()
                      )
                  } else {
                      ErrorCode.showErrorMsg(this@RegisterActivity, it.status)

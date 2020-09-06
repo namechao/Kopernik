@@ -46,14 +46,12 @@
         <activity android:name=".ui.Ecology.ChooseNodeLogoActivity"  android:screenOrientation="portrait" />
         <activity android:name=".ui.Ecology.NodeRegisterActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.Ecology.VoteOperateActivity"   android:screenOrientation="portrait"/>
-        <activity android:name=".ui.Ecology.MyVoteActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.setting.ExportMnemonicSuccessActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.setting.ExportMnemonicActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.setting.ModifyPassActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.setting.ModifyNickActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.setting.SecurityActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.setting.InviteAddressActivity"   android:screenOrientation="portrait"/>
-        <activity android:name=".ui.setting.SwitchAccountActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.setting.VersionActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.my.AboutUsActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.my.SettingActivity"   android:screenOrientation="portrait"/>

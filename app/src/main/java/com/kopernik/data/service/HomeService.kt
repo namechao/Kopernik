@@ -11,6 +11,8 @@ import com.kopernik.ui.my.bean.InviteFriendsEntity
 import com.kopernik.ui.my.bean.VersionEntity
 import com.kopernik.ui.setting.entity.ContactBean
 import com.kopernik.ui.setting.entity.UpdateBean
+import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.http.*
 
 /**
@@ -21,7 +23,7 @@ import retrofit2.http.*
 interface HomeService {
     @FormUrlEncoded
     @POST("user/sendPhone")
-    suspend fun sendCode(@Field("phone") phone:String):BaseResult<Any>
+    suspend fun sendCode(@Field("phone") phone:String,@Field("imageCode") imageCode:String):BaseResult<Any>
     @FormUrlEncoded
     @POST("user/sendMail")
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
@@ -43,6 +45,10 @@ interface HomeService {
     @FormUrlEncoded
     @POST("user/login")
     suspend fun login(@FieldMap map: Map<String, String>): BaseResult<AccountBean>
+    //随机生成图片验证码
+    @Streaming
+    @GET("user/getImageCode")
+    suspend fun getImageCode(@Query("phone") phone:String): Call<ResponseBody>
     //邀请好友
     @FormUrlEncoded
     @POST("user/inviteFriends")
@@ -63,6 +69,7 @@ interface HomeService {
     //获取联系人列表
     @GET("register/getcontacts")
     suspend fun getContacts(): BaseResult<ContactBean>
+
 
     //获取首页数据
     @GET("home/home")
