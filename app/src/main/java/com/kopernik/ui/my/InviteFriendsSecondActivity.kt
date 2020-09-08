@@ -31,7 +31,7 @@ class InviteFriendsSecondActivity : NewBaseActivity<InviteFriendsViewModel, View
     override fun initData() {
         smartRefreshLayout.setOnRefreshLoadMoreListener(object:OnRefreshLoadMoreListener{
             override fun onLoadMore(refreshLayout: RefreshLayout) {
-
+                getList()
             }
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 pagerNumber=1
@@ -42,7 +42,7 @@ class InviteFriendsSecondActivity : NewBaseActivity<InviteFriendsViewModel, View
         }
   private  fun getList(){
       viewModel.run {
-          var map= mapOf("pageNumber" to "1" ,"pageSize" to "10","uid" to uid)
+          var map= mapOf("pageNumber" to pagerNumber.toString() ,"pageSize" to "10","uid" to uid)
           inviteFriendsSecond(map).observe(this@InviteFriendsSecondActivity, Observer {
               if (it.status == 200) {
 

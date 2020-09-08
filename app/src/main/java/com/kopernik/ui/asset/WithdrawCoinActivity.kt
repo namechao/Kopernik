@@ -133,12 +133,7 @@ companion object{
                         getString(R.string.tip_asset_withdraw_success)
                     );
                     this@WithdrawCoinActivity.finish()
-                } else if (it.status==423) {
-                    ToastUtils.showShort(
-                        this@WithdrawCoinActivity,
-                        getString(R.string.tip_asset_withdraw_failed)
-                    );
-                }else{
+                } else{
                     ErrorCode.showErrorMsg(getActivity(), it.status)
                 }
 

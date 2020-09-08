@@ -20,8 +20,11 @@
     <string name="error_417">Please set transaction password first</string>
     <string name="error_418">This phone number is not registered</string>
     <string name="error_420">The current network login account number has reached the upper limit, please switch to another network login!</string>
-    <string name="error_421">Image verification code is incorrect</string>
-    <string name="error_422">Page error</string>
+    <string name="error_421">Image verification code has expired</string>
+    <string name="error_422">Image verification code is incorrect</string>
+    <string name="error_423">Withdrawal failed</string>
+    <string name="error_424">Account freeze</string>
+    <string name="error_425">Incorrect password, lock for 1 hour</string>
     <string name="error_500">Page error</string>
     <string name="error_600">unknown mistake</string>
     <string name="error_exit">Logout failed, please try again later</string>
@@ -312,7 +315,7 @@
     <string name="tip_alert_no_asset_withdrawl">There is no withdrawal balance temporarily</string>
     <string name="tip_alert_no_asset_transfer">There is currently no transferable balance</string>
     <string name="tip_asset_withdraw_success">Successful withdrawal</string>
-    <string name="tip_asset_withdraw_failed">Withdrawal failed</string>
+
     <string name="success">success</string>
     <string name="pending">Pending</string>
     <string name="transfer_in">Transfer in</string>

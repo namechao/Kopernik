@@ -31,6 +31,9 @@ object ErrorCode {
         msg[420] = context.getString(R.string.error_420)
         msg[421] = context.getString(R.string.error_421)
         msg[422] = context.getString(R.string.error_422)
+        msg[423] = context.getString(R.string.error_423)
+        msg[424] = context.getString(R.string.error_424)
+        msg[425] = context.getString(R.string.error_425)
         msg[600] = context.getString(R.string.error_600)
 
     }
