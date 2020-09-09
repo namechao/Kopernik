@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.allen.library.SuperTextView
 import com.chad.library.adapter.base.BaseViewHolder
 import com.kopernik.R
@@ -83,8 +84,9 @@ class PurchaseMiningMachineHolder(view: View?) : BaseViewHolder(view) {
           if (field==null) field=itemView.findViewById(R.id.tv_precent)
           return field
       }
-
-
-
-
+    var clIneffect: ConstraintLayout?=null
+      get() {
+          if (field==null) field=itemView.findViewById(R.id.cl_ineffect)
+          return field
+      }
 }

@@ -3,8 +3,10 @@ package com.kopernik.ui.mine.adapter
 
 import android.R.attr.width
 import android.util.Log
+import android.view.View
 import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import androidx.core.content.ContextCompat
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.kopernik.R
 import com.kopernik.app.utils.BigDecimalUtils
@@ -56,6 +58,16 @@ class RuntimeMiningMAdapter(
         var process=BigDecimalUtils.multiply(BigDecimalUtils.roundDOWN(value.toString(),2),"100")
         helper?.progressBar?.progress=process.toInt()
         helper?.tvPrecent?.text="${process.toInt()}%"
+        if (item?.status=="3"){
+            helper?.clIneffect?.visibility=View.VISIBLE
+            helper?.tvMiningType?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
+            helper?.tvMiningPrice?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
+            helper?.tvMiningSpeed?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
+            helper?.tvWaveCounts?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
+            helper?.tvMningTime?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
+            helper?.tvMiningCounts?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
+            helper?.tvPrecent?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
+        }
 
     }
 

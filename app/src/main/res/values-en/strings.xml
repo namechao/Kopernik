@@ -110,6 +110,7 @@
     <string name="save_to_picture">Save to album</string>
     <string name="save_to_picture_success">Saved to album</string>
     <!--    矿场相关-->
+    <string name="mine_ineffect">Mining machine is not valid</string>
     <string name="i_know">I know</string>
     <string name="income">Cumulative income(UTDM)</string>
     <string name="synthesis_utc">Synthetic UTC</string>
