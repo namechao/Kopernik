@@ -15,7 +15,9 @@ class UYTDepositWithdrawlAssetAdapter(
     override fun convert(holder: UYTAssetViewHolder, item: DepositWithdarwlRecord?) {
         item?.operate?.let {
             if (it.contains("Recharge"))
-            holder.typeTv?.text=mContext.getString(R.string.title_asset_deposit)  else if (it.contains("Cash"))  holder.typeTv?.text=mContext.getString(R.string.title_asset_withdrawl)
+                holder.typeTv?.text =
+                    mContext.getString(R.string.title_asset_deposit) else if (it.contains("Cash")) holder.typeTv?.text =
+                mContext.getString(R.string.title_asset_withdrawl)
         }
         holder.txHashSpt?.setLeftString(item?.extrinsicHash)
         holder.txHashSpt?.setRightImageViewClickListener {
@@ -37,8 +39,17 @@ class UYTDepositWithdrawlAssetAdapter(
             }
         }
         holder.valueSpt?.setLeftString(item?.amount)
-            if ( item?.flag!=null&&item.flag==2) {
+//        0:待确认 1：审核通过  2：成功 3.确认失败 4.提现失败
+            if (item?.flag!=null&&item.flag==0){
+                holder.stausSpt?.setLeftString(mContext.getString(R.string.to_be_confirmed))
+            }else if (item?.flag!=null&&item.flag==1){
+                holder.stausSpt?.setLeftString(mContext.getString(R.string.examinations_passed))
+            }else if ( item?.flag!=null&&item.flag==2) {
                 holder.stausSpt?.setLeftString(mContext.getString(R.string.success))
+            }else if(item?.flag!=null&&item.flag==3){
+                holder.stausSpt?.setLeftString(mContext.getString(R.string.confirmation_failed))
+            }else if(item?.flag!=null&&item.flag==4){
+                holder.stausSpt?.setLeftString(mContext.getString(R.string.withdrawal_failed))
             }
         holder.timeSpt?.setLeftString( TimeUtils.normalTimeStampToMinute(item?.createTime?.toString()))
     }

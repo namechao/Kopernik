@@ -318,7 +318,10 @@
     <string name="tip_asset_withdraw_success">Successful withdrawal</string>
 
     <string name="success">success</string>
-    <string name="pending">Pending</string>
+    <string name="to_be_confirmed">to be confirmed</string>
+    <string name="examinations_passed">examination passed</string>
+    <string name="confirmation_failed">Confirmation failed</string>
+    <string name="withdrawal_failed">Withdrawal failed</string>
     <string name="transfer_in">Transfer in</string>
     <string name="transfer_out">Transfer out</string>
 </resources>

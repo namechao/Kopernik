@@ -781,7 +781,10 @@
    <string name="tip_alert_no_asset_transfer">暂时没有可转账余额</string>
    <string name="tip_asset_withdraw_success">提币成功</string>
    <string name="success">成功</string>
-   <string name="pending">待审核</string>
+   <string name="to_be_confirmed">待确认</string>
+   <string name="examinations_passed">审核通过</string>
+   <string name="confirmation_failed">确认失败</string>
+   <string name="withdrawal_failed">提现失败</string>
    <string name="transfer_in">转入</string>
    <string name="transfer_out">转出</string>
 
