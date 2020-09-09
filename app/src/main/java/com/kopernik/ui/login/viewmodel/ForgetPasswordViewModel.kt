@@ -13,12 +13,13 @@ class ForgetPasswordViewModel : BaseViewModel() {
     private val accountBean = SingleLiveEvent<BaseResult<Any>>()
 
     fun forgetPassword(
-        type: String, acount: String, pwd:String): SingleLiveEvent<BaseResult<Any>> {
+        type: String, acount: String, pwd:String,verifyCode:String): SingleLiveEvent<BaseResult<Any>> {
         launchGo({
             var map = mapOf(
                 "type" to type,
                 "acount" to acount,
-                "pwd" to pwd
+                "pwd" to pwd,
+                "verifyCode" to verifyCode
             )
             accountBean.value = homeRepository.forgetPassword(map)
         })

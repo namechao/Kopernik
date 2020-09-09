@@ -30,19 +30,22 @@ object LaunchConfig {
         context.startActivity(intent)
     }
 
-    fun startForgetPasswordNextActivity(context: Activity ,registerType: Int,changePasswordType:Int,account:String) {
+    fun startForgetPasswordNextActivity(context: Activity ,registerType: Int,changePasswordType:Int,account:String,verifyCode: String) {
         val intent =
             Intent(context, ForgetPasswordNextActivity::class.java)
         intent.putExtra("registerType",registerType)
         intent.putExtra("account",account)
         intent.putExtra("changePasswordType",changePasswordType)
+        intent.putExtra("verifyCode",verifyCode)
         context.startActivityForResult(intent,10)
     }
 
-    fun startTradePasswordNextActivity(context: Activity,changeTradePasswordType:Int) {
+    fun startTradePasswordNextActivity(context: Activity,registerType:String,changeTradePasswordType:Int,verifyCode: String) {
         val intent =
             Intent(context, ForgetTradePasswordNextActivity::class.java)
+            intent.putExtra("registerType",registerType)
             intent.putExtra("changeTradePasswordType",changeTradePasswordType)
+            intent.putExtra("verifyCode",verifyCode)
         context.startActivityForResult(intent,13)
     }
    fun startGoogleVerifyFirstStepActivity(context: Context) {

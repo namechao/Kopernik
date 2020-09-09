@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.VerifyCodeAlertDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.ToastUtils
@@ -25,18 +26,21 @@ import com.kopernik.ui.login.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.activity_forget_password.*
 import kotlinx.android.synthetic.main.activity_forget_password.confirmBtn
 import kotlinx.android.synthetic.main.activity_forget_password.etInput
+import kotlinx.android.synthetic.main.activity_forget_password.etVerifyCode
 import kotlinx.android.synthetic.main.activity_forget_password.icClear
 import kotlinx.android.synthetic.main.activity_forget_password.ivPhoneHead
 import kotlinx.android.synthetic.main.activity_forget_password.llHeader
 import kotlinx.android.synthetic.main.activity_forget_password.tvCode
 import kotlinx.android.synthetic.main.activity_forget_password.tvPhoneHead
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_trade_password.*
 import java.util.ArrayList
 
 class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBinding>() {
 
     private  var registerType=-1
     private  var changePasswordType=-1
+    private  var phoneNumber=""
     override fun layoutId()=R.layout.activity_forget_password
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -47,6 +51,9 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
             setTitle(resources.getString(R.string.login_forget_psw))
         }else{
             setTitle(resources.getString(R.string.login_change_password))
+            llHeader.isEnabled=false
+            icClear.visibility=View.GONE
+            etInput.isEnabled=false
         }
         intent.getIntExtra("registerType",-1)?.let{
             registerType=it
@@ -58,6 +65,15 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
             etInput.hint=resources.getString(R.string.login_input_phone_hint)
             llHeader.visibility= View.VISIBLE
             etInput.setText("")
+            if (changePasswordType==2){
+                var phone= UserConfig.singleton?.accountBean?.phone
+                if (phone!=null){
+                    phoneNumber=phone
+                    if (phone.length>5){
+                        etInput.setText("${phone.subSequence(0,3)}****${phone.subSequence(phone.length-4,phone.length)}")
+                    }
+                }
+            }
         }else {
             //邮箱登录
                 etInput.hint = resources.getString(R.string.login_input_email_hint)
@@ -65,6 +81,13 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
             etInput.hint=resources.getString(R.string.login_input_email_hint)
                 etInput.setText("")
                 llHeader.visibility = View.GONE
+            if (changePasswordType==2){
+                var email= UserConfig.singleton?.accountBean?.email
+                if (email!=null){
+                    phoneNumber=email
+                    etInput.setText(email)
+                }
+            }
         }
         //清除按钮
         icClear.setOnClickListener {
@@ -76,26 +99,26 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
         }
         //获取验证码
         tvCode.setOnClickListener {
-
+            if (changePasswordType==1){
+                phoneNumber=etInput.text.toString().trim()
+            }
             //手机登录
             if (registerType==1) {
-                if (etInput.text.toString().trim().isNullOrEmpty()) {
+                if (phoneNumber.isNullOrEmpty()) {
                     ToastUtils.showShort(this, resources.getString(R.string.phone_not_empty))
                 return@setOnClickListener
                 }
-                if (!etInput.text.toString()
-                        .trim().matches(
-                            Regex("1[0-9]{10}"))
+                if (!phoneNumber.matches(Regex("1[0-9]{10}"))
                 ) {
                     ToastUtils.showShort(this, resources.getString(R.string.verify_phone_error))
                     return@setOnClickListener
                 }
-                VerifyCodeAlertDialog(this@ForgetPasswordActivity,etInput.text.toString().trim())
+                VerifyCodeAlertDialog(this@ForgetPasswordActivity,phoneNumber)
                     .setCancelable(false)
                     .setPositiveButton(object : VerifyCodeAlertDialog.RequestListener{
                         override fun onRequest(imageVerifyCode: String) {
                             viewModel.run {
-                                sendCode(etInput.text.toString().trim(),imageVerifyCode).observe(this@ForgetPasswordActivity,
+                                sendCode(phoneNumber,imageVerifyCode).observe(this@ForgetPasswordActivity,
                                     Observer {
                                             if (it.status == 200) {
                                                 timer.start()
@@ -110,20 +133,18 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
                     .show()
 
             }else{//邮箱获取验证码
-                if (etInput.text.toString().trim().isNullOrEmpty()) {
+                if (phoneNumber.isNullOrEmpty()) {
                     ToastUtils.showShort(this, resources.getString(R.string.email_not_empty))
                     return@setOnClickListener
                 }
-                if (!etInput.text.toString()
-                        .trim().matches(
-                            Regex("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}"))
+                if (!phoneNumber.matches(Regex("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}"))
                 ) {
                     ToastUtils.showShort(this, resources.getString(R.string.verify_email_error))
                     return@setOnClickListener
                 }
 
                 viewModel.run {
-                    sendEmailCode(etInput.text.toString().trim()).observeForever {
+                    sendEmailCode(phoneNumber).observeForever {
                         if (it.status == 200) {
                             timer.start()
                         } else {
@@ -136,15 +157,16 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
         }
         //下一步按钮
         confirmBtn.setOnClickListener {
+            if (changePasswordType==1){
+                phoneNumber=etInput.text.toString().trim()
+            }
             if (registerType==1){
                 //手机号不为空
-                if (etInput.text.toString().trim().isNullOrEmpty()){
+                if (phoneNumber.isNullOrEmpty()){
                     ToastUtils.showShort(this, resources.getString(R.string.phone_not_empty))
                     return@setOnClickListener
                 }
-                if (!etInput.text.toString()
-                        .trim().matches(
-                            Regex("1[0-9]{10}"))
+                if (!phoneNumber.matches(Regex("1[0-9]{10}"))
                 ) {
                     ToastUtils.showShort(this, resources.getString(R.string.verify_phone_error))
                     return@setOnClickListener
@@ -159,12 +181,13 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
                     return@setOnClickListener
                 }
                 viewModel.run {
-                    checkPhone(etInput.text.toString().trim(),etVerifyCode.text.toString().trim()).observe(this@ForgetPasswordActivity, Observer {
+                    checkPhone(phoneNumber,etVerifyCode.text.toString().trim()).observe(this@ForgetPasswordActivity, Observer {
                         if (it.status == 200) {
                             LaunchConfig.startForgetPasswordNextActivity(this@ForgetPasswordActivity,
                                 1,
                                 changePasswordType,
-                                etInput.text.toString().trim()
+                                phoneNumber,
+                                etVerifyCode.text.toString().trim()
                             )
                         } else {
                             ErrorCode.showErrorMsg(this@ForgetPasswordActivity, it.status)
@@ -173,10 +196,8 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
                 }
             }else{
                 //邮箱不为空
-                if (etInput.text.toString().trim().isNullOrEmpty()) ToastUtils.showShort(this, resources.getString(R.string.email_not_empty))
-                if (!etInput.text.toString()
-                        .trim().matches(
-                            Regex("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}"))
+                if (phoneNumber.isNullOrEmpty()) ToastUtils.showShort(this, resources.getString(R.string.email_not_empty))
+                if (!phoneNumber.matches(Regex("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}"))
                 ) {
                     ToastUtils.showShort(this, resources.getString(R.string.verify_email_error))
                     return@setOnClickListener
@@ -191,12 +212,13 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
                     return@setOnClickListener
                 }
                 viewModel.run {
-                    checkEMail(etInput.text.toString().trim(),etVerifyCode.text.toString().trim()).observe(this@ForgetPasswordActivity, Observer {
+                    checkEMail(phoneNumber,etVerifyCode.text.toString().trim()).observe(this@ForgetPasswordActivity, Observer {
                         if (it.status == 200) {
                             LaunchConfig.startForgetPasswordNextActivity(this@ForgetPasswordActivity,
                                 2,
                                 changePasswordType,
-                                etInput.text.toString().trim()
+                                phoneNumber,
+                                etVerifyCode.text.toString().trim()
                             )
                         } else {
                             ErrorCode.showErrorMsg(this@ForgetPasswordActivity, it.status)

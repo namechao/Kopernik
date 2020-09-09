@@ -5,13 +5,13 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         release {
-            storeFile file('F:\\AndroidProject\\Project\\Kopernik\\kopernik.keystore')
+            storeFile file('/Users/zhanglichao/AndroidProject/Kopernik/kopernik.keystore')
             storePassword '123456'
             keyAlias 'kopernik'
             keyPassword '123456'
         }
         debug {
-            storeFile file('F:\\AndroidProject\\Project\\Kopernik\\kopernik.keystore')
+            storeFile file('/Users/zhanglichao/AndroidProject/Kopernik/kopernik.keystore')
             storePassword '123456'
             keyAlias 'kopernik'
             keyPassword '123456'
@@ -40,9 +40,6 @@ android {
     }
     buildTypes {
         debug{
-            minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {

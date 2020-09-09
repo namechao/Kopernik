@@ -24,10 +24,18 @@ class ForgetTradePasswordNextActivity : NewBaseActivity<ForgetTradePasswordViewM
     private var openEye=false
     private var openEye1=false
    var  changeTradePasswordType=-1
+    var verifyCode=""
+    var registerType=""
     override fun layoutId()=R.layout.activity_trade_password_next
     override fun initView(savedInstanceState: Bundle?) {
         intent.getIntExtra("changeTradePasswordType",-1)?.let {
             changeTradePasswordType=it
+        }
+        intent.getStringExtra("verifyCode")?.let {
+            verifyCode=it
+        }
+        intent.getStringExtra("registerType")?.let {
+            registerType=it
         }
         if (changeTradePasswordType==1) {
             setTitle(resources.getString(R.string.title_set_trade_psw))
@@ -97,7 +105,7 @@ class ForgetTradePasswordNextActivity : NewBaseActivity<ForgetTradePasswordViewM
     //导入网络请求
     private fun setTradePsw() {
         viewModel.run {
-            var map= mapOf("pwd" to MD5Utils.md5(MD5Utils.md5(etTradeInput.text.toString().trim())) )
+            var map= mapOf("pwd" to MD5Utils.md5(MD5Utils.md5(etTradeInput.text.toString().trim())),"type" to registerType ,"verifyCode" to verifyCode)
             changeTradePsw(map).observe(this@ForgetTradePasswordNextActivity, androidx.lifecycle.Observer {
                 if (it.status==200){
                     if (changeTradePasswordType==1)

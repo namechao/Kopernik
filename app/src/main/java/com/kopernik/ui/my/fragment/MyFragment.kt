@@ -66,15 +66,16 @@ class MyFragment : NewBaseFragment<MyViewModel, ViewDataBinding>() {
     override fun layoutId() = R.layout.fragment_my
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        UserConfig.singleton?.accountBean?.phone?.let {
-            if (it.length>5){
-                tvPhoneNumber.text="${it.subSequence(0,3)}****${it.subSequence(it.length-4,it.length)}"
+       var phone= UserConfig.singleton?.accountBean?.phone
+        var email=UserConfig.singleton?.accountBean?.email
+        if (phone!=null){
+            if (phone.length>5){
+                tvPhoneNumber.text="${phone.subSequence(0,3)}****${phone.subSequence(phone.length-4,phone.length)}"
             }
+        }else if (email!=null){
+            tvPhoneNumber.text=email
+        }
 
-        }
-        UserConfig.singleton?.accountBean?.email?.let {
-            tvPhoneNumber.text=it
-        }
         UserConfig.singleton?.accountBean?.uid?.let {
             tvId.text="ID："+it
         }
