@@ -72,7 +72,7 @@ class WithdrawlDialog : DialogFragment(),
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
         }
-
+        KeyboardUtils.showKeyboard(passwordEt)
         okBtn?.setOnClickListener(clickFastListener)
     }
 

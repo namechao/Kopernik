@@ -10,7 +10,9 @@ import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
+import com.kopernik.app.dialog.GetUtkDialog
 import com.kopernik.app.dialog.PurchaseDialog
+import com.kopernik.app.dialog.ReminderDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.app.utils.ToastUtils
@@ -145,7 +147,11 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
         }
         var map= mapOf("uid" to uid ,"type" to type)
         buyMineMachine(map).observe(this@PurchaseMiningMachineryActivity, Observer {
-            if (it.status==200) ToastUtils.showShort(this@PurchaseMiningMachineryActivity,getString(R.string.purchase_success))else   ErrorCode.showErrorMsg(getActivity(), it.status)
+            if (it.status==200)
+                ReminderDialog(this@PurchaseMiningMachineryActivity)
+                    .setCancelable(true)
+                    .show()
+            else   ErrorCode.showErrorMsg(getActivity(), it.status)
         })
         }
     }

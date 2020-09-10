@@ -19,6 +19,7 @@
     <string name="error_416">Unfortunately, it’s not time to pick up</string>
     <string name="error_417">Please set transaction password first</string>
     <string name="error_418">This phone number is not registered</string>
+    <string name="error_419">data error</string>
     <string name="error_420">The current network login account number has reached the upper limit, please switch to another network login!</string>
     <string name="error_421">Image verification code has expired</string>
     <string name="error_422">Image verification code is incorrect</string>
@@ -112,6 +113,7 @@
     <!--    矿场相关-->
     <string name="mine_ineffect">Mining machine is not valid</string>
     <string name="i_know">I know</string>
+    <string name="reminder_msg">48 hours later, the hashrate will be turned on at one o'clock in the morning and the miner level will be displayed</string>
     <string name="income">Cumulative income(UTDM)</string>
     <string name="synthesis_utc">Synthetic UTC</string>
     <string name="synthesis_bt">synthesis</string>
@@ -121,7 +123,7 @@
     <string name="ic_mm_tip2">100% mining efficiency</string>
     <string name="ic_mm_tip3">Daily income</string>
     <string name="ic_mm_tip4">No threshold mechanism</string>
-    <string name="purchase_mm">Buy miner</string>
+    <string name="purchase_mm">Reserve a miner</string>
     <string name="runtime_mm">Run miner</string>
     <string name="out_time_mm">Expired miners</string>
     <string name="balance_not_enough">（Insufficient current balance）</string>
@@ -142,15 +144,15 @@
     <string name="mining_machine_type6">Super miner</string>
     <string name="mining_machine_unit">station</string>
     <string name="current_exchange_precent">UTDM needs to be consumed to synthesize UTC</string>
-    <string name="purchase_success">Successful purchase</string>
+    <string name="purchase_success">Appointment successful</string>
     <string name="recvice_error">UTK is currently not available</string>
     <string name="recvice_time_tip">The collection time is</string>
     <string name="recvice_success">Successfully received</string>
     <string name="recvice_not_time">It’s not time to receive it!</string>
     <string name="button_purchase_over">over</string>
     <string name="button_purchase_not_open">Not yet open</string>
-    <string name="title_purchase_mm">Buy miner</string>
-    <string name="button_purchase">buy</string>
+    <string name="title_purchase_mm">Reserve a miner</string>
+    <string name="button_purchase">reservation</string>
     <string name="button_purchase_none">Sold out</string>
     <string name="recycle_input_verify">Please enter verification</string>
     <string name="utc_max_counts">The maximum number of synthesizers has been reached</string>

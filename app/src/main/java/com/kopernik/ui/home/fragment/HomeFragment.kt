@@ -14,7 +14,7 @@ import com.kopernik.R
 import com.kopernik.app.base.NewBaseFragment
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
-import com.kopernik.app.dialog.ReminderDialog
+import com.kopernik.app.dialog.GetUtkDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.app.utils.TimeUtils
@@ -25,7 +25,6 @@ import com.kopernik.ui.home.ViewModel.HomeViewModel
 import com.kopernik.ui.home.adadpter.AutoPollAdapter
 import com.kopernik.ui.home.adadpter.HomeAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_my.*
 
 
 /**
@@ -92,9 +91,9 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
                  } else {
 //                 弹窗
                      activity?.let { it1 ->
-                         ReminderDialog(it1,it.data)
+                         GetUtkDialog(it1,it.data)
                              .setCancelable(true)
-                             .setOnRequestListener(object :ReminderDialog.RequestListener{
+                             .setOnRequestListener(object :GetUtkDialog.RequestListener{
                                  override fun onRequest() {
                                      getUtk()
                                  }

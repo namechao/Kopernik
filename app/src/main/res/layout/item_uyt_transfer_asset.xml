@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         app:sLeftViewMarginLeft="0dp"
+        app:sLeftViewMarginRight="@dimen/dp_25"
         app:sLeftViewGravity="left_center"
         app:sRightViewMarginLeft="@dimen/dp_10"
         app:sLeftTopTextString="@string/title_deal_hash"

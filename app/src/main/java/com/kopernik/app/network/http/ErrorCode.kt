@@ -28,6 +28,7 @@ object ErrorCode {
         msg[416] = context.getString(R.string.error_416)
         msg[417] = context.getString(R.string.error_417)
         msg[418] = context.getString(R.string.error_418)
+        msg[419] = context.getString(R.string.error_419)
         msg[420] = context.getString(R.string.error_420)
         msg[421] = context.getString(R.string.error_421)
         msg[422] = context.getString(R.string.error_422)
