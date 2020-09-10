@@ -99,11 +99,10 @@ class MineFragment : NewBaseFragment<MineViewModel, ViewDataBinding>() {
     }
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        if (!isOpenSound&&!hidden){
-            //打开音乐
-            player.start()
-        }else{
+        if (hidden){
             //关闭音乐
+            isOpenSound=false
+            ivSound.setImageResource(R.mipmap.ic_close_sound)
             player.pause()
         }
         if (hidden){

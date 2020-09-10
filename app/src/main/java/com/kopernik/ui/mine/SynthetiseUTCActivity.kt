@@ -45,7 +45,7 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
         val assetManager: AssetManager = resources.assets
         try {
             val fileDescriptor =
-                assetManager.openFd("mining.mp3")
+                assetManager.openFd("synthetise.mp3")
             player.setDataSource(
                 fileDescriptor.fileDescriptor,
                 fileDescriptor.startOffset,
@@ -169,7 +169,10 @@ class SynthetiseUTCActivity : NewFullScreenBaseActivity<MineViewModel,ViewDataBi
     }
     override fun onDestroy() {
         super.onDestroy()
-        player.stop()
+        if (player!=null) {
+            player.stop()
+            player.release()
+        }
         lottieAnimationView.cancelAnimation()
     }
 

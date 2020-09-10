@@ -111,9 +111,9 @@
     <string name="save_to_picture">Save to album</string>
     <string name="save_to_picture_success">Saved to album</string>
     <!--    矿场相关-->
-    <string name="mine_ineffect">Mining machine is not valid</string>
+    <string name="mine_ineffect">The appointment is successful, to be opened!</string>
     <string name="i_know">I know</string>
-    <string name="reminder_msg">48 hours later, the hashrate will be turned on at one o'clock in the morning and the miner level will be displayed</string>
+    <string name="reminder_msg">48 hours later, the hashrate will be turned on at one clock in the morning and the miner level will be displayed</string>
     <string name="income">Cumulative income(UTDM)</string>
     <string name="synthesis_utc">Synthetic UTC</string>
     <string name="synthesis_bt">synthesis</string>
