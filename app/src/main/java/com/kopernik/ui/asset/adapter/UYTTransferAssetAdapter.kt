@@ -39,9 +39,7 @@ class UYTTransferAssetAdapter(
             }
         }
         holder.valueSpt?.setLeftString(item?.amount)
-        if ( item?.flag!=null&&item.flag==2) {
-            holder.stausSpt?.setLeftString(mContext.getString(R.string.success))
-        }
+        holder.stausSpt?.setLeftString(mContext.getString(R.string.success))
         holder.timeSpt?.setLeftString( TimeUtils.normalTimeStampToMinute(item?.createTime?.toString()))
     }
     }
