@@ -61,12 +61,11 @@ class RuntimeMiningMAdapter(
         if (item?.status=="3"){
             helper?.clIneffect?.visibility=View.VISIBLE
             helper?.tvMiningType?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
-            helper?.tvMiningPrice?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
-            helper?.tvMiningSpeed?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
-            helper?.tvWaveCounts?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
-            helper?.tvMningTime?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
-            helper?.tvMiningCounts?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
             helper?.tvPrecent?.setTextColor(ContextCompat.getColor(mContext,R.color.color_A49CC2))
+        }else{
+            helper?.clIneffect?.visibility=View.GONE
+            helper?.tvMiningType?.setTextColor(ContextCompat.getColor(mContext,R.color.color_FFCF32))
+            helper?.tvPrecent?.setTextColor(ContextCompat.getColor(mContext,R.color.color_FFCF32))
         }
 
     }
