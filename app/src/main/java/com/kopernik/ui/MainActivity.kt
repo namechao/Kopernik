@@ -31,6 +31,7 @@ import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.dialog.UYTQuitAlertDialog
 import com.kopernik.app.events.LocalEvent
+import com.kopernik.app.network.RetrofitClient
 import com.kopernik.app.utils.DBLog
 import com.kopernik.app.utils.KeyboardUtils
 import com.kopernik.app.utils.ToastUtils
@@ -53,6 +54,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_my.*
 import me.majiajie.pagerbottomtabstrip.NavigationController
 import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener
+import okhttp3.Request
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.EasyPermissions.PermissionCallbacks
@@ -369,41 +371,45 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
 
                     //                    String cachePath = getExternalFilesDir("upgrade_apk") + File.separator + getPackageName() + ".apk";
                     //                    caacheFile = new File(cachePath);
-
-                    val url = URL(versionEntity?.deploy?.url)
-                    // 创建连接
-                    val conn = url.openConnection() as HttpURLConnection
-                    conn.connect()
+                    val okHttpClient = RetrofitClient.getInstance().getOkHttpClient() //建立客户端
+                    var request=Request.Builder().url(versionEntity?.deploy?.url).build()
+                    var responseBody=okHttpClient.newCall(request).execute().body()
                     // 获取文件大小
-                    val length = conn.contentLength
+                    val length = responseBody?.contentLength()
                     // 创建输入流
-                    val `is` = conn.inputStream
+                    val `is` = responseBody?.byteStream()
                     val fos = FileOutputStream(apkFile)
                     var count = 0
                     // 缓存
                     val buf = ByteArray(1024)
                     // 写入到文件中
                     do {
-                        val numread = `is`.read(buf)
-                        count += numread
+                        val numread = `is`?.read(buf)
+                        if (numread != null) {
+                            count += numread
+                        }
                         // 计算进度条位置
-                        val progress = (count.toFloat() / length * 100).toInt()
+                        val progress = (count.toFloat() / length!! * 100).toInt()
                         // 更新进度
                         runOnUiThread {
                             // 进度条更新进度
                             numberProgressBar?.let { it. progress = progress}
                         }
 
-                        if (numread <= 0) {
-                            // 下载完成
-                            installApk(File(mSavePath, "kopernik.apk"))
-                            break
+                        if (numread != null) {
+                            if (numread <= 0) {
+                                // 下载完成
+                                installApk(File(mSavePath, "kopernik.apk"))
+                                break
+                            }
                         }
                         // 写入文件
-                        fos.write(buf, 0, numread)
+                        if (numread != null) {
+                            fos.write(buf, 0, numread)
+                        }
                     } while (!cancelUpdate)// 点击取消就停止下载.
                     fos.close()
-                    `is`.close()
+                    `is`?.close()
                 }
             } catch (e: MalformedURLException) {
                 e.printStackTrace()
