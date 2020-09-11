@@ -23,7 +23,9 @@ import retrofit2.http.*
 interface HomeService {
     @FormUrlEncoded
     @POST("user/sendPhone")
-    suspend fun sendCode(@Field("phone") phone:String,@Field("imageCode") imageCode:String):BaseResult<Any>
+    suspend fun sendCode(@Field("phone") phone:String,@Field("imageCode") imageCode:String):BaseResult<Any>   @FormUrlEncoded
+    @POST("user/checkUser")
+    suspend fun checkUser(@Field("phone") phone:String):BaseResult<Any>
     @FormUrlEncoded
     @POST("user/sendMail")
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")

@@ -113,24 +113,34 @@ class ForgetPasswordActivity : NewBaseActivity<RegisterViewModel, ViewDataBindin
                     ToastUtils.showShort(this, resources.getString(R.string.verify_phone_error))
                     return@setOnClickListener
                 }
-                VerifyCodeAlertDialog(this@ForgetPasswordActivity,phoneNumber)
-                    .setCancelable(false)
-                    .setPositiveButton(object : VerifyCodeAlertDialog.RequestListener{
-                        override fun onRequest(imageVerifyCode: String) {
-                            viewModel.run {
-                                sendCode(phoneNumber,imageVerifyCode).observe(this@ForgetPasswordActivity,
-                                    Observer {
-                                            if (it.status == 200) {
-                                                timer.start()
-                                            } else {
-                                                ErrorCode.showErrorMsg(this@ForgetPasswordActivity, it.status)
-                                            }
-                                    })
-                            }
-                        }
+                viewModel.run {
+                    checkUser(phoneNumber).observe(this@ForgetPasswordActivity, Observer {
+                        if (it.status==200)  {
+                            VerifyCodeAlertDialog(this@ForgetPasswordActivity,phoneNumber)
+                                .setCancelable(false)
+                                .setPositiveButton(object : VerifyCodeAlertDialog.RequestListener{
+                                    override fun onRequest(imageVerifyCode: String) {
+                                        viewModel.run {
+                                            sendCode(phoneNumber,imageVerifyCode).observe(this@ForgetPasswordActivity,
+                                                Observer {
+                                                    if (it.status == 200) {
+                                                        timer.start()
+                                                    } else {
+                                                        ErrorCode.showErrorMsg(this@ForgetPasswordActivity, it.status)
+                                                    }
+                                                })
+                                        }
+                                    }
 
+                                })
+                                .show()
+                        } else{
+                            ErrorCode.showErrorMsg(this@ForgetPasswordActivity, it.status)
+                        }
                     })
-                    .show()
+                }
+
+
 
             }else{//邮箱获取验证码
                 if (phoneNumber.isNullOrEmpty()) {

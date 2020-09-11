@@ -7,6 +7,7 @@ class HomeNetWork {
     private val mService by lazy { RetrofitClient.getInstance().create(HomeService::class.java) }
 
     suspend fun sendCode(phone: String,imageCode:String) = mService.sendCode(phone,imageCode)
+    suspend fun checkUser(phone: String) = mService.checkUser(phone)
     suspend fun sendEmailCode(phone: String) = mService.sendEmailCode(phone)
     suspend fun checkPhone(phone: String, verifyCode:String) = mService.checkPhone(phone,verifyCode)
     suspend fun checkEMail(email: String, verifyCode:String) = mService.checkEMail(email,verifyCode)

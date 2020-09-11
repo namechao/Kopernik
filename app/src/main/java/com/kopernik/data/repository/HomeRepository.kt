@@ -23,6 +23,9 @@ class HomeRepository private constructor(private val newWork: HomeNetWork):BaseM
     suspend fun sendEmailCode(phone:String):BaseResult<Any>{
         return newWork.sendEmailCode(phone)
     }
+    suspend fun checkUser(phone:String):BaseResult<Any>{
+        return newWork.checkUser(phone)
+    }
     suspend fun checkPhone(phone:String,verifyCode:String):BaseResult<Any>{
         return newWork.checkPhone(phone,verifyCode)
     }

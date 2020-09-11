@@ -17,6 +17,7 @@ class RegisterViewModel :BaseViewModel(){
     private val checkPhoneCode = SingleLiveEvent<BaseResult<Any>>()
     private val checkEmailCode = SingleLiveEvent<BaseResult<Any>>()
     private val getImageCode = SingleLiveEvent<Call<ResponseBody>>()
+    private val checkUser = SingleLiveEvent<BaseResult<Any>>()
 
     fun sendCode(sendCode:String,imageCode:String): SingleLiveEvent<BaseResult<Any>> {
         launchGo({
@@ -35,6 +36,12 @@ class RegisterViewModel :BaseViewModel(){
             checkPhoneCode.value = homeRepository.checkPhone(phone,verifyCode)
         })
         return checkPhoneCode
+    }
+    fun checkUser(phone: String): SingleLiveEvent<BaseResult<Any>> {
+        launchGo({
+            checkUser.value = homeRepository.checkUser(phone)
+        })
+        return checkUser
     }
     fun getImageCode(phone: String): SingleLiveEvent<Call<ResponseBody>> {
         launchGo({
