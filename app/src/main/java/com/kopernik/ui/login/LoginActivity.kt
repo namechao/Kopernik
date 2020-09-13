@@ -7,6 +7,7 @@ import android.text.InputType
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,7 @@ import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
 import com.kopernik.app.dialog.ChoseAreaCodeDialog
 import com.kopernik.app.network.http.ErrorCode
+import com.kopernik.app.utils.DeviceIDUtil
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.adapter.ChoseAreaAdapter
@@ -202,7 +204,9 @@ class LoginActivity : NewFullScreenBaseActivity<LoginViewModel, ViewDataBinding>
                 return@setOnClickListener
             }
                 viewModel.run {
-                   var ipAddress= NetWorkUtils.getIPAddress(true)
+                    Log.e("loginIp",NetWorkUtils.getIPAddress(true)+ DeviceIDUtil.getDeviceId(applicationContext))
+                    var ipAddress=MD5Utils.md5(NetWorkUtils.getIPAddress(true)+ DeviceIDUtil.getDeviceId(applicationContext))
+
                     login(registerType.toString(),etInput.text.toString().trim(),MD5Utils.md5(MD5Utils.md5(etPassword.text.toString().trim())),ipAddress).observe(this@LoginActivity, Observer {
                         if (it.status == 200) {
                             UserConfig.singleton?.accountBean=it.data.user

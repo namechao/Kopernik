@@ -31,6 +31,7 @@ import com.kopernik.R
 import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.dialog.UYTQuitAlertDialog
 import com.kopernik.app.events.LocalEvent
+import com.kopernik.app.network.DownLoadCilent
 import com.kopernik.app.network.RetrofitClient
 import com.kopernik.app.utils.DBLog
 import com.kopernik.app.utils.KeyboardUtils
@@ -76,8 +77,6 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
     private val myFragment= MyFragment.newInstance()
     var navCtl: NavigationController? =null
     private var mWebview: WebView?=null
-    private var mSavePath: String? = null
-    private var cancelUpdate = false
     private var reLoginDialog: UYTQuitAlertDialog? = null
     private var versionEntity: VersionEntity?=null
     private var numberProgressBar: NumberProgressBar?=null
@@ -271,7 +270,12 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
                confrim.visibility=View.GONE
                numberProgressBar?.visibility=View.VISIBLE
                if (versionEntity!=null&&versionEntity?.deploy!=null&&versionEntity?.deploy?.url!=null)
-                downloadApk()
+                   DownLoadCilent.getInstance().downLoad(versionEntity?.deploy?.url!!,object :DownLoadCilent.ProcessCallBack{
+                       override fun CallBack(process: Int) {
+                           numberProgressBar?.progress=process
+                       }
+
+                   })
             }
             baseDialog.setOnKeyListener( object :DialogInterface.OnKeyListener{
                 override fun onKey(
@@ -293,7 +297,6 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
                 FrameLayout.LayoutParams.WRAP_CONTENT
             )
             baseDialog.show()
-
     }
 
 
@@ -317,111 +320,6 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
             }
         })
     }
-
-
-    /**
-     * 安装 apk 文件
-     *
-     * @param apkFile
-     */
-    fun installApk(apkFile: File) {
-        val installApkIntent = Intent()
-        installApkIntent.action = Intent.ACTION_VIEW
-        installApkIntent.addCategory(Intent.CATEGORY_DEFAULT)
-        installApkIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-            installApkIntent.setDataAndType(FileProvider.getUriForFile(applicationContext, "com.kopernik.file_provider", apkFile), "application/vnd.android.package-archive")
-            installApkIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        } else {
-            installApkIntent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive")
-        }
-
-        if (packageManager.queryIntentActivities(installApkIntent, 0).size > 0) {
-            startActivity(installApkIntent)
-        }
-
-    }
-
-    /**
-     * 下载apk文件
-     */
-    private fun downloadApk() {
-        // 启动新线程下载软件
-        downloadApkThread().start()
-    }
-
-    /**
-     * 下载文件线程
-     */
-    private inner class downloadApkThread : Thread() {
-        override fun run() {
-            try {
-                // 判断SD卡是否存在，并且是否具有读写权限
-                if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-                    // 获得存储卡的路径
-                    val sdpath = Environment.getExternalStorageDirectory().toString() + "/"
-                    mSavePath = sdpath + "download"
-                    val file = File(mSavePath)
-                    // 判断文件目录是否存在
-                    if (!file.exists()) {
-                        file.mkdir()
-                    }
-                    val apkFile = File(mSavePath, "kopernik.apk")
-
-                    //                    String cachePath = getExternalFilesDir("upgrade_apk") + File.separator + getPackageName() + ".apk";
-                    //                    caacheFile = new File(cachePath);
-                    val okHttpClient = RetrofitClient.getInstance().getOkHttpClient() //建立客户端
-                    var request=Request.Builder().url(versionEntity?.deploy?.url).build()
-                    var responseBody=okHttpClient.newCall(request).execute().body()
-                    // 获取文件大小
-                    val length = responseBody?.contentLength()
-                    // 创建输入流
-                    val `is` = responseBody?.byteStream()
-                    val fos = FileOutputStream(apkFile)
-                    var count = 0
-                    // 缓存
-                    val buf = ByteArray(1024)
-                    // 写入到文件中
-                    do {
-                        val numread = `is`?.read(buf)
-                        if (numread != null) {
-                            count += numread
-                        }
-                        // 计算进度条位置
-                        val progress = (count.toFloat() / length!! * 100).toInt()
-                        // 更新进度
-                        runOnUiThread {
-                            // 进度条更新进度
-                            numberProgressBar?.let { it. progress = progress}
-                        }
-
-                        if (numread != null) {
-                            if (numread <= 0) {
-                                // 下载完成
-                                installApk(File(mSavePath, "kopernik.apk"))
-                                break
-                            }
-                        }
-                        // 写入文件
-                        if (numread != null) {
-                            fos.write(buf, 0, numread)
-                        }
-                    } while (!cancelUpdate)// 点击取消就停止下载.
-                    fos.close()
-                    `is`?.close()
-                }
-            } catch (e: MalformedURLException) {
-                e.printStackTrace()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-
-        }
-    }
-
-
-
 
      //对低版本手机进行账户处理
     override fun onResume() {

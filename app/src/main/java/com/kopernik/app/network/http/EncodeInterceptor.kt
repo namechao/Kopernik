@@ -1,5 +1,5 @@
 package com.kopernik.app.network.http
-
+ 
 import com.kopernik.app.config.UserConfig
 import okhttp3.Interceptor
 import okhttp3.Response

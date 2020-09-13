@@ -13,9 +13,12 @@ import com.kopernik.app.base.NewBaseActivity
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.config.UserConfig
 import com.kopernik.app.network.http.ErrorCode
+import com.kopernik.app.utils.DeviceIDUtil
 import com.kopernik.app.utils.StringUtils
 import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.login.viewmodel.RegisterSetUpPasswordViewModel
+import dev.utils.app.ADBUtils
+import dev.utils.app.DeviceUtils
 import dev.utils.app.NetWorkUtils
 import dev.utils.common.encrypt.MD5Utils
 import kotlinx.android.synthetic.main.activity_forget_password_next.*
@@ -124,7 +127,7 @@ class RegisterSetUpPasswordActivity :
     //导入网络请求
     private fun register() {
         viewModel.run {
-            var ipAddress= NetWorkUtils.getIPAddress(true)
+            var ipAddress=MD5Utils.md5(NetWorkUtils.getIPAddress(true)+ DeviceIDUtil.getDeviceId(applicationContext))
             createAccount(type.toString(),acount,invitationCode,MD5Utils.md5(MD5Utils.md5(etInput?.text.toString().trim())),ipAddress,verifyCode).observe(this@RegisterSetUpPasswordActivity, androidx.lifecycle.Observer {
              if (it.status==200){
                  UserConfig.singleton?.accountBean=it.data.user
