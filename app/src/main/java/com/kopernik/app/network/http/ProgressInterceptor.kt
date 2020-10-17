@@ -1,6 +1,5 @@
-package com.kopernik.app.network
+package com.kopernik.app.network.http
 
-import com.kopernik.app.network.http.ProgressResponseBody
 import okhttp3.Interceptor
 import okhttp3.Response
 import org.jetbrains.annotations.NotNull

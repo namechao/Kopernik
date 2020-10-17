@@ -23,11 +23,19 @@ class DepositMoneyActivity : NewBaseActivity<NoViewModel,ViewDataBinding>() {
         setTitle( resources.getString(R.string.title_asset_deposit))
         val address = intent.getStringExtra("address")
         val memo = intent.getStringExtra("memo")
+        val type = intent.getStringExtra("type")
         if (StringUtils.isEmpty(address)) {
             ToastUtils.showShort(getActivity(), getString(R.string.address_is_empty))
             finish()
         } else {
-            rulesTv.text = getString(R.string.uyt_deposit_rules)
+                if (type=="UYT") {
+                    rulesTv.text = getString(R.string.uyt_test_deposit_rules)
+                    depositCoinTip.text = getString(R.string.memo_test_tip)
+                }
+                else if (type=="UYTPRO") {
+                    rulesTv.text = getString(R.string.uyt_deposit_rules)
+                    depositCoinTip.text = getString(R.string.memo_tip)
+                }
             addressTv.text = address
             tvCopyAddress .setOnClickListener(View.OnClickListener {
                 APPHelper.copy(

@@ -576,15 +576,19 @@
     <string name="purchase_mm">预约矿机</string>
     <string name="runtime_mm">运行矿机</string>
     <string name="out_time_mm">过期矿机</string>
-    <string name="balance_not_enough">（当前余额不足）</string>
+    <string name="balance_not_enough">（当前 </string>
+    <string name="balance_not_enough_end">余额不足）</string>
     <string name="mining_machine_name">矿机名称</string>
     <string name="mining_machine_price">矿机价格</string>
+    <string name="pay_type">支付方式</string>
     <string name="mining_machine_speed">当前算速</string>
     <string name="mining_machine_update_counts">(每日更新一次)</string>
     <string name="mining_power">挖矿算力</string>
     <string name="mining_machine_times">倍</string>
-    <string name="pay_uyt_coins">消耗等额UYT</string>
+    <string name="pay_uyt_coins">UYT消耗</string>
+    <string name="pay_uyt_test_coins">UYT_TEST消耗</string>
     <string name="uyt_balance">UYT余额</string>
+    <string name="uyt_test_balance">UYT_TEST余额</string>
     <string name="input_counts">输入数量</string>
     <string name="mining_machine_type1">体验矿机</string>
     <string name="mining_machine_type2">微型矿机</string>
@@ -719,6 +723,7 @@
     <string name="asset_utc_balance">UTC余额</string>
     <string name="asset_utk_balance">UTK余额</string>
     <string name="asset_uyt_balance">UYT余额</string>
+    <string name="asset_uyt_test_balance">UYT_TEST余额</string>
     <string name="asset_exchange">兑换</string>
     <string name="asset_tansfer">转账</string>
     <string name="asset_synthesis_record">UTC合成记录</string>
@@ -751,6 +756,7 @@
     <string name="title_finance_state">状态</string>
     <string name="title_asset_withdrawl">提币</string>
     <string name="title_asset_deposit">充币</string>
+    <string name="uyt_test_deposit_rules">• 请勿向上述地址充值任何非 UYT_TEST 资产，否则资产将不可找回。\n• UYT_TEST收款到账需要约3个区块确认。\n• 最小充值金额：0.01 UYT_TEST，小于最小金额的充值将不会上账且无法退回\n• 请务必确认手机安全，防止信息被篡改或泄露</string>
     <string name="uyt_deposit_rules">• 请勿向上述地址充值任何非 UYT 资产，否则资产将不可找回。\n• UYT收款到账需要约3个区块确认。\n• 最小充值金额：0.01 UYT，小于最小金额的充值将不会上账且无法退回\n• 请务必确认手机安全，防止信息被篡改或泄露</string>
     <string name="uyt_withdrawl_rules">• 为保障资金安全，我们会对提币进行人工审核，请耐心等待。\n• 请务必确认手机安全，防止信息被篡改或泄露。</string>
     <string name="uyt_transfer_rules">• 为保障资金安全，请仔细核对方UID。\n• 请务必确认手机安全，防止信息被篡改或泄露。</string>
@@ -758,7 +764,9 @@
     <string name="copy_address">复制地址</string>
     <string name="copy_memo">复制memo</string>
     <string name="desposit_address">UYT提币地址</string>
+    <string name="desposit_test_address">UYT_TEST提币地址</string>
     <string name="memo_tip">提示:请在UYT转账【备注】里填写memo，否则无法到账！</string>
+    <string name="memo_test_tip">提示:请在UYT_TEST转账【备注】里填写memo，否则无法到账！</string>
     <string name="withdraw_num">提币数量</string>
     <string name="hint_note">备注(64个字符以内)</string>
     <string name="withdrawl_tip">UYT提币提示</string>

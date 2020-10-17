@@ -7,10 +7,7 @@ import android.os.Environment
 import android.util.Log
 import androidx.core.content.FileProvider
 import com.kopernik.app.MyApplication
-import com.kopernik.app.network.http.EncodeInterceptor
-import com.kopernik.app.network.http.MyOkHttpRetryInterceptor
-import com.kopernik.app.network.http.ProgressResponseBody
-import com.kopernik.app.network.http.TrustAllCerts
+import com.kopernik.app.network.http.*
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -68,15 +65,23 @@ class DownLoadCilent {
     }
 
     fun downLoad(url:String,callback:ProcessCallBack){
-        var okHttpClient=okHttpClient?.newBuilder()?.addInterceptor(ProgressInterceptor(object :
-            ProgressResponseBody.ProgressListener {
-            override fun update(url: String?, bytesRead: Long, contentLength: Long, done: Boolean) {
-                // 计算进度条位置
-                val progress = (bytesRead.toFloat() / contentLength!! * 100).toInt()
-                Log.e("downloadProcess","$progress")
-                if (callback!=null) callback.CallBack(progress)
-            }
-        }))?.build()
+        var okHttpClient=okHttpClient?.newBuilder()?.addInterceptor(
+            ProgressInterceptor(
+            object :
+                ProgressResponseBody.ProgressListener {
+                override fun update(
+                    url: String?,
+                    bytesRead: Long,
+                    contentLength: Long,
+                    done: Boolean
+                ) {
+                    // 计算进度条位置
+                    val progress = (bytesRead.toFloat() / contentLength!! * 100).toInt()
+                    Log.e("downloadProcess", "$progress")
+                    if (callback != null) callback.CallBack(progress)
+                }
+            })
+        )?.build()
      get(okHttpClient,url,object :Callback{
          override fun onFailure(call: Call, e: IOException) {
 

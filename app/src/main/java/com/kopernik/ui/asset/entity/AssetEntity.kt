@@ -7,5 +7,7 @@ data class AssetEntity(
     val utkAmount: String,
     val utkCny: String,
     val uytAmount: String,
-    val uytCny: String
+    val uytCny: String,
+    val uytProCny: String,
+    val uytProAmount: String
 )

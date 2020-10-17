@@ -16,6 +16,7 @@ import com.kopernik.ui.asset.viewModel.AssetViewModel
 import kotlinx.android.synthetic.main.fragment_asset.*
 import kotlinx.android.synthetic.main.fragment_asset.smartRefreshLayout
 import org.greenrobot.eventbus.EventBus
+import java.math.BigDecimal
 
 
 class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
@@ -42,7 +43,8 @@ class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
                 "UTC"-> {activity?.let { LaunchConfig.startUTCAssetActivity(it,asset?.utcAmount) }}
                 "UTK"-> activity?.let { LaunchConfig.startUTKAssetActivity(it,asset?.utkAmount) }
                 "UTDM"-> activity?.let { LaunchConfig.startUDMTAssetActivity(it,asset?.utdmAmount) }
-                "UYT"-> activity?.let { LaunchConfig.startUYTAssetActivity(it,asset?.uytAmount) }
+                "UYT_TEST"-> activity?.let { LaunchConfig.startUYTTESTAssetActivity(it,asset?.uytAmount,"UYT") }
+                "UYT"-> activity?.let { LaunchConfig.startUYTAssetActivity(it,asset?.uytProAmount,"UYTPRO") }
             }
         }
         smartRefreshLayout.setOnRefreshListener {
@@ -65,9 +67,11 @@ class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
                    data.add(AssetItemEntity(R.mipmap.ic_utc,"UTC",it.data.utcAmount,it.data.utcCny))
                    data.add(AssetItemEntity(R.mipmap.ic_utk,"UTK",it.data.utkAmount,it.data.utkCny))
                    data.add(AssetItemEntity(R.mipmap.ic_utdm,"UTDM",it.data.utdmAmount,it.data.utdmCny))
-                   data.add(AssetItemEntity(R.mipmap.ic_uyt,"UYT",it.data.uytAmount,it.data.uytCny))
+                   data.add(AssetItemEntity(R.mipmap.ic_uyt_test,"UYT_TEST",it.data.uytAmount,it.data.uytCny))
+                   data.add(AssetItemEntity(R.mipmap.ic_uyt,"UYT",it.data.uytProAmount,it.data.uytProCny))
                    adapter.setNewData(data)
-                   var totle= BigDecimalUtils.add(it.data.utcCny,it.data.utkCny).add(BigDecimalUtils.add(it.data.utdmCny,it.data.uytCny)).toString()
+                   var totle= BigDecimalUtils.add(it.data.utcCny,it.data.utkCny).add(BigDecimalUtils.add(it.data.utdmCny,it.data.uytCny)).add(
+                       BigDecimal( it.data.uytProCny)).toString()
                    assetTotal.text="≈ ${BigDecimalUtils.roundDOWN(totle,2)}"
                }else{
                    ErrorCode.showErrorMsg(activity,it.status)

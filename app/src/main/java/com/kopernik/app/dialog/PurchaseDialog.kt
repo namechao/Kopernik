@@ -25,9 +25,12 @@ class PurchaseDialog : DialogFragment(),
     private var type = 0
     private var miningMachineType:TextView?=null
     private var miningMachinePrice:TextView?=null
+    private var payType:TextView?=null
     private var payUytCoins:TextView?=null
+    private var payUytTestCoins:TextView?=null
     private var balanceNotEnough:TextView?=null
     private var uytBalance:TextView?=null
+    private var uytTestBalance:TextView?=null
     private var purchaseEntity: PurchaseEntity?=null
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -55,18 +58,30 @@ class PurchaseDialog : DialogFragment(),
         miningMachineType = dialog.findViewById(R.id.mining_machine_type)
         miningMachinePrice = dialog.findViewById(R.id.mining_machine_price)
         payUytCoins = dialog.findViewById(R.id.pay_uyt_coins)
+        payType = dialog.findViewById(R.id.pay_type)
+        payUytTestCoins = dialog.findViewById(R.id.pay_uyt_test_coins)
         balanceNotEnough = dialog.findViewById(R.id.tv_balance_not_enough)
         uytBalance = dialog.findViewById(R.id.uyt_balance)
+        uytTestBalance = dialog.findViewById(R.id.uyt_test_balance)
         passwordEt = dialog.findViewById(R.id.password_et)
         okBtn = dialog.findViewById(R.id.confirm)
         passwordEt?.addTextChangedListener(passwordWatcher)
         miningMachineType?.text=purchaseEntity?.mineMacName
         miningMachinePrice?.text= BigDecimalUtils.roundDOWN(purchaseEntity?.mineMacPrice,2)+"USDT"
-        payUytCoins?.text=BigDecimalUtils.roundDOWN(purchaseEntity?.consumeUyt,2)+"UYT"
-        uytBalance?.text=resources.getString(R.string.uyt_balance)+": "+BigDecimalUtils.roundDOWN(purchaseEntity?.uytBanlance,2)
-         if ( BigDecimalUtils.substract(purchaseEntity?.consumeUyt,purchaseEntity?.uytBanlance) <BigDecimal(0))
-             balanceNotEnough?.visibility=View.GONE
-             else   balanceNotEnough?.visibility=View.VISIBLE
+        payUytCoins?.text=BigDecimalUtils.roundDOWN(purchaseEntity?.consumeUytPro,2)
+        payUytTestCoins?.text=BigDecimalUtils.roundDOWN(purchaseEntity?.consumeUyt,2)
+        uytBalance?.text=resources.getString(R.string.uyt_balance)+": "+BigDecimalUtils.roundDOWN(purchaseEntity?.uytProBanlance,2)
+        payType?.text="UYT : UYT_TEST=7:3"
+        uytTestBalance?.text=resources.getString(R.string.uyt_test_balance)+": "+BigDecimalUtils.roundDOWN(purchaseEntity?.uytBanlance,2)
+         if (BigDecimalUtils.compare(purchaseEntity?.consumeUytPro,purchaseEntity?.uytProBanlance)) {
+             balanceNotEnough?.visibility = View.VISIBLE
+             balanceNotEnough?.text=getString(R.string.balance_not_enough)+"UYT"+getString(R.string.balance_not_enough_end)
+         } else  if (BigDecimalUtils.compare(purchaseEntity?.consumeUyt,purchaseEntity?.uytBanlance)) {
+             balanceNotEnough?.visibility = View.VISIBLE
+             balanceNotEnough?.text=getString(R.string.balance_not_enough)+"UYT_TEST"+getString(R.string.balance_not_enough_end)
+         } else {
+             balanceNotEnough?.visibility = View.GONE
+         }
         KeyboardUtils.showKeyboard(passwordEt)
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
@@ -106,7 +121,7 @@ class PurchaseDialog : DialogFragment(),
         override fun afterTextChanged(s: Editable) {
 
 
-            if (passwordEt!!.text.toString().isNotEmpty()&&BigDecimalUtils.substract(purchaseEntity?.consumeUyt,purchaseEntity?.uytBanlance) <BigDecimal(0)) {
+            if (passwordEt!!.text.toString().isNotEmpty()&&BigDecimalUtils.compare(purchaseEntity?.uytProBanlance,purchaseEntity?.consumeUytPro)&&BigDecimalUtils.compare(purchaseEntity?.uytBanlance,purchaseEntity?.consumeUyt)) {
                 okBtn?.isEnabled = true
                 activity?.getColor(R.color.color_20222F)?.let { okBtn?.setTextColor(it) }
             } else {

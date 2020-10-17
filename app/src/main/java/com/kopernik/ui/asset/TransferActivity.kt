@@ -20,21 +20,36 @@ import com.kopernik.ui.asset.viewModel.TransferViewModel
 import com.kopernik.ui.mine.entity.AllConfigEntity
 import dev.utils.common.encrypt.MD5Utils
 import kotlinx.android.synthetic.main.activity_transfer.*
+import kotlinx.android.synthetic.main.activity_transfer.etRemark
+import kotlinx.android.synthetic.main.activity_transfer.okBtn
+import kotlinx.android.synthetic.main.activity_withdraw_coin.*
 import java.math.BigDecimal
 
 class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
 
 
-    private var balanaceOf: BigDecimal? = null
+    private var balanace=""
     private var allConfigEntity: AllConfigEntity?=null
     private var rate=""
+    private var type=""
     override fun layoutId() = R.layout.activity_transfer
 
     override fun initView(savedInstanceState: Bundle?) {
         intent.getSerializableExtra("allConfigEntity")?.let {
             allConfigEntity=it as AllConfigEntity
         }
-        setTitle("UYT"+resources.getString(R.string.title_asset_transfer))
+        intent.getStringExtra("type")?.let {
+            type=it
+        }
+        if (type=="UYT")
+            setTitle("UYT_TEST"+resources.getString(R.string.title_asset_transfer))
+        else if (type=="UYTPRO")
+            setTitle("UYT"+resources.getString(R.string.title_asset_transfer))
+        if (type=="UYT"){
+            balanace= allConfigEntity?.uyt.toString()
+        }else if(type=="UYTPRO"){
+            balanace= allConfigEntity?.uytPro.toString()
+        }
         getConfigAsset()
         eTUidAddress?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
         eTTransferCounts?.maxLines = 2
@@ -49,7 +64,7 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
             }
             if(allConfigEntity!=null) {
                 //校验提现金额
-                if (BigDecimal(allConfigEntity?.uyt).compareTo(BigDecimal("0")) == 0) {
+                if (BigDecimal(balanace).compareTo(BigDecimal("0")) == 0) {
                     ToastUtils.showShort(
                         getActivity(),
                         getString(R.string.tip_alert_no_asset_transfer)
@@ -59,7 +74,7 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
                 //校验提现金额
                 if (BigDecimal(
                         eTTransferCounts.text.toString().trim()
-                    ) > BigDecimal(allConfigEntity?.uyt)
+                    ) > BigDecimal(balanace)
                 ) {
                     ToastUtils.showShort(getActivity(), getString(R.string.uyt_transfer_error))
                     return@setOnClickListener
@@ -120,7 +135,11 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
     }
     private fun submitWithDrawlCoin(psw:String) {
         viewModel.run {
-            var map= mapOf("amount" to eTTransferCounts.text.toString().trim(),"uidReceive" to eTUidAddress.text.toString().trim(),"rate" to rate ,"type" to "UYT" ,"pwd" to MD5Utils.md5(
+            var map= mapOf("amount" to eTTransferCounts.text.toString().trim(),
+                "uidReceive" to eTUidAddress.text.toString().trim(),
+                "rate" to rate ,
+                "type" to type,
+                "pwd" to MD5Utils.md5(
                 MD5Utils.md5(psw)),  "remark" to etRemark.text.toString().trim())
             transfer(map).observe(this@TransferActivity, Observer {
                 if (it.status==200){

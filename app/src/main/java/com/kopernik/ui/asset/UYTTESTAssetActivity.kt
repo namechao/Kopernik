@@ -18,8 +18,8 @@ import com.kopernik.ui.asset.adapter.UYTTransferAssetAdapter
 import com.kopernik.ui.asset.entity.DepositWithdarwlRecord
 import com.kopernik.ui.asset.entity.UYTTransferRecord
 import com.kopernik.ui.asset.viewModel.UYTAssetViewModel
+import com.kopernik.ui.asset.viewModel.UYTTESTAssetViewModel
 import com.kopernik.ui.mine.entity.AllConfigEntity
-import kotlinx.android.synthetic.main.activity_utc_asset.*
 import kotlinx.android.synthetic.main.activity_uyt_asset.*
 import kotlinx.android.synthetic.main.activity_uyt_asset.assetTotal
 import kotlinx.android.synthetic.main.activity_uyt_asset.ivBack
@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.activity_uyt_asset.recyclerView1
 import kotlinx.android.synthetic.main.activity_uyt_asset.smartRefreshLayout
 import kotlinx.android.synthetic.main.activity_uyt_asset.transfer
 
-class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBinding>() {
+class UYTTESTAssetActivity : NewFullScreenBaseActivity<UYTTESTAssetViewModel, ViewDataBinding>() {
 
     private var pager=1
     private var pager1=1
@@ -39,7 +39,7 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
     private var adapter= UYTDepositWithdrawlAssetAdapter(arrayListOf())
     private var adapter1 = UYTTransferAssetAdapter(arrayListOf())
     private var type = ""
-    override fun layoutId()=R.layout.activity_uyt_asset
+    override fun layoutId()=R.layout.activity_uyt_test_asset
 
     override fun initView(savedInstanceState: Bundle?) {
         intent.getStringExtra("asset")?.let {
@@ -75,16 +75,16 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
        //充币
         tvDepositCoin.setOnClickListener {
            viewModel.run {
-               withDrawlCoin(type).observe(this@UYTAssetActivity, Observer {
+               withDrawlCoin(type).observe(this@UYTTESTAssetActivity, Observer {
                    if (it.status==200) {
                        LaunchConfig.startDepositMoneyActivity(
-                           this@UYTAssetActivity,
+                           this@UYTTESTAssetActivity,
                            it.data.acountHash,
                            it.data.memo,
                            type
                        )
                    }else{
-                       ErrorCode.showErrorMsg(this@UYTAssetActivity,it.status)
+                       ErrorCode.showErrorMsg(this@UYTTESTAssetActivity,it.status)
                    }
                })
            }
@@ -94,14 +94,14 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
         //提币
         tvWithDrawlCoin.setOnClickListener {
             LaunchConfig.startWithdrawCoinAc(
-                this@UYTAssetActivity,allConfigEntity,type
+                this@UYTTESTAssetActivity,allConfigEntity,type
             )
         }
         //转账
         transfer.setOnClickListener {
             viewModel.run {
                         LaunchConfig.startTransferAc(
-                            this@UYTAssetActivity,
+                            this@UYTTESTAssetActivity,
                             allConfigEntity,
                             type
                         )
@@ -123,10 +123,10 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
 
     private  fun  getCurrentAsset(){
         viewModel.run {
-            getAssetConfig().observe(this@UYTAssetActivity, Observer {
+            getAssetConfig().observe(this@UYTTESTAssetActivity, Observer {
                 if (it.status==200){
                     allConfigEntity=it.data
-                    assetTotal.text= BigDecimalUtils.roundDOWN(it.data.uytPro,2)
+                    assetTotal.text= BigDecimalUtils.roundDOWN(it.data.uyt,2)
                 }
             })
         }
@@ -137,7 +137,7 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
         viewModel.run {
             if (machinngType==0) {
                 var map = mapOf("type" to type,"pageNumber" to pager.toString(),"pageSize" to "10")
-                rechargeCashRecord(map).observe(this@UYTAssetActivity, Observer {
+                rechargeCashRecord(map).observe(this@UYTTESTAssetActivity, Observer {
 
                     if (it.status==200){
                         val datas: List<DepositWithdarwlRecord>?=it.data.datas
@@ -173,7 +173,7 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
                 })
             }else{
                 var map = mapOf("type" to type,"pageNumber" to pager1.toString(),"pageSize" to "10")
-                transferRecord(map).observe(this@UYTAssetActivity, Observer {
+                transferRecord(map).observe(this@UYTTESTAssetActivity, Observer {
 
                     if (it.status==200){
                         val datas: List<UYTTransferRecord>?=it.data.datas

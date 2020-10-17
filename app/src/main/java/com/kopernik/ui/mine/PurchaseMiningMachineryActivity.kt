@@ -105,9 +105,19 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
                 var purchaseEntity=PurchaseEntity()
                 purchaseEntity.mineMacName= (adapter.data[position] as Machine).name
                 purchaseEntity.mineMacPrice= (adapter.data[position] as Machine).price
-                purchaseEntity.consumeUyt= BigDecimalUtils.divide((adapter.data[position] as Machine).price,minebean?.uytPrice,8)
+                purchaseEntity.consumeUyt= BigDecimalUtils.divide(BigDecimalUtils.multiply((adapter.data[position] as Machine).price,"0.3").toString(),minebean?.uytPrice,8)
+                purchaseEntity.consumeUytPro= BigDecimalUtils.divide(BigDecimalUtils.multiply((adapter.data[position] as Machine).price,"0.7").toString(),minebean?.uytProPrice,8)
                 minebean?.uytCaptial?.amount?.let {
                     purchaseEntity.uytBanlance=it
+                }
+                minebean?.uytProCaptial?.amount?.let {
+                    purchaseEntity.uytProBanlance=it
+                }
+                minebean?.uytToUsdt?.let {
+                    purchaseEntity.uytToUsdt=it
+                }
+                minebean?.uytProToUsdt?.let {
+                    purchaseEntity.uytProToUsdt=it
                 }
                 //购买弹窗
                 var dialog = PurchaseDialog.newInstance(1,purchaseEntity)
@@ -145,7 +155,7 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
         UserConfig.singleton?.accountBean?.uid?.let {
             uid=it
         }
-        var map= mapOf("uid" to uid ,"type" to type)
+        var map= mapOf("uid" to uid ,"type" to type,"iconType" to "UYT")
         buyMineMachine(map).observe(this@PurchaseMiningMachineryActivity, Observer {
             if (it.status==200)
                 ReminderDialog(this@PurchaseMiningMachineryActivity)

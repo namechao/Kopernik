@@ -78,7 +78,37 @@
 
 
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tx_title4_ll"
+            app:layout_constraintTop_toBottomOf="@+id/exchange_counts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginLeft="@dimen/dp_25"
+            android:layout_marginRight="@dimen/dp_25"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pay_type"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/pay_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:text="UYT"
+                android:gravity="right"
+                android:textSize="13dp"
+                android:textColor="@color/color_AA9CCA" />
+
+
+        </LinearLayout>
         <LinearLayout
             app:layout_constraintTop_toBottomOf="@+id/exchange_counts"
             android:layout_width="match_parent"
@@ -108,7 +138,34 @@
                 android:textSize="13dp"
                 android:textColor="@color/color_AA9CCA" />
         </LinearLayout>
+        <LinearLayout
+            app:layout_constraintTop_toBottomOf="@+id/exchange_counts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginLeft="@dimen/dp_25"
+            android:layout_marginRight="@dimen/dp_25"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pay_uyt_test_coins"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/pay_uyt_test_coins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:text="UYT"
+                android:gravity="right"
+                android:textSize="13dp"
+                android:textColor="@color/color_AA9CCA" />
+        </LinearLayout>
         <EditText
             android:id="@+id/password_et"
             android:layout_marginLeft="@dimen/dp_18"
@@ -154,7 +211,6 @@
             android:layout_marginLeft="@dimen/dp_18"
             android:layout_marginTop="@dimen/dp_16"
             android:layout_marginRight="@dimen/dp_18"
-            android:layout_marginBottom="@dimen/dp_20"
             android:background="@drawable/receive_utk_btn"
             android:enabled="false"
             android:text="@string/tv_get_purchase"
@@ -176,8 +232,20 @@
             android:layout_marginLeft="@dimen/dp_25"
             android:layout_marginRight="@dimen/dp_25"
             android:layout_marginTop="@dimen/dp_7"
-            android:layout_marginBottom="@dimen/dp_26"
             android:text="@string/uyt_balance"
+            />
+        <TextView
+            android:id="@+id/uyt_test_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:gravity="right"
+            android:textColor="@color/color_A49CC2"
+            android:layout_marginLeft="@dimen/dp_25"
+            android:layout_marginRight="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_7"
+            android:layout_marginBottom="@dimen/dp_26"
+            android:text="@string/uyt_test_balance"
             />
     </LinearLayout>
     <ImageView

@@ -7,9 +7,12 @@ data class MineBean(
     val parentFlag: Boolean,
     val flag: Boolean,
     val uytPrice:String,
+    val uytProPrice:String,
     val user: User,
     val uytCaptial: UytCaptial,
-    val uytToUsdt: String
+    val uytProCaptial: UytProCaptial,
+    val uytToUsdt: String,
+    val uytProToUsdt: String
 )
 
 data class Machine(
@@ -50,6 +53,14 @@ data class User(
 )
 
 data class UytCaptial(
+    val amount: String,
+    val createTime: String,
+    val freeze: String,
+    val id: String,
+    val type: String,
+    val uid: String
+)
+data class UytProCaptial(
     val amount: String,
     val createTime: String,
     val freeze: String,

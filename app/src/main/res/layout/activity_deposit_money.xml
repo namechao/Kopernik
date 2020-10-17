@@ -80,6 +80,7 @@
                 android:paddingBottom="@dimen/dp_11"
                 android:text="@string/copy_memo"/>
             <TextView
+                android:id="@+id/depositCoinTip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"

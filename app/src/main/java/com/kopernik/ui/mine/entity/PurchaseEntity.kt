@@ -7,8 +7,12 @@ import com.kopernik.ui.asset.entity.WithdrawEarningsBean
 class PurchaseEntity : Parcelable {
     var mineMacName: String? = ""
     var mineMacPrice: String? = ""
+    var consumeUytPro: String? = ""
     var consumeUyt: String? = ""
     var uytBanlance: String? = ""
+    var uytProBanlance: String? = ""
+    var uytToUsdt: String? = ""
+    var uytProToUsdt: String? = ""
 
 
     constructor() {}
@@ -16,14 +20,22 @@ class PurchaseEntity : Parcelable {
         mineMacName = `in`.readString()
         mineMacPrice = `in`.readString()
         consumeUyt = `in`.readString()
+        consumeUytPro = `in`.readString()
         uytBanlance = `in`.readString()
+        uytProBanlance = `in`.readString()
+        uytToUsdt = `in`.readString()
+        uytProToUsdt = `in`.readString()
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeString(mineMacName)
         dest.writeString(mineMacPrice)
         dest.writeString(consumeUyt)
+        dest.writeString(consumeUytPro)
         dest.writeString(uytBanlance)
+        dest.writeString(uytProBanlance)
+        dest.writeString(uytToUsdt)
+        dest.writeString(uytProToUsdt)
     }
 
     override fun describeContents(): Int {

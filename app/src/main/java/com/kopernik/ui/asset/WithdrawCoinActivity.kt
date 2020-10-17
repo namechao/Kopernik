@@ -33,9 +33,9 @@ companion object{
     private const val REQUEST_CODE_QRCODE_PERMISSIONS = 2
 }
     private var allConfigEntity:AllConfigEntity?=null
-    private var balanaceOf: BigDecimal? = null
+    private var balanace=""
     private var fee: String? = null
-    private var iconType:String=""
+    private var type:String=""
 
     private var rate=""
     override fun layoutId()=R.layout.activity_withdraw_coin
@@ -43,6 +43,16 @@ companion object{
         setTitle(getString(R.string.title_asset_withdrawl))
         intent.getSerializableExtra("allConfigEntity")?.let {
             allConfigEntity=it as AllConfigEntity
+        }
+        intent.getStringExtra("type")?.let {
+            type=it
+        }
+        if (type=="UYT"){
+            withdrawlAddressTip.text=getString(R.string.desposit_test_address)
+            balanace= allConfigEntity?.uyt.toString()
+        }else if(type=="UYTPRO"){
+            withdrawlAddressTip.text=getString(R.string.desposit_address)
+            balanace= allConfigEntity?.uytPro.toString()
         }
         eTWithdrawlCoinCounts?.maxLines = 2
         eTWithdrwalAddress?.addTextChangedListener(textWatcher)
@@ -57,12 +67,12 @@ companion object{
                 return@setOnClickListener
             }
             //校验提现金额
-            if (BigDecimal(allConfigEntity?.uyt).compareTo(BigDecimal("0")) == 0) {
+            if (BigDecimal(balanace).compareTo(BigDecimal("0")) == 0) {
                 ToastUtils.showShort(getActivity(), getString(R.string.tip_alert_no_asset_withdrawl))
                 return@setOnClickListener
             }
             //校验提现金额
-            if (BigDecimal(eTWithdrawlCoinCounts.text.toString().trim()) > BigDecimal(allConfigEntity?.uyt)) {
+            if (BigDecimal(eTWithdrawlCoinCounts.text.toString().trim()) > BigDecimal(balanace)) {
                 ToastUtils.showShort(getActivity(), getString(R.string.uyt_witdrawl_error))
                 return@setOnClickListener
             }
@@ -122,6 +132,7 @@ companion object{
             "amount" to eTWithdrawlCoinCounts.text.toString().trim(),
             "addressHash" to eTWithdrwalAddress.text.toString().trim(),
             "rate" to rate,
+            "type" to type,
             "pwd" to MD5Utils.md5(MD5Utils.md5(psw)),
             "remark" to etRemark.text.toString().trim()
         )

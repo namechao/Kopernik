@@ -8,7 +8,7 @@ import com.kopernik.data.InjectorUtil
 import com.kopernik.ui.asset.entity.*
 import com.kopernik.ui.mine.entity.AllConfigEntity
 
-class UYTAssetViewModel : BaseViewModel() {
+class UYTTESTAssetViewModel : BaseViewModel() {
     private val homeRepository by lazy { InjectorUtil.getAssetRepository() }
     private val withDrawlCoin = SingleLiveEvent<BaseResult<WithDrawlCoinEntity>>()
     private val data = SingleLiveEvent<BaseResult<Any>>()

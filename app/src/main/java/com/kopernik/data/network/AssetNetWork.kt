@@ -23,7 +23,7 @@ class AssetNetWork {
     suspend fun cancelWithdraw(url: String) = mService.cancelcash(url)
     suspend fun getGains(iconType: String) = mService.getGains(iconType)
     suspend fun saveGains() = mService.saveGains()
-    suspend fun withDrawlCoin() = mService.withDrawlCoin()
+    suspend fun withDrawlCoin(type:String) = mService.withDrawlCoin(type)
     suspend fun verifyPwd(pwd: String) = mService.verifyPwd(pwd)
     suspend fun getWithDrawSatatus(iconType :String) = mService.getWithDrawSatatus(iconType )
 //    suspend fun deposit(iconType :String) = mService.deposit(iconType )

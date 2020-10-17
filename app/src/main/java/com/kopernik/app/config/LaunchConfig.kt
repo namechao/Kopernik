@@ -200,10 +200,11 @@ object LaunchConfig {
     }
 
 
-    fun startTransferAc(context: Context,  allConfigEntity: AllConfigEntity?) {
+    fun startTransferAc(context: Context,  allConfigEntity: AllConfigEntity?,type:String) {
         val intent =
             Intent(context, TransferActivity::class.java)
         intent.putExtra("allConfigEntity", allConfigEntity)
+        intent.putExtra("type", type)
         context.startActivity(intent)
     }
 
@@ -221,19 +222,22 @@ object LaunchConfig {
     fun startDepositMoneyActivity(
         context: Context,
         address: String?,
-        memo: String?
+        memo: String?,
+        type:String
     ) {
         val intent =
             Intent(context, DepositMoneyActivity::class.java)
         intent.putExtra("address", address)
         intent.putExtra("memo", memo)
+        intent.putExtra("type", type)
         context.startActivity(intent)
     }
 
-    fun startWithdrawCoinAc(context: Context, allConfigEntity: AllConfigEntity?) {
+    fun startWithdrawCoinAc(context: Context, allConfigEntity: AllConfigEntity?,type:String) {
         val intent =
             Intent(context, WithdrawCoinActivity::class.java)
         intent.putExtra("allConfigEntity",allConfigEntity)
+        intent.putExtra("type",type)
         context.startActivity(intent)
     }
 
@@ -408,10 +412,18 @@ object LaunchConfig {
         intent.putExtra("asset",asset)
         context.startActivity(intent)
     }
-    fun startUYTAssetActivity(context: Context,asset:String?) {
+    fun startUYTAssetActivity(context: Context,asset:String?,type:String) {
         val intent =
             Intent(context, UYTAssetActivity::class.java)
         intent.putExtra("asset",asset)
+        intent.putExtra("type",type)
+        context.startActivity(intent)
+    }
+    fun startUYTTESTAssetActivity(context: Context,asset:String?,type:String) {
+        val intent =
+            Intent(context, UYTTESTAssetActivity::class.java)
+        intent.putExtra("asset",asset)
+        intent.putExtra("type",type)
         context.startActivity(intent)
     }
     fun startWebViewAc(

@@ -126,15 +126,19 @@
     <string name="purchase_mm">Reserve a miner</string>
     <string name="runtime_mm">Run miner</string>
     <string name="out_time_mm">Expired miners</string>
-    <string name="balance_not_enough">（Insufficient current balance）</string>
+    <string name="balance_not_enough">（Insufficient </string>
+    <string name="balance_not_enough_end"> current balance）</string>
     <string name="mining_machine_name">Miner name</string>
     <string name="mining_machine_price">Mining machine price</string>
+    <string name="pay_type">payment method</string>
     <string name="mining_machine_speed">Current calculation speed</string>
     <string name="mining_machine_update_counts">(Update once a day)</string>
     <string name="mining_power">Mining power</string>
     <string name="mining_machine_times">Times</string>
-    <string name="pay_uyt_coins">Consumption equal UYT</string>
+    <string name="pay_uyt_coins">UYT consumption</string>
+    <string name="pay_uyt_test_coins">UYT_TEST consumption</string>
     <string name="uyt_balance">UYT balance</string>
+    <string name="uyt_test_balance">UYT_TEST balance</string>
     <string name="input_counts">Input quantity</string>
     <string name="mining_machine_type1">Experience the mining machine</string>
     <string name="mining_machine_type2">Micro miner</string>
@@ -256,6 +260,7 @@
     <string name="asset_utc_balance">UTC balance</string>
     <string name="asset_utk_balance">UTK balance</string>
     <string name="asset_uyt_balance">UYT balance</string>
+    <string name="asset_uyt_test_balance">UYT_TEST balance</string>
     <string name="asset_exchange">exchange</string>
     <string name="asset_tansfer">Transfer</string>
     <string name="asset_synthesis_record">UTC composite record</string>
@@ -288,6 +293,7 @@
     <string name="title_finance_state">status</string>
     <string name="title_asset_withdrawl">Withdrawal</string>
     <string name="title_asset_deposit">Recharge</string>
+    <string name="uyt_test_deposit_rules">• Do not recharge any non-UYT_TEST assets to the above address, otherwise the assets will not be retrieved.\n•UYT_TEST needs about 3 blocks to confirm the payment.\n• Minimum recharge amount: 0.01 UYT_TEST, recharge less than the minimum amount will not be credited to the account and cannot be returned\n• Please make sure that your phone is safe to prevent information from being tampered with or leaked</string>
     <string name="uyt_deposit_rules">• Do not recharge any non-UYT assets to the above address, otherwise the assets will not be retrieved.\n•UYT needs about 3 blocks to confirm the payment.\n• Minimum recharge amount: 0.01 UYT, recharge less than the minimum amount will not be credited to the account and cannot be returned\n• Please make sure that your phone is safe to prevent information from being tampered with or leaked</string>
     <string name="uyt_withdrawl_rules">•To ensure the safety of funds, we will manually review the withdrawals, please be patient.\n• Be sure to confirm the security of your phone to prevent information from being tampered with or leaked.</string>
     <string name="uyt_transfer_rules">• To ensure the safety of funds, please carefully verify the UID of the other party.\n• Be sure to confirm the security of your phone to prevent information from being tampered with or leaked.</string>
@@ -295,7 +301,9 @@
     <string name="copy_address">Copy address</string>
     <string name="copy_memo">Copy memo</string>
     <string name="desposit_address">UYT withdrawal address</string>
+    <string name="desposit_test_address">UYT_TEST withdrawal address</string>
     <string name="memo_tip">Reminder: Please fill in memo in the UYT transfer [Remarks], otherwise the account cannot be received!d</string>
+    <string name="memo_test_tip">Reminder: Please fill in memo in the UYT_TEST transfer [Remarks], otherwise the account cannot be received!d</string>
     <string name="withdraw_num">Number of withdrawals</string>
     <string name="hint_note">Remarks (within 64 characters)</string>
     <string name="withdrawl_tip">UYT Withdrawal tips</string>
