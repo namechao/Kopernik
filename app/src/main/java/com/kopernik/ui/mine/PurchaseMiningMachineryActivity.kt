@@ -105,14 +105,43 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
                 var purchaseEntity=PurchaseEntity()
                 purchaseEntity.mineMacName= (adapter.data[position] as Machine).name
                 purchaseEntity.mineMacPrice= (adapter.data[position] as Machine).price
-                purchaseEntity.consumeUyt= BigDecimalUtils.divide(BigDecimalUtils.multiply((adapter.data[position] as Machine).price,"0.3").toString(),minebean?.uytPrice,8)
-                purchaseEntity.consumeUytPro= BigDecimalUtils.divide(BigDecimalUtils.multiply((adapter.data[position] as Machine).price,"0.7").toString(),minebean?.uytProPrice,8)
+
+                if (minebean?.uytRatio!=null&&minebean?.uytproRatio!=null) {
+                    //计算比例关系
+                    var uytRatio = BigDecimalUtils.divide(
+                        minebean?.uytRatio,
+                        BigDecimalUtils.add(minebean?.uytRatio, minebean?.uytproRatio).toString(),
+                        2
+                    )
+                    var uytproRatio = BigDecimalUtils.divide(
+                        minebean?.uytproRatio,
+                        BigDecimalUtils.add(minebean?.uytRatio, minebean?.uytproRatio).toString(),
+                        2
+                    )
+                    purchaseEntity.consumeUyt = BigDecimalUtils.divide(
+                        BigDecimalUtils.multiply(
+                            (adapter.data[position] as Machine).price,
+                            uytRatio
+                        ).toString(), minebean?.uytPrice, 8
+                    )
+                    purchaseEntity.consumeUytPro = BigDecimalUtils.divide(
+                        BigDecimalUtils.multiply(
+                            (adapter.data[position] as Machine).price,
+                            uytproRatio
+                        ).toString(), minebean?.uytProPrice, 8
+                    )
+                    //                var ratio=BigDecimalUtils.divide(minebean?.uytRatio,minebean?.uytproRatio,2)
+//                purchaseEntity.uytProRation="UYT : UYT_TEST=1:$ratio"
+                    purchaseEntity.uytProRation="UYT : UYT_TEST=${BigDecimalUtils.getRound(minebean?.uytproRatio)}:${BigDecimalUtils.getRound(minebean?.uytRatio)}"
+                }
                 minebean?.uytCaptial?.amount?.let {
                     purchaseEntity.uytBanlance=it
                 }
                 minebean?.uytProCaptial?.amount?.let {
                     purchaseEntity.uytProBanlance=it
                 }
+
+
                 minebean?.uytToUsdt?.let {
                     purchaseEntity.uytToUsdt=it
                 }

@@ -11,18 +11,29 @@ import com.kopernik.ui.mine.entity.AllConfigEntity
 class UYTAssetViewModel : BaseViewModel() {
     private val homeRepository by lazy { InjectorUtil.getAssetRepository() }
     private val withDrawlCoin = SingleLiveEvent<BaseResult<WithDrawlCoinEntity>>()
-    private val data = SingleLiveEvent<BaseResult<Any>>()
+    private val getTransferConfig = SingleLiveEvent<BaseResult<AllConfigEntity>>()
     private val getAssetConfig = SingleLiveEvent<BaseResult<AllConfigEntity>>()
     private val transferRecord = SingleLiveEvent<BaseResult<UYTTransferEntity>>()
     private val rechargeCashRecord = SingleLiveEvent<BaseResult<UYTDepositWithdarwlAssetBean>>()
-
+    private val getConfig = SingleLiveEvent<BaseResult<AllConfigEntity>>()
     fun getAssetConfig(): SingleLiveEvent<BaseResult<AllConfigEntity>> {
         launchGo({
             getAssetConfig.value = homeRepository.getAssetConfig()
         },isShowDialog = false)
         return getAssetConfig
     }
-
+    fun getConfig(): SingleLiveEvent<BaseResult<AllConfigEntity>> {
+        launchGo({
+            getConfig.value = homeRepository.getAssetConfig()
+        })
+        return getConfig
+    }
+    fun getTransferConfig(): SingleLiveEvent<BaseResult<AllConfigEntity>> {
+        launchGo({
+            getTransferConfig.value = homeRepository.getAssetConfig()
+        })
+        return getTransferConfig
+    }
     fun withDrawlCoin(type:String): SingleLiveEvent<BaseResult<WithDrawlCoinEntity>> {
         launchGo({
             withDrawlCoin.value = homeRepository.withDrawlCoin(type)

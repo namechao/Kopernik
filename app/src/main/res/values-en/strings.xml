@@ -247,6 +247,7 @@
     <string name="receive_dialog_top">The amount of UTK that can be claimed this time</string>
     <string name="tv_get_it">get it right now</string>
     <string name="tv_real_m">Real-time market</string>
+    <string name="tv_mine_data">Mining data</string>
     <string name="coin_name">name</string>
     <string name="coin_price">Latest price</string>
     <string name="coin_rise_fall">Latest price...</string>

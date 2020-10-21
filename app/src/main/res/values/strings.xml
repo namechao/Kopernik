@@ -599,7 +599,7 @@
     <string name="mining_machine_unit">台</string>
     <string name="current_exchange_precent">个UTDM合成UTC需消耗</string>
     <string name="purchase_success">预约成功</string>
-    <string name="recvice_error">当前不可以领取UKT</string>
+    <string name="recvice_error">当前不可以领取UTK</string>
     <string name="recvice_time_tip">的领取时间为</string>
     <string name="recvice_success">领取成功</string>
     <string name="recvice_not_time">未到领取时间哦！</string>
@@ -710,6 +710,7 @@
     <string name="tv_get_it">立即领取</string>
     <string name="tv_get_purchase">立即购买</string>
     <string name="tv_real_m">实时行情</string>
+    <string name="tv_mine_data">挖矿数据</string>
     <string name="coin_name">名称</string>
     <string name="coin_price">最新价</string>
     <string name="coin_rise_fall">涨跌幅</string>

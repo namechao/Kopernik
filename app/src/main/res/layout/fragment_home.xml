@@ -253,7 +253,7 @@
                    android:layout_marginLeft="@dimen/dp_15"
                    android:layout_marginTop="@dimen/dp_20"
                    android:textStyle="bold"
-                   android:text="@string/tv_real_m"/>
+                   android:text="@string/tv_mine_data"/>
                <TextView
                    android:id="@+id/tvMineDataRight"
                    android:layout_width="wrap_content"

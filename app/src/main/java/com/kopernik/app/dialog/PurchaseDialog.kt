@@ -71,7 +71,7 @@ class PurchaseDialog : DialogFragment(),
         payUytCoins?.text=BigDecimalUtils.roundDOWN(purchaseEntity?.consumeUytPro,2)
         payUytTestCoins?.text=BigDecimalUtils.roundDOWN(purchaseEntity?.consumeUyt,2)
         uytBalance?.text=resources.getString(R.string.uyt_balance)+": "+BigDecimalUtils.roundDOWN(purchaseEntity?.uytProBanlance,2)
-        payType?.text="UYT : UYT_TEST=7:3"
+        payType?.text=purchaseEntity?.uytProRation
         uytTestBalance?.text=resources.getString(R.string.uyt_test_balance)+": "+BigDecimalUtils.roundDOWN(purchaseEntity?.uytBanlance,2)
          if (BigDecimalUtils.compare(purchaseEntity?.consumeUytPro,purchaseEntity?.uytProBanlance)) {
              balanceNotEnough?.visibility = View.VISIBLE

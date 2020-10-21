@@ -50,7 +50,6 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
         }else if(type=="UYTPRO"){
             balanace= allConfigEntity?.uytPro.toString()
         }
-        getConfigAsset()
         eTUidAddress?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
         eTTransferCounts?.maxLines = 2
         eTUidAddress?.addTextChangedListener(textWatcher)
@@ -121,15 +120,7 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
 
 
 
-    private  fun  getConfigAsset(){
-        viewModel.run {
-            getAssetConfig().observe(this@TransferActivity, Observer {
-                if (it.status==200){
-                    allConfigEntity=it.data
-                }
-            })
-        }
-    }
+
     override fun initData() {
 
     }

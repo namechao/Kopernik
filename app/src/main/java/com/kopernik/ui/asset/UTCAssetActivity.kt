@@ -75,15 +75,8 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
                     }
                 }
             }
-            if (allConfigEntity!=null){
-                var exchangeDialog = ExchangeDialog.newInstance(allConfigEntity!!)
-                exchangeDialog!!.setOnRequestListener(object : ExchangeDialog.RequestListener {
-                    override fun onRequest(utcCounts:String,uytCounts: String, params: String,rate:String) {
-                        exchangeCoin(utcCounts,uytCounts,params,rate)
-                    }
-                })
-                exchangeDialog!!.show(supportFragmentManager, "withdrawRecommed")
-            }
+            getConfig()
+
         }
         smartRefreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(refreshLayout: RefreshLayout) {
@@ -101,6 +94,28 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
         smartRefreshLayout.autoRefresh()
 
     }
+      fun getConfig(){
+         viewModel.run {
+             getConfig().observe(this@UTCAssetActivity, Observer {
+                 if (it.status==200){
+                     allConfigEntity=it.data
+                     if (allConfigEntity!=null){
+                         var exchangeDialog = ExchangeDialog.newInstance(allConfigEntity!!)
+                         exchangeDialog!!.setOnRequestListener(object : ExchangeDialog.RequestListener {
+                             override fun onRequest(utcCounts:String,uytCounts: String, params: String,rate:String) {
+                                 exchangeCoin(utcCounts,uytCounts,params,rate)
+                             }
+                         })
+                         exchangeDialog!!.show(supportFragmentManager, "withdrawRecommed")
+                     }
+
+                 }else{
+                     ErrorCode.showErrorMsg(this@UTCAssetActivity,it.status)
+                 }
+             })
+         }
+      }
+
      private  fun  getCurrentAsset(){
          viewModel.run {
              getAssetConfig().observe(this@UTCAssetActivity, Observer {

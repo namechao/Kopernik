@@ -81,12 +81,17 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
                  // 1.需要uyt 2.需要utc  的数量 才允许 用户领取utk
                  // 2.switchReceive 代表当前是否可以领取 utk
                  var hour = TimeUtils.getHour().toInt()
+                 //控制全网不可以买
+                 if (it.data.switchReceive==2){
+                     ToastUtils.showShort(activity, getString(R.string.recvice_error))
+                     return@Observer
+                 }
                  if (it.data.flag == 2) {
                      ToastUtils.showShort(activity, getString(R.string.recvice_error))
                  } else if (hour < it.data.config.start || hour > it.data.config.end) {
                      ToastUtils.showShort(
                          activity,
-                         "UKT" + "${getString(R.string.recvice_time_tip)}" + "${it.data.config.start}-${it.data.config.end}"
+                         "UTK" + "${getString(R.string.recvice_time_tip)}" + "${it.data.config.start}-${it.data.config.end}"
                      )
                  } else {
 //                 弹窗
@@ -166,7 +171,7 @@ open class HomeFragment: NewBaseFragment<HomeViewModel, ViewDataBinding>() {
       tvUtdm.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utdmAmount,2)
       tvUtk.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utkAmount,2)
       tvUtc.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utcAmount,2)
-      tvUyt.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.uytAmount,2)
+      tvUyt.text=BigDecimalUtils.roundDOWN(homeEntity?.amountList?.uytProAmount,2)
       allCoinCounts
           .text= BigDecimalUtils.roundDOWN(homeEntity?.amountList?.utdmAmount,2)
       list.clear()

@@ -11,6 +11,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.kopernik.R
 import com.kopernik.app.base.NewFullScreenBaseActivity
 import com.kopernik.app.config.LaunchConfig
+import com.kopernik.app.dialog.UTKTransferDialog
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.ui.asset.adapter.UYTDepositWithdrawlAssetAdapter
@@ -93,20 +94,11 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
       }
         //提币
         tvWithDrawlCoin.setOnClickListener {
-            LaunchConfig.startWithdrawCoinAc(
-                this@UYTAssetActivity,allConfigEntity,type
-            )
+            getWithDrawl()
         }
         //转账
         transfer.setOnClickListener {
-            viewModel.run {
-                        LaunchConfig.startTransferAc(
-                            this@UYTAssetActivity,
-                            allConfigEntity,
-                            type
-                        )
-
-            }
+            getTransferConfig()
         }
         llTitle.setOnClickListener {
             machinngType=0
@@ -119,7 +111,36 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
     }
 
 
-
+    fun getWithDrawl(){
+        viewModel.run {
+            getConfig().observe(this@UYTAssetActivity, Observer {
+                if (it.status==200){
+                    allConfigEntity=it.data
+                    LaunchConfig.startWithdrawCoinAc(
+                        this@UYTAssetActivity,allConfigEntity,type
+                    )
+                }else{
+                    ErrorCode.showErrorMsg(this@UYTAssetActivity,it.status)
+                }
+            })
+        }
+    }
+    fun getTransferConfig(){
+        viewModel.run {
+            getTransferConfig().observe(this@UYTAssetActivity, Observer {
+                if (it.status==200){
+                    allConfigEntity=it.data
+                    LaunchConfig.startTransferAc(
+                        this@UYTAssetActivity,
+                        allConfigEntity,
+                        type
+                    )
+                }else{
+                    ErrorCode.showErrorMsg(this@UYTAssetActivity,it.status)
+                }
+            })
+        }
+    }
 
     private  fun  getCurrentAsset(){
         viewModel.run {

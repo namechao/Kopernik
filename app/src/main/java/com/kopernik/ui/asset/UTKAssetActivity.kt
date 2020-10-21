@@ -78,24 +78,34 @@ class UTKAssetActivity : NewFullScreenBaseActivity<UTKAssetViewModel,ViewDataBin
                     }
                 }
             }
-            if (allConfigEntity!=null) {
-                var dialog = UTKTransferDialog.newInstance(allConfigEntity!!)
-                dialog!!.setOnRequestListener(object : UTKTransferDialog.RequestListener {
-                    override fun onRequest(
-                        transferCounts: String,
-                        uid: String,
-                        rate: String,
-                        psw: String
-                    ) {
-                        transfer(transferCounts, uid, rate, psw)
-                    }
-                })
-                dialog!!.show(supportFragmentManager, "withdrawRecommed")
-            }
-
+            getConfig()
         }
     }
-
+    fun getConfig(){
+        viewModel.run {
+            getConfig().observe(this@UTKAssetActivity, Observer {
+                if (it.status==200){
+                    allConfigEntity=it.data
+                    if (allConfigEntity!=null) {
+                        var dialog = UTKTransferDialog.newInstance(allConfigEntity!!)
+                        dialog!!.setOnRequestListener(object : UTKTransferDialog.RequestListener {
+                            override fun onRequest(
+                                transferCounts: String,
+                                uid: String,
+                                rate: String,
+                                psw: String
+                            ) {
+                                transfer(transferCounts, uid, rate, psw)
+                            }
+                        })
+                        dialog!!.show(supportFragmentManager, "withdrawRecommed")
+                    }
+                }else{
+                    ErrorCode.showErrorMsg(this@UTKAssetActivity,it.status)
+                }
+            })
+        }
+    }
     override fun initData() {
         llTitle.setOnClickListener {
             machinngType=0

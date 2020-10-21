@@ -13,6 +13,7 @@ class PurchaseEntity : Parcelable {
     var uytProBanlance: String? = ""
     var uytToUsdt: String? = ""
     var uytProToUsdt: String? = ""
+    var uytProRation: String? = ""
 
 
     constructor() {}
@@ -25,6 +26,7 @@ class PurchaseEntity : Parcelable {
         uytProBanlance = `in`.readString()
         uytToUsdt = `in`.readString()
         uytProToUsdt = `in`.readString()
+        uytProRation = `in`.readString()
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
@@ -36,6 +38,7 @@ class PurchaseEntity : Parcelable {
         dest.writeString(uytProBanlance)
         dest.writeString(uytToUsdt)
         dest.writeString(uytProToUsdt)
+        dest.writeString(uytProRation)
     }
 
     override fun describeContents(): Int {

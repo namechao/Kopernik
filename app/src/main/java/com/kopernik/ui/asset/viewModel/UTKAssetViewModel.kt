@@ -20,6 +20,13 @@ class UTKAssetViewModel : BaseViewModel() {
     private val receiveRecord = SingleLiveEvent<BaseResult<ReceiveRecordEntity>>()
     private val transferRecord = SingleLiveEvent<BaseResult<TransferRecordEntity>>()
 
+    private val getConfig = SingleLiveEvent<BaseResult<AllConfigEntity>>()
+    fun getConfig(): SingleLiveEvent<BaseResult<AllConfigEntity>> {
+        launchGo({
+            getConfig.value = homeRepository.getAssetConfig()
+        })
+        return getConfig
+    }
     fun getAssetConfig(): SingleLiveEvent<BaseResult<AllConfigEntity>> {
         launchGo({
             getAssetConfig.value = homeRepository.getAssetConfig()

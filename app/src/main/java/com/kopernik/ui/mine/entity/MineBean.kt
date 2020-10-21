@@ -12,7 +12,9 @@ data class MineBean(
     val uytCaptial: UytCaptial,
     val uytProCaptial: UytProCaptial,
     val uytToUsdt: String,
-    val uytProToUsdt: String
+    val uytProToUsdt: String,
+    var uytRatio: String?,
+    var uytproRatio: String?
 )
 
 data class Machine(

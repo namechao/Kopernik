@@ -93,20 +93,12 @@ class UYTTESTAssetActivity : NewFullScreenBaseActivity<UYTTESTAssetViewModel, Vi
       }
         //提币
         tvWithDrawlCoin.setOnClickListener {
-            LaunchConfig.startWithdrawCoinAc(
-                this@UYTTESTAssetActivity,allConfigEntity,type
-            )
+            getWithDrawl()
+
         }
         //转账
         transfer.setOnClickListener {
-            viewModel.run {
-                        LaunchConfig.startTransferAc(
-                            this@UYTTESTAssetActivity,
-                            allConfigEntity,
-                            type
-                        )
-
-            }
+            getTransferConfig()
         }
         llTitle.setOnClickListener {
             machinngType=0
@@ -119,8 +111,36 @@ class UYTTESTAssetActivity : NewFullScreenBaseActivity<UYTTESTAssetViewModel, Vi
     }
 
 
-
-
+    fun getWithDrawl(){
+        viewModel.run {
+            getConfig().observe(this@UYTTESTAssetActivity, Observer {
+                if (it.status==200){
+                    allConfigEntity=it.data
+                    LaunchConfig.startWithdrawCoinAc(
+                        this@UYTTESTAssetActivity,allConfigEntity,type
+                    )
+                }else{
+                    ErrorCode.showErrorMsg(this@UYTTESTAssetActivity,it.status)
+                }
+            })
+        }
+    }
+    fun getTransferConfig(){
+        viewModel.run {
+            getTransferConfig().observe(this@UYTTESTAssetActivity, Observer {
+                if (it.status==200){
+                    allConfigEntity=it.data
+                    LaunchConfig.startTransferAc(
+                        this@UYTTESTAssetActivity,
+                        allConfigEntity,
+                        type
+                    )
+                }else{
+                    ErrorCode.showErrorMsg(this@UYTTESTAssetActivity,it.status)
+                }
+            })
+        }
+    }
     private  fun  getCurrentAsset(){
         viewModel.run {
             getAssetConfig().observe(this@UYTTESTAssetActivity, Observer {

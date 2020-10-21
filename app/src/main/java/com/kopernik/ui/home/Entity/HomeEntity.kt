@@ -13,6 +13,7 @@ data class AmountList(
     val utcAmount: String,
     val utdmAmount: String,
     val utkAmount: String,
+    val uytProAmount: String,
     val uytAmount: String
 )
 

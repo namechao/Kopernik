@@ -17,13 +17,19 @@ class UTCAssetViewModel : BaseViewModel() {
     private val exchangeRecord = SingleLiveEvent<BaseResult<ExchangeRecordEntity>>()
     private val getRate = SingleLiveEvent<BaseResult<RateEntity>>()
     private val exchange = SingleLiveEvent<BaseResult<Any>>()
-    private val receiveRecord = SingleLiveEvent<BaseResult<ReceiveRecordEntity>>()
+    private val getConfig = SingleLiveEvent<BaseResult<AllConfigEntity>>()
 
     fun getAssetConfig(): SingleLiveEvent<BaseResult<AllConfigEntity>> {
         launchGo({
             getAssetConfig.value = homeRepository.getAssetConfig()
         },isShowDialog = false)
         return getAssetConfig
+    }
+    fun getConfig(): SingleLiveEvent<BaseResult<AllConfigEntity>> {
+        launchGo({
+            getConfig.value = homeRepository.getAssetConfig()
+        })
+        return getConfig
     }
     fun composeRecord(map: Map<String,String>): SingleLiveEvent<BaseResult<UTCAssetEntity>> {
         launchGo({
