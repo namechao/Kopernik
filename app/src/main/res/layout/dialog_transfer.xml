@@ -121,6 +121,7 @@
             android:textSize="13dp"
             android:textColor="@color/color_F4C41B" />
         <TextView
+            android:id="@+id/countsType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="UYT"
@@ -160,7 +161,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="UYT"
+            android:text="UYT_TEST"
             android:gravity="right"
             android:textSize="13dp"
             android:textColor="@color/color_AA9CCA" />

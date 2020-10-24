@@ -44,5 +44,6 @@ data class AllConfigEntity (
     val uyt: String,
     val uytPro: String,
     val uytPrice: String,
+    val  uytProPrice: String,
     val composeAmount:String
 ):Serializable

@@ -109,7 +109,7 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
         bean.handlerFee =rate
         bean.receiveId = eTUidAddress!!.text.toString().trim()
         bean.transferNumber = eTTransferCounts.text.toString().trim()
-        var extractDialog = TransferDialog.newInstance(bean)
+        var extractDialog = TransferDialog.newInstance(bean,type)
         extractDialog!!.setOnRequestListener(object : TransferDialog.RequestListener {
             override fun onRequest( params: String) {
                 submitWithDrawlCoin(params)

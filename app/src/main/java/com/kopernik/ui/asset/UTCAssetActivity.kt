@@ -35,6 +35,7 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
     private var pager=1
     private var pager1=1
     private var allConfigEntity:AllConfigEntity?=null
+    private var isFirst=true
     var adpter=UTCSynthesisRecordAdapter(arrayListOf())
     var adpter1=UTCExchangeRecordAdapter(arrayListOf())
 
@@ -87,7 +88,11 @@ class UTCAssetActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewDataBi
                 pager=1
                 pager1=1
                 getList()
+                if (isFirst){
+                    isFirst=false
+                }else{
                 getCurrentAsset()
+                }
             }
 
         })

@@ -14,6 +14,7 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import com.kopernik.R
+import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.ui.asset.entity.*
 import com.kopernik.ui.asset.util.OnClickFastListener
 import com.kopernik.app.utils.KeyboardUtils
@@ -23,6 +24,8 @@ class TransferDialog : DialogFragment(),
     private var desc: TextView? = null
     private var desc1: TextView? = null
     private var desc2: TextView? = null
+    private var countsType: TextView? = null
+    private var type = ""
 
 
     private var passwordEt: EditText? = null
@@ -48,7 +51,9 @@ class TransferDialog : DialogFragment(),
         bundle?.getParcelable<TransferCoinBean>("bean")?.let{
             bean=it
         }
-
+        bundle?.getString("type")?.let{
+            type=it
+        }
         initView(dialog)
         return dialog
     }
@@ -57,12 +62,17 @@ class TransferDialog : DialogFragment(),
         desc = dialog.findViewById(R.id.tx_desc)
         desc1 = dialog.findViewById(R.id.tx_desc1)
         desc2 = dialog.findViewById(R.id.tx_desc2)
+        countsType = dialog.findViewById(R.id.countsType)
         passwordEt = dialog.findViewById(R.id.etTradePsw)
         passwordEt?.addTextChangedListener(passwordWatcher)
         okBtn = dialog.findViewById(R.id.ok)
         desc?.text=bean?.receiveId
         desc1?.text=bean?.transferNumber
-        desc2?.text=bean?.handlerFee
+        desc2?.text= BigDecimalUtils.round(bean?.handlerFee,2)
+        if (type=="UYT")
+            countsType?.text="UYT_TEST"
+        else if (type=="UYTPRO")
+            countsType?.text="UYT"
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
@@ -133,10 +143,11 @@ class TransferDialog : DialogFragment(),
     }
 
     companion object {
-        fun newInstance(bean: TransferCoinBean): TransferDialog {
+        fun newInstance(bean: TransferCoinBean,type:String): TransferDialog {
             val fragment = TransferDialog()
             val bundle = Bundle()
             bundle.putParcelable("bean", bean)
+            bundle.putString("type", type)
             fragment.arguments = bundle
             return fragment
         }

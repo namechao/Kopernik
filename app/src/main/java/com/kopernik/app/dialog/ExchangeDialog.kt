@@ -78,7 +78,7 @@ class ExchangeDialog : DialogFragment(),
         passwordEt?.addTextChangedListener(passwordWatcher)
         etUtcCounts?.addTextChangedListener(uytCountsWatcher)
         okBtn = dialog.findViewById(R.id.ok)
-        var utcTouyt= BigDecimalUtils.divideDown(bean?.config?.utcPrice,bean?.uytPrice,2)
+        var utcTouyt= BigDecimalUtils.divideDown(bean?.config?.utcPrice,bean?.uytProPrice,2)
         etUytCounts?.isEnabled=false
         exchangeProportion?.text=getString(R.string.asset_exchange_proportion)+"UTC:UYT= 1：${utcTouyt}"
         if (bean?.rateList!=null) {
@@ -88,7 +88,7 @@ class ExchangeDialog : DialogFragment(),
         }
 
 
-        desc?.text=rate+"UYT"
+        desc?.text=rate+"UYT_TEST"
         maxUtcCounts=BigDecimalUtils.roundDOWN(bean?.utc,2)
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
@@ -109,7 +109,7 @@ class ExchangeDialog : DialogFragment(),
             KeyboardUtils.hideSoftKeyboard(passwordEt)
             listener?.let {
                 dismiss()
-                var uytCounts=BigDecimalUtils.divideDown( BigDecimalUtils.multiply(bean?.config?.utcPrice,etUtcCounts?.text.toString().trim()).toString(),bean?.uytPrice,8)
+                var uytCounts=BigDecimalUtils.divideDown( BigDecimalUtils.multiply(bean?.config?.utcPrice,etUtcCounts?.text.toString().trim()).toString(),bean?.uytProPrice,8)
                 it.onRequest(etUtcCounts?.text.toString().trim(),uytCounts,passwordEt!!.text.toString().trim(),rate) }
         }
     }
@@ -159,7 +159,7 @@ class ExchangeDialog : DialogFragment(),
             etUtcCounts?.setSelection(etUtcCounts?.text.toString().length)
             if (!etUtcCounts?.text.toString().trim().isBlank()&&BigDecimal(etUtcCounts?.text.toString().trim())-BigDecimal(maxUtcCounts)> BigDecimal("0")) etUtcCounts?.setText(""+maxUtcCounts)
             if (!etUtcCounts?.text.toString().trim().isBlank())
-                etUytCounts?.setText(""+BigDecimalUtils.divideDown( BigDecimalUtils.multiply(bean?.config?.utcPrice,etUtcCounts?.text.toString().trim()).toString(),bean?.uytPrice,2))
+                etUytCounts?.setText(""+BigDecimalUtils.divideDown( BigDecimalUtils.multiply(bean?.config?.utcPrice,etUtcCounts?.text.toString().trim()).toString(),bean?.uytProPrice,2))
                 else   etUytCounts?.setText("")
 
         }

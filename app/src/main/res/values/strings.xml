@@ -736,7 +736,7 @@
     <string name="asset_utdm_consume">UTDM消耗</string>
     <string name="asset_utc_consume">UTC消耗</string>
     <string name="asset_utk_consume">UTK消耗</string>
-    <string name="asset_handling_fee">手续费(UYT)</string>
+    <string name="asset_handling_fee">手续费\n(UYT_TEST)</string>
     <string name="asset_handling_fees">手续费</string>
     <string name="asset_synthesis_counts">合成数量</string>
     <string name="asset_exchange_proportion">当前兑换比例</string>

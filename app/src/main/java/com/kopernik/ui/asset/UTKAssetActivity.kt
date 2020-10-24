@@ -46,6 +46,7 @@ class UTKAssetActivity : NewFullScreenBaseActivity<UTKAssetViewModel,ViewDataBin
     private var pager=1
     private var pager1=1
     private var allConfigEntity:AllConfigEntity?=null
+    private var isFirst=true
     var adpter= UTKReceiveRecordAdapter(arrayListOf())
     var adpter1= UTKTransferRecordAdapter(arrayListOf())
     override fun layoutId()=R.layout.activity_utk_asset
@@ -125,7 +126,11 @@ class UTKAssetActivity : NewFullScreenBaseActivity<UTKAssetViewModel,ViewDataBin
                 pager=1
                 pager1=1
                 getList()
-                getCurrentAsset()
+                if (isFirst){
+                    isFirst=false
+                }else{
+                    getCurrentAsset()
+                }
             }
 
         })

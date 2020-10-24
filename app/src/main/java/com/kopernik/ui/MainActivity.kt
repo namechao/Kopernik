@@ -123,8 +123,13 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
         navCtl?.addTabItemSelectedListener(object : OnTabItemSelectedListener {
 
             override fun onSelected(index: Int, old: Int) {
-                mIndex=index
-                switchPage(index, old)
+                if (index==2){
+                    ToastUtils.showShort(this@MainActivity,"暂未开放")
+                    navCtl?.setSelect(mIndex)
+                }else {
+                    mIndex = index
+                    switchPage(index, old)
+                }
             }
 
             override fun onRepeat(index: Int) {

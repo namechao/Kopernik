@@ -40,6 +40,7 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
     private var adapter= UYTDepositWithdrawlAssetAdapter(arrayListOf())
     private var adapter1 = UYTTransferAssetAdapter(arrayListOf())
     private var type = ""
+    private var isFirst=true
     override fun layoutId()=R.layout.activity_uyt_asset
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -68,7 +69,11 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
             override fun onRefresh(@NonNull refreshLayout: RefreshLayout) {
                 pager=1
                 pager1=1
-                getCurrentAsset()
+                if (isFirst){
+                    isFirst=false
+                }else {
+                    getCurrentAsset()
+                }
                 getListData()
             }
         })

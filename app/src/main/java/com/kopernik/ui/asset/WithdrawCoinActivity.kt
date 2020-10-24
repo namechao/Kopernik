@@ -116,7 +116,7 @@ companion object{
         wdBean.mineFee =rate
         wdBean.addressHash = eTWithdrwalAddress!!.text.toString().trim()
         wdBean.withdrawNumber = eTWithdrawlCoinCounts.text.toString().trim()
-        var dialog = WithdrawlDialog.newInstance(wdBean)
+        var dialog = WithdrawlDialog.newInstance(wdBean,type)
         dialog!!.setOnRequestListener(object : WithdrawlDialog.RequestListener {
             override fun onRequest(params: String) {
                 submitWithDrawlCoin(params)

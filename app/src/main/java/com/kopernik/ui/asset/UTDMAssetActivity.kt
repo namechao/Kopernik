@@ -27,6 +27,7 @@ class UTDMAssetActivity : NewFullScreenBaseActivity<UDMTAssetViewModel, ViewData
     override fun layoutId()= R.layout.activity_udmt_asset
     private var pager=1
     private var allConfigEntity: AllConfigEntity?=null
+    private var isFirst=true
     var adpter= UDMTFinanceRecordsAdapter(arrayListOf())
     override fun initView(savedInstanceState: Bundle?) {
         ivBack.setOnClickListener {
@@ -59,7 +60,11 @@ class UTDMAssetActivity : NewFullScreenBaseActivity<UDMTAssetViewModel, ViewData
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 pager=1
                 getList()
-                getCurrentAsset()
+                if (isFirst){
+                    isFirst=false
+                }else {
+                    getCurrentAsset()
+                }
             }
 
         })
