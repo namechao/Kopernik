@@ -488,8 +488,10 @@
     <string name="nav_title_main">首页</string>
     <string name="nav_title_mine">矿场</string>
     <string name="nav_title_ecology">生态</string>
+    <string name="nav_title_trade">交易</string>
     <string name="nav_title_asset">资产</string>
     <string name="nav_title_my">我的</string>
+    <string name="opening_soon">即将开放</string>
     <!--    我的相关-->
     <string name="name_verified">实名认证</string>
     <string name="exit_login">退出登录</string>

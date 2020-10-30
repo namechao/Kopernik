@@ -1,9 +1,12 @@
 package com.kopernik.ui.login
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.webkit.WebChromeClient
+import android.webkit.WebSettings
+import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.databinding.ViewDataBinding
 import com.aleyn.mvvm.base.BaseActivity
@@ -31,7 +34,12 @@ class NoticeActivity : NewBaseActivity<NoViewModel, ViewDataBinding>() {
          }
         var webSetting= webview.settings
         webSetting.javaScriptEnabled=true
-        webSetting.domStorageEnabled = true;
+        webSetting.domStorageEnabled = true
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP) {
+            webSetting.mixedContentMode=WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+        }
+
+        webSetting.blockNetworkImage=false
         webview.webChromeClient =WebChromeClient()
         webview?.setBackgroundColor(Color.TRANSPARENT)
         webview.webViewClient = WebViewClient()

@@ -113,7 +113,7 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
         navCtl = page_navigation_view.material()
             .addItem(R.mipmap.icon_home_normal, R.mipmap.icon_home_press,resources.getString(R.string.nav_title_main),resources.getColor(R.color.color_F4C41B))
             .addItem(R.mipmap.icon_mine_normal, R.mipmap.icon_mine_press,resources.getString(R.string.nav_title_mine),resources.getColor(R.color.color_F4C41B))
-            .addItem(R.mipmap.icon_ecology_normal, R.mipmap.icon_ecology_press,  resources.getString(R.string.nav_title_ecology),resources.getColor(R.color.color_F4C41B))
+            .addItem(R.mipmap.icon_trade_nomal, R.mipmap.icon_trade_nomal,  resources.getString(R.string.nav_title_trade),resources.getColor(R.color.color_F4C41B))
             .addItem(R.mipmap.icon_asset_normal,  R.mipmap.icon_asset_press,  resources.getString(R.string.nav_title_asset),resources.getColor(R.color.color_F4C41B))
             .addItem(R.mipmap.icon_my_normal, R.mipmap.icon_my_press, resources.getString(R.string.nav_title_my),resources.getColor(R.color.color_F4C41B))
             .setDefaultColor(resources.getColor(R.color.color_70659F))
@@ -124,7 +124,7 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
 
             override fun onSelected(index: Int, old: Int) {
                 if (index==2){
-                    ToastUtils.showShort(this@MainActivity,"暂未开放")
+                    ToastUtils.showShort(this@MainActivity,resources.getString(R.string.opening_soon))
                     navCtl?.setSelect(mIndex)
                 }else {
                     mIndex = index

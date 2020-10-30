@@ -39,8 +39,10 @@
     <string name="nav_title_main">Home</string>
     <string name="nav_title_mine">Mine</string>
     <string name="nav_title_ecology">Ecology</string>
+    <string name="nav_title_trade">transaction</string>
     <string name="nav_title_asset">assets</string>
     <string name="nav_title_my">me</string>
+    <string name="opening_soon">Opening soon</string>
     <!--    我的相关-->
     <string name="name_verified">Verified</string>
     <string name="exit_login">sign out</string>
