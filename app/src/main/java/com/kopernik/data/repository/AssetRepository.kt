@@ -20,7 +20,9 @@ class AssetRepository private constructor(private val newWork: AssetNetWork):Bas
     }
 
 
-
+    suspend fun sendCode(phone:String,imageCode:String):BaseResult<Any>{
+        return newWork.sendCode(phone,imageCode)
+    }
     suspend fun submitWithDrawlCoin(map: Map<String, String>): BaseResult<Any> {
         return newWork.submitWithDrawlCoin(map)
     }

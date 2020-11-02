@@ -11,6 +11,7 @@ import com.kopernik.ui.mine.entity.AllConfigEntity
 class TransferViewModel : BaseViewModel() {
     private val homeRepository by lazy { InjectorUtil.getAssetRepository() }
     private val transfer = SingleLiveEvent<BaseResult<Any>>()
+    private val phoneCode = SingleLiveEvent<BaseResult<Any>>()
     private val getAssetConfig = SingleLiveEvent<BaseResult<AllConfigEntity>>()
     fun getAssetConfig(): SingleLiveEvent<BaseResult<AllConfigEntity>> {
         launchGo({
@@ -24,5 +25,10 @@ class TransferViewModel : BaseViewModel() {
         },isShowDialog = false)
         return transfer
     }
-
+    fun sendCode(sendCode:String,imageCode:String): SingleLiveEvent<BaseResult<Any>> {
+        launchGo({
+            phoneCode.value = homeRepository.sendCode(sendCode,imageCode)
+        })
+        return phoneCode
+    }
 }

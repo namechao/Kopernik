@@ -171,6 +171,15 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompa
             onClickItem?.onClick()
         }
     }
+    open fun setTitleAndRightResButton(titleName: String?, resId: Int,onClickItem:OnRightClickItem) {
+        initHeadLayoutId()
+        rightIv.visibility = View.VISIBLE
+        rightIv.setImageResource(resId)
+        headTitleTv.text = titleName
+        rightIv.setOnClickListener {
+            onClickItem?.onClick()
+        }
+    }
     open fun setTitleAndRightonClick(titleName: String?,  functionName: String?,onClickItem:OnRightClickItem) {
         initHeadLayoutId()
         rightTv.visibility = View.VISIBLE

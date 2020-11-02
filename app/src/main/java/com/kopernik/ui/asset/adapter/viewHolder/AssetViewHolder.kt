@@ -25,23 +25,30 @@ class AssetViewHolder(view: View?) : BaseViewHolder(view) {
             return field
         }
         private set
-    var assetCounts: TextView? = null
+
+    var tvAvailable: TextView? = null
         get() {
             if (field == null) {
-                field = itemView.findViewById(R.id.asset_counts)
+                field = itemView.findViewById(R.id.tv_available)
             }
             return field
         }
         private set
-    var assetCny: TextView? = null
+    var tvFreeze: TextView? = null
         get() {
             if (field == null) {
-                field = itemView.findViewById(R.id.asset_cny)
+                field = itemView.findViewById(R.id.tv_freeze)
             }
             return field
         }
         private set
-
-
+    var tvConvert: TextView? = null
+        get() {
+            if (field == null) {
+                field = itemView.findViewById(R.id.tv_convert)
+            }
+            return field
+        }
+        private set
 
 }

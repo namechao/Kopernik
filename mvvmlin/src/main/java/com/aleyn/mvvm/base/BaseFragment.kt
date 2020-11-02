@@ -17,7 +17,6 @@ import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.aleyn.mvvm.R
 import com.aleyn.mvvm.event.Message
 import com.blankj.utilcode.util.ToastUtils
-import com.qmuiteam.qmui.arch.QMUIFragment
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -29,7 +28,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
     protected lateinit var viewModel: VM
 
     protected var mBinding: DB? = null
-
+    protected var mRootView: View? = null
     //是否第一次加载
     private var isFirst: Boolean = true
 
@@ -47,7 +46,8 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
             mBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false)
             return mBinding?.root
         }
-        return inflater.inflate(layoutId(), container, false)
+        mRootView=inflater.inflate(layoutId(), container, false)
+        return mRootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

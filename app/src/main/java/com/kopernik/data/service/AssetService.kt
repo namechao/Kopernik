@@ -13,7 +13,9 @@ import retrofit2.http.*
  */
 
 interface AssetService {
-
+    @FormUrlEncoded
+    @POST("user/sendPhone")
+    suspend fun sendCode(@Field("phone") phone:String,@Field("imageCode") imageCode:String):BaseResult<Any>
     //获取所有资产
     @GET("asset/details")
     suspend fun getAsset(): BaseResult<AssetEntity>

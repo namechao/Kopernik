@@ -3,6 +3,7 @@ package com.kopernik.app.dialog
 import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Parcelable
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,26 +13,27 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.kopernik.R
+import com.kopernik.app.config.UserConfig
+import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.BigDecimalUtils
 import com.kopernik.ui.asset.entity.*
 import com.kopernik.ui.asset.util.OnClickFastListener
 import com.kopernik.app.utils.KeyboardUtils
+import com.kopernik.app.utils.ToastUtils
+import kotlinx.android.synthetic.main.activity_trade_password.*
 
 class WithdrawlDialog : DialogFragment(),
     FingerprintDialog.AuthenticationCallback {
 
 
 
-    private var desc: TextView? = null
-    private var desc1: TextView? = null
-    private var desc2: TextView? = null
-    private var countsType: TextView? = null
-    private var type = ""
-
-    private var passwordEt: EditText? = null
-    private var googlCodeEt: EditText? = null
+    private var tvPhone: TextView? = null
+    private var tvCode: TextView? = null
+    private var phoneNumber=""
+    private var verfiyCode: EditText? = null
     private var okBtn: Button? = null
     private var bean:WithdrawCoinBean?=null
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -54,34 +56,37 @@ class WithdrawlDialog : DialogFragment(),
          bundle?.getParcelable<WithdrawCoinBean>("bean")?.let{
             bean=it
         }
-        bundle?.getString("type")?.let{
-            type=it
-        }
+
         initView(dialog)
         return dialog
     }
 
     private fun initView(dialog: Dialog) {
-        desc = dialog.findViewById(R.id.tx_desc)
-        desc1 = dialog.findViewById(R.id.tx_desc1)
-        desc2 = dialog.findViewById(R.id.tx_desc2)
-        countsType = dialog.findViewById(R.id.countsType)
-        passwordEt = dialog.findViewById(R.id.etTradePsw)
-        googlCodeEt = dialog.findViewById(R.id.etGoogleCode)
-        passwordEt?.addTextChangedListener(passwordWatcher)
+        tvPhone = dialog.findViewById(R.id.tvPhone)
+        tvCode = dialog.findViewById(R.id.tvCode)
+        verfiyCode = dialog.findViewById(R.id.etInputCode)
+        verfiyCode?.addTextChangedListener(passwordWatcher)
         okBtn = dialog.findViewById(R.id.ok)
-        desc?.text=bean?.addressHash
-        desc1?.text=bean?.withdrawNumber
-        desc2?.text= BigDecimalUtils.round(bean?.mineFee,2)
-        if (type=="UYT")
-            countsType?.text="UYT_TEST"
-        else if (type=="UYTPRO")
-            countsType?.text="UYT"
+        var phone= UserConfig.singleton?.accountBean?.phone
+        if (phone!=null){
+            phoneNumber=phone
+            if (phone.length>5){
+                tvPhone?.text="${phone.subSequence(0,3)}****${phone.subSequence(phone.length-4,phone.length)}"
+            }
+        }
+        tvCode?.setOnClickListener {
+            if (phoneNumber.isNullOrEmpty()) {
+                ToastUtils.showShort(context, resources.getString(R.string.phone_not_empty))
+                return@setOnClickListener
+            }
+            //获取验证码
+            listener?.let { it.onRequest(verfiyCode!!.text.toString().trim(),0,phoneNumber) }
+        }
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
         }
-        KeyboardUtils.showKeyboard(passwordEt)
+        KeyboardUtils.showKeyboard(verfiyCode)
         okBtn?.setOnClickListener(clickFastListener)
     }
 
@@ -89,8 +94,8 @@ class WithdrawlDialog : DialogFragment(),
     var clickFastListener: OnClickFastListener = object : OnClickFastListener() {
         override fun onFastClick(v: View) {
 
-            KeyboardUtils.hideSoftKeyboard(passwordEt)
-            listener?.let { it.onRequest(passwordEt!!.text.toString().trim()) }
+            KeyboardUtils.hideSoftKeyboard(verfiyCode)
+            listener?.let { it.onRequest(verfiyCode!!.text.toString().trim(),1,phoneNumber) }
             dismiss()
         }
     }
@@ -115,7 +120,7 @@ class WithdrawlDialog : DialogFragment(),
         }
 
         override fun afterTextChanged(s: Editable) {
-                if (passwordEt!!.text.toString().isNotEmpty()) {
+                if (verfiyCode!!.text.toString().isNotEmpty()) {
                     enableBtn()
                 } else {
                     disableBtn()
@@ -140,9 +145,33 @@ class WithdrawlDialog : DialogFragment(),
         listener=requestListener
     }
     interface RequestListener {
-        fun onRequest(params:String)
+        fun onRequest(params:String,type: Int,phoneNumber:String)
     }
+    open fun startTime(){
+        timer.start()
+    }
+    //计时器定时
+    internal var timer: CountDownTimer = object : CountDownTimer((60 * 1000 + 500).toLong(), 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            if (millisUntilFinished / 1000 == 0L) {
+                onFinish()
+                return
+            }
+            tvCode?.text = "重新发送(${(millisUntilFinished / 1000).toString()})"
+           context?.let {  tvCode?.setTextColor(ContextCompat.getColor(it, R.color.color_5D5386) )}
+            tvCode?.isClickable = false
+        }
 
+        override fun onFinish() {
+            tvCode?.text = "重新获取"
+            context?.let {  tvCode?.setTextColor(ContextCompat.getColor(it, R.color.color_F4C41B))}
+            tvCode?.postInvalidate()
+        }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        timer.cancel()
+    }
     companion object {
         fun newInstance(bean: WithdrawCoinBean,type:String): WithdrawlDialog {
             val fragment = WithdrawlDialog()

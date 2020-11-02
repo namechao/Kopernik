@@ -9,6 +9,7 @@ import com.kopernik.ui.Ecology.*
 import com.kopernik.ui.Ecology.entity.CheckRegisterInfo
 import com.kopernik.ui.login.*
 import com.kopernik.ui.asset.*
+import com.kopernik.ui.asset.entity.AssetEntity
 import com.kopernik.ui.mine.PurchaseMiningMachineryActivity
 import com.kopernik.ui.mine.SynthetiseUTCActivity
 import com.kopernik.ui.mine.entity.AllConfigEntity
@@ -200,44 +201,32 @@ object LaunchConfig {
     }
 
 
-    fun startTransferAc(context: Context,  allConfigEntity: AllConfigEntity?,type:String) {
+    fun startTransferAc(context: Context,allConfigEntity: AllConfigEntity) {
         val intent =
             Intent(context, TransferActivity::class.java)
-        intent.putExtra("allConfigEntity", allConfigEntity)
-        intent.putExtra("type", type)
+        intent.putExtra("allConfigEntity",allConfigEntity)
         context.startActivity(intent)
     }
 
     fun startDepositCoinActivity(
-        context: Context,
-        type: Int,
-        address: String?
+        context: Context
     ) {
         val intent =
             Intent(context, DepositCoinActivity::class.java)
-        intent.putExtra("type", type)
-        intent.putExtra("address", address)
         context.startActivity(intent)
     }
     fun startDepositMoneyActivity(
-        context: Context,
-        address: String?,
-        memo: String?,
-        type:String
+        context: Context
     ) {
         val intent =
             Intent(context, DepositMoneyActivity::class.java)
-        intent.putExtra("address", address)
-        intent.putExtra("memo", memo)
-        intent.putExtra("type", type)
         context.startActivity(intent)
     }
 
-    fun startWithdrawCoinAc(context: Context, allConfigEntity: AllConfigEntity?,type:String) {
+    fun startWithdrawCoinAc(context: Context,allConfigEntity: AllConfigEntity) {
         val intent =
             Intent(context, WithdrawCoinActivity::class.java)
         intent.putExtra("allConfigEntity",allConfigEntity)
-        intent.putExtra("type",type)
         context.startActivity(intent)
     }
 

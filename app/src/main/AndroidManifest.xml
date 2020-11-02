@@ -69,10 +69,13 @@
         <activity android:name=".ui.asset.WithdrawCoinActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.DepositCoinActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.CrossChainTxActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.DepositCoinHistoryActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.UYTAssetActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.UYTTESTAssetActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.DepositMoneyActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.TransferActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.ChoseCoinTypeActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.TransferHistoryActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.login.RegisterActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.login.UserProtocolActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.login.ForgetPasswordNextActivity"   android:screenOrientation="portrait"/>

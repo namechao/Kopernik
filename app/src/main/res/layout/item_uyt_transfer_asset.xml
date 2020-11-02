@@ -39,6 +39,7 @@
         app:sShapeCornersRadius="12dp"
         app:sRightIconRes="@mipmap/ic_copy"
         app:sShapeSelectorNormalColor="@color/colorAccent"
+        app:sShapeSelectorPressedColor="@color/colorAccent"
         app:sUseShape="true"
         app:sUseRipple="false">
     </com.allen.library.SuperTextView>
@@ -61,6 +62,7 @@
         app:sRightTopTextString=" "
         app:sRightIconRes="@mipmap/ic_copy"
         app:sShapeSelectorNormalColor="@color/colorAccent"
+        app:sShapeSelectorPressedColor="@color/colorAccent"
         app:sUseShape="true"
         app:sUseRipple="false">
     </com.allen.library.SuperTextView>
@@ -85,6 +87,7 @@
             app:sLeftTextColor="@color/white"
             app:sShapeCornersRadius="12dp"
             app:sShapeSelectorNormalColor="@color/colorAccent"
+            app:sShapeSelectorPressedColor="@color/colorAccent"
             app:sUseShape="true"
             app:sUseRipple="false">
         </com.allen.library.SuperTextView>
@@ -105,6 +108,7 @@
             app:sLeftTextColor="@color/white"
             app:sShapeCornersRadius="12dp"
             app:sShapeSelectorNormalColor="@color/colorAccent"
+            app:sShapeSelectorPressedColor="@color/colorAccent"
             app:sUseShape="true"
             app:sUseRipple="false">
         </com.allen.library.SuperTextView>
@@ -125,6 +129,7 @@
         app:sLeftTextColor="@color/white"
         app:sShapeCornersRadius="12dp"
         app:sShapeSelectorNormalColor="@color/colorAccent"
+        app:sShapeSelectorPressedColor="@color/colorAccent"
         app:sUseShape="true"
         app:sUseRipple="false">
     </com.allen.library.SuperTextView>

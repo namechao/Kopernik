@@ -1,52 +1,60 @@
 package com.kopernik.ui.Ecology.fragment
 
-import android.os.Bundle
+import android.view.KeyEvent
+import android.view.ViewGroup
+import androidx.annotation.NonNull
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.kopernik.R
-import com.kopernik.app.base.NewBaseFragment
-import com.kopernik.ui.Ecology.adapter.EcologyTabAddrAdapter
+import com.kopernik.app.baseweb.BaseWebViewFragment
+import com.kopernik.data.api.Api
 import com.kopernik.ui.Ecology.viewModel.NodeViewModel
-import kotlinx.android.synthetic.main.fragment_ecology.*
+import org.jetbrains.annotations.Nullable
 
 
-class EcologyFragment : NewBaseFragment<NodeViewModel, ViewDataBinding>() {
-    var list= arrayListOf("全球健康骑行基金会--骑游世界","THN","七星海","大其力")
+class EcologyFragment : BaseWebViewFragment<NodeViewModel, ViewDataBinding>() {
+
     companion object {
         fun newInstance() = EcologyFragment()
     }
 
-    override fun layoutId() = R.layout.fragment_ecology
-    override fun initView(savedInstanceState: Bundle?) {
-        super.initView(savedInstanceState)
-//        var layoutManager=LinearLayoutManager(activity)
-//        layoutManager.orientation=LinearLayoutManager.HORIZONTAL
-//        recyclerView.layoutManager=layoutManager
-//        tvEcologyContent.text = resources.getText(R.string.ecology_tab_content1)
-//        tvEcologyTitle1.text = resources.getText(R.string.ecology_tab_title1_1)
-//        var mAdapter=EcologyTabAddrAdapter(list)
-//        mAdapter.setOnItemClickListener { adapter, view, position ->
-//            mAdapter.positon=position
-//            mAdapter.notifyDataSetChanged()
-//            when(position){
-//                0->{
-//                    tvEcologyContent.text = resources.getText(R.string.ecology_tab_content1)
-//                    tvEcologyTitle1.text = resources.getText(R.string.ecology_tab_title1_1)
-//                }
-//                1->{
-//                    tvEcologyContent.text = resources.getText(R.string.ecology_tab_content2)
-//                    tvEcologyTitle1.text = resources.getText(R.string.ecology_tab_title1_2)
-//                }
-//                2->{
-//                    tvEcologyContent.text = resources.getText(R.string.ecology_tab_content3)
-//                    tvEcologyTitle1.text = resources.getText(R.string.ecology_tab_title1_3)
-//                }
-//                3->{
-//                    tvEcologyContent.text = resources.getText(R.string.ecology_tab_content4)
-//                    tvEcologyTitle1.text = resources.getText(R.string.ecology_tab_title1_4)
-//                }
-//            }
-//        }
-//        recyclerView.adapter=mAdapter
+
+    protected fun init() {}
+
+    @NonNull
+    override fun getAgentWebParent(): ViewGroup? {
+        return mRootView?.findViewById(R.id.container)
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        return if (mAgentWeb != null && mAgentWeb!!.handleKeyEvent(
+                keyCode,
+                event
+            )
+        ) true else super.onKeyDown(keyCode, event)
+    }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            getAgentWeb()!!.urlLoader.loadUrl(getUrl())
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getAgentWeb()!!.urlLoader.loadUrl(getUrl())
+    }
+
+    @Nullable
+    override fun getUrl(): String? {
+        return Api.trade
+    }
+
+    override fun layoutId(): Int {
+        return R.layout.fragment_ecology
     }
 }

@@ -298,6 +298,7 @@
     <string name="title_asset_deposit">Recharge</string>
     <string name="uyt_test_deposit_rules">• Do not recharge any non-UYT_TEST assets to the above address, otherwise the assets will not be retrieved.\n•UYT_TEST needs about 3 blocks to confirm the payment.\n• Minimum recharge amount: 0.01 UYT_TEST, recharge less than the minimum amount will not be credited to the account and cannot be returned\n• Please make sure that your phone is safe to prevent information from being tampered with or leaked</string>
     <string name="uyt_deposit_rules">• Do not recharge any non-UYT assets to the above address, otherwise the assets will not be retrieved.\n•UYT needs about 3 blocks to confirm the payment.\n• Minimum recharge amount: 0.01 UYT, recharge less than the minimum amount will not be credited to the account and cannot be returned\n• Please make sure that your phone is safe to prevent information from being tampered with or leaked</string>
+    <string name="utc_deposit_rules">• Do not recharge any non-UTC assets to the above address, otherwise the assets will not be retrieved.\n•UTC needs about 3 blocks to confirm the payment.\n• Minimum recharge amount: 0.01 UTC, recharge less than the minimum amount will not be credited to the account and cannot be returned\n• Please make sure that your phone is safe to prevent information from being tampered with or leaked</string>
     <string name="uyt_withdrawl_rules">•To ensure the safety of funds, we will manually review the withdrawals, please be patient.\n• Be sure to confirm the security of your phone to prevent information from being tampered with or leaked.</string>
     <string name="uyt_transfer_rules">• To ensure the safety of funds, please carefully verify the UID of the other party.\n• Be sure to confirm the security of your phone to prevent information from being tampered with or leaked.</string>
     <string name="balance_counts">Available Balance</string>
@@ -337,4 +338,17 @@
     <string name="withdrawal_failed">Withdrawal failed</string>
     <string name="transfer_in">Transfer in</string>
     <string name="transfer_out">Transfer out</string>
+    <string name="title_asset_use">Available</string>
+    <string name="title_asset_lock">Freeze</string>
+    <string name="title_asset_convert">Convert</string>
+    <string name="chose_coin_type">Choose currency</string>
+    <string name="chain_name">Chain name</string>
+    <string name="save_code">Save the QR code</string>
+    <string name="deposit_address">Deposit address</string>
+    <string name="deposit_history">History record</string>
+    <string name="input_hint">Enter or long press to paste the address</string>
+    <string name="withdrawl_num">Quantity</string>
+    <string name="safe_verify">safety verification</string>
+    <string name="send_verfiy_code">Send the verification code</string>
+    <string name="input_uid_hint">Please enter the UID of the other party</string>
 </resources>

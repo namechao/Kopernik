@@ -9,12 +9,18 @@ import com.kopernik.R
 import com.kopernik.app.config.LaunchConfig
 import com.kopernik.app.network.http.ErrorCode
 import com.kopernik.app.utils.BigDecimalUtils
+import com.kopernik.app.utils.ToastUtils
 import com.kopernik.ui.asset.adapter.AssetAdapter
 import com.kopernik.ui.asset.entity.AssetEntity
 import com.kopernik.ui.asset.entity.AssetItemEntity
 import com.kopernik.ui.asset.viewModel.AssetViewModel
+import kotlinx.android.synthetic.main.activity_uyt_asset.*
 import kotlinx.android.synthetic.main.fragment_asset.*
+import kotlinx.android.synthetic.main.fragment_asset.recyclerView
 import kotlinx.android.synthetic.main.fragment_asset.smartRefreshLayout
+import kotlinx.android.synthetic.main.fragment_asset.transfer
+import kotlinx.android.synthetic.main.fragment_asset.tvDepositCoin
+import kotlinx.android.synthetic.main.fragment_asset.tvWithDrawlCoin
 import org.greenrobot.eventbus.EventBus
 import java.math.BigDecimal
 
@@ -43,16 +49,71 @@ class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
                 "UTC"-> {activity?.let { LaunchConfig.startUTCAssetActivity(it,asset?.utcAmount) }}
                 "UTK"-> activity?.let { LaunchConfig.startUTKAssetActivity(it,asset?.utkAmount) }
                 "UTDM"-> activity?.let { LaunchConfig.startUDMTAssetActivity(it,asset?.utdmAmount) }
-                "UYT_TEST"-> activity?.let { LaunchConfig.startUYTTESTAssetActivity(it,asset?.uytAmount,"UYT") }
-                "UYT"-> activity?.let { LaunchConfig.startUYTAssetActivity(it,asset?.uytProAmount,"UYTPRO") }
+                "UYT_TEST"-> activity?.let {
+//                    LaunchConfig.startUYTTESTAssetActivity(it,asset?.uytAmount,"UYT")
+                    ToastUtils.showShort(activity,getString(R.string.button_purchase_not_open))
+                }
+                "UYT"-> activity?.let {
+//                    LaunchConfig.startUYTAssetActivity(it,asset?.uytProAmount,"UYTPRO")
+                    ToastUtils.showShort(activity,getString(R.string.button_purchase_not_open))
+                }
+                "USDT"-> activity?.let {
+//                    LaunchConfig.startUYTAssetActivity(it,asset?.uytProAmount,"UYTPRO")
+                    ToastUtils.showShort(activity,getString(R.string.button_purchase_not_open))
+                }
             }
         }
         smartRefreshLayout.setOnRefreshListener {
             getAsset()
         }
         smartRefreshLayout.autoRefresh()
+        //充币
+        tvDepositCoin.setOnClickListener {
+            activity?.let { it1 ->
+                LaunchConfig.startDepositMoneyActivity(
+                    it1
+                )
+            }
+
+        }
+        //提币
+        tvWithDrawlCoin.setOnClickListener {
+            getWithDrawl()
+        }
+        //转账
+        transfer.setOnClickListener {
+            getTransferConfig()
+        }
     }
 
+
+        fun getWithDrawl(){
+        viewModel.run {
+            getConfig().observe(activity!!, Observer {
+                if (it.status==200){
+                    LaunchConfig.startWithdrawCoinAc(
+                        activity!!,it.data
+                    )
+                }else{
+                    ErrorCode.showErrorMsg(activity,it.status)
+                }
+            })
+        }
+    }
+        fun getTransferConfig(){
+        viewModel.run {
+            getTransferConfig().observe(activity!!, Observer {
+                if (it.status==200){
+                    LaunchConfig.startTransferAc(
+                        activity!!,
+                        it.data
+                    )
+                }else{
+                    ErrorCode.showErrorMsg(activity!!,it.status)
+                }
+            })
+        }
+    }
     override fun onResume() {
         super.onResume()
         smartRefreshLayout.autoRefresh()
@@ -64,15 +125,15 @@ class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
                if (it.status==200){
                    asset=it.data
                    data.clear()
-                   data.add(AssetItemEntity(R.mipmap.ic_utc,"UTC",it.data.utcAmount,it.data.utcCny))
-                   data.add(AssetItemEntity(R.mipmap.ic_utk,"UTK",it.data.utkAmount,it.data.utkCny))
-                   data.add(AssetItemEntity(R.mipmap.ic_utdm,"UTDM",it.data.utdmAmount,it.data.utdmCny))
-                   data.add(AssetItemEntity(R.mipmap.ic_uyt_test,"UYT_TEST",it.data.uytAmount,it.data.uytCny))
-                   data.add(AssetItemEntity(R.mipmap.ic_uyt,"UYT",it.data.uytProAmount,it.data.uytProCny))
+                   data.add(AssetItemEntity(R.mipmap.ic_usdt,"USDT",it.data.usdtAmount,it.data.usdtAmountFreeze,it.data.usdtCny))
+                   data.add(AssetItemEntity(R.mipmap.ic_utc,"UTC",it.data.utcAmount,it.data.utcAmountFreeze,it.data.utcCny))
+                   data.add(AssetItemEntity(R.mipmap.ic_utk,"UTK",it.data.utkAmount,it.data.utkAmountFreeze,it.data.utkCny))
+                   data.add(AssetItemEntity(R.mipmap.ic_utdm,"UTDM",it.data.utdmAmount,it.data.utdmAmountFreeze,it.data.utdmCny))
+                   data.add(AssetItemEntity(R.mipmap.ic_uyt_test,"UYT_TEST",it.data.uytAmount,it.data.uytAmountFreeze,it.data.uytCny))
+                   data.add(AssetItemEntity(R.mipmap.ic_uyt,"UYT",it.data.uytProAmount,it.data.uytProAmountFreeze,it.data.uytProCny))
                    adapter.setNewData(data)
-                   var totle= BigDecimalUtils.add(it.data.utcCny,it.data.utkCny).add(BigDecimalUtils.add(it.data.utdmCny,it.data.uytCny)).add(
-                       BigDecimal( it.data.uytProCny)).toString()
-                   assetTotal.text="≈ ${BigDecimalUtils.roundDOWN(totle,2)}"
+                   cnyAssetTotal.text="≈ ${BigDecimalUtils.roundDOWN(it.data.totalUsdtCny,2)} CNY"
+                   usdtAssetTotal.text=BigDecimalUtils.roundDOWN(it.data.totalUsdt,3)
                }else{
                    ErrorCode.showErrorMsg(activity,it.status)
                }

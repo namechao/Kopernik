@@ -9,7 +9,7 @@ class AssetNetWork {
     suspend fun getTobeExtractedList(map: Map<String, String>) = mService.getTobeExtractedList(map)
     suspend fun getAssetTxRecord(map: Map<String, String>) = mService.getAssetTxRecord(map)
     suspend fun getUnMapRecord(map: Map<String, String>) = mService.getUnMapRecord(map)
-
+    suspend fun sendCode(phone: String,imageCode:String) = mService.sendCode(phone,imageCode)
     suspend fun submitWithDrawlCoin(map: Map<String, String>) = mService.submitWithDrawlCoin(map)
     suspend fun composeRecord(map: Map<String, String>) = mService.composeRecord(map)
     suspend fun rechargeCashRecord(map: Map<String, String>) = mService.rechargeCashRecord(map)

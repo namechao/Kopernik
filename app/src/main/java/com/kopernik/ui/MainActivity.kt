@@ -113,7 +113,7 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
         navCtl = page_navigation_view.material()
             .addItem(R.mipmap.icon_home_normal, R.mipmap.icon_home_press,resources.getString(R.string.nav_title_main),resources.getColor(R.color.color_F4C41B))
             .addItem(R.mipmap.icon_mine_normal, R.mipmap.icon_mine_press,resources.getString(R.string.nav_title_mine),resources.getColor(R.color.color_F4C41B))
-            .addItem(R.mipmap.icon_trade_nomal, R.mipmap.icon_trade_nomal,  resources.getString(R.string.nav_title_trade),resources.getColor(R.color.color_F4C41B))
+            .addItem(R.mipmap.icon_trade_nomal, R.mipmap.icon_trade_press,  resources.getString(R.string.nav_title_trade),resources.getColor(R.color.color_F4C41B))
             .addItem(R.mipmap.icon_asset_normal,  R.mipmap.icon_asset_press,  resources.getString(R.string.nav_title_asset),resources.getColor(R.color.color_F4C41B))
             .addItem(R.mipmap.icon_my_normal, R.mipmap.icon_my_press, resources.getString(R.string.nav_title_my),resources.getColor(R.color.color_F4C41B))
             .setDefaultColor(resources.getColor(R.color.color_70659F))
@@ -123,13 +123,7 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
         navCtl?.addTabItemSelectedListener(object : OnTabItemSelectedListener {
 
             override fun onSelected(index: Int, old: Int) {
-                if (index==2){
-                    ToastUtils.showShort(this@MainActivity,resources.getString(R.string.opening_soon))
-                    navCtl?.setSelect(mIndex)
-                }else {
-                    mIndex = index
                     switchPage(index, old)
-                }
             }
 
             override fun onRepeat(index: Int) {
@@ -326,7 +320,14 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
             }
         })
     }
-
+    //对webview返回键进行拦截
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mIndex==2) {if (ecologyFragment.onKeyDown(keyCode,event))  return true}
+            moveTaskToBack(true)
+        }
+        return super.onKeyDown(keyCode, event)
+    }
      //对低版本手机进行账户处理
     override fun onResume() {
         super.onResume()

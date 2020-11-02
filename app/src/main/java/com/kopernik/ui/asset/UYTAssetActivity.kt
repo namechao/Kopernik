@@ -79,32 +79,32 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
         })
         smartRefreshLayout.autoRefresh()
        //充币
-        tvDepositCoin.setOnClickListener {
-           viewModel.run {
-               withDrawlCoin(type).observe(this@UYTAssetActivity, Observer {
-                   if (it.status==200) {
-                       LaunchConfig.startDepositMoneyActivity(
-                           this@UYTAssetActivity,
-                           it.data.acountHash,
-                           it.data.memo,
-                           type
-                       )
-                   }else{
-                       ErrorCode.showErrorMsg(this@UYTAssetActivity,it.status)
-                   }
-               })
-           }
-
-
-      }
+//        tvDepositCoin.setOnClickListener {
+//           viewModel.run {
+//               withDrawlCoin(type).observe(this@UYTAssetActivity, Observer {
+//                   if (it.status==200) {
+//                       LaunchConfig.startDepositMoneyActivity(
+//                           this@UYTAssetActivity,
+//                           it.data.acountHash,
+//                           it.data.memo,
+//                           type
+//                       )
+//                   }else{
+//                       ErrorCode.showErrorMsg(this@UYTAssetActivity,it.status)
+//                   }
+//               })
+//           }
+//
+//
+//      }
         //提币
-        tvWithDrawlCoin.setOnClickListener {
-            getWithDrawl()
-        }
+//        tvWithDrawlCoin.setOnClickListener {
+//            getWithDrawl()
+//        }
         //转账
-        transfer.setOnClickListener {
-            getTransferConfig()
-        }
+//        transfer.setOnClickListener {
+//            getTransferConfig()
+//        }
         llTitle.setOnClickListener {
             machinngType=0
             onTabOnClick(true,false)
@@ -116,36 +116,36 @@ class UYTAssetActivity : NewFullScreenBaseActivity<UYTAssetViewModel, ViewDataBi
     }
 
 
-    fun getWithDrawl(){
-        viewModel.run {
-            getConfig().observe(this@UYTAssetActivity, Observer {
-                if (it.status==200){
-                    allConfigEntity=it.data
-                    LaunchConfig.startWithdrawCoinAc(
-                        this@UYTAssetActivity,allConfigEntity,type
-                    )
-                }else{
-                    ErrorCode.showErrorMsg(this@UYTAssetActivity,it.status)
-                }
-            })
-        }
-    }
-    fun getTransferConfig(){
-        viewModel.run {
-            getTransferConfig().observe(this@UYTAssetActivity, Observer {
-                if (it.status==200){
-                    allConfigEntity=it.data
-                    LaunchConfig.startTransferAc(
-                        this@UYTAssetActivity,
-                        allConfigEntity,
-                        type
-                    )
-                }else{
-                    ErrorCode.showErrorMsg(this@UYTAssetActivity,it.status)
-                }
-            })
-        }
-    }
+//    fun getWithDrawl(){
+//        viewModel.run {
+//            getConfig().observe(this@UYTAssetActivity, Observer {
+//                if (it.status==200){
+//                    allConfigEntity=it.data
+//                    LaunchConfig.startWithdrawCoinAc(
+//                        this@UYTAssetActivity,allConfigEntity,type
+//                    )
+//                }else{
+//                    ErrorCode.showErrorMsg(this@UYTAssetActivity,it.status)
+//                }
+//            })
+//        }
+//    }
+//    fun getTransferConfig(){
+//        viewModel.run {
+//            getTransferConfig().observe(this@UYTAssetActivity, Observer {
+//                if (it.status==200){
+//                    allConfigEntity=it.data
+//                    LaunchConfig.startTransferAc(
+//                        this@UYTAssetActivity,
+//                        allConfigEntity,
+//                        type
+//                    )
+//                }else{
+//                    ErrorCode.showErrorMsg(this@UYTAssetActivity,it.status)
+//                }
+//            })
+//        }
+//    }
 
     private  fun  getCurrentAsset(){
         viewModel.run {

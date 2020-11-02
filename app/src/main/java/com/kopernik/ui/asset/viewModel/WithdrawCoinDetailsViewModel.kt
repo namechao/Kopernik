@@ -10,7 +10,7 @@ import com.kopernik.ui.mine.entity.AllConfigEntity
 
 class WithdrawCoinDetailsViewModel : BaseViewModel() {
     private val homeRepository by lazy { InjectorUtil.getAssetRepository() }
-
+    private val phoneCode = SingleLiveEvent<BaseResult<Any>>()
     private val submit = SingleLiveEvent<BaseResult<Any>>()
     private val data = SingleLiveEvent<BaseResult<Any>>()
     private val getAssetConfig = SingleLiveEvent<BaseResult<AllConfigEntity>>()
@@ -27,7 +27,12 @@ class WithdrawCoinDetailsViewModel : BaseViewModel() {
         })
         return return submit
     }
-
+    fun sendCode(sendCode:String,imageCode:String): SingleLiveEvent<BaseResult<Any>> {
+        launchGo({
+            phoneCode.value = homeRepository.sendCode(sendCode,imageCode)
+        })
+        return phoneCode
+    }
     //验证密码
     fun verifyPsw(pwd: String): MutableLiveData<BaseResult<Any>> {
         launchGo({

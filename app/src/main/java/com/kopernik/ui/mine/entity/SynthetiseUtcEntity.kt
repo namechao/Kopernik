@@ -39,6 +39,7 @@ data class AllConfigEntity (
     val config: Config,
     val rateList: List<Rate>,
     val utc: String,
+    val usdt: String,
     val utdm: String,
     val utk: String,
     val uyt: String,

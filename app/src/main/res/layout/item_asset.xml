@@ -1,63 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-<ImageView
-    android:id="@+id/asset_head"
-    android:layout_width="36dp"
-    android:layout_height="36dp"
-    android:src="@mipmap/ic_launcher"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    android:layout_marginTop="@dimen/dp_22"
-    android:layout_marginBottom="22dp"
-    android:layout_marginLeft="@dimen/dp_15"/>
+
+    <ImageView
+        android:id="@+id/asset_head"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_22"
+        android:layout_marginBottom="22dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/asset_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/asset_head"
-        app:layout_constraintTop_toTopOf="@id/asset_head"
-        app:layout_constraintBottom_toBottomOf="@id/asset_head"
         android:layout_marginLeft="12dp"
+        android:text="UTC"
+        android:textColor="@color/white"
         android:textSize="@dimen/sp_18"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        android:text="UTC"/>
+        app:layout_constraintBottom_toBottomOf="@id/asset_head"
+        app:layout_constraintLeft_toRightOf="@id/asset_head"
+        app:layout_constraintTop_toTopOf="@id/asset_head" />
+
     <TextView
-        android:id="@+id/asset_counts"
+        android:id="@+id/title_available"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/tv_available"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_available"
+        app:layout_constraintTop_toBottomOf="@+id/asset_head"
+        android:textColor="@color/color_AA9CCA"
+        android:textSize="@dimen/sp_12"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="@string/title_asset_use"/>
+    <TextView
+        android:id="@+id/tv_available"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_4"
         android:textSize="@dimen/sp_14"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/asset_cny"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:layout_marginRight="@dimen/dp_15"
-        android:text="157.02548774 UTC"
-        />
+        android:text="0.00"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/dp_20"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_freeze"
+        app:layout_constraintTop_toBottomOf="@+id/title_available" />
     <TextView
-        android:id="@+id/asset_cny"
+        android:id="@+id/title_freeze"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/asset_counts"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:layout_marginRight="@dimen/dp_15"
-        android:textSize="@dimen/sp_11"
+        app:layout_constraintBottom_toTopOf="@+id/tv_freeze"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_freeze"
+        android:layout_marginBottom="@dimen/dp_4"
         android:textColor="@color/color_AA9CCA"
-        android:text="≈ ¥142.24"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-      <View
-          android:layout_width="wrap_content"
-          android:layout_height="1dp"
-          android:background="@color/color_332852"
-          app:layout_constraintBottom_toBottomOf="parent"/>
+        android:textSize="@dimen/sp_12"
+        android:text="@string/title_asset_lock"/>
+    <TextView
+        android:id="@+id/tv_freeze"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.00"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/white"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toRightOf="@+id/tv_available"
+        app:layout_constraintRight_toLeftOf="@+id/tv_convert"
+        app:layout_constraintTop_toTopOf="@+id/tv_available" />
+    <TextView
+        android:id="@+id/title_convert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/tv_convert"
+        app:layout_constraintRight_toRightOf="@+id/tv_convert"
+        android:layout_marginBottom="@dimen/dp_4"
+        android:textColor="@color/color_AA9CCA"
+        android:textSize="@dimen/sp_12"
+        android:text="@string/title_asset_convert"/>
+    <TextView
+        android:id="@+id/tv_convert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.00"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/white"
+        android:layout_marginRight="@dimen/dp_15"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toRightOf="@+id/tv_freeze"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_available" />
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_332852"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
