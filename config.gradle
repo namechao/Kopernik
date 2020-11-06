@@ -6,8 +6,8 @@ ext {
             applicationId    : "com.kopernik",
             minSdkVersion    : 23,
             targetSdkVersion : 28,
-            versionCode      : 20,
-            versionName      : "2.1.9",
+            versionCode      : 21,
+            versionName      : "2.2.0",
     ]
     //version配置
     versions = [
@@ -100,6 +100,7 @@ ext {
             'versionchecklib'           : 'com.allenliu.versionchecklib:library:2.2.0',
             'lottie'           : 'com.airbnb.android:lottie:3.4.0',
             'bugly'           : 'com.tencent.bugly:crashreport:latest.release',
+            'tbssdk'                     : 'com.tencent.tbs.tbssdk:sdk:43939',
     ]
     androidxs = androidx.values()
     network = retrofit.values()

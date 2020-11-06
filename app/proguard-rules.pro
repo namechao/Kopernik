@@ -168,3 +168,14 @@
 ################annotation###############
 -keep class android.support.annotation.** { *; }
 -keep interface android.support.annotation.** { *; }
+####################x5###############
+-dontwarn dalvik.**
+-dontwarn com.tencent.smtt.**
+
+-keep class com.tencent.smtt.** {
+    *;
+}
+
+-keep class com.tencent.tbs.** {
+    *;
+}

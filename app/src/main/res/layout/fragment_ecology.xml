@@ -3,8 +3,12 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/dp_30"
-    android:orientation="vertical"
-    android:background="@color/colorAccent">
-
+    android:background="@color/colorAccent"
+    android:paddingTop="30dp"
+    android:orientation="vertical">
+    <com.tencent.smtt.sdk.WebView
+        android:id="@+id/ecologyWebview"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

@@ -123,6 +123,7 @@ class MainActivity : NewBaseActivity<CheckAppVersionViewModel,ViewDataBinding>()
         navCtl?.addTabItemSelectedListener(object : OnTabItemSelectedListener {
 
             override fun onSelected(index: Int, old: Int) {
+                mIndex=index
                     switchPage(index, old)
             }
 

@@ -5,13 +5,13 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         release {
-            storeFile file('F:\\AndroidProject\\Project\\Kopernik\\kopernik.keystore')
+            storeFile file('D:\\Android\\Project\\Kopernik\\kopernik.keystore')
             storePassword '123456'
             keyAlias 'kopernik'
             keyPassword '123456'
         }
         debug {
-            storeFile file('F:\\AndroidProject\\Project\\Kopernik\\kopernik.keystore')
+            storeFile file('D:\\Android\\Project\\Kopernik\\kopernik.keystore')
             storePassword '123456'
             keyAlias 'kopernik'
             keyPassword '123456'
@@ -142,6 +142,7 @@ dependencies {
     implementation rootProject.ext.dependencies['eventbus']
     implementation rootProject.ext.dependencies['lottie']
     implementation rootProject.ext.dependencies['bugly']
+    implementation rootProject.ext.dependencies['tbssdk']
     annotationProcessor rootProject.ext.dependencies['qmuiteam:arch-compiler']
 
 }
