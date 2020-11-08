@@ -43,7 +43,7 @@ class PurchaseMiningMAdapter(
        }
         helper?.tvMiningPrice?.text="${mContext.getString(R.string.mining_machine_price)}：${item?.price} USDT"
         helper?.tvMiningSpeed?.text="${mContext.getString(R.string.mining_power)}：${item?.power}${mContext.getString(R.string.mining_machine_times)}"
-        helper?.tvWaveCounts?.text="${mContext.getString(R.string.mining_machine_speed)}：${item?.rateMin}%-${item?.rateMax}%"
+        helper?.tvWaveCounts?.text="${mContext.getString(R.string.mining_wave)}：${item?.rateMin}%-${item?.rateMax}%"
         helper?.addOnClickListener(R.id.tv_purchase)
 
         //switchStatus 1带边开关开放 2未开放

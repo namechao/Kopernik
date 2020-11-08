@@ -1,5 +1,6 @@
 package com.kopernik.ui.mine.entity
 
+import java.io.Serializable
 
 
 data class MineBean(
@@ -8,14 +9,19 @@ data class MineBean(
     val flag: Boolean,
     val uytPrice:String,
     val uytProPrice:String,
+    val utdmPrice:String,
     val user: User,
     val uytCaptial: UytCaptial,
     val uytProCaptial: UytProCaptial,
+    val utdmCaptial: UtdmCaptial,
     val uytToUsdt: String,
+    val utdmToUsdt: String,
     val uytProToUsdt: String,
     var uytRatio: String?,
-    var uytproRatio: String?
-)
+    var uytproRatio: String?,
+    var utdmRatio: String?,
+    var utdmUytRatio: String?
+):Serializable
 
 data class Machine(
     val createTime: String,
@@ -34,7 +40,7 @@ data class Machine(
     val switchStatus: Int,
     val type: Int,
     val url: String
-)
+):Serializable
 
 data class User(
     val createTime: String,
@@ -52,7 +58,7 @@ data class User(
     val salePwd: String,
     val token: String,
     val uid: String
-)
+):Serializable
 
 data class UytCaptial(
     val amount: String,
@@ -61,7 +67,7 @@ data class UytCaptial(
     val id: String,
     val type: String,
     val uid: String
-)
+):Serializable
 data class UytProCaptial(
     val amount: String,
     val createTime: String,
@@ -69,7 +75,15 @@ data class UytProCaptial(
     val id: String,
     val type: String,
     val uid: String
-)
+):Serializable
+data class UtdmCaptial(
+    val amount: String,
+    val createTime: String,
+    val freeze: String,
+    val id: String,
+    val type: String,
+    val uid: String
+):Serializable
 
 
 data class OtherMineBean(

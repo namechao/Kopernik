@@ -50,26 +50,12 @@ class PurchaseMiningMachineHolder(view: View?) : BaseViewHolder(view) {
             return field
         }
         private set
-    var tvMningTime: TextView? = null
+
+
+    var totalIncome: TextView? = null
         get() {
             if (field == null) {
-                field = itemView.findViewById(R.id.tv_mining_time)
-            }
-            return field
-        }
-        private set
-    var tvMiningCounts: TextView? = null
-        get() {
-            if (field == null) {
-                field = itemView.findViewById(R.id.tv_mining_counts)
-            }
-            return field
-        }
-        private set
-    var tvUpdateCounts: TextView? = null
-        get() {
-            if (field == null) {
-                field = itemView.findViewById(R.id.tv_update_counts)
+                field = itemView.findViewById(R.id.total_income)
             }
             return field
         }
@@ -79,11 +65,7 @@ class PurchaseMiningMachineHolder(view: View?) : BaseViewHolder(view) {
           if (field==null) field=itemView.findViewById(R.id.progressBar)
           return field
       }
-   var tvPrecent:TextView?=null
-      get() {
-          if (field==null) field=itemView.findViewById(R.id.tv_precent)
-          return field
-      }
+
     var clIneffect: ConstraintLayout?=null
       get() {
           if (field==null) field=itemView.findViewById(R.id.cl_ineffect)

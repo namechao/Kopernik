@@ -69,20 +69,29 @@ class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
         smartRefreshLayout.autoRefresh()
         //充币
         tvDepositCoin.setOnClickListener {
+            if (asset?.recharge=="0"&&asset?.user?.recharge=="0")
             activity?.let { it1 ->
                 LaunchConfig.startDepositMoneyActivity(
                     it1
                 )
             }
+            else
+                ToastUtils.showShort(activity,getString(R.string.button_purchase_not_open))
 
         }
         //提币
         tvWithDrawlCoin.setOnClickListener {
+            if (asset?.cash=="0"&&asset?.user?.cash=="0")
             getWithDrawl()
+            else
+                ToastUtils.showShort(activity,getString(R.string.button_purchase_not_open))
         }
         //转账
         transfer.setOnClickListener {
+            if (asset?.transfer=="0"&&asset?.user?.transfer=="0")
             getTransferConfig()
+            else
+                ToastUtils.showShort(activity,getString(R.string.button_purchase_not_open))
         }
     }
 

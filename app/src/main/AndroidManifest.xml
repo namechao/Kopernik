@@ -75,6 +75,7 @@
         <activity android:name=".ui.asset.DepositMoneyActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.TransferActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.ChoseCoinTypeActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.asset.UTDMRevenueRecordActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.asset.TransferHistoryActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.login.RegisterActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.login.UserProtocolActivity"   android:screenOrientation="portrait"/>
@@ -83,6 +84,7 @@
         <activity android:name=".ui.login.NoticeActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.mine.SynthetiseUTCActivity"   android:screenOrientation="portrait"/>
         <activity android:name=".ui.mine.PurchaseMiningMachineryActivity"   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.mine.BuyMningMachineActivity"   android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.MainActivity"

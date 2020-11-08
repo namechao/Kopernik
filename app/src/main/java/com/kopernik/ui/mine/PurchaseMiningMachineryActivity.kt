@@ -1,5 +1,6 @@
 package com.kopernik.ui.mine
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -35,7 +36,10 @@ import kotlin.math.log
 
 
 class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,ViewDataBinding>() {
-
+   companion object{
+       val REQUEST_BUY_MINE=12434
+       val RESULT_BUY_MINE=12435
+   }
     override fun layoutId()=R.layout.activity_purchase_mining_machinery
     //0购买矿机列表 1有效矿机 2过期矿机
     private var machinngType=0
@@ -101,62 +105,10 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
                     ToastUtils.showShort(this,getString(R.string.purchase_team_total_limit))
                     return@setOnItemChildClickListener
                 }
-                //购买重组数据
-                var purchaseEntity=PurchaseEntity()
-                purchaseEntity.mineMacName= (adapter.data[position] as Machine).name
-                purchaseEntity.mineMacPrice= (adapter.data[position] as Machine).price
+                var mineType= (adapter.data[position] as Machine).type
+                var minePrice= (adapter.data[position] as Machine).price
+                LaunchConfig.startBuyMningMachineActivity(this,mineType,minePrice,minebean)
 
-                if (minebean?.uytRatio!=null&&minebean?.uytproRatio!=null) {
-                    //计算比例关系
-                    var uytRatio = BigDecimalUtils.divide(
-                        minebean?.uytRatio,
-                        BigDecimalUtils.add(minebean?.uytRatio, minebean?.uytproRatio).toString(),
-                        2
-                    )
-                    var uytproRatio = BigDecimalUtils.divide(
-                        minebean?.uytproRatio,
-                        BigDecimalUtils.add(minebean?.uytRatio, minebean?.uytproRatio).toString(),
-                        2
-                    )
-                    purchaseEntity.consumeUyt = BigDecimalUtils.divide(
-                        BigDecimalUtils.multiply(
-                            (adapter.data[position] as Machine).price,
-                            uytRatio
-                        ).toString(), minebean?.uytPrice, 8
-                    )
-                    purchaseEntity.consumeUytPro = BigDecimalUtils.divide(
-                        BigDecimalUtils.multiply(
-                            (adapter.data[position] as Machine).price,
-                            uytproRatio
-                        ).toString(), minebean?.uytProPrice, 8
-                    )
-                    //                var ratio=BigDecimalUtils.divide(minebean?.uytRatio,minebean?.uytproRatio,2)
-//                purchaseEntity.uytProRation="UYT : UYT_TEST=1:$ratio"
-                    purchaseEntity.uytProRation="UYT : UYT_TEST=${BigDecimalUtils.getRound(minebean?.uytproRatio)}:${BigDecimalUtils.getRound(minebean?.uytRatio)}"
-                }
-                minebean?.uytCaptial?.amount?.let {
-                    purchaseEntity.uytBanlance=it
-                }
-                minebean?.uytProCaptial?.amount?.let {
-                    purchaseEntity.uytProBanlance=it
-                }
-
-
-                minebean?.uytToUsdt?.let {
-                    purchaseEntity.uytToUsdt=it
-                }
-                minebean?.uytProToUsdt?.let {
-                    purchaseEntity.uytProToUsdt=it
-                }
-                //购买弹窗
-                var dialog = PurchaseDialog.newInstance(1,purchaseEntity)
-                dialog!!.setOnRequestListener(object : PurchaseDialog.RequestListener {
-                    override fun onRequest(params: String) {
-                        type= (adapter.data[position] as Machine).type.toString()
-                        checkPassword(params)
-                    }
-                })
-                dialog!!.show(supportFragmentManager, "withdrawRecommed")
             }
         }
         smartRefreshLayout.autoRefresh()
@@ -328,5 +280,13 @@ class PurchaseMiningMachineryActivity : NewBaseActivity<MineMachineryViewModel,V
             }
 
        }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode== REQUEST_BUY_MINE&&resultCode== RESULT_BUY_MINE){
+            finish()
+        }
+    }
+
 
 }

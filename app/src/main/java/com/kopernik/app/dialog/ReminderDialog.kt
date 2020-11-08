@@ -44,6 +44,7 @@ class ReminderDialog(private val context: Context) {
 
 
         mBtn?.setOnClickListener {
+            listener?.onRequest()
                 dialog?.dismiss()
         }
 

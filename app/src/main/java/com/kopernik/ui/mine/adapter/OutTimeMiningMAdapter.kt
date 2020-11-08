@@ -41,17 +41,14 @@ class OutTimeMiningMAdapter(
                 helper?.tvMiningType?.text=mContext.getString(R.string.mining_machine_type6)
             }
         }
-        helper?.tvMiningPrice?.text="${mContext.getString(R.string.mining_machine_price)}：${item?.price} USDT"
-        helper?.tvMiningSpeed?.text="${mContext.getString(R.string.mining_power)}：${item?.power}${mContext.getString(R.string.mining_machine_times)}"
-        helper?.tvWaveCounts?.text="${mContext.getString(R.string.mining_machine_speed)}：${item?.rate}%"
-        helper?.tvMningTime?.text=TimeUtils.normalTimeStampToMinute(item?.createTime)
-        helper?.tvMiningCounts?.text= BigDecimalUtils.roundDOWN(item?.amount,4)
+        helper?.tvMiningSpeed?.text="${mContext.getString(R.string.mine_speed)}：${item?.power}${mContext.getString(R.string.mining_machine_times)}"
+        helper?.tvWaveCounts?.text="${mContext.getString(R.string.mining_wave)}：${item?.rate}%"
+        helper?.totalIncome?.text="${mContext.getText(R.string.mine_total_income)}${BigDecimalUtils.roundDOWN(item?.amountTotal,2) } UTDM"
         var value= item?.amount?.toDouble()?.let { BigDecimalUtils.divide(it,
             item?.amountTotal.toDouble()
         ) }
         var process= BigDecimalUtils.multiply(BigDecimalUtils.roundDOWN(value.toString(),2),"100")
         helper?.progressBar?.progress=process.toInt()
-        helper?.tvPrecent?.text="${process.toInt()}%"
     }
 
 

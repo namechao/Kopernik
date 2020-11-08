@@ -22,6 +22,7 @@ import com.kopernik.ui.asset.entity.AssetEntity
 import com.kopernik.ui.asset.entity.WithdrawCoinBean
 import com.kopernik.ui.asset.viewModel.WithdrawCoinDetailsViewModel
 import com.kopernik.ui.mine.entity.AllConfigEntity
+import com.kopernik.ui.setting.AddContactActivity
 import com.xuexiang.xqrcode.XQRCode
 import kotlinx.android.synthetic.main.activity_deposit_money.*
 import kotlinx.android.synthetic.main.activity_withdraw_coin.*
@@ -31,13 +32,21 @@ import kotlinx.android.synthetic.main.activity_withdraw_coin.csChoseCoin
 import kotlinx.android.synthetic.main.activity_withdraw_coin.etRemark
 import kotlinx.android.synthetic.main.activity_withdraw_coin.okBtn
 import kotlinx.android.synthetic.main.activity_withdraw_coin.tvCoinType1
+import pub.devrel.easypermissions.AfterPermissionGranted
+import pub.devrel.easypermissions.EasyPermissions
 import java.math.BigDecimal
 
-class WithdrawCoinActivity : NewBaseActivity<WithdrawCoinDetailsViewModel,ViewDataBinding>() {
+class WithdrawCoinActivity : NewBaseActivity<WithdrawCoinDetailsViewModel,ViewDataBinding>(),
+    EasyPermissions.PermissionCallbacks {
 companion object{
     private const val REQUEST_CODE = 1
     private const val REQUEST_CODE_QRCODE_PERMISSIONS = 2
 }
+    private val perms = arrayOf(
+        Manifest.permission.CAMERA,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
     private var allConfigEntity:AllConfigEntity?=null
     private var balanace="0"
     private var fee: String? = null
@@ -67,8 +76,12 @@ companion object{
         intent.getSerializableExtra("allConfigEntity")?.let {
             allConfigEntity=it as AllConfigEntity
         }
-        ivScan.setOnClickListener {
-
+        ivScan.setOnClickListener { v: View? ->
+            if (!EasyPermissions.hasPermissions(this, *perms)) {
+                requestCodeQRCodePermissions()
+                return@setOnClickListener
+            }
+            XQRCode.startScan(this, REQUEST_CODE)
         }
         //获取币种余额
         balanace=allConfigEntity?.usdt.toString()
@@ -202,29 +215,6 @@ companion object{
         }
     }
 
-    /**
-     * 处理二维码扫描结果
-     * @param data
-     */
-    private fun handleScanResult(data: Intent?) {
-        if (data != null) {
-            val bundle = data.extras
-            if (bundle != null) {
-                if (bundle.getInt(XQRCode.RESULT_TYPE) == XQRCode.RESULT_SUCCESS) {
-                    val result = bundle.getString(XQRCode.RESULT_DATA)
-                    eTWithdrwalAddress!!.setText(result)
-                } else if (bundle.getInt(XQRCode.RESULT_TYPE) == XQRCode.RESULT_FAILED) {
-                    ToastUtils.showShort(getActivity(), getString(R.string.decode_qrcode_error))
-                }
-            }
-        }
-    }
-
-
-
-
-
-
 
     private var textWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(
@@ -278,6 +268,9 @@ companion object{
                 update()
             }
 
+        }else if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
+            //处理二维码扫描结果
+                handleScanResult(data)
         }
     }
 
@@ -317,5 +310,52 @@ companion object{
         eTWithdrwalAddress.setText("")
         eTWithdrawlCoinCounts.setText("")
         etRemark.setText("")
+    }
+
+    /**
+     * 处理二维码扫描结果
+     * @param data
+     */
+    private fun handleScanResult(data: Intent?) {
+        if (data != null) {
+            val bundle = data.extras
+            if (bundle != null) {
+                if (bundle.getInt(XQRCode.RESULT_TYPE) == XQRCode.RESULT_SUCCESS) {
+                    val result = bundle.getString(XQRCode.RESULT_DATA)
+                    eTWithdrwalAddress!!.setText(result)
+                } else if (bundle.getInt(XQRCode.RESULT_TYPE) == XQRCode.RESULT_FAILED) {
+                    ToastUtils.showShort(getActivity(), getString(R.string.decode_qrcode_error))
+                }
+            }
+        }
+    }
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        EasyPermissions.onRequestPermissionsResult(
+            requestCode,
+            permissions,
+            grantResults, this
+        )
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        XQRCode.startScan(this, REQUEST_CODE)
+    }
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+    }
+
+    @AfterPermissionGranted(REQUEST_CODE_QRCODE_PERMISSIONS)
+    private fun requestCodeQRCodePermissions() {
+        EasyPermissions.requestPermissions(
+            this,
+            getString(R.string.qrcode_permissions),
+          REQUEST_CODE_QRCODE_PERMISSIONS,
+            perms.toString()
+        )
     }
 }

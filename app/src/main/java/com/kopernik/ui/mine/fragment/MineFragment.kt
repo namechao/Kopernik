@@ -55,6 +55,9 @@ class MineFragment : NewBaseFragment<MineViewModel, ViewDataBinding>() {
         buyMine.setOnClickListener {
             activity?.let { it1 -> LaunchConfig.startPurchaseMiningMachineryActivity(it1) }
         }
+        incomeRecord.setOnClickListener {
+            activity?.let { it1 -> LaunchConfig.startUTDMRevenueRecordActivity(it1) }
+        }
         ivSound.setOnClickListener {
             if (!isOpenSound){
                 isOpenSound=true
@@ -99,7 +102,7 @@ class MineFragment : NewBaseFragment<MineViewModel, ViewDataBinding>() {
     }
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        if (hidden){
+        if (hidden&&isOpenSound){
             //关闭音乐
             isOpenSound=false
             ivSound.setImageResource(R.mipmap.ic_close_sound)

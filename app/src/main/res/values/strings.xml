@@ -503,6 +503,13 @@
     <string name="trade_password">交易密码</string>
     <string name="invite_friend">邀请好友</string>
     <string name="about_us">关于我们</string>
+    <string name="string_current_usdt">当前UTDM余额：</string>
+    <string name="string_current_uyt_test">当前UYT-TEST余额：</string>
+    <string name="mine_total_income">矿机总收益：</string>
+    <string name="mine_rule">矿机规则说明</string>
+    <string name="string_current_uyt">当前UYT余额：</string>
+    <string name="total_consume">总计：</string>
+    <string name="trade_style">交易方式</string>
     <string name="title_two_step">两步验证</string>
     <string name="verson_code">版本号</string>
     <string name="contact_us">联系我们</string>
@@ -565,6 +572,7 @@
    <string name="i_know">我知道了</string>
    <string name="reminder_msg">48小时后凌晨一时开启算力并显示矿机级别</string>
     <string name="income">累计收益(UTDM)</string>
+    <string name="income_record">收益记录</string>
     <string name="synthesis_utc">合成UTC</string>
     <string name="synthesis_bt">合成</string>
     <string name="purchase_mm_tip">提前预约矿机</string>
@@ -576,14 +584,16 @@
     <string name="purchase_mm">预约矿机</string>
     <string name="runtime_mm">运行矿机</string>
     <string name="out_time_mm">过期矿机</string>
-    <string name="balance_not_enough">（当前 </string>
-    <string name="balance_not_enough_end">余额不足）</string>
+    <string name="balance_not_enough">当前 </string>
+    <string name="balance_not_enough_end">余额不足</string>
     <string name="mining_machine_name">矿机名称</string>
     <string name="mining_machine_price">矿机价格</string>
     <string name="pay_type">支付方式</string>
+    <string name="pay_ratio">支付比例:</string>
     <string name="mining_machine_speed">当前算速</string>
     <string name="mining_machine_update_counts">(每日更新一次)</string>
     <string name="mining_power">挖矿算力</string>
+    <string name="mining_wave">定波数</string>
     <string name="mining_machine_times">倍</string>
     <string name="pay_uyt_coins">UYT消耗</string>
     <string name="pay_uyt_test_coins">UYT_TEST消耗</string>
@@ -619,6 +629,8 @@
    <string name="exchange_success">兑换成功</string>
    <string name="purchase_total_limit">您购买的矿机数已达上限</string>
    <string name="purchase_team_total_limit">此社群矿机已达上限</string>
+   <string name="mine_income_dis">矿机收益发放</string>
+   <string name="mine_speed">挖矿速度</string>
     <!--    生态相关-->
     <string name="ecology_tab_title">哥白尼网络生态应用</string>
     <string name="ecology_app">应用场景</string>
@@ -844,5 +856,6 @@
    <string name="safe_verify">安全验证</string>
    <string name="send_verfiy_code">发送验证码</string>
    <string name="input_uid_hint">请输入对方UID</string>
+   <string name="purchase_mine_title">购买矿机</string>
     <!-- 新项目文字资源-->
 </resources>

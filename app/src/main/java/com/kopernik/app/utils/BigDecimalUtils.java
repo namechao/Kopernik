@@ -40,8 +40,8 @@ public final class BigDecimalUtils {
      */
     public static BigDecimal add(final String v1, final String v2) {
         try {
-            BigDecimal b1 = new BigDecimal(v1);
-            BigDecimal b2 = new BigDecimal(v2);
+            BigDecimal b1 = new BigDecimal(v1==null? "0" : v1);
+            BigDecimal b2 = new BigDecimal(v2==null? "0" : v2);
             return b1.add(b2);
         } catch (Exception e) {
             JCLogUtils.eTag(TAG, e, "add");
@@ -199,8 +199,8 @@ public final class BigDecimalUtils {
      */
     public static double multiply(final String v1, final String v2) {
         try {
-            BigDecimal b1 = new BigDecimal(v1);
-            BigDecimal b2 = new BigDecimal(v2);
+            BigDecimal b1 = new BigDecimal(v1 == null ? "0" : v1);
+            BigDecimal b2 = new BigDecimal(v2 == null ? "0" : v2);
             return b1.multiply(b2).doubleValue();
         } catch (Exception e) {
             JCLogUtils.eTag(TAG, e, "multiply");
@@ -243,8 +243,8 @@ public final class BigDecimalUtils {
      */
     public static String multiply(final String v1, final String v2, final int scale) {
         try {
-            BigDecimal b1 = new BigDecimal(v1);
-            BigDecimal b2 = new BigDecimal(v2);
+            BigDecimal b1 = new BigDecimal(v1 == null ? "0" : v1);
+            BigDecimal b2 = new BigDecimal(v2 == null ? "0" : v2);
             if (scale <= 0) {
                 return b1.multiply(b2).intValue() + "";
             } else {
@@ -303,8 +303,11 @@ public final class BigDecimalUtils {
      */
     public static String divide(final String v1, final String v2, final int scale) {
         try {
-            BigDecimal b1 = new BigDecimal(v1);
-            BigDecimal b2 = new BigDecimal(v2);
+            BigDecimal b1 = new BigDecimal(v1 == null ? "0" : v1);
+            BigDecimal b2 = new BigDecimal(v2 == null ? "0" : v2);
+            if (b2.compareTo(BigDecimal.ZERO)==0){
+                return "0";
+            }
             if (scale <= 0) {
                 return b1.divide(b2).intValue() + "";
             } else {

@@ -22,10 +22,17 @@ import java.io.Serializable
 //"utcCny": "0.00000000000000000000000",//utc折合人民币
 //"uytProAmount": "470.65203963",//uyt可用
 //"totalUsdtCny": "4350991.79669190955835128960000" //总资产 这个人民币
-
+//开关  0 代表可以使用   1代表不能操作
+//transfer 总转账开关 recharge总充值开关  cash 总提现开关 compose总合成开关  exchange 总兑换开关
+//user.transfer 用户转账开关 user.recharge用户充值开关  user.cash 用户提现开关 user.compose用户合成开关  user.exchange 用户兑换开关
 data class AssetEntity(
     val totalUsdt: String,
     val totalUsdtCny: String,
+    val transfer: String,
+    val recharge: String,
+    val compose: String,
+    val cash: String,
+    val exchange: String,
     val usdtAmount: String,
     val usdtAmountFreeze: String,
     val usdtCny: String,
@@ -43,6 +50,15 @@ data class AssetEntity(
     val uytCny: String,
     val uytProAmount: String,
     val uytProAmountFreeze: String,
-    val uytProCny: String
+    val uytProCny: String,
+    var user:UserC
 ): Serializable
+
+data class UserC(
+    val transfer:String,
+    val recharge:String,
+    val cash:String,
+    val compose:String,
+    val exchange:String
+):Serializable
 data class CoinType(var headRes:Int, var coinType:String)

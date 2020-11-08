@@ -10,9 +10,11 @@ import com.kopernik.ui.Ecology.entity.CheckRegisterInfo
 import com.kopernik.ui.login.*
 import com.kopernik.ui.asset.*
 import com.kopernik.ui.asset.entity.AssetEntity
+import com.kopernik.ui.mine.BuyMningMachineActivity
 import com.kopernik.ui.mine.PurchaseMiningMachineryActivity
 import com.kopernik.ui.mine.SynthetiseUTCActivity
 import com.kopernik.ui.mine.entity.AllConfigEntity
+import com.kopernik.ui.mine.entity.MineBean
 import com.kopernik.ui.my.*
 import com.kopernik.ui.setting.*
 
@@ -366,6 +368,19 @@ object LaunchConfig {
         val intent =
             Intent(context, AboutUsActivity::class.java)
         context.startActivity(intent)
+    }
+    fun startUTDMRevenueRecordActivity(context: Context) {
+        val intent =
+            Intent(context, UTDMRevenueRecordActivity::class.java)
+        context.startActivity(intent)
+    }
+    fun startBuyMningMachineActivity(context: Activity, mineType:Int?,minePrice:String?,minebean: MineBean?) {
+        val intent =
+            Intent(context, BuyMningMachineActivity::class.java)
+        intent.putExtra("mineType",mineType)
+        intent.putExtra("minePrice",minePrice)
+        intent.putExtra("minebean",minebean)
+        context.startActivityForResult(intent,PurchaseMiningMachineryActivity.REQUEST_BUY_MINE)
     }
     fun startInviteFriendsSecondActivity(context: Context,uid:String) {
         val intent =

@@ -56,6 +56,12 @@
     <string name="trade_password">transaction password</string>
     <string name="invite_friend">invite friends</string>
     <string name="about_us">about us</string>
+    <string name="string_current_usdt">Current UTDM balance:</string>
+    <string name="string_current_uyt_test">Current UYT-TEST balance:</string>
+    <string name="mine_total_income">Total income of mining machine:</string>
+    <string name="mine_rule">Mining machine rules description</string>
+    <string name="string_current_uyt">Current UYT balance:</string>
+    <string name="total_consume">total:</string>
     <string name="title_two_step">Two-step verification</string>
     <string name="verson_code">version number</string>
     <string name="contact_us">contact us</string>
@@ -117,6 +123,7 @@
     <string name="i_know">I know</string>
     <string name="reminder_msg">48 hours later, the hashrate will be turned on at one clock in the morning and the miner level will be displayed</string>
     <string name="income">Cumulative income(UTDM)</string>
+    <string name="income_record">Cumulative income(UTDM)</string>
     <string name="synthesis_utc">Synthetic UTC</string>
     <string name="synthesis_bt">synthesis</string>
     <string name="purchase_mm_tip">Reserve miners in advance</string>
@@ -136,6 +143,7 @@
     <string name="mining_machine_speed">Current calculation speed</string>
     <string name="mining_machine_update_counts">(Update once a day)</string>
     <string name="mining_power">Mining power</string>
+    <string name="mining_wave">Constant wave number</string>
     <string name="mining_machine_times">Times</string>
     <string name="pay_uyt_coins">UYT consumption</string>
     <string name="pay_uyt_test_coins">UYT_TEST consumption</string>
@@ -171,6 +179,8 @@
     <string name="exchange_success">Successful redemption</string>
     <string name="purchase_total_limit">The number of miners you purchased has reached the upper limit</string>
     <string name="purchase_team_total_limit">This community miner has reached the limit</string>
+    <string name="mine_income_dis">Mining machine income distribution</string>
+    <string name="mine_speed">Mining speed</string>
     <!--    生态相关-->
     <string name="ecology_tab_title">Copernicus Network Ecological Application</string>
     <string name="ecology_app">Application scenarios</string>
@@ -351,4 +361,5 @@
     <string name="safe_verify">safety verification</string>
     <string name="send_verfiy_code">Send the verification code</string>
     <string name="input_uid_hint">Please enter the UID of the other party</string>
+    <string name="purchase_mine_title">Buy mining machine</string>
 </resources>
