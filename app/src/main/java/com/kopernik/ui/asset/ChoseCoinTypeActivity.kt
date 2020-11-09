@@ -40,6 +40,7 @@ class ChoseCoinTypeActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewD
         }else if(choseType=="3"){
             data.add(CoinType(R.mipmap.ic_usdt, "USDT"))
             data.add(CoinType(R.mipmap.ic_utk,"UTK"))
+            data.add(CoinType(R.mipmap.ic_utdm,"UTDM"))
             data.add(CoinType(R.mipmap.ic_uyt, "UYT"))
             data.add(CoinType(R.mipmap.ic_uyt_test, "UYT_TEST"))
         }
@@ -63,6 +64,9 @@ class ChoseCoinTypeActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewD
                 setResult(DepositMoneyActivity.RESULTCODE,intent)
                 finish()
             }else if (item.coinType=="UTC"){
+                setResult(DepositMoneyActivity.RESULTCODE,intent)
+                finish()
+            }else if (item.coinType=="UTDM"){
                 setResult(DepositMoneyActivity.RESULTCODE,intent)
                 finish()
             }

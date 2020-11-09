@@ -423,10 +423,10 @@
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:textColor="@color/white"
-               android:textSize="@dimen/sp_20"
+               android:textColor="@color/color_AA9CCA"
+               android:textSize="@dimen/sp_14"
                android:layout_margin="@dimen/dp_15"
-               android:text="aaa"/>
+               android:text="@string/purchase_mine_rule"/>
        </LinearLayout>
    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

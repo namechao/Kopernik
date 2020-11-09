@@ -362,4 +362,5 @@
     <string name="send_verfiy_code">Send the verification code</string>
     <string name="input_uid_hint">Please enter the UID of the other party</string>
     <string name="purchase_mine_title">Buy mining machine</string>
+    <string name="purchase_mine_rule">• Each user can participate in mining machine mining; \n• The purchased mining machine cannot be redeemed in advance and cannot be transferred to other users;\n• After the purchase, it will take effect after 48 hours, and will enjoy the mining machine income, and the income will be distributed to the asset Available balance;\n• If the mining machine is adjusted, the update of the kopernik platform shall prevail, and the final interpretation right belongs to kopernik.</string>
 </resources>

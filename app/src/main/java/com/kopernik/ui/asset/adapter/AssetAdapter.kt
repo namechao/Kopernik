@@ -18,9 +18,9 @@ class AssetAdapter(data:List<AssetItemEntity>) : BaseQuickAdapter<AssetItemEntit
     override fun convert(helper: AssetViewHolder?, item: AssetItemEntity?) {
         helper?.assetName?.text=item?.coinType
         item?.headRes?.let { helper?.assetHead?.setImageResource(it) }
-         helper?.tvAvailable?.text=item?.available?.let { BigDecimalUtils.round(it,4) }
-         helper?.tvFreeze?.text=item?.frezee?.let {  BigDecimalUtils.round(it,4)}
-         helper?.tvConvert?.text=  item?.convert?.let { BigDecimalUtils.round(it,4) }
+         helper?.tvAvailable?.text=item?.available?.let { BigDecimalUtils.round(it,8) }
+         helper?.tvFreeze?.text=item?.frezee?.let {  BigDecimalUtils.round(it,8)}
+         helper?.tvConvert?.text=  item?.convert?.let { BigDecimalUtils.round(it,8) }
     }
 
 

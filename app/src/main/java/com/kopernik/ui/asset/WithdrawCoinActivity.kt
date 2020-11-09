@@ -24,6 +24,7 @@ import com.kopernik.ui.asset.viewModel.WithdrawCoinDetailsViewModel
 import com.kopernik.ui.mine.entity.AllConfigEntity
 import com.kopernik.ui.setting.AddContactActivity
 import com.xuexiang.xqrcode.XQRCode
+import dev.utils.common.encrypt.MD5Utils
 import kotlinx.android.synthetic.main.activity_deposit_money.*
 import kotlinx.android.synthetic.main.activity_withdraw_coin.*
 import kotlinx.android.synthetic.main.activity_withdraw_coin.chainName
@@ -121,19 +122,19 @@ companion object{
                 return@setOnClickListener
             }
             //判断是否设置交易密码
-//            if (UserConfig.singleton?.accountBean!=null){
-//                if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
-//                    if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
-//                        LaunchConfig.startTradePasswordActivity(this, 1,1)
-//                        return@setOnClickListener
-//                    }
-//                }else{
-//                    if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
-//                        LaunchConfig.startTradePasswordActivity(this, 2,1)
-//                        return@setOnClickListener
-//                    }
-//                }
-//            }
+            if (UserConfig.singleton?.accountBean!=null){
+                if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
+                    if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                        LaunchConfig.startTradePasswordActivity(this, 1,1)
+                        return@setOnClickListener
+                    }
+                }else{
+                    if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                        LaunchConfig.startTradePasswordActivity(this, 2,1)
+                        return@setOnClickListener
+                    }
+                }
+            }
             showDialog()
         }
 
@@ -158,45 +159,22 @@ companion object{
         wdBean.withdrawNumber = eTWithdrawlCoinCounts.text.toString().trim()
         var dialog = WithdrawlDialog.newInstance(wdBean,"")
         dialog!!.setOnRequestListener(object : WithdrawlDialog.RequestListener {
-            override fun onRequest(params: String,type:Int,phoneNumber:String) {
-                if (type==0)
-                    sendCode(phoneNumber,dialog)
-                  else if (type==1)
+            override fun onRequest(params: String,type:Int) {
                 submitWithDrawlCoin(params)
             }
         })
         dialog!!.show(supportFragmentManager, "withdrawRecommed")
     }
 
-    fun sendCode(phoneNumber:String,dialog:WithdrawlDialog){
-        VerifyCodeAlertDialog(this@WithdrawCoinActivity,phoneNumber)
-            .setCancelable(false)
-            .setPositiveButton(object : VerifyCodeAlertDialog.RequestListener{
-                override fun onRequest(imageVerifyCode: String) {
-                    viewModel.run {
-                        sendCode(phoneNumber,imageVerifyCode).observe(this@WithdrawCoinActivity,
-                            Observer {
-                                if (it.status == 200) {
-                                    dialog.startTime()
-                                } else {
-                                    ErrorCode.showErrorMsg(this@WithdrawCoinActivity, it.status)
-                                }
 
-                            })
-                    }
-                }
-
-            })
-            .show()
-    }
-
-    private fun submitWithDrawlCoin(verifyCode:String) {
+    private fun submitWithDrawlCoin(pwd:String) {
         var map = mapOf(
             "amount" to eTWithdrawlCoinCounts.text.toString().trim(),
             "addressHash" to eTWithdrwalAddress.text.toString().trim(),
             "rate" to rate,
             "type" to coinType,
-            "verifyCode" to verifyCode,
+            "pwd" to MD5Utils.md5(
+                MD5Utils.md5(pwd)),
             "remark" to etRemark.text.toString().trim()
         )
         viewModel.run {

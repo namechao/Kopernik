@@ -857,5 +857,6 @@
    <string name="send_verfiy_code">发送验证码</string>
    <string name="input_uid_hint">请输入对方UID</string>
    <string name="purchase_mine_title">购买矿机</string>
+   <string name="purchase_mine_rule">• 每个用户可参与矿机挖矿;\n• 购买矿机不可提前赎回,不可转移给其他用户;\n• 购买后,48小时后生效,将享受矿机收益,收益将发放至资产可用余额;\n• 矿机如有调整，以 kopernik 平台更新为准，最终解释权归 kopernik 所有。</string>
     <!-- 新项目文字资源-->
 </resources>

@@ -23,16 +23,11 @@ import com.kopernik.ui.asset.entity.*
 import com.kopernik.ui.asset.util.OnClickFastListener
 import com.kopernik.app.utils.KeyboardUtils
 import com.kopernik.app.utils.ToastUtils
-import kotlinx.android.synthetic.main.activity_trade_password.*
+
 
 class WithdrawlDialog : DialogFragment(),
     FingerprintDialog.AuthenticationCallback {
 
-
-
-    private var tvPhone: TextView? = null
-    private var tvCode: TextView? = null
-    private var phoneNumber=""
     private var verfiyCode: EditText? = null
     private var okBtn: Button? = null
     private var bean:WithdrawCoinBean?=null
@@ -62,26 +57,9 @@ class WithdrawlDialog : DialogFragment(),
     }
 
     private fun initView(dialog: Dialog) {
-        tvPhone = dialog.findViewById(R.id.tvPhone)
-        tvCode = dialog.findViewById(R.id.tvCode)
         verfiyCode = dialog.findViewById(R.id.etInputCode)
         verfiyCode?.addTextChangedListener(passwordWatcher)
         okBtn = dialog.findViewById(R.id.ok)
-        var phone= UserConfig.singleton?.accountBean?.phone
-        if (phone!=null){
-            phoneNumber=phone
-            if (phone.length>5){
-                tvPhone?.text="${phone.subSequence(0,3)}****${phone.subSequence(phone.length-4,phone.length)}"
-            }
-        }
-        tvCode?.setOnClickListener {
-            if (phoneNumber.isNullOrEmpty()) {
-                ToastUtils.showShort(context, resources.getString(R.string.phone_not_empty))
-                return@setOnClickListener
-            }
-            //获取验证码
-            listener?.let { it.onRequest(verfiyCode!!.text.toString().trim(),0,phoneNumber) }
-        }
         //关闭弹窗
         dialog.findViewById<ImageView>(R.id.icon_close).setOnClickListener {
             dismiss()
@@ -95,7 +73,7 @@ class WithdrawlDialog : DialogFragment(),
         override fun onFastClick(v: View) {
 
             KeyboardUtils.hideSoftKeyboard(verfiyCode)
-            listener?.let { it.onRequest(verfiyCode!!.text.toString().trim(),1,phoneNumber) }
+            listener?.let { it.onRequest(verfiyCode!!.text.toString().trim(),1) }
             dismiss()
         }
     }
@@ -145,33 +123,9 @@ class WithdrawlDialog : DialogFragment(),
         listener=requestListener
     }
     interface RequestListener {
-        fun onRequest(params:String,type: Int,phoneNumber:String)
+        fun onRequest(params:String,type: Int)
     }
-    open fun startTime(){
-        timer.start()
-    }
-    //计时器定时
-    internal var timer: CountDownTimer = object : CountDownTimer((60 * 1000 + 500).toLong(), 1000) {
-        override fun onTick(millisUntilFinished: Long) {
-            if (millisUntilFinished / 1000 == 0L) {
-                onFinish()
-                return
-            }
-            tvCode?.text = "重新发送(${(millisUntilFinished / 1000).toString()})"
-           context?.let {  tvCode?.setTextColor(ContextCompat.getColor(it, R.color.color_5D5386) )}
-            tvCode?.isClickable = false
-        }
 
-        override fun onFinish() {
-            tvCode?.text = "重新获取"
-            context?.let {  tvCode?.setTextColor(ContextCompat.getColor(it, R.color.color_F4C41B))}
-            tvCode?.postInvalidate()
-        }
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-        timer.cancel()
-    }
     companion object {
         fun newInstance(bean: WithdrawCoinBean,type:String): WithdrawlDialog {
             val fragment = WithdrawlDialog()

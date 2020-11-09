@@ -109,19 +109,19 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
                     return@setOnClickListener
                 }
                 //判断是否设置交易密码
-//                if (UserConfig.singleton?.accountBean!=null){
-//                    if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
-//                        if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
-//                            LaunchConfig.startTradePasswordActivity(this, 1,1)
-//                            return@setOnClickListener
-//                        }
-//                    }else{
-//                        if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
-//                            LaunchConfig.startTradePasswordActivity(this, 2,1)
-//                            return@setOnClickListener
-//                        }
-//                    }
-//                }
+                if (UserConfig.singleton?.accountBean!=null){
+                    if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){
+                        if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                            LaunchConfig.startTradePasswordActivity(this, 1,1)
+                            return@setOnClickListener
+                        }
+                    }else{
+                        if (UserConfig.singleton?.tradePassword.isNullOrEmpty()){
+                            LaunchConfig.startTradePasswordActivity(this, 2,1)
+                            return@setOnClickListener
+                        }
+                    }
+                }
                 showDialog()
             }
         }
@@ -141,48 +141,24 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
         bean.transferNumber = eTTransferCounts.text.toString().trim()
         var extractDialog = TransferDialog.newInstance(bean,"")
         extractDialog!!.setOnRequestListener(object : TransferDialog.RequestListener {
-            override fun onRequest( params: String,type:Int,phoneNumber:String) {
-                if (type==0)
-                    sendCode(phoneNumber,extractDialog)
-                else if (type==1)
+            override fun onRequest( params: String,type:Int) {
                 submitWithDrawlCoin(params)
             }
         })
         extractDialog!!.show(supportFragmentManager, "withdrawRecommed")
     }
-    fun sendCode(phoneNumber:String,dialog: TransferDialog){
-        VerifyCodeAlertDialog(this@TransferActivity,phoneNumber)
-            .setCancelable(false)
-            .setPositiveButton(object : VerifyCodeAlertDialog.RequestListener{
-                override fun onRequest(imageVerifyCode: String) {
-                    viewModel.run {
-                        sendCode(phoneNumber,imageVerifyCode).observe(this@TransferActivity,
-                            Observer {
-                                if (it.status == 200) {
-                                    dialog.startTime()
-                                } else {
-                                    ErrorCode.showErrorMsg(this@TransferActivity, it.status)
-                                }
-
-                            })
-                    }
-                }
-
-            })
-            .show()
-    }
-
 
     override fun initData() {
 
     }
-    private fun submitWithDrawlCoin(verifyCode:String) {
+    private fun submitWithDrawlCoin(pwd:String) {
         viewModel.run {
             var map= mapOf("amount" to eTTransferCounts.text.toString().trim(),
                 "uidReceive" to eTUidAddress.text.toString().trim(),
                 "rate" to rate ,
                 "type" to coinType,
-                "verifyCode" to verifyCode)
+                "pwd" to MD5Utils.md5(
+                    MD5Utils.md5(pwd)))
             transfer(map).observe(this@TransferActivity, Observer {
                 if (it.status==200){
                     ToastUtils.showShort(this@TransferActivity,resources.getString(R.string.tip_asset_transfer_success))
@@ -264,6 +240,9 @@ class TransferActivity : NewBaseActivity<TransferViewModel, ViewDataBinding>() {
         }else if(coinName=="UTK"){
             coinType="UTK"
             balanace= allConfigEntity?.utk.toString()
+        }else if(coinName=="UTDM"){
+            coinType="UTDM"
+            balanace= allConfigEntity?.utdm.toString()
         }
         availableUse.text = resources.getString(R.string.title_asset_use)+BigDecimalUtils.roundDOWN(balanace,8)+" "+coinName
         tvWithDrawlType.text=coinName
