@@ -35,7 +35,7 @@ class ChoseCoinTypeActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewD
         }else if(choseType=="2"){
             data.add(CoinType(R.mipmap.ic_usdt, "USDT"))
             data.add(CoinType(R.mipmap.ic_utc,"UTC"))
-            data.add(CoinType(R.mipmap.ic_uyt, "UYT"))
+//            data.add(CoinType(R.mipmap.ic_uyt, "UYT"))
             data.add(CoinType(R.mipmap.ic_uyt_test, "UYT_TEST"))
         }else if(choseType=="3"){
             data.add(CoinType(R.mipmap.ic_usdt, "USDT"))
