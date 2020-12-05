@@ -43,6 +43,9 @@ class AssetRepository private constructor(private val newWork: AssetNetWork):Bas
     suspend fun exchangeRecord(map: Map<String, String>): BaseResult<ExchangeRecordEntity> {
         return newWork.exchangeRecord(map)
     }
+    suspend fun exchangeRecordUytTest(map: Map<String, String>): BaseResult<UytTestExchangeRecordEntity> {
+        return newWork.exchangeRecordUytTest(map)
+    }
     suspend fun transferRecord(map: Map<String, String>): BaseResult<TransferRecordEntity> {
         return newWork.transferRecord(map)
     }
@@ -57,6 +60,9 @@ class AssetRepository private constructor(private val newWork: AssetNetWork):Bas
     }
     suspend fun exchange(map: Map<String, String>): BaseResult<Any> {
         return newWork.exchange(map)
+    }
+    suspend fun uytTestexchange(map: Map<String, String>): BaseResult<Any> {
+        return newWork.uytTestexchange(map)
     }
     suspend fun transfer(map: Map<String, String>): BaseResult<Any> {
         return newWork.transfer(map)

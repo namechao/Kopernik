@@ -121,6 +121,11 @@ companion object{
                 ToastUtils.showShort(getActivity(), getString(R.string.uyt_witdrawl_error))
                 return@setOnClickListener
             }
+            //提币数量校验
+            if (BigDecimal(eTWithdrawlCoinCounts.text.toString().trim()).compareTo( BigDecimal("100"))==-1) {
+                ToastUtils.showShort(getActivity(), "${getString(R.string.withdrawl_counts_limit)}100$coinName")
+                return@setOnClickListener
+            }
             //判断是否设置交易密码
             if (UserConfig.singleton?.accountBean!=null){
                 if (!UserConfig.singleton?.accountBean?.phone.isNullOrEmpty()){

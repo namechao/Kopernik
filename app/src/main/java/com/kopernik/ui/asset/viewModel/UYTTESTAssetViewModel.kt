@@ -16,6 +16,8 @@ class UYTTESTAssetViewModel : BaseViewModel() {
     private val transferRecord = SingleLiveEvent<BaseResult<UYTTransferEntity>>()
     private val rechargeCashRecord = SingleLiveEvent<BaseResult<UYTDepositWithdarwlAssetBean>>()
     private val getConfig = SingleLiveEvent<BaseResult<AllConfigEntity>>()
+    private val exchange = SingleLiveEvent<BaseResult<Any>>()
+    private val uytTestExchange = SingleLiveEvent<BaseResult<UytTestExchangeRecordEntity>>()
 
     fun getAssetConfig(): SingleLiveEvent<BaseResult<AllConfigEntity>> {
         launchGo({
@@ -42,8 +44,12 @@ class UYTTESTAssetViewModel : BaseViewModel() {
         return  withDrawlCoin
     }
 
-
-
+    fun exchange(map: Map<String,String>): SingleLiveEvent<BaseResult<Any>> {
+        launchGo({
+            exchange.value = homeRepository.uytTestexchange(map)
+        },isShowDialog = false)
+        return exchange
+    }
     fun rechargeCashRecord(map: Map<String,String>): SingleLiveEvent<BaseResult<UYTDepositWithdarwlAssetBean>> {
         launchGo({
             rechargeCashRecord.value = homeRepository.rechargeCashRecord(map)
@@ -55,5 +61,11 @@ class UYTTESTAssetViewModel : BaseViewModel() {
             transferRecord.value = homeRepository.uytTransferRecord(map)
         },isShowDialog = false)
         return transferRecord
+    }
+    fun exchangeRecord(map: Map<String,String>): SingleLiveEvent<BaseResult<UytTestExchangeRecordEntity>> {
+        launchGo({
+            uytTestExchange.value = homeRepository.exchangeRecordUytTest(map)
+        },isShowDialog = false)
+        return uytTestExchange
     }
 }

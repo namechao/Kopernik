@@ -17,7 +17,7 @@ import com.kopernik.app.config.AppConfig
  */
 object Api {
     val baseUrl =
-        if (AppConfig.isDebug) "http://123.57.8.136:80/" else "https://kopernik.network/"
+        if (AppConfig.isDebug) "http://47.93.190.158:81/" else "https://kopernik.network/"
     val UserAgreementApi=  if (AppConfig.isDebug)  "http://123.57.8.136:8083/#/agreement" else "https://kopernik.network/#/agreement"
     val UserNoticeApi=  if (AppConfig.isDebug) "http://123.57.8.136:8083/#/note?id=" else "https://kopernik.network/#/note?id="
     val InviteFriendsCodeApi= if (AppConfig.isDebug) "http://123.57.8.136:8083/#/register?inviteCode=" else "https://kopernik.network/#/register?inviteCode="

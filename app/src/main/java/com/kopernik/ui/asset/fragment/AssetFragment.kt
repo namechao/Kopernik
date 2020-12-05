@@ -50,8 +50,7 @@ class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
                 "UTK"-> activity?.let { LaunchConfig.startUTKAssetActivity(it,asset?.utkAmount) }
                 "UTDM"-> activity?.let { LaunchConfig.startUDMTAssetActivity(it,asset?.utdmAmount) }
                 "UYT_TEST"-> activity?.let {
-//                    LaunchConfig.startUYTTESTAssetActivity(it,asset?.uytAmount,"UYT")
-                    ToastUtils.showShort(activity,getString(R.string.button_purchase_not_open))
+                    LaunchConfig.startUYTTESTAssetActivity(it,asset?.uytAmount,"UYT")
                 }
                 "UYT"-> activity?.let {
 //                    LaunchConfig.startUYTAssetActivity(it,asset?.uytProAmount,"UYTPRO")

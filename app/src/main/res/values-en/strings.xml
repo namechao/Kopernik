@@ -172,7 +172,9 @@
     <string name="utc_max_counts">The maximum number of synthesizers has been reached</string>
     <string name="utc_input_counts">Please enter the quantity to synthesize UTC</string>
     <string name="utc_exchange_hint">Please enter UTC quantity</string>
+    <string name="uyt_test_exchange_hint">Please enter UYT_TEST quantity</string>
     <string name="utc_exchange_uyt_hint">Number of UYT to be redeemed</string>
+    <string name="utc_to_exchange_hint">Number of UTC to be redeemed</string>
     <string name="utc_input_syth_limit">The synthesis quantity cannot be zero</string>
     <string name="utc_get_utc_counts">Congratulations on getting</string>
     <string name="utc_per">A</string>
@@ -278,12 +280,14 @@
     <string name="asset_tansfer">Transfer</string>
     <string name="asset_synthesis_record">UTC composite record</string>
     <string name="asset_exchange_record">Exchange record</string>
+    <string name="asset_uyt_test_exchange">Exchange record \n(UTC)</string>
     <string name="asset_receive_record">Collection record</string>
     <string name="asset_transfer_record">Transfer record</string>
     <string name="send_code">send</string>
     <string name="asset_synthesis_time">time</string>
     <string name="asset_utdm_consume">UTDM consumption</string>
     <string name="asset_utc_consume">UTC consumption</string>
+    <string name="asset_uyt_test_consume">consumption\n(UYT_TEST)</string>
     <string name="asset_utk_consume">UTK consumption</string>
     <string name="asset_handling_fee">Handling fee(UYT)</string>
     <string name="asset_handling_fees">Handling fee</string>
@@ -337,6 +341,7 @@
     <string name="uyt_addr_error">UYT address is incorrect</string>
     <string name="uyt_witdrawl_error">The withdrawal amount cannot be greater than the current account balance</string>
     <string name="uyt_transfer_error">The transfer amount cannot be greater than the current account balance</string>
+    <string name="withdrawl_counts_limit">The withdrawal amount cannot be less than</string>
     <string name="tip_alert_no_asset_withdrawl">There is no withdrawal balance temporarily</string>
     <string name="tip_alert_no_asset_transfer">There is currently no transferable balance</string>
     <string name="tip_asset_withdraw_success">Successful withdrawal</string>

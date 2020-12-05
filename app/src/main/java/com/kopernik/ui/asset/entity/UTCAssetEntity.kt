@@ -35,3 +35,20 @@ data class ExchangeRecord(
     val utcAmount: String,
     val uytAmount: String
 )
+data class UytTestExchangeRecordEntity(
+    val datas: List<UytTestExchangeRecord>,
+    val pageNum: Int,
+    val pageSize: Int,
+    val pages: Int,
+    val total: Int
+)
+
+data class UytTestExchangeRecord(
+    val createTime: Long,
+    val id: Int,
+    val rate: String,
+    val remark: Any,
+    val uid: Int,
+    val utcAmount: String,
+    val uytTestAmount: String
+)

@@ -80,6 +80,9 @@ interface AssetService {
     //uyt转账记录
     @GET("asset/transferRecord")
     suspend fun  uytTransferRecord(@QueryMap map: Map<String, String>): BaseResult<UYTTransferEntity>
+    //uyt_test 兑换记录
+    @GET("asset/exchangeRecordUytTest")
+    suspend fun  exchangeRecordUytTest(@QueryMap map: Map<String, String>): BaseResult<UytTestExchangeRecordEntity>
     //兑换记录
     @GET("asset/exchangeRecord")
     suspend fun  exchangeRecord(@QueryMap map: Map<String, String>): BaseResult<ExchangeRecordEntity>
@@ -94,6 +97,10 @@ interface AssetService {
     @POST("asset/exchange")
     @FormUrlEncoded
     suspend fun  exchange(@FieldMap map: Map<String, String>): BaseResult<Any>
+    //合成
+    @POST("asset/exchangeUytTest")
+    @FormUrlEncoded
+    suspend fun  uytTestexchange(@FieldMap map: Map<String, String>): BaseResult<Any>
     //合成
     @POST("asset/transfer")
     @FormUrlEncoded
