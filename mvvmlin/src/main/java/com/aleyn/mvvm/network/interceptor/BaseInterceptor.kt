@@ -4,7 +4,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 
 /**
- *   @auther : Aleyn
+ *   @auther : zhanglichao
  *   time   : 2019/11/02
  */
 class BaseInterceptor(private val headers: Map<String, String>?) : Interceptor {

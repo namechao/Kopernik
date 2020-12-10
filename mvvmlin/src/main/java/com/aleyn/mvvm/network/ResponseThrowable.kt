@@ -3,7 +3,7 @@ package com.aleyn.mvvm.network
 import com.aleyn.mvvm.base.IBaseResponse
 
 /**
- *   @auther : Aleyn
+ *   @auther : zhanglichao
  *   time   : 2019/08/12
  */
 class ResponseThrowable : Exception {
