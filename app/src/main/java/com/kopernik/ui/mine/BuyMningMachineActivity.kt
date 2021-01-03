@@ -167,16 +167,16 @@ class BuyMningMachineActivity : NewBaseActivity<MineMachineryViewModel, ViewData
             }
             //utdm
             if (utdmChose){
-                if (BigDecimalUtils.compare(consumeUsdt,minebean?.usdtCaptial?.amount)) {
+                if (!BigDecimalUtils.compare(minebean?.usdtCaptial?.amount,consumeUsdt)) {
                     ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"USDT"+getString(R.string.balance_not_enough_end))
                     return@setOnClickListener
-                } else  if (BigDecimalUtils.compare(consumeUsdtUytTest,minebean?.uytCaptial?.amount)) {
+                } else  if (!BigDecimalUtils.compare(minebean?.uytCaptial?.amount,consumeUsdtUytTest)) {
                     ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"UYT_TEST"+getString(R.string.balance_not_enough_end))
                     return@setOnClickListener
                 }
             }else{
                 //uyt
-                if (BigDecimalUtils.compare(consumeUtc,minebean?.utcCaptial?.amount)) {
+                if (!BigDecimalUtils.compare(minebean?.utcCaptial?.amount,consumeUtc)) {
                     ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"UTC"+getString(R.string.balance_not_enough_end))
                     return@setOnClickListener
                 }
