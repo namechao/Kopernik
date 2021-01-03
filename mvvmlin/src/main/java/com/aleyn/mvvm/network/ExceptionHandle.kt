@@ -8,7 +8,7 @@ import retrofit2.HttpException
 import java.net.ConnectException
 
 /**
- *   @auther : Aleyn
+ *   @auther : zhanglichao
  *   time   : 2019/08/12
  */
 object ExceptionHandle {

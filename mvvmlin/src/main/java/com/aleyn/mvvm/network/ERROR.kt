@@ -4,7 +4,7 @@ import com.aleyn.mvvm.R
 import com.blankj.utilcode.util.Utils
 
 /**
- *   @auther : Aleyn
+ *   @auther : zhanglichao
  *   time   : 2019/08/12
  */
 enum class ERROR(private val code: Int, private val err: String) {

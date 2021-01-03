@@ -167,19 +167,19 @@ class BuyMningMachineActivity : NewBaseActivity<MineMachineryViewModel, ViewData
             }
             //utdm
             if (utdmChose){
-                if (BigDecimalUtils.compare(consumeUtdm,minebean?.utdmCaptial?.amount)) {
+                if (!BigDecimalUtils.compare(minebean?.utdmCaptial?.amount,consumeUtdm)) {
                     ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"UTDM"+getString(R.string.balance_not_enough_end))
                     return@setOnClickListener
-                } else  if (BigDecimalUtils.compare(consumeUtdmUytTest,minebean?.uytCaptial?.amount)) {
+                } else  if (!BigDecimalUtils.compare(minebean?.uytCaptial?.amount,consumeUtdmUytTest)) {
                     ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"UYT_TEST"+getString(R.string.balance_not_enough_end))
                     return@setOnClickListener
                 }
             }else{
                 //uyt
-                if (BigDecimalUtils.compare(consumeUyt,minebean?.uytProCaptial?.amount)) {
+                if (!BigDecimalUtils.compare(minebean?.uytProCaptial?.amount,consumeUyt)) {
                     ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"UYT"+getString(R.string.balance_not_enough_end))
                     return@setOnClickListener
-                } else  if (BigDecimalUtils.compare(consumeUytTest,minebean?.uytCaptial?.amount)) {
+                } else  if (!BigDecimalUtils.compare(minebean?.uytCaptial?.amount,consumeUytTest)) {
                     ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"UYT_TEST"+getString(R.string.balance_not_enough_end))
                     return@setOnClickListener
                 }
