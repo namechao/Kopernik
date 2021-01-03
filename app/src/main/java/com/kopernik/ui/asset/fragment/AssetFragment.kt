@@ -138,7 +138,7 @@ class AssetFragment : BaseFragment<AssetViewModel,ViewDataBinding>() {
                    data.add(AssetItemEntity(R.mipmap.ic_utk,"UTK",it.data.utkAmount,it.data.utkAmountFreeze,it.data.utkCny))
                    data.add(AssetItemEntity(R.mipmap.ic_utdm,"UTDM",it.data.utdmAmount,it.data.utdmAmountFreeze,it.data.utdmCny))
                    data.add(AssetItemEntity(R.mipmap.ic_uyt_test,"UYT_TEST",it.data.uytAmount,it.data.uytAmountFreeze,it.data.uytCny))
-                   data.add(AssetItemEntity(R.mipmap.ic_uyt,"UYT",it.data.uytProAmount,it.data.uytProAmountFreeze,it.data.uytProCny))
+//                   data.add(AssetItemEntity(R.mipmap.ic_uyt,"UYT",it.data.uytProAmount,it.data.uytProAmountFreeze,it.data.uytProCny))
                    adapter.setNewData(data)
                    cnyAssetTotal.text="≈ ${BigDecimalUtils.roundDOWN(it.data.totalUsdtCny,2)} CNY"
                    usdtAssetTotal.text=BigDecimalUtils.roundDOWN(it.data.totalUsdt,3)

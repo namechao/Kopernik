@@ -56,11 +56,11 @@
     <string name="trade_password">transaction password</string>
     <string name="invite_friend">invite friends</string>
     <string name="about_us">about us</string>
-    <string name="string_current_usdt">Current UTDM balance:</string>
+    <string name="string_current_usdt">Current USDT balance:</string>
     <string name="string_current_uyt_test">Current UYT-TEST balance:</string>
     <string name="mine_total_income">Total income of mining machine:</string>
     <string name="mine_rule">Mining machine rules description</string>
-    <string name="string_current_uyt">Current UYT balance:</string>
+    <string name="string_current_uyt">Current UTC balance:</string>
     <string name="total_consume">total:</string>
     <string name="title_two_step">Two-step verification</string>
     <string name="verson_code">version number</string>

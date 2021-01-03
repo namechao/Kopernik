@@ -26,10 +26,10 @@ class BuyMningMachineActivity : NewBaseActivity<MineMachineryViewModel, ViewData
    var mineType=-1
     var minePrice=""
     var minebean: MineBean?=null
-    var consumeUyt=""
-    var consumeUytTest=""
-    var consumeUtdm=""
-    var consumeUtdmUytTest=""
+    var consumeUtc=""
+    var consumeUtcTest=""
+    var consumeUsdt=""
+    var consumeUsdtUytTest=""
     var utdmChose=true
     override fun layoutId()=R.layout.activity_buy_mine_machine
 
@@ -75,76 +75,76 @@ class BuyMningMachineActivity : NewBaseActivity<MineMachineryViewModel, ViewData
         miningMachinePrice.text=  BigDecimalUtils.roundDOWN(minePrice,2)+"USDT"
         //计算UTDM:UYT_TEST比例关系
         var uytTestRatio = BigDecimalUtils.divide(
-            minebean?.utdmUytRatio,
-            BigDecimalUtils.add(minebean?.utdmUytRatio, minebean?.utdmRatio).toString(),
+            minebean?.usdtUytRatio,
+            BigDecimalUtils.add(minebean?.usdtUytRatio, minebean?.usdtRatio).toString(),
             2
         )
-        var utdmRatio = BigDecimalUtils.divide(
-            minebean?.utdmRatio,
-            BigDecimalUtils.add(minebean?.utdmUytRatio , minebean?.utdmRatio).toString(),
+        var usdtRatio = BigDecimalUtils.divide(
+            minebean?.usdtRatio,
+            BigDecimalUtils.add(minebean?.usdtUytRatio , minebean?.usdtRatio).toString(),
             2
         )
-        consumeUtdm=BigDecimalUtils.divide(
+        consumeUsdt=BigDecimalUtils.divide(
             BigDecimalUtils.multiply(
                 minePrice,
-                utdmRatio
-            ).toString(), minebean?.utdmPrice, 8
+                usdtRatio
+            ).toString(), "1", 8
         )
-        consumeUtdmUytTest=BigDecimalUtils.divide(
+        consumeUsdtUytTest=BigDecimalUtils.divide(
             BigDecimalUtils.multiply(
                 minePrice,
                 uytTestRatio
             ).toString(), minebean?.uytPrice, 8
         )
      //计算UYT:UYT_TEST比例关系
-        var uytRatio = BigDecimalUtils.divide(
-            minebean?.uytRatio,
-            BigDecimalUtils.add(minebean?.uytRatio, minebean?.uytproRatio).toString(),
-            2
+//        var uytRatio = BigDecimalUtils.divide(
+//            minebean?.uytRatio,
+//            BigDecimalUtils.add(minebean?.uytRatio, minebean?.uytproRatio).toString(),
+//            2
+//        )
+//        var uytproRatio = BigDecimalUtils.divide(
+//            minebean?.uytproRatio,
+//            BigDecimalUtils.add(minebean?.uytRatio, minebean?.uytproRatio).toString(),
+//            2
+//        )
+        consumeUtc=BigDecimalUtils.divide(
+                BigDecimalUtils.multiply(
+                    minePrice,
+                    "1"
+                ).toString(), minebean?.utcPrice, 8
         )
-        var uytproRatio = BigDecimalUtils.divide(
-            minebean?.uytproRatio,
-            BigDecimalUtils.add(minebean?.uytRatio, minebean?.uytproRatio).toString(),
-            2
-        )
-        consumeUyt=BigDecimalUtils.divide(
-            BigDecimalUtils.multiply(
-                minePrice,
-                uytproRatio
-            ).toString(), minebean?.uytProPrice, 8
-        )
-        consumeUytTest=BigDecimalUtils.divide(
-            BigDecimalUtils.multiply(
-                minePrice,
-                uytRatio
-            ).toString(), minebean?.uytPrice, 8
-        )
+//        consumeUtcTest=BigDecimalUtils.divide(
+//            BigDecimalUtils.multiply(
+//                minePrice,
+//                uytRatio
+//            ).toString(), minebean?.uytPrice, 8
+//        )
 
         //utdm :uyttest消费计算
-        payUytTestCoins.text = BigDecimalUtils.roundDOWN(consumeUtdmUytTest,2)
-        totalTop.text = BigDecimalUtils.roundDOWN(consumeUtdm,2)+" UTDM"
+        payUytTestCoins.text = BigDecimalUtils.roundDOWN(consumeUsdtUytTest,2)
+        totalTop.text = BigDecimalUtils.roundDOWN(consumeUsdt,2)+" USDT"
         //uyt_test 消费计算
-        totalUytTest.text = BigDecimalUtils.roundDOWN(consumeUtdmUytTest,2)+" UYT_TEST"
+        totalUytTest.text = BigDecimalUtils.roundDOWN(consumeUsdtUytTest,2)+" UYT_TEST"
         //uyt：uyt_test
-        tvPayUtdmToUytTest.text="UTDM : UYT_TEST=${BigDecimalUtils.getRound(minebean?.utdmRatio)}:${BigDecimalUtils.getRound(minebean?.utdmUytRatio)}"
+        tvPayUtdmToUytTest.text="USDT : UYT_TEST=${BigDecimalUtils.getRound(minebean?.usdtRatio)}:${BigDecimalUtils.getRound(minebean?.usdtUytRatio)}"
 
         //uyt :uyttest消费计算
 
-        tvPayUytToUytTest.text="UYT : UYT_TEST=${BigDecimalUtils.getRound(minebean?.uytproRatio)}:${BigDecimalUtils.getRound(minebean?.uytRatio)}"
+//        tvPayUytToUytTest.text="UYT : UYT_TEST=${BigDecimalUtils.getRound(minebean?.uytproRatio)}:${BigDecimalUtils.getRound(minebean?.uytRatio)}"
 
         //余额
-        tvCurrentUTDM.text=minebean?.utdmCaptial?.amount
+        tvCurrentUTDM.text=minebean?.usdtCaptial?.amount
         tvCurrentUYT_TEST.text=minebean?.uytCaptial?.amount
-        tvCurrentUYT.text=minebean?.uytProCaptial?.amount
+        tvCurrentUYT.text=minebean?.utcCaptial?.amount
        //utdm
         clUTDM.setOnClickListener {
          if (!utdmChose){
              ivIsChose.setImageResource(R.mipmap.ic_chosed)
              ivIsUytChose.setImageResource(R.mipmap.ic_no_chose)
-             payUytTestCoins.text = BigDecimalUtils.roundDOWN(consumeUtdmUytTest,2)
-             totalTop.text = BigDecimalUtils.roundDOWN(consumeUtdm,2)+" UTDM"
+             payUytTestCoins.text = BigDecimalUtils.roundDOWN(consumeUsdtUytTest,2)
+             totalTop.text = BigDecimalUtils.roundDOWN(consumeUsdt,2)+" USDT"
              //uyt_test 消费计算
-             totalUytTest.text = BigDecimalUtils.roundDOWN(consumeUtdmUytTest,2)+" UYT_TEST"
+             totalUytTest.text = BigDecimalUtils.roundDOWN(consumeUsdtUytTest,2)+" UYT_TEST"
              utdmChose=true
          }
         }
@@ -153,10 +153,10 @@ class BuyMningMachineActivity : NewBaseActivity<MineMachineryViewModel, ViewData
             if (utdmChose){
                 ivIsUytChose.setImageResource(R.mipmap.ic_chosed)
                 ivIsChose.setImageResource(R.mipmap.ic_no_chose)
-                payUytTestCoins.text = BigDecimalUtils.roundDOWN(consumeUytTest,2)
-                totalTop.text = BigDecimalUtils.roundDOWN(consumeUyt,2)+" UYT"
+                payUytTestCoins.text = ""
+                totalTop.text = BigDecimalUtils.roundDOWN(consumeUtc,2)+"UTC"
                 //uyt_test 消费计算
-                totalUytTest.text = BigDecimalUtils.roundDOWN(consumeUytTest,2)+" UYT_TEST"
+                totalUytTest.text = ""
                 utdmChose=false
             }
         }
@@ -167,22 +167,23 @@ class BuyMningMachineActivity : NewBaseActivity<MineMachineryViewModel, ViewData
             }
             //utdm
             if (utdmChose){
-                if (BigDecimalUtils.compare(consumeUtdm,minebean?.utdmCaptial?.amount)) {
-                    ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"UTDM"+getString(R.string.balance_not_enough_end))
+                if (BigDecimalUtils.compare(consumeUsdt,minebean?.usdtCaptial?.amount)) {
+                    ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"USDT"+getString(R.string.balance_not_enough_end))
                     return@setOnClickListener
-                } else  if (BigDecimalUtils.compare(consumeUtdmUytTest,minebean?.uytCaptial?.amount)) {
+                } else  if (BigDecimalUtils.compare(consumeUsdtUytTest,minebean?.uytCaptial?.amount)) {
                     ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"UYT_TEST"+getString(R.string.balance_not_enough_end))
                     return@setOnClickListener
                 }
             }else{
                 //uyt
-                if (BigDecimalUtils.compare(consumeUyt,minebean?.uytProCaptial?.amount)) {
-                    ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"UYT"+getString(R.string.balance_not_enough_end))
-                    return@setOnClickListener
-                } else  if (BigDecimalUtils.compare(consumeUytTest,minebean?.uytCaptial?.amount)) {
-                    ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"UYT_TEST"+getString(R.string.balance_not_enough_end))
+                if (BigDecimalUtils.compare(consumeUtc,minebean?.utcCaptial?.amount)) {
+                    ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"UTC"+getString(R.string.balance_not_enough_end))
                     return@setOnClickListener
                 }
+//                else  if (BigDecimalUtils.compare(consumeUytTest,minebean?.uytCaptial?.amount)) {
+//                    ToastUtils.showShort(this@BuyMningMachineActivity,getString(R.string.balance_not_enough)+"UYT_TEST"+getString(R.string.balance_not_enough_end))
+//                    return@setOnClickListener
+//                }
             }
             purchaseMineMac()
         }
@@ -196,9 +197,9 @@ class BuyMningMachineActivity : NewBaseActivity<MineMachineryViewModel, ViewData
             }
             var iconType=""
             if (utdmChose){
-                iconType="UTDM"
+                iconType="USDT"
             }else{
-                iconType="UYT"
+                iconType="UTC"
             }
             var map= mapOf("uid" to uid ,"type" to mineType.toString(),"iconType" to iconType,"pwd" to MD5Utils.md5(
                 MD5Utils.md5(password_et.text.toString().trim())))

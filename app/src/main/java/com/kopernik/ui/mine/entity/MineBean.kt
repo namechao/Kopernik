@@ -4,23 +4,46 @@ import java.io.Serializable
 
 
 data class MineBean(
+    val MachineConfig: MachineConfig,
+    val flag: Boolean,
     val nachineList: List<Machine>,
     val parentFlag: Boolean,
-    val flag: Boolean,
-    val uytPrice:String,
-    val uytProPrice:String,
-    val utdmPrice:String,
+    val usdt: String,
+    val usdtCaptial: UsdtCaptial,
+    val usdtRatio: String,
+    val usdtUytRatio: String,
     val user: User,
-    val uytCaptial: UytCaptial,
-    val uytProCaptial: UytProCaptial,
+    val utcCaptial: UtcCaptial,
+    val utcPrice: String,
+    val utcToUsdt: String,
     val utdmCaptial: UtdmCaptial,
-    val uytToUsdt: String,
+    val utdmPrice: String,
+    val utdmRatio: String,
     val utdmToUsdt: String,
+    val utdmUytRatio: String,
+    val uytCaptial: UytCaptial,
+    val uytPrice: String,
+    val uytProCaptial: UytProCaptial,
+    val uytProPrice: String,
     val uytProToUsdt: String,
-    var uytRatio: String?,
-    var uytproRatio: String?,
-    var utdmRatio: String?,
-    var utdmUytRatio: String?
+    val uytRatio: String,
+    val uytToUsdt: String,
+    val uytproRatio: String
+):Serializable
+
+data class MachineConfig(
+    val end: String,
+    val id: String,
+    val ipCount: String,
+    val onceCount: String,
+    val onceTime: String,
+    val parentCount: String,
+    val personCount: String,
+    val start: String,
+    val switchReceive: String,
+    val switchStatus: String,
+    val utcAmount: String,
+    val uytAmount: String
 ):Serializable
 
 data class Machine(
@@ -33,7 +56,7 @@ data class Machine(
     val price: String,
     val rate: String,
     val rateMax: String,
-    val rateMin: Double,
+    val rateMin: String,
     val startTime: Long,
     val status: String,
     val stock: Int,
@@ -42,21 +65,61 @@ data class Machine(
     val url: String
 ):Serializable
 
+data class UsdtCaptial(
+    val amount: String,
+    val createTime: String,
+    val freeze: String,
+    val id: String,
+    val transactionFreeze: String,
+    val type: String,
+    val uid: String
+):Serializable
+
 data class User(
+    val achievement: String,
+    val cash: String,
+    val compose: String,
     val createTime: String,
     val email: String,
+    val exchange: String,
+    val freeze: String,
     val ggPwd: String,
     val id: String,
     val idCard: String,
     val invitationCode: String,
+    val ipAddress: String,
     val level: String,
     val loginPwd: String,
+    val machineLevel: String,
+    val machineTotal: String,
     val memo: String,
     val name: String,
-    val parentUid: Int,
+    val parentUid: String,
     val phone: String,
+    val recharge: String,
     val salePwd: String,
     val token: String,
+    val transfer: String,
+    val uid: String
+):Serializable
+
+data class UtcCaptial(
+    val amount: String,
+    val createTime: String,
+    val freeze: String,
+    val id: String,
+    val transactionFreeze: String,
+    val type: String,
+    val uid: String
+):Serializable
+
+data class UtdmCaptial(
+    val amount: String,
+    val createTime: String,
+    val freeze: String,
+    val id: String,
+    val transactionFreeze: String,
+    val type: String,
     val uid: String
 ):Serializable
 
@@ -65,25 +128,25 @@ data class UytCaptial(
     val createTime: String,
     val freeze: String,
     val id: String,
+    val transactionFreeze: String,
     val type: String,
     val uid: String
 ):Serializable
+
 data class UytProCaptial(
     val amount: String,
     val createTime: String,
     val freeze: String,
     val id: String,
+    val transactionFreeze: String,
     val type: String,
     val uid: String
 ):Serializable
-data class UtdmCaptial(
-    val amount: String,
-    val createTime: String,
-    val freeze: String,
-    val id: String,
-    val type: String,
-    val uid: String
-):Serializable
+
+
+
+
+
 
 
 data class OtherMineBean(
