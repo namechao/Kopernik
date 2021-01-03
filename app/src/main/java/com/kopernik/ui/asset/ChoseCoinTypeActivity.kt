@@ -30,7 +30,7 @@ class ChoseCoinTypeActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewD
 //            data.add(CoinType(R.mipmap.ic_utc,"UTC"))
 //        data.add(CoinType(R.mipmap.ic_utk,"UTK"))
 //        data.add(CoinType(R.mipmap.ic_utdm,"UTDM"))
-            data.add(CoinType(R.mipmap.ic_uyt, "UYT"))
+//            data.add(CoinType(R.mipmap.ic_uyt, "UYT"))
             data.add(CoinType(R.mipmap.ic_uyt_test, "UYT_TEST"))
         }else if(choseType=="2"){
             data.add(CoinType(R.mipmap.ic_usdt, "USDT"))
@@ -41,7 +41,7 @@ class ChoseCoinTypeActivity : NewFullScreenBaseActivity<UTCAssetViewModel, ViewD
             data.add(CoinType(R.mipmap.ic_usdt, "USDT"))
             data.add(CoinType(R.mipmap.ic_utk,"UTK"))
             data.add(CoinType(R.mipmap.ic_utdm,"UTDM"))
-            data.add(CoinType(R.mipmap.ic_uyt, "UYT"))
+//            data.add(CoinType(R.mipmap.ic_uyt, "UYT"))
             data.add(CoinType(R.mipmap.ic_uyt_test, "UYT_TEST"))
         }
         var adpter= ChoseCoinAdapter(data)
