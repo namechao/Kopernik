@@ -61,7 +61,6 @@ class USDTAssetActivity : NewBaseActivity<UYTAssetViewModel, ViewDataBinding>() 
         recyclerView.adapter = adapter
         recyclerView1.layoutManager =  LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView1.adapter = adapter1
-
         smartRefreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(@NonNull refreshLayout: RefreshLayout) {
                 getListData()

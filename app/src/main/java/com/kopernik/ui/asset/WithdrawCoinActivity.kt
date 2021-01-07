@@ -64,7 +64,6 @@ companion object{
                 intent.putExtra("historyType","Cash")
                 startActivity(intent)
             }
-
         })
         csChoseCoin.setOnClickListener {
            var intent= Intent(this,ChoseCoinTypeActivity::class.java)

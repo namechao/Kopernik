@@ -209,7 +209,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     android:textSize="@dimen/sp_16"
-                    android:text="UYT_TEST"/>
+                    android:text="USDT"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
